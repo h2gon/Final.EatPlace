@@ -20,8 +20,7 @@
     
  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/vendor/magnific-popup/magnific-popup.css">
 	
-
-
+	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 
   </head>
@@ -49,22 +48,82 @@
         
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Portfolio
-              </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-                <a class="dropdown-item" href="portfolio-1-col.html">1 Column Portfolio</a>
-                <a class="dropdown-item" href="portfolio-2-col.html">2 Column Portfolio</a>
-                <a class="dropdown-item" href="portfolio-3-col.html">3 Column Portfolio</a>
-                <a class="dropdown-item" href="portfolio-4-col.html">4 Column Portfolio</a>
-                <a class="dropdown-item" href="portfolio-item.html">Single Portfolio Item</a>
-              </div>
+               	LOGIN
+              </a>           
+				
+                <div  class="dropdown-menu dropdown-menu-right" id="kakao_btn_changed" aria-labelledby="navbarDropdownPortfolio">
+					<a  class="dropdown-item" id="custom-login-btn" href="regi.do" style="text-align: center;">regi</a>
+					
+					<a  class="dropdown-item" id="custom-login-btn" href="javascript:loginWithKakao()">
+						<img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="200"/>
+					</a>
+				</div>				
             </li>
           </ul>
         </div>
       </div>
     </nav>
-    
-   
+	
+	<!--  <script type='text/javascript'>
+ 	 //<![CDATA[
+    // 사용할 앱의 JavaScript 키를 설정해 주세요.
+    Kakao.init('7b79e9996c3bab29b8e5285b04135813');
+    function loginWithKakao() {
+	      // 로그인 창을 띄웁니다.
+	      Kakao.Auth.login({
+	        success: function(authObj) {
+	          alert(JSON.stringify(authObj));
+	        },
+	        fail: function(err) {
+	          alert(JSON.stringify(err));
+	        }
+	      });
+	    };
+	  //]]>
+	</script>  --> 
+<script type='text/javascript'>	
+	Kakao.init('7b79e9996c3bab29b8e5285b04135813');
+ function loginWithKakao() {
+       // 로그인 창을 띄웁니다.
+       Kakao.Auth.login({
+         success: function(authObj) {
+           Kakao.API.request({
+                 url: '/v1/user/me',
+                 success: function(res) {
+              //   alert(JSON.stringify(res));
+                   $.ajax({
+                       type:"post",
+                dataType:"json",
+                       url:"/indb.jsp",
+                       data : {
+                          "email":res.kaccount_email,
+                          "id":res.id,
+                          "nickname":res.properties.nickname,
+                       },
+                       success:function(data){
+                        if(data.login == "success"){
+                          alert("로그인되었습니다");
+                            location.href="/";
+                       },
+                       error:function(data){
+                          alert('error:'+data.result);
+                       }
+                    });
+                 },
+                 fail: function(error) {
+                   alert(JSON.stringify(error));
+                 }
+               });
+         },
+         fail: function(err) {
+           alert(JSON.stringify(err));
+         }
+       });
+     };
+	</script>
+
+	
+	
     <header>
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
        
@@ -76,7 +135,9 @@
               <p>This is a description for the first slide.</p>
             </div>   -->
           </div> 
-        
+        </div>
+      </div>
+     
     </header>
 
 	<br><br>
@@ -267,10 +328,6 @@
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
     <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
     <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
-
-
-
-
 
 
   </body>
