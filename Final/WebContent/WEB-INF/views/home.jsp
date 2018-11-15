@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib  prefix="form" uri="http://www.springframework.org/tags/form" %>
 <fmt:requestEncoding value="UTF-8"/>
@@ -48,10 +51,12 @@
               <a class="nav-link" href="restaurantsInsert.do">식당추가</a>
             </li>
         
-            <li class="nav-item dropdown">
+        
+            <li class="nav-item dropdown" id="before">
+              
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                	LOGIN
-              </a>           
+              </a>        
 				
                 <div  class="dropdown-menu dropdown-menu-right" id="kakao_btn_changed" aria-labelledby="navbarDropdownPortfolio">
 					<a  class="dropdown-item" href="regi.do" style="text-align: center;">regi</a>
@@ -265,8 +270,8 @@
     </footer>
 
     <!-- Bootstrap core JavaScript -->
-     <script src="js/creative.min.js"></script>
     <script src="vendor/jquery/jquery.min.js"></script>
+<!--      <script src="js/creative.min.js"></script> -->
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
     <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
@@ -274,27 +279,77 @@
 
 	
 	 
-<script type='text/javascript'>
- 	 //<![CDATA[
-    // 사용할 앱의 JavaScript 키를 설정해 주세요.
-    Kakao.init('7b79e9996c3bab29b8e5285b04135813');   
-      // 카카오 로그인 버튼을 생성합니다.
-      Kakao.Auth.createLoginButton({
-        container: '#kakao-login-btn',
-        success: function(authObj) {
-          alert(JSON.stringify(authObj));
-        },
-        fail: function(err) {
-           alert(JSON.stringify(err));
-        }
-      });
-    //]]>
-  </script>
 	
+<script type='text/javascript'>
+	$(document).ready(function(){
+		console.log(Kakao.Auth.getAccessToken());
+		if(Kakao.Auth.getAccessToken() ==null){
+			console.log("nothing");
+		}
+	});
+		  //<![CDATA[
+			// 사용할 앱의 JavaScript 키를 설정해 주세요.
+			Kakao.init('7b79e9996c3bab29b8e5285b04135813');
+			
+			// 카카오 로그인 버튼을 생성합니다.
+			Kakao.Auth.createLoginButton({
+				container: '#kakao-login-btn',
+				success: function(authObj) {
+			
+			/* Kakao.Auth.login({      
+				success: function(authObj) { */
+						
+					// 로그인 성공시, API를 호출합니다.
+					Kakao.API.request({
+						url: '/v1/user/me',
+						success: function(res) {
+							console.log(res);
+							
+							var userID = res.id;						//유저의 카카오톡 고유 id
+							var userEmail = res.kaccount_email;			//유저의 이메일
+							var userNickName = res.properties.nickname;	//유저가 등록한 별명
+							
+							console.log(userID);
+							console.log(userEmail);
+							console.log(userNickName);
+							
+							document.getElementById("before").innerHTML="<li class='nav-item dropdown' id='after'>"+
+							"<a class='nav-link dropdown-toggle' href='#' id='navbarDropdownPortfolio' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>" + 
+			               	userNickName + "</a>" +
+			               	"<div  class='dropdown-menu dropdown-menu-right' aria-labelledby='navbarDropdownPortfolio' style='text-align: center'>" +
+			               	"<a class='dropdown-item'>" + 
+			               	"<button type='button' onclick='Kakao.Auth.logout()'>로그아웃</button>"+
+			               	"</a>"+
+			               	"</div></li>";
+			               	
+			               	
+			               	
+						},
+						fail: function(error) {
+							alert(JSON.stringify(error));
+						}
+
+
+					});
+				},
+				fail: function(err) {
+					alert(JSON.stringify(err));
+				},
+				persistRefreshToken: false,
+				persistAccessToken: false
+			
+			});
+		  //]]>
+		  
+		  
+		</script>
+
+
 
 
 
   </body>
+
 
 
 
