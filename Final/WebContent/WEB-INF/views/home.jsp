@@ -3,7 +3,7 @@
 <fmt:requestEncoding value="UTF-8"/>
 
 <!DOCTYPE html>
-<html lang="en">
+<html >
 
   <head>
 
