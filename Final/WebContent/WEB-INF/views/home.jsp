@@ -6,7 +6,21 @@
 <fmt:requestEncoding value="UTF-8"/>
 
 <!DOCTYPE html>
-<html >
+<html>
+<style>
+@use postcss-color-function;
+@use postcss-nested;
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700,900');
+input:hover,
+input:focus {
+            padding: 12px 0;
+            outline: 0;
+            border: 1px solid transparent;
+            border-bottom: 1px solid #575756;
+            border-radius: 0;
+            background-position: 100% center;
+        } 
+</style>
 
   <head>
 
@@ -17,14 +31,16 @@
 
     <title>Modern Business - Start Bootstrap Template</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="css/modern-business.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/creative.min.css" rel="stylesheet">
     
  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/vendor/magnific-popup/magnific-popup.css">
+ <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+ 
 	
  <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 
@@ -35,7 +51,7 @@
     <!-- Navigation -->
      <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+        <a class="navbar-brand" href="index.html">EAT PLACE</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -45,10 +61,10 @@
               <a class="nav-link" href="about.html">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="services.html">Services</a>
+              <a class="nav-link" href="restaurntsList.do">맛집 보기</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="restaurantsInsert.do">식당추가</a>
+              <a class="nav-link" href="restaurantsInsert.do">맛집 추가</a>
             </li>
         
         
@@ -59,7 +75,7 @@
               </a>        
 				
                 <div  class="dropdown-menu dropdown-menu-right" id="kakao_btn_changed" aria-labelledby="navbarDropdownPortfolio">
-					<a  class="dropdown-item" href="regi.do" style="text-align: center;">regi</a>
+					<a  class="dropdown-item" href="regi.do" style="text-align: center;">회원가입</a>
 					<!-- href="javascript:loginWithKakao()" -->
 					<a  class="dropdown-item" id="kakao-login-btn">	
 					</a>
@@ -75,18 +91,41 @@
     <header>
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
        
-        <div class="carousel-inner" role="listbox">
-         
-           <div class="carousel-item active" style="background-image: url('http://placehold.it/1900x1080')">
-             <!-- <div class="carousel-caption d-none d-md-block">
-              <h3>First Slide</h3>
-              <p>This is a description for the first slide.</p>
-            </div>   -->
-          </div> 
-        </div>
-      </div>
-     
+	        <div class="carousel-inner" role="listbox">
+	         
+	           <div class="carousel-item active" style="text-align: center; padding-top: 150px">
+	            
+	              <h2>망고 플레이트 </h2>
+	              <h2>따라하기</h2>
+	           		<br>
+	             <div style="padding-top: 64px; width: 550px; margin: 0 auto;" class="w3-container">				
+				    <input style=" width: 100%; padding: 12px 24px; background-color: transparent; transition: transform 250ms ease-in-out; font-size: 14px;
+       					line-height: 18px; color: #575756; background-color: transparent; background-image: url(http://mihaeltomic.com/codepen/input-search/ic_search_black_24px.svg);
+        				background-repeat: no-repeat; background-size: 18px 18px; background-position: 95% center; border-radius: 50px; border: 1px solid #575756;
+        				transition: all 250ms ease-in-out; backface-visibility: hidden; transform-style: preserve-3d;" type="text" placeholder="Search">
+        			 
+				    <div class="w3-dropdown-click">				    
+				      <button type="button" onclick="myFunction()">추천 검색어</button>
+				    </div>
+				  	
+        				 
+				</div>
+	 
+	          </div> 
+	        </div>
+	      </div>
+	  
     </header>
+    <script>
+function myFunction() {
+    var x = document.getElementById("Demo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else { 
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+</script>
 
 	<br><br>
     <!-- Portfolio Section -->
