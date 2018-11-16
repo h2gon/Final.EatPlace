@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="EatRestaurant">
+  
+  <insert id="InsertRS" parameterType="kh.c.five.model.InsertDto">
+  	INSERT INTO EAT_RESTAURANT(SEQ,RS_NAME,RS_ADDRESS1,RS_ADDRESS2,RS_PICTURE,
+  	RS_CATEGORY,RS_MENU,RS_RATING,RS_READCOUNT)
+  		VALUES(seq.nextVal,#{rs_name},#{rs_address1},#{rs_address2},#{rs_picture},#{rs_category},#{rs_menu}
+  		,0,0)
+  </insert>
+  <insert id="InsertDetail" parameterType="kh.c.five.model.InsertDto">
+  	INSERT INTO RESTAURANT_INFO(RS_NAME,RS_SEQ,RS_TIME,RS_PHONE,RS_PRICE,RS_PARKING)
+  		VALUES(#{rs_name},#{rs_time},rs_seq.nextVal,#{rs_phone},#{rs_price},#{rs_parking})
+  </insert>
+
+  </mapper>
