@@ -22,7 +22,7 @@
  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/vendor/magnific-popup/magnific-popup.css">
 	
  <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
- 
+ <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
  
  <style type="text/css">
  
@@ -40,6 +40,15 @@
     padding-left: 10px;
     width: 100%;
  }
+ 
+ .login-form h2, .signup-form h2 {
+    color: #696763;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    margin-top: 30px;
+}
+ 
  </style>
 
 </head>
@@ -132,48 +141,63 @@
     margin-bottom: 30px;
     position: relative;
 }">
-			<strong>상품 등록</strong>
+			<strong>맛집 등록</strong>
 		</h2>
 
 		<div class="signup-form">
 			<!--sign up form-->
-			<h2 style="">상품 상세 등록</h2>
+			
 			<form action="insertProduct" method="post" enctype="multipart/form-data" onsubmit="return check()">
 						
 			
 			<!-- <input type="hidden" name="id" value="123"> -->
-			 <input type="hidden" name="id" value=""> 
+			<!--  <input type="hidden" name="id" value="">  -->
 
 				<div>
 					<h2>
-						<label>상품명</label>
+						<label>맛집이름</label>
 					</h2>
-					<input id="productName" name="productName" type="text" placeholder="상품명">
+					<input id="rsName" name="productName" type="text" placeholder="맛집이름">
 				</div>
 
 				<div>
 					<h2>
-						<label>판매시작가격</label>
+						<label>영업시간</label>
 					</h2>
-					<input id="startPrice" name="startPrice" type="text" numberOnly placeholder="금액">
+					<input id="startPrice" name="startPrice" type="text" numberOnly placeholder="영업시간">
 	
-
-
 				</div>
 
 				<div>
 					<h2>
-						<label>즉시판매가격</label>
+						<label>가격대</label>
 					</h2>
-					<input id="bnPrice" name="bnPrice" type="text" numberOnly placeholder="즉시판매가격">
+					<input id="bnPrice" name="bnPrice" type="text"  placeholder="ex)2만원대">
 				</div>
 				
 				<div>
 					<h2>
-						<label>판매종료일</label>
+						<label>메뉴</label>
 					</h2>
 					<!-- <input type="text" placeholder="판매종료일"> -->
-					<input name="edate" readonly="readonly" type="text" id="datepicker1">
+					<input name="edate"  type="text" placeholder="삼겹살,양꼬치 등">
+				</div>
+				<div>
+					<h2>
+						<label>연락처</label>
+					</h2>
+					<!-- <input type="text" placeholder="판매종료일"> -->
+					<input name="edate"  type="text" placeholder="02-0000-0000">
+				</div>
+				
+				<div>
+					<h2>
+						<label>주차장유무</label>
+					</h2>
+					<select name="status" style="height: 40px">
+						<option value="0" selected="selected">가능</option>
+						<option value="1">불가</option>
+					</select>
 				</div>
 				
 				<div>
@@ -181,34 +205,40 @@
 						<label>카테고리</label>
 					</h2>
 					<select name="category" style="height: 40px">
-						<option selected="selected">전자기기</option>
-						<option>의류</option>
-						<option>생활용품</option>
-						<option>이용권</option>
+						<option selected="selected">한식</option>
+						<option>양식</option>
+						<option>일식</option>
+						<option>중식</option>
+						<option>카페</option>
+						<option>PUB</option>
+						<option>세계음식</option>
+						<option>뷔폐</option>
 					</select>
 				</div>
 				
 				<div>
-					<h2>
-						<label>상품상태</label>
-					</h2>
-					<select name="status" style="height: 40px">
-						<option value="0" selected="selected">신품</option>
-						<option value="1">중고</option>
-					</select>
-				</div>
+				<h2>
+					<label>키워드</label>
+				</h2>
+				<textarea id="expln" name="expln" rows="5" cols="40" style="overflow-x: hidden; overflow-y: auto;"
+				placeholder="역삼역3번출구,가로수길 등"></textarea>
+				
+				
+			</div>
+				
+				
 				
 				<div id="fileArea">
 			
 				<h2 style="margin-bottom: 10px;">
-					<label>이미지 등록</label> 
+					<label>대표사진 등록</label> 
 					<!-- <input class="clear1" type="button" id="append" value="파일추가" > -->
 					
 				</h2>
 				
-				<button style="margin-bottom: 10px; margin-right:5px; width: auto; padding: 3px 15px; float: left" type="button" id="append">파일추가</button>
+				<!-- <button style="margin-bottom: 10px; margin-right:5px; width: auto; padding: 3px 15px; float: left" type="button" id="append">파일추가</button>
 				<button  style="width: auto; padding: 3px 15px; float: left	" type="button" id="delete">파일삭제</button>
-				
+				 -->
 					<input type="file" name="userfile" id="userfile" />
 					<!-- <input type="file" name="fileload" style="width: 400px"> -->
 					<!-- <input name="pic" type=file id="input_imgs" multiple/>
@@ -217,13 +247,16 @@
 					
 				
 				</div>
+				
+				<div style="width: 350px; display: block;">
+							<h3 align="left" >주소 </h3>
+							<!-- <input type="text" name="address" placeholder="Address"> -->
+							<input type="text" name="postcode" id="sample6_postcode" placeholder="우편번호" style="width: 115px; float: left; margin-right: 10px">
+							<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="width: 105px; float: left"><br>
+							<input type="text" name="address1" id="sample6_address" placeholder="주소">
+							<input type="text" name="address2" id="sample6_address2" placeholder="상세주소">
+						</div>
 
-			<div>
-				<h2>
-					<label>상품설명</label>
-				</h2>
-				<textarea id="expln" name="expln" rows="15" cols="" style="overflow-x: hidden; overflow-y: auto;"></textarea>
-			</div>
 	
 			<br>
 			
@@ -240,6 +273,50 @@
 	</div>
 	</section>
 	<br>
+	<script>
+    function sample6_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var fullAddr = ''; // 최종 주소 변수
+                var extraAddr = ''; // 조합형 주소 변수
+
+                // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    fullAddr = data.roadAddress;
+
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    fullAddr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+                if(data.userSelectedType === 'R'){
+                    //법정동명이 있을 경우 추가한다.
+                    if(data.bname !== ''){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있을 경우 추가한다.
+                    if(data.buildingName !== ''){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('sample6_postcode').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('sample6_address').value = fullAddr;
+
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById('sample6_address2').focus();
+            }
+        }).open();
+    }
+</script>
+	
 		<!--/sign up form-->
 
 
