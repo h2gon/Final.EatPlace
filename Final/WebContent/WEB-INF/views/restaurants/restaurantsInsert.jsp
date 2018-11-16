@@ -22,6 +22,25 @@
  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/vendor/magnific-popup/magnific-popup.css">
 	
  <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+ 
+ 
+ <style type="text/css">
+ 
+ .login-form form input, .signup-form form input {
+     background: #F0F0E9;
+    border: medium none;
+    color: #696763;
+    display: block;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    height: 40px;
+    margin-bottom: 10px;
+    outline: medium none;
+    padding-left: 10px;
+    width: 100%;
+ }
+ </style>
 
 </head>
 <body>
@@ -68,7 +87,7 @@
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;">
-			<div class="row" style="display: inline-flex; margin-right: -15px;
+			<div class="row22" style="display: inline-flex; margin-right: -15px;
     margin-left: -15px;"><div class="col-sm-3" style="    width: 25%;
     ">
 					<div class="left-sidebar">
