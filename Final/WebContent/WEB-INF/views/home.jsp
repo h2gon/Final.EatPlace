@@ -61,7 +61,7 @@ input:focus {
               <a class="nav-link" href="about.html">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="restaurntsList.do">맛집 보기</a>
+              <a class="nav-link" href="restaurntsList.do">맛집 리스트</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="restaurantsInsert.do">맛집 추가</a>
@@ -100,7 +100,7 @@ input:focus {
 	              <div style="padding-top: 64px; width: 550px; margin-left: 375px;">				
 				    <input style=" width: 150%; height:60px; padding: 12px 24px; background-color: transparent; transition: transform 250ms ease-in-out; font-size: 14px;
        					line-height: 18px; color: #575756; background-color: #e9ecef; background-image: url(http://mihaeltomic.com/codepen/input-search/ic_search_black_24px.svg);
-        				background-repeat: no-repeat; background-size: 18px 18px; background-position: 95% center; border-radius: 50px; border: 5px solid #ffc107;
+        				background-repeat: no-repeat; background-size: 18px 18px; background-position: 95% center; border-radius: 50px; border: 5px solid #ff7100;
         				transition: all 250ms ease-in-out; backface-visibility: hidden; transform-style: preserve-3d;" type="text" placeholder="지역, 식당 또는 음식">
         			
         			<!-- 
