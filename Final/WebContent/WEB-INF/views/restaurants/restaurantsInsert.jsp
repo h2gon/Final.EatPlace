@@ -147,7 +147,7 @@
 		<div class="signup-form">
 			<!--sign up form-->
 			
-			<form action="insertProduct" method="post" enctype="multipart/form-data" onsubmit="return check()">
+			<form action="InsertRS.do" method="post" enctype="multipart/form-data" onsubmit="return check()">
 						
 			
 			<!-- <input type="hidden" name="id" value="123"> -->
@@ -157,14 +157,14 @@
 					<h2>
 						<label>맛집이름</label>
 					</h2>
-					<input id="rsName" name="productName" type="text" placeholder="맛집이름">
+					<input id="rsName" name="rs_name" type="text" placeholder="맛집이름">
 				</div>
 
 				<div>
 					<h2>
 						<label>영업시간</label>
 					</h2>
-					<input id="startPrice" name="startPrice" type="text" numberOnly placeholder="영업시간">
+					<input id="startPrice" name="rs_time" type="text" numberOnly placeholder="영업시간">
 	
 				</div>
 
@@ -172,7 +172,7 @@
 					<h2>
 						<label>가격대</label>
 					</h2>
-					<input id="bnPrice" name="bnPrice" type="text"  placeholder="ex)2만원대">
+					<input id="bnPrice" name="rs_price" type="text"  placeholder="ex)2만원대">
 				</div>
 				
 				<div>
@@ -180,21 +180,21 @@
 						<label>메뉴</label>
 					</h2>
 					<!-- <input type="text" placeholder="판매종료일"> -->
-					<input name="edate"  type="text" placeholder="삼겹살,양꼬치 등">
+					<input name="rs_menu"  type="text" placeholder="삼겹살,양꼬치 등">
 				</div>
 				<div>
 					<h2>
 						<label>연락처</label>
 					</h2>
 					<!-- <input type="text" placeholder="판매종료일"> -->
-					<input name="edate"  type="text" placeholder="02-0000-0000">
+					<input name="rs_phone"  type="text" placeholder="02-0000-0000">
 				</div>
 				
 				<div>
 					<h2>
 						<label>주차장유무</label>
 					</h2>
-					<select name="status" style="height: 40px">
+					<select name="rs_parking" style="height: 40px">
 						<option value="0" selected="selected">가능</option>
 						<option value="1">불가</option>
 					</select>
@@ -204,7 +204,7 @@
 					<h2>
 						<label>카테고리</label>
 					</h2>
-					<select name="category" style="height: 40px">
+					<select name="rs_category" style="height: 40px">
 						<option selected="selected">한식</option>
 						<option>양식</option>
 						<option>일식</option>
@@ -220,7 +220,7 @@
 				<h2>
 					<label>키워드</label>
 				</h2>
-				<textarea id="expln" name="expln" rows="5" cols="40" style="overflow-x: hidden; overflow-y: auto;"
+				<textarea id="expln" name="rs_keyword" rows="5" cols="40" style="overflow-x: hidden; overflow-y: auto;"
 				placeholder="역삼역3번출구,가로수길 등"></textarea>
 				
 				
@@ -239,7 +239,7 @@
 				<!-- <button style="margin-bottom: 10px; margin-right:5px; width: auto; padding: 3px 15px; float: left" type="button" id="append">파일추가</button>
 				<button  style="width: auto; padding: 3px 15px; float: left	" type="button" id="delete">파일삭제</button>
 				 -->
-					<input type="file" name="userfile" id="userfile" />
+					<input type="file" name="rs_picture" id="userfile" />
 					<!-- <input type="file" name="fileload" style="width: 400px"> -->
 					<!-- <input name="pic" type=file id="input_imgs" multiple/>
 					<div class="imgs_wrap"> -->
@@ -253,8 +253,8 @@
 							<!-- <input type="text" name="address" placeholder="Address"> -->
 							<input type="text" name="postcode" id="sample6_postcode" placeholder="우편번호" style="width: 115px; float: left; margin-right: 10px">
 							<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="width: 105px; float: left"><br>
-							<input type="text" name="address1" id="sample6_address" placeholder="주소">
-							<input type="text" name="address2" id="sample6_address2" placeholder="상세주소">
+							<input type="text" name="rs_address1" id="sample6_address" placeholder="주소">
+							<input type="text" name="rs_address2" id="sample6_address2" placeholder="상세주소">
 						</div>
 
 	
@@ -264,7 +264,7 @@
 			
 			</form>
 			
-			<form action="index.jsp">
+			<form action="home.do">
 				<input type="submit" value="취소">
 			</form>	
 	</div>
