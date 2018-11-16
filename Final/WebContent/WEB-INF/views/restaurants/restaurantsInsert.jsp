@@ -4,119 +4,73 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Modern Business - Start Bootstrap Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/modern-business.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/creative.min.css" rel="stylesheet">
+    
+ <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/vendor/magnific-popup/magnific-popup.css">
+	
+ <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+
 </head>
 <body>
-
-<header id="header"><!--header-->
-		<div class="header_top"><!--header_top-->
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-6">
-						<div class="contactinfo">
-							<ul class="nav nav-pills">
-								<li><a href="#"><i class="fa fa-phone"></i> 010-5535-8807 </a></li>
-								<li><a href="#"><i class="fa fa-envelope"></i>valva7@naver.com</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="shop-menu pull-right">
-							<ul class="nav navbar-nav">
-							<%-- 	<%if(user == null){%>
-								<li><a href="account.jsp"><i class="fa fa-user"></i> 회원가입</a></li>
-								<li><a href="login.jsp"><i class="fa fa-lock"></i> 로그인</a></li>
-								<%} else{%>
-								<li><a href="#"><i class="fa fa-user"></i><%=user.getId()%>님</a></li>
-								<li><a href="Mypage.jsp?id='<%=user.getId()%>'"><i class="fa fa-lock"></i> 내 정보 </a></li>
-								<li><a href="logout.jsp" id="logout"><i class="fa fa-lock"></i> 로그아웃 </a></li>
-								<%} %>	 --%>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div><!--/header_top-->
-		
-		<div class="header-middle"><!--header-middle-->
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-4" style="margin-bottom: 10px">
-						<div class="logo pull-left">
-							<a href="index.jsp"><img src="images/home/logo.png" alt=""  width="180px" height="42px"/></a>
-						</div>
-					</div>
-						
-						<form action="searchAf.jsp" method="get">								   
-						        <div class="col-xs-8 col-xs-offset-2" style="margin: auto">
-								    <div class="input-group">
-						                <div class="input-group-btn search-panel">
-						                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="margin-left: 260px; width: 100px" >
-						                    	<span id="search_concept">Filter by</span> <span class="caret"></span>
-						                    </button>
-						                    <ul class="dropdown-menu" role="menu" style="margin-left: 260px">
-						                      <li><a>전체</a></li>
-						                      <li><a>의류</a></li>
-						                      <li><a>전자기기</a></li>
-						                      <li><a>생활용품</a></li>
-						                      <li><a>이용권</a></li>
-						                    </ul>
-						                </div>
-						                <input type="hidden" name="choice" value="전체" id="search_param">         
-						                <input type="text" class="form-control" name="findWord" placeholder="Search item..." style="width: 350px; float: right">
-						                <span class="input-group-btn">
-						                    <button class="btn btn-default" type="submit" style="height: 34px"><span class="glyphicon glyphicon-search"></span></button>
-						                </span>
-						            </div>
-						        </div>									
-							</form>
-							<script type="text/javascript">
-							$(document).ready(function(e){
-							    $('.dropdown-menu').find('a').click(function(e) {
-									e.preventDefault();
-									var concept = $(this).text();
-									console.log(concept);
-									$('.search-panel span#search_concept').text(concept);
-									$('.input-group #search_param').val(concept);
-								});
-							});
-							</script>
-					</div>
-				</div>
-			</div><!--/header-middle-->
-	
-		<div class="header-bottom"><!--header-bottom-->
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-9">
-						<div class="navbar-header">
-							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-							</button>
-						</div>
-						<div class="mainmenu pull-left">
-							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="index.jsp" style="color:#5ca5fe">홈</a></li>
-								<li><a href="category.jsp?choice=전체&color='전체'" id="all">전체</a></li>
-								<li><a href="category.jsp?choice=의류&color='의류'" id="cloth">의류</a></li>
-								<li><a href="category.jsp?choice=전자기기&color='전자기기'" id="elec">전자기기</a></li>
-								<li><a href="category.jsp?choice=생활용품&color='생활용품'" id="etc">생활용품</a></li>
-								<li><a href="category.jsp?choice=이용권&color='이용권'" id="ticket">이용권</a></li>
-								<li><a href="contact-us.jsp?choice=고객센터">고객센터</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div><!--/header-bottom-->
-	</header><!--/header-->
+ <!-- Navigation -->
+     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="services.html">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="restaurantsInsert.do">식당추가</a>
+            </li>
+        
+        
+            <li class="nav-item dropdown" id="before">
+              
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               	LOGIN
+              </a>        
+				
+                <div  class="dropdown-menu dropdown-menu-right" id="kakao_btn_changed" aria-labelledby="navbarDropdownPortfolio">
+					<a  class="dropdown-item" href="regi.do" style="text-align: center;">regi</a>
+					<!-- href="javascript:loginWithKakao()" -->
+					<a  class="dropdown-item" id="kakao-login-btn">	
+					</a>
+				</div>				
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 	
 	<section>
-		<div class="container">
-			<div class="row" style="display: inline-flex;"><div class="col-sm-3">
+		<div class="container" style="    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;">
+			<div class="row" style="display: inline-flex; margin-right: -15px;
+    margin-left: -15px;"><div class="col-sm-3" style="    width: 25%;
+    ">
 					<div class="left-sidebar">
 						<h2>Category</h2>
 						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
@@ -150,14 +104,21 @@
 	</div>
 </div>
 	
-	<div id="contact-page" class="container">
-		<h2 class="title text-center">
+	<div id="contact-page" class="container" style="width: 970px;padding-right: 15px; padding-left: 15px; margin-right: auto; margin-left: auto;">
+		<h2 class="title text-center" style="color: #86c4f0; font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 15px;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    position: relative;
+}">
 			<strong>상품 등록</strong>
 		</h2>
 
 		<div class="signup-form">
 			<!--sign up form-->
-			<h2>상품 상세 등록</h2>
+			<h2 style="">상품 상세 등록</h2>
 			<form action="insertProduct" method="post" enctype="multipart/form-data" onsubmit="return check()">
 						
 			
