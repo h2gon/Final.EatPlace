@@ -147,7 +147,7 @@
 		<div class="signup-form">
 			<!--sign up form-->
 			
-			<form action="InsertRS.do" method="post" enctype="multipart/form-data" onsubmit="return check()">
+			<form action="InsertRS.do" method="post" enctype="multipart/form-data" >
 						
 			
 			<!-- <input type="hidden" name="id" value="123"> -->
