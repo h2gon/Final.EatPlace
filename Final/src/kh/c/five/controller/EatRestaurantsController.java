@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import kh.c.five.model.InsertDto;
+import kh.c.five.model.RegiDto;
 import kh.c.five.service.EatRestaurantsService;
 import kh.c.five.util.FUpUtil;
 
@@ -39,7 +40,7 @@ public class EatRestaurantsController {
 
 	
 	@RequestMapping(value="insertrs.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String InsertRS(InsertDto dto,HttpServletRequest req,
+	public String InsertRS1(RegiDto dto,HttpServletRequest req,
 			@RequestParam(value="fileload", required=false)
 			MultipartFile fileload) {
 		
@@ -54,8 +55,8 @@ public class EatRestaurantsController {
 		
 		// upload 경로
 		// tomcat
-		//String fupload = req.getServletContext().getRealPath("/upload");
-		String fupload = "\\\\\\\\192.168.30.34\\\\공유\\\\tmp";
+		String fupload = req.getServletContext().getRealPath("/upload");
+		//String fupload = "\\\\\\\\192.168.30.34\\\\공유\\\\tmp";
 		logger.info("upload 경로:" + fupload);
 		
 		// 폴더
@@ -71,11 +72,12 @@ public class EatRestaurantsController {
 		System.out.println("파일:" + fupload + "/" + newFile);
 		
 		boolean isS = false;
+		System.out.println("dto:"+dto.toString());
 		
 		try {			
 			// 실제 upload 부분
 			FileUtils.writeByteArrayToFile(file, fileload.getBytes());
-			
+		
 			// Db에 저장
 			isS = eatRestaurantsService.InsertRS(dto);
 			

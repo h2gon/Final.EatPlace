@@ -2,6 +2,35 @@ package kh.c.five.model;
 
 import java.io.Serializable;
 
+/*CREATE TABLE EAT_RESTAURANT(
+		SEQ NUMBER PRIMARY KEY,
+		RS_NAME VARCHAR2(100) UNIQUE,
+		RS_ADDRESS1 VARCHAR2(200) NOT NULL,
+		RS_ADDRESS2 VARCHAR2(100) NOT NULL,
+		RS_PICTURE VARCHAR2(100) NOT NULL,
+		RS_CATEGORY VARCHAR2(100) NOT NULL,
+		RS_MENU VARCHAR2(4000) NOT NULL,	
+		RS_RATING NUMBER NOT NULL,
+		RS_READCOUNT NUMBER NOT NULL	
+	);
+	CREATE SEQUENCE SEQ
+	START WITH 1
+	INCREMENT BY 1;
+
+
+	CREATE TABLE RESTAURANT_INFO(
+		RS_SEQ NUMBER NOT NULL, 
+		RS_NAME VARCHAR2(500) NOT NULL,	
+		RS_TIME VARCHAR2(500),
+		RS_PHONE VARCHAR2(500),
+		RS_PRICE VARCHAR2(500),
+		RS_PARKING NUMBER
+	);
+	CREATE SEQUENCE RS_SEQ
+	START WITH 1
+	INCREMENT BY 1;*/
+
+
 public class InsertDto implements Serializable {
 	
 	private int seq;
@@ -15,17 +44,15 @@ public class InsertDto implements Serializable {
 	private int rs_rating; //별점
 	private int rs_readcount; //조회수
 	private int rs_parking; //주차장시설이 있다 ->1 주차장시설이 없다 ->0
-	private int rs_price; //메뉴에 대한 가격
+	private String rs_price; //메뉴에 대한 가격
 	private String rs_phone; //연락처
 	private String rs_keyword; //키워드
 	
-	public InsertDto() {
-		// TODO Auto-generated constructor stub
-	}
+	public InsertDto() {}
 	
 	public InsertDto(int seq, String rs_name, String rs_address1, String rs_address2, String rs_picture,
 			String rs_category, String rs_menu, String rs_time, int rs_rating, int rs_readcount, int rs_parking,
-			int rs_price, String rs_phone, String rs_keyword) {
+			String rs_price, String rs_phone, String rs_keyword) {
 		super();
 		this.seq = seq;
 		this.rs_name = rs_name;
@@ -108,10 +135,10 @@ public class InsertDto implements Serializable {
 	public void setRs_parking(int rs_parking) {
 		this.rs_parking = rs_parking;
 	}
-	public int getRs_price() {
+	public String getRs_price() {
 		return rs_price;
 	}
-	public void setRs_price(int rs_price) {
+	public void setRs_price(String rs_price) {
 		this.rs_price = rs_price;
 	}
 	public String getRs_phone() {
