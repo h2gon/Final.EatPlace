@@ -36,10 +36,12 @@ public class EatRestaurantsController {
 		return "restaurants/restaurantsInsert";
 	}
 	
-	@RequestMapping(value="InsertRS.do", method={RequestMethod.GET, RequestMethod.POST})
+
+	
+	@RequestMapping(value="insertrs.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String InsertRS(InsertDto dto,HttpServletRequest req,
-			@RequestParam(value="rs_picture", required=false)
-			MultipartFile rs_picture) {
+			@RequestParam(value="fileload", required=false)
+			MultipartFile fileload) {
 		
 		
 		logger.info("EatRestaurantsController InsertRS"+new Date());
@@ -48,7 +50,7 @@ public class EatRestaurantsController {
 		
 		
 		// filename 취득
-		dto.setRs_picture(rs_picture.getOriginalFilename());
+		dto.setRs_picture(fileload.getOriginalFilename());
 		
 		// upload 경로
 		// tomcat
@@ -72,7 +74,7 @@ public class EatRestaurantsController {
 		
 		try {			
 			// 실제 upload 부분
-			FileUtils.writeByteArrayToFile(file, rs_picture.getBytes());
+			FileUtils.writeByteArrayToFile(file, fileload.getBytes());
 			
 			// Db에 저장
 			isS = eatRestaurantsService.InsertRS(dto);
@@ -89,11 +91,8 @@ public class EatRestaurantsController {
 			return "home";
 		}else {
 			logger.info("Insert isS:"+isS);
-		return "home";
-		}
-		
-		
-	
+			return "home";
+		}	
 		
 	}
 	

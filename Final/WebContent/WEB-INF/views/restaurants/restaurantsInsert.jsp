@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib  prefix="form" uri="http://www.springframework.org/tags/form" %>
+<fmt:requestEncoding value="UTF-8"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -143,11 +148,13 @@
 }">
 			<strong>맛집 등록</strong>
 		</h2>
+		
+			
 
 		<div class="signup-form">
 			<!--sign up form-->
 			
-			<form action="InsertRS.do" method="post" enctype="multipart/form-data" >
+			<form action="insertrs.do" method="post" enctype="multipart/form-data" >
 						
 			
 			<!-- <input type="hidden" name="id" value="123"> -->
@@ -164,7 +171,7 @@
 					<h2>
 						<label>영업시간</label>
 					</h2>
-					<input id="startPrice" name="rs_time" type="text" numberOnly placeholder="영업시간">
+					<input id="startPrice" name="rs_time" type="text"  placeholder="영업시간">
 	
 				</div>
 
@@ -239,7 +246,7 @@
 				<!-- <button style="margin-bottom: 10px; margin-right:5px; width: auto; padding: 3px 15px; float: left" type="button" id="append">파일추가</button>
 				<button  style="width: auto; padding: 3px 15px; float: left	" type="button" id="delete">파일삭제</button>
 				 -->
-					<input type="file" name="rs_picture" id="userfile" />
+					 <input type="file" name="fileload" id="fileload" /> 
 					<!-- <input type="file" name="fileload" style="width: 400px"> -->
 					<!-- <input name="pic" type=file id="input_imgs" multiple/>
 					<div class="imgs_wrap"> -->
@@ -504,26 +511,6 @@ function check() {
 }
 
 
-$(function() {
-	
-  $( "#datepicker1" ).datepicker({
-    dateFormat: 'yy/mm/dd',
-    prevText: '이전 달',
-    nextText: '다음 달',
-    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-    dayNames: ['일','월','화','수','목','금','토'],
-    dayNamesShort: ['일','월','화','수','목','금','토'],
-    dayNamesMin: ['일','월','화','수','목','금','토'],
-    showMonthAfterYear: true,
-    changeMonth: true,
-    changeYear: true,
-    yearSuffix: '년',
-    minDate: 1,
-    maxDate: +14
-  });
-  
-});
 </script>
 
 <script type="text/javascript">

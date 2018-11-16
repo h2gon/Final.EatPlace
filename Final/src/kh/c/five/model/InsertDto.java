@@ -18,6 +18,11 @@ public class InsertDto implements Serializable {
 	private int rs_price; //메뉴에 대한 가격
 	private String rs_phone; //연락처
 	private String rs_keyword; //키워드
+	
+	public InsertDto() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public InsertDto(int seq, String rs_name, String rs_address1, String rs_address2, String rs_picture,
 			String rs_category, String rs_menu, String rs_time, int rs_rating, int rs_readcount, int rs_parking,
 			int rs_price, String rs_phone, String rs_keyword) {
