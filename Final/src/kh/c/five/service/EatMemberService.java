@@ -1,13 +1,13 @@
 package kh.c.five.service;
 
-import kh.c.five.model.MemberDto;
+import kh.c.five.model.EatMemberDto;
 
 public interface EatMemberService {
 	
-public boolean addmember(MemberDto mem) throws Exception;
+	public boolean addmember(EatMemberDto mem) throws Exception;
 	
-	public MemberDto login(MemberDto mem) throws Exception;
+	public int getID(EatMemberDto mem);
 	
-	public int getID(MemberDto mem);
-
+	public EatMemberDto login(EatMemberDto mem) throws Exception;
+	
 }

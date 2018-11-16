@@ -5,11 +5,20 @@
   
 <mapper namespace="EatMember">
 
-<insert id="addmember" parameterType="kh.c.five.model.MemberDto">
-	INSERT INTO EATMEMBER(ID, PWD, NAME, EMAIL, AUTH)
-	VALUES(#{id}, #{pwd}, #{name}, #{email}, 3)
+<insert id="addmember" parameterType="kh.c.five.model.EatMemberDto">
+	INSERT INTO EATMEMBER(SEQ, ID, PWD, NAME, EMAIL, NICKNAME, AUTH)
+	VALUES(SEQ_EATMEMBER.nextval, #{id}, #{pwd}, #{name}, #{email}, #{nickname}, 3)
 </insert>
 
+<select id="getID" 
+	parameterType="kh.c.five.model.EatMemberDto"
+	resultType="java.lang.Integer">
+	SELECT NVL(COUNT(*), 0)
+	FROM EATMEMBER
+	WHERE ID=#{id}
+</select>
+
+<!-- 
 <select id="login" parameterType="kh.c.five.model.MemberDto"
 	resultType="kh.c.five.model.MemberDto">
 	SELECT ID, NAME, EMAIL, AUTH
@@ -17,14 +26,8 @@
 	WHERE ID=#{id} AND PWD=#{pwd}
 </select>
 
-<select id="getID" 
-	parameterType="kh.c.five.model.MemberDto"
-	resultType="java.lang.Integer">
-	SELECT NVL(COUNT(*), 0)
-	FROM EATMEMBER
-	WHERE ID=#{id}
-</select>
 
+ -->
 
 
 </mapper>  

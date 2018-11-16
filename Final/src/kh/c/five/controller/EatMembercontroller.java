@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kh.c.five.model.MemberDto;
+import kh.c.five.model.EatMemberDto;
 import kh.c.five.model.YesMember;
 import kh.c.five.service.EatMemberService;
 
@@ -32,7 +32,7 @@ public class EatMembercontroller {
 		return "home";
 	}
 	
-	@RequestMapping(value="regi.do", method=RequestMethod.GET)
+	@RequestMapping(value="regi.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String regi() {
 		logger.info("EatMembercontroller regi " + new Date());
 		
@@ -40,37 +40,22 @@ public class EatMembercontroller {
 	}
 	
 	@RequestMapping(value="regiAf.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String regiAf(MemberDto mem) throws Exception {
+	public String regiAf(EatMemberDto mem) throws Exception {
 		logger.info("EatMembercontroller regiAf " + new Date());
 		
 		logger.info(mem.toString());
 				
 		boolean b = eatmemberservice.addmember(mem);
 		if(b) {
-			return "login";
+			return "home";
 		}else {
 			return "regi";
 		}
 	}
 	
-	@RequestMapping(value="loginAf.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String loginAf(HttpServletRequest req, MemberDto mem)throws Exception {
-		logger.info("EatMembercontroller loginAf " + new Date());
-		
-		MemberDto login = eatmemberservice.login(mem);
-		
-		if(login != null && !login.getId().equals("")) {			
-			req.getSession().setAttribute("login", login);
-			// bbslist로 이동	
-			return "home";
-		}else {
-			return "login";
-		}				
-	}
-	
 	@ResponseBody
 	@RequestMapping(value="getID.do", method={RequestMethod.GET, RequestMethod.POST})
-	public YesMember getID(MemberDto mem) {
+	public YesMember getID(EatMemberDto mem) {
 		logger.info("EatMembercontroller getID " + new Date());
 		
 		int count = eatmemberservice.getID(mem);
@@ -83,6 +68,23 @@ public class EatMembercontroller {
 		}
 		return yes;		
 	}
+	/*
+	@RequestMapping(value="loginAf.do", method={RequestMethod.GET, RequestMethod.POST})
+	public String loginAf(HttpServletRequest req, EatMemberDto mem)throws Exception {
+		logger.info("EatMembercontroller loginAf " + new Date());
+		
+		EatMemberDto login = eatmemberservice.login(mem);
+		
+		if(login != null && !login.getId().equals("")) {			
+			req.getSession().setAttribute("login", login);
+			// bbslist로 이동	
+			return "home";
+		}else {
+			return "login";
+		}				
+	}
+	
+	
 	
 	
 	@RequestMapping(value="logout.do", method={RequestMethod.GET, RequestMethod.POST})
@@ -93,6 +95,6 @@ public class EatMembercontroller {
 
 		
 		return "login";
-	}
+	}*/
 	
 }

@@ -367,8 +367,6 @@ function myFunction() {
 						fail: function(error) {
 							alert(JSON.stringify(error));
 						}
-
-
 					});
 				},
 				fail: function(err) {

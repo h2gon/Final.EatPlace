@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.c.five.dao.EatMemberDao;
-import kh.c.five.model.MemberDto;
+import kh.c.five.model.EatMemberDto;
 
 
 @Repository
@@ -18,20 +18,23 @@ public class EatMemberDaoImpl implements EatMemberDao {
 
 
 	@Override
-	public boolean addmember(MemberDto mem) throws Exception {
+	public boolean addmember(EatMemberDto mem) throws Exception {
 		int n = sqlSession.insert(namespace + "addmember", mem);
 		
 		return n>0?true:false;
 	}
-
+	
 	@Override
-	public MemberDto login(MemberDto mem) throws Exception {
+	public int getID(EatMemberDto mem) {
+		return sqlSession.selectOne(namespace + "getID", mem);
+	}
+	
+	@Override
+	public EatMemberDto login(EatMemberDto mem) throws Exception {
 		return sqlSession.selectOne(namespace + "login", mem);
 	}
 
-	@Override
-	public int getID(MemberDto mem) {
-		return sqlSession.selectOne(namespace + "getID", mem);
-	}
+	
+	
 
 }

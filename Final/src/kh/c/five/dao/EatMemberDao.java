@@ -1,14 +1,14 @@
 package kh.c.five.dao;
 
-import kh.c.five.model.MemberDto;
+import kh.c.five.model.EatMemberDto;
 
 public interface EatMemberDao {
 	
 	
-	boolean addmember(MemberDto mem) throws Exception;
+	boolean addmember(EatMemberDto mem) throws Exception;
 	
-	MemberDto login(MemberDto mem) throws Exception;
+	int getID(EatMemberDto mem);
 	
-	int getID(MemberDto mem);
-
+	EatMemberDto login(EatMemberDto mem) throws Exception;
+	
 }
