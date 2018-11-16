@@ -29,7 +29,7 @@ input:focus {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Modern Business - Start Bootstrap Template</title>
+    <title>EAT PLACE: 나만의 맛집 검색</title>
 
   <!-- Bootstrap core CSS -->
      <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -75,8 +75,7 @@ input:focus {
               </a>        
 				
                 <div  class="dropdown-menu dropdown-menu-right" id="kakao_btn_changed" aria-labelledby="navbarDropdownPortfolio">
-					<a  class="dropdown-item" href="regi.do" style="text-align: center;">회원가입</a>
-					<!-- href="javascript:loginWithKakao()" -->
+					<a  class="dropdown-item" href="regi.do" style="text-align: center;">회원가입</a>					
 					<a  class="dropdown-item" id="kakao-login-btn">	
 					</a>
 				</div>				
@@ -93,22 +92,70 @@ input:focus {
        
 	        <div class="carousel-inner" role="listbox">
 	         
-	           <div class="carousel-item active" style="text-align: center; padding-top: 150px">
+	           <div class="carousel-item active" style="text-align: center; padding-top: 150px; background-image: url('img/main_food.jpg');">
 	            
-	              <h2>망고 플레이트 </h2>
-	              <h2>따라하기</h2>
-	           		<br>
-	             <div style="padding-top: 64px; width: 550px; margin: 0 auto;" class="w3-container">				
-				    <input style=" width: 100%; padding: 12px 24px; background-color: transparent; transition: transform 250ms ease-in-out; font-size: 14px;
-       					line-height: 18px; color: #575756; background-color: transparent; background-image: url(http://mihaeltomic.com/codepen/input-search/ic_search_black_24px.svg);
-        				background-repeat: no-repeat; background-size: 18px 18px; background-position: 95% center; border-radius: 50px; border: 1px solid #575756;
-        				transition: all 250ms ease-in-out; backface-visibility: hidden; transform-style: preserve-3d;" type="text" placeholder="Search">
-        			 
-				    <div class="w3-dropdown-click">				    
-				      <button type="button" onclick="myFunction()">추천 검색어</button>
-				    </div>
-				  	
-        				 
+	            <h1 style="color: white;"><strong>솔직한 리뷰, 믿을 수 있는 평점!</strong></h1>
+	              <h1 style="color: white;"><strong>EAT PLACE</strong></h1> 
+	             
+	              <div style="padding-top: 64px; width: 550px; margin-left: 375px;">				
+				    <input style=" width: 150%; height:60px; padding: 12px 24px; background-color: transparent; transition: transform 250ms ease-in-out; font-size: 14px;
+       					line-height: 18px; color: #575756; background-color: #e9ecef; background-image: url(http://mihaeltomic.com/codepen/input-search/ic_search_black_24px.svg);
+        				background-repeat: no-repeat; background-size: 18px 18px; background-position: 95% center; border-radius: 50px; border: 5px solid #ffc107;
+        				transition: all 250ms ease-in-out; backface-visibility: hidden; transform-style: preserve-3d;" type="text" placeholder="지역, 식당 또는 음식">
+        			
+        			<!-- 
+					<aside class="search-keywords-container" ng-controller="mp20_search_list_controller" ng-cloak>
+					  <nav class="tab-keywords" ng-show="!keyword">
+					    <button class="searching_tap_recommend searching_tap"
+					            onclick="common_ga(get_now_page_code(), 'CLICK_SEARCH_RECOMMEND')"
+					            ng-click="select_tab_by_recommend()">
+					      추천 검색어
+					    </button>
+					    <button class="searching_tap_trending searching_tap"
+					            onclick="common_ga(get_now_page_code(), 'CLICK_SEARCH_POPULAR')"
+					            ng-click="select_tab_by_popular()">
+					      인기 검색어
+					    </button>
+					    <button class="searching_tap_recent searching_tap"
+					            onclick="common_ga(get_now_page_code(), 'CLICK_SEARCH_RECENT')"
+					            ng-click="select_tab_by_lately()">
+					      최근 검색어
+					    </button>
+					  </nav>
+					
+					   검색 자동완성
+					  <div class="keywords">
+						  <div class="list-keywords-wrap">
+						    <ol class="list-keywords" ng-class="{'no_tab': keyword}">
+						      <li class="list-keyword"
+					            ng-repeat="item in show_keyword_list track by $index"
+					            ng-class="{'selected': $index == pointer}"
+					            ng-click="go_to_link(item, item.keyword, $event)">
+						        <a href="#" category="{{item.display_text}}" onclick="return false;" ng-bind="item.keyword"></a>
+						        <div class="search_result_delete"
+					               ng-show="selected_tab == constant.lately_tab_name"
+					               ng-click="remove_lately_keyword($index, $event)"
+					               onclick="common_ga(get_now_page_code(), 'CLICK_SEARCH_RECENT_CANCEL')">
+					          </div>
+						      </li>
+					
+							    <li class="clear_all"
+					            ng-show="selected_tab === 'lately' && show_keyword_list.length">
+					          <button ng-click="remove_lately_keyword_all()"
+					                  onclick="common_ga(get_now_page_code(), 'CLICK_SEARCH_RECENT_CLEAR')">
+					            x clear all
+					          </button>
+					        </li>
+					
+						      <li class="no_lately_keyword"
+					            ng-show="selected_tab === 'lately' && !show_keyword_list.length">
+					          최근 검색어가 없습니다.
+					        </li>
+						    </ol>
+						  </div>
+					  </div>
+					</aside> -->
+
 				</div>
 	 
 	          </div> 
@@ -116,16 +163,7 @@ input:focus {
 	      </div>
 	  
     </header>
-    <script>
-function myFunction() {
-    var x = document.getElementById("Demo");
-    if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-    } else { 
-        x.className = x.className.replace(" w3-show", "");
-    }
-}
-</script>
+
 
 	<br><br>
     <!-- Portfolio Section -->
@@ -367,6 +405,8 @@ function myFunction() {
 						fail: function(error) {
 							alert(JSON.stringify(error));
 						}
+
+
 					});
 				},
 				fail: function(err) {
@@ -374,6 +414,7 @@ function myFunction() {
 				},
 				persistRefreshToken: false,
 				persistAccessToken: false
+				
 			
 			});
 		  //]]>
