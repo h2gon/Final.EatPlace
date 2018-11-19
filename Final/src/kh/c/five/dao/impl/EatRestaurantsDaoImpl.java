@@ -44,6 +44,10 @@ public class EatRestaurantsDaoImpl implements EatRestaurantsDao {
 		return sqlSession.selectOne(namespace+"getrs2",seq);
 	}
 	
+	@Override
+	public List<RegiDto> getRankList(RegiDto dto) {
+		return sqlSession.selectList(namespace + "getRankList", dto);
+	}
 	
 
 }

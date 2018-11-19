@@ -37,5 +37,9 @@
   
   </select>
   
+    <select id="getRankList" parameterType="kh.c.five.model.RegiDto" resultType="kh.c.five.model.RegiDto">
+  	SELECT * FROM EAT_RESTAURANT ORDER BY RS_RATING
+  </select>
+  
   
   </mapper>

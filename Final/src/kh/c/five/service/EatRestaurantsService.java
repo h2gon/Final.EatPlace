@@ -16,4 +16,5 @@ public interface EatRestaurantsService {
 
 	public RegiDto getrs2(int seq) throws Exception;	
 
+	public List<RegiDto> getRankList(RegiDto dto);
 }

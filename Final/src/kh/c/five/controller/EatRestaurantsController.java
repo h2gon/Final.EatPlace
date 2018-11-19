@@ -151,5 +151,16 @@ public class EatRestaurantsController {
 		/*return "restaurants/restaurantDetail?seq="+seq;*/
 		return "restaurants/restaurantDetail";
 	}
+	
+	@RequestMapping(value="home.do",  method={RequestMethod.GET, RequestMethod.POST})
+	public String getRankList(RegiDto dto, Model model) {
+		logger.info("EatRestaurantsController getRankList"+new Date());
+		
+		List<RegiDto> list = eatRestaurantsService.getRankList(dto);
+		
+		model.addAttribute("RankList", list);
+		
+		return "home";
+	}
 
 }

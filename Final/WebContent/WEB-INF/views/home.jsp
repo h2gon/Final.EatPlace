@@ -1,3 +1,5 @@
+<%@page import="kh.c.five.model.RegiDto"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -53,6 +55,16 @@ input:focus {
     height:500px;
     background-color:#FFF;
     z-index:10000;   
+ }
+ 
+ img.card-img-top{
+ 	max-width: 453px;
+ 	min-width: 453px;
+ 	max-height: 300px;
+ 	min-height: 300px; 
+ 	display: block;
+ 	margin-left: auto;
+ 	margin-right: auto; 	
  }
 </style>
 
@@ -198,67 +210,13 @@ input:focus {
 	            <h1 style="color: white;"><strong>솔직한 리뷰, 믿을 수 있는 평점!</strong></h1>
 	              <h1 style="color: white;"><strong>EAT PLACE</strong></h1> 
 	             
+	             <form action="" id="main-search" name="main-search" method="post">
 	              <div style="padding-top: 64px; width: 550px; margin-left: 375px;">				
-				    <input style=" width: 150%; height:60px; padding: 12px 24px; background-color: transparent; transition: transform 250ms ease-in-out; font-size: 14px;
-       					line-height: 18px; color: #575756; background-color: #e9ecef; background-image: url(http://mihaeltomic.com/codepen/input-search/ic_search_black_24px.svg);
-        				background-repeat: no-repeat; background-size: 18px 18px; background-position: 95% center; border-radius: 50px; border: 5px solid #ff7100;
-        				transition: all 250ms ease-in-out; backface-visibility: hidden; transform-style: preserve-3d;" type="text" placeholder="지역, 식당 또는 음식">
-        			
-        			<!-- 
-					<aside class="search-keywords-container" ng-controller="mp20_search_list_controller" ng-cloak>
-					  <nav class="tab-keywords" ng-show="!keyword">
-					    <button class="searching_tap_recommend searching_tap"
-					            onclick="common_ga(get_now_page_code(), 'CLICK_SEARCH_RECOMMEND')"
-					            ng-click="select_tab_by_recommend()">
-					      추천 검색어
-					    </button>
-					    <button class="searching_tap_trending searching_tap"
-					            onclick="common_ga(get_now_page_code(), 'CLICK_SEARCH_POPULAR')"
-					            ng-click="select_tab_by_popular()">
-					      인기 검색어
-					    </button>
-					    <button class="searching_tap_recent searching_tap"
-					            onclick="common_ga(get_now_page_code(), 'CLICK_SEARCH_RECENT')"
-					            ng-click="select_tab_by_lately()">
-					      최근 검색어
-					    </button>
-					  </nav>
-					
-					   검색 자동완성
-					  <div class="keywords">
-						  <div class="list-keywords-wrap">
-						    <ol class="list-keywords" ng-class="{'no_tab': keyword}">
-						      <li class="list-keyword"
-					            ng-repeat="item in show_keyword_list track by $index"
-					            ng-class="{'selected': $index == pointer}"
-					            ng-click="go_to_link(item, item.keyword, $event)">
-						        <a href="#" category="{{item.display_text}}" onclick="return false;" ng-bind="item.keyword"></a>
-						        <div class="search_result_delete"
-					               ng-show="selected_tab == constant.lately_tab_name"
-					               ng-click="remove_lately_keyword($index, $event)"
-					               onclick="common_ga(get_now_page_code(), 'CLICK_SEARCH_RECENT_CANCEL')">
-					          </div>
-						      </li>
-					
-							    <li class="clear_all"
-					            ng-show="selected_tab === 'lately' && show_keyword_list.length">
-					          <button ng-click="remove_lately_keyword_all()"
-					                  onclick="common_ga(get_now_page_code(), 'CLICK_SEARCH_RECENT_CLEAR')">
-					            x clear all
-					          </button>
-					        </li>
-					
-						      <li class="no_lately_keyword"
-					            ng-show="selected_tab === 'lately' && !show_keyword_list.length">
-					          최근 검색어가 없습니다.
-					        </li>
-						    </ol>
-						  </div>
-					  </div>
-					</aside> -->
-
-				</div>
-	 
+				    <input type="search" id="main-keyword" name="main-keyword" onkeypress="if(event.keyCode==13){search();}" style="width: 150%; height: 60px; padding: 12px 24px; background-color: transparent; color: #575756; background-color: #e9ecef;
+    						border-radius: 50px; border: 5px solid #ff7100; float: left;" placeholder="지역, 식당 또는 음식">	        			 
+        		  </div>       		  
+	 			 </form>
+	 			 
 	          </div> 
 	        </div>
 	      </div>
@@ -268,90 +226,44 @@ input:focus {
 
 	<br><br>
     <!-- Portfolio Section -->
-      
-
+    
+    <p style="margin-left: 58px; font-size: 24px; color: #ff7100"><strong>평점이 높은 식당</strong></p>
       <div class="row" style="margin-left: 65px; margin-right: 65px">
-        <div class="col-lg-4 col-sm-6 portfolio-item">
+      
+     <%
+     List<RegiDto> RankList = (List<RegiDto>)request.getAttribute("RankList");
+    
+     for(int i=0; i<6; i++){
+    %>	 
+        <div class="col-lg-4 col-sm-6 portfolio-item" style="height: 400px; width: 430px;">
+        
           <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <a href="#"><img class="card-img-top" src="\image\<%=RankList.get(i).getRs_picture() %>" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
-                <a href="rsdetail.do?seq=6">Detail test One</a>
+                <a href="details.do?seq=<%=RankList.get(i).getSeq() %>"><%=RankList.get(i).getRs_name() %></a>
               </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
+              <p class="card-text"><%=RankList.get(i).getRs_address1() %> - <%=RankList.get(i).getRs_category() %></p>
             </div>
           </div>
         </div>
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Project Two</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Project Three</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure perspiciatis mollitia recusandae vero vel quam!</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Project Four</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Project Five</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Project Six</a>
-              </h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque earum nostrum suscipit ducimus nihil provident, perferendis rem illo, voluptate atque, sit eius in voluptates, nemo repellat fugiat excepturi! Nemo, esse.</p>
-            </div>
-          </div>
-        </div>
-      </div>
- 	
+   
+    <%}%>
+    
+       </div>
  	<section class="p-0" id="portfolio">
       <div class="container-fluid p-0">
         <div class="row no-gutters popup-gallery">
           <div class="col-lg-4 col-sm-6">
             <a class="portfolio-box" href="img/portfolio/fullsize/1.jpg">
-              <img class="img-fluid" src="img/portfolio/thumbnails/1.jpg" alt="">
+              <img class="img-fluid" src="img/portfolio/fullsize/k.jpg" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
                     Category
                   </div>
                   <div class="project-name">
-                    Project Name
+                    	한식
                   </div>
                 </div>
               </div>
@@ -359,14 +271,14 @@ input:focus {
           </div>
           <div class="col-lg-4 col-sm-6">
             <a class="portfolio-box" href="img/portfolio/fullsize/2.jpg">
-              <img class="img-fluid" src="img/portfolio/thumbnails/2.jpg" alt="">
+              <img class="img-fluid" src="img/portfolio/fullsize/a.jpg" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
                     Category
                   </div>
                   <div class="project-name">
-                    Project Name
+                    	양식
                   </div>
                 </div>
               </div>
@@ -374,14 +286,14 @@ input:focus {
           </div>
           <div class="col-lg-4 col-sm-6">
             <a class="portfolio-box" href="img/portfolio/fullsize/3.jpg">
-              <img class="img-fluid" src="img/portfolio/thumbnails/3.jpg" alt="">
+              <img class="img-fluid" src="img/portfolio/fullsize/j.jpg" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
                     Category
                   </div>
                   <div class="project-name">
-                    Project Name
+                   	일식
                   </div>
                 </div>
               </div>
@@ -389,14 +301,14 @@ input:focus {
           </div>
           <div class="col-lg-4 col-sm-6">
             <a class="portfolio-box" href="img/portfolio/fullsize/4.jpg">
-              <img class="img-fluid" src="img/portfolio/thumbnails/4.jpg" alt="">
+              <img class="img-fluid" src="img/portfolio/fullsize/china.jpg" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
                     Category
                   </div>
                   <div class="project-name">
-                    Project Name
+                    	중식
                   </div>
                 </div>
               </div>
@@ -404,14 +316,14 @@ input:focus {
           </div>
           <div class="col-lg-4 col-sm-6">
             <a class="portfolio-box" href="img/portfolio/fullsize/5.jpg">
-              <img class="img-fluid" src="img/portfolio/thumbnails/5.jpg" alt="">
+              <img class="img-fluid" src="img/portfolio/fullsize/cafe.jpg" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
                     Category
                   </div>
                   <div class="project-name">
-                    Project Name
+                    	카페
                   </div>
                 </div>
               </div>
@@ -419,14 +331,14 @@ input:focus {
           </div>
           <div class="col-lg-4 col-sm-6">
             <a class="portfolio-box" href="img/portfolio/fullsize/6.jpg">
-              <img class="img-fluid" src="img/portfolio/thumbnails/6.jpg" alt="">
+              <img class="img-fluid" src="img/portfolio/fullsize/v.jpg" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
                     Category
                   </div>
                   <div class="project-name">
-                    Project Name
+                    	뷔폐
                   </div>
                 </div>
               </div>
@@ -523,7 +435,19 @@ input:focus {
 		  
 		</script>
 
+<script type="text/javascript">
 
+function search() {
+	
+	  var keyword = $("#main-keyword").val();
+	  //alert("main-keyword = " + keyword);
+	  
+}
+    
+ 
+
+
+</script>
 
 
 

@@ -36,5 +36,10 @@ public class EatRestaurantsServiceImpl implements EatRestaurantsService {
 	public RegiDto getrs2(int seq) throws Exception {
 		return eatRestaurantsDao.getrs2(seq);
 	}
+	
+	@Override
+	public List<RegiDto> getRankList(RegiDto dto) {
+		return eatRestaurantsDao.getRankList(dto);
+	}
 
 }
