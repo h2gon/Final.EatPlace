@@ -109,6 +109,10 @@ public class EatRestaurantsController {
 		
 		model.addAttribute("rslist", rslist);
 		
+		for (int i = 0; i < rslist.size(); i++) {
+			rslist.get(i).toString();
+		}
+		
 		
 		
 		return "restaurants/restaurntsList";
