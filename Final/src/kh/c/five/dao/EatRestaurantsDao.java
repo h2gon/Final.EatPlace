@@ -11,4 +11,6 @@ public interface EatRestaurantsDao {
 	
 	public List<RegiDto> getRs_List();
 
+	public RegiDto getrs(int seq) throws Exception;
+	
 }

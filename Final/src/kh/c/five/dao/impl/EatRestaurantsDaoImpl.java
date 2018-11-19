@@ -32,6 +32,11 @@ public class EatRestaurantsDaoImpl implements EatRestaurantsDao {
 		
 		return sqlSession.selectList(namespace+"getList");
 	}
+
+	@Override
+	public RegiDto getrs(int seq) throws Exception {
+		return sqlSession.selectOne(namespace+"getrs",seq);
+	}
 	
 	
 

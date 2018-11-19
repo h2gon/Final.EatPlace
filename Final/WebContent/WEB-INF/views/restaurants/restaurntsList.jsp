@@ -8,34 +8,30 @@
 <fmt:requestEncoding value="utf-8"/> 
 
 
-<table class="rslist" style="width: 85%">
-	<colgroup>
-		<col style="width:70px;">
-		<col style="width:auto;">
-	</colgroup>
+<table class="rslist" border="3" style="width: 85%">
 	
 <thead>
 	<tr>
-		<th>순서</th><th>제목</th>
+		<th>순서</th><th>가게이름</th>
 	</tr>
 </thead>
 
 <tbody>
 	<c:if test="${empty rslist }">
 	<tr>
-		<td colspan="3">작성된 글이 없습니다</td>
+		<td colspan="3">등록된 식당이 없습니다.</td>
 	</tr>	
 	</c:if>
 	
 	<!-- for(BbsDto bbs : bbslist) -->
-	<c:forEach items="${rslist }" var="bbs" varStatus="vs">
+	<c:forEach items="${rslist }" var="rs" varStatus="vs">
 	
-
-	
-	<tr class="_hover_tr">
-		<td>${rs.seq }</td>
-		<td style="text-align: left;">
-			${rs.name }
+	<tr class="td" style="width: 85%">
+		<td style="text-align: center;">${rs.seq }</td>
+		<td style="text-align: center;">
+			<a href="rsdetail.do?seq=${rs.seq }">
+			${rs.rs_name }
+			</a>
 		</td>
 
 	</tr>		

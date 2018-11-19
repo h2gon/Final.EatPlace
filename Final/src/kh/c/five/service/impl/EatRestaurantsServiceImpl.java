@@ -26,4 +26,9 @@ public class EatRestaurantsServiceImpl implements EatRestaurantsService {
 		return eatRestaurantsDao.getRs_List();
 	}
 
+	@Override
+	public RegiDto getrs(int seq) throws Exception {
+		return eatRestaurantsDao.getrs(seq);
+	}
+
 }

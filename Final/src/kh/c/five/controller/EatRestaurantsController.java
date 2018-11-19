@@ -120,12 +120,20 @@ public class EatRestaurantsController {
 	
 	
 
-	//임시 디테일
-	@RequestMapping(value="details.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String details() {
+	//디테일
+	@RequestMapping(value="rsdetail.do", method={RequestMethod.GET, RequestMethod.POST})
+	public String details(int seq,Model model) throws Exception {
 		logger.info("EatRestaurantsController detail"+new Date());
 	//	logger.info("InsertRS InsertDto.toString:"+dto.toString());
 		
+		
+		RegiDto rs=null;		
+		rs=eatRestaurantsService.getrs(seq);
+		model.addAttribute("rs", rs);
+		
+		System.out.println(rs.toString());
+		
+		/*return "restaurants/restaurantDetail?seq="+seq;*/
 		return "restaurants/restaurantDetail";
 	}
 

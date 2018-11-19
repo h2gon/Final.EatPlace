@@ -23,5 +23,13 @@
   
   </select>
   
+   <select id="getrs" resultType="kh.c.five.model.RegiDto">
+  
+  	SELECT * FROM EAT_RESTAURANT
+  	WHERE SEQ = #{seq}
+  
+  </select>
+  
+  
   
   </mapper>
