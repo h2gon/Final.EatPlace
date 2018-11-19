@@ -16,5 +16,10 @@
   	INSERT INTO RESTAURANT_INFO(RS_SEQ,RS_NAME,RS_TIME,RS_PHONE,RS_PRICE,RS_PARKING)
   		VALUES(RS_SEQ.nextVal,#{rs_name},#{rs_time},#{rs_phone},#{rs_price},#{rs_parking})
   </insert>
-
+  
+  <select id="getList" resultType="kh.c.five.model.RegiDto">
+  
+  	SELECT * FROM EAT_RESTAURANT
+  
+  </select>
   </mapper>

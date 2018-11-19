@@ -1,5 +1,7 @@
 package kh.c.five.dao.impl;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,6 +25,12 @@ public class EatRestaurantsDaoImpl implements EatRestaurantsDao {
 		int n1 = sqlSession.insert(namespace + "InsertRS", dto);
 		int n2 = sqlSession.insert(namespace+"InsertDetail", dto);
 		return n1>0 && n2>0?true:false;
+	}
+
+	@Override
+	public List<RegiDto> getRs_List() {
+		
+		return sqlSession.selectList(namespace+"getList");
 	}
 	
 	
