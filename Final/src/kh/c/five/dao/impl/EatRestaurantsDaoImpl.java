@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import kh.c.five.dao.EatRestaurantsDao;
 import kh.c.five.model.InsertDto;
 import kh.c.five.model.RegiDto;
+import kh.c.five.model.RestaurantDto;
 
 
 @Repository
@@ -36,6 +37,11 @@ public class EatRestaurantsDaoImpl implements EatRestaurantsDao {
 	@Override
 	public RegiDto getrs(int seq) throws Exception {
 		return sqlSession.selectOne(namespace+"getrs",seq);
+	}
+
+	@Override
+	public RegiDto getrs2(int seq) throws Exception {
+		return sqlSession.selectOne(namespace+"getrs2",seq);
 	}
 	
 	

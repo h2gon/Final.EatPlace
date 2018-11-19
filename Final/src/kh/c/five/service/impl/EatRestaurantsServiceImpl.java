@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import kh.c.five.dao.EatRestaurantsDao;
 import kh.c.five.model.InsertDto;
 import kh.c.five.model.RegiDto;
+import kh.c.five.model.RestaurantDto;
 import kh.c.five.service.EatRestaurantsService;
 
 @Service
@@ -29,6 +30,11 @@ public class EatRestaurantsServiceImpl implements EatRestaurantsService {
 	@Override
 	public RegiDto getrs(int seq) throws Exception {
 		return eatRestaurantsDao.getrs(seq);
+	}
+
+	@Override
+	public RegiDto getrs2(int seq) throws Exception {
+		return eatRestaurantsDao.getrs2(seq);
 	}
 
 }

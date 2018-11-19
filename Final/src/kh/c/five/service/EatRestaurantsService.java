@@ -4,6 +4,7 @@ import java.util.List;
 
 import kh.c.five.model.InsertDto;
 import kh.c.five.model.RegiDto;
+import kh.c.five.model.RestaurantDto;
 
 public interface EatRestaurantsService {
 	
@@ -12,5 +13,7 @@ public interface EatRestaurantsService {
 	public List<RegiDto> getRs_List();
 	
 	public RegiDto getrs(int seq) throws Exception;	
+
+	public RegiDto getrs2(int seq) throws Exception;	
 
 }

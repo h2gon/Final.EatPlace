@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kh.c.five.model.InsertDto;
 import kh.c.five.model.RegiDto;
+import kh.c.five.model.RestaurantDto;
 import kh.c.five.service.EatRestaurantsService;
 import kh.c.five.util.FUpUtil;
 
@@ -129,9 +130,16 @@ public class EatRestaurantsController {
 		
 		RegiDto rs=null;		
 		rs=eatRestaurantsService.getrs(seq);
+		
+		RegiDto rs2 = null;
+		rs2=eatRestaurantsService.getrs2(seq);
+		
 		model.addAttribute("rs", rs);
+		model.addAttribute("rs2", rs2);
+		
 		
 		System.out.println(rs.toString());
+		System.out.println(rs2.toString());
 		
 		/*return "restaurants/restaurantDetail?seq="+seq;*/
 		return "restaurants/restaurantDetail";
