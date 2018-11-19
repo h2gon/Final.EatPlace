@@ -50,35 +50,35 @@ public class EatRestaurantsController {
 		
 		
 		
-		// filename 취득
+		// filename 痍⑤뱷
 		dto.setRs_picture(fileload.getOriginalFilename());
 		
-		// upload 경로
+		// upload 寃쎈줈
 		// tomcat
 		String fupload = req.getServletContext().getRealPath("/upload");
-		//String fupload = "\\\\\\\\192.168.30.34\\\\공유\\\\tmp";
-		logger.info("upload 경로:" + fupload);
+		//String fupload = "\\\\\\\\192.168.30.34\\\\怨듭쑀\\\\tmp";
+		logger.info("upload 寃쎈줈:" + fupload);
 		
-		// 폴더
+		// �뤃�뜑
 	//	String fupload = "d:\\tmp";
 		
 		String f = dto.getRs_picture();
-		String newFile = FUpUtil.getNewFile(f);	// 파일명을 타임에 따라서 변경
+		String newFile = FUpUtil.getNewFile(f);	// �뙆�씪紐낆쓣 ���엫�뿉 �뵲�씪�꽌 蹂�寃�
 		
 		dto.setRs_picture(newFile);
 		
 		File file = new File(fupload + "/" + newFile);
 		
-		System.out.println("파일:" + fupload + "/" + newFile);
+		System.out.println("�뙆�씪:" + fupload + "/" + newFile);
 		
 		boolean isS = false;
 		System.out.println("dto:"+dto.toString());
 		
 		try {			
-			// 실제 upload 부분
+			// �떎�젣 upload 遺�遺�
 			FileUtils.writeByteArrayToFile(file, fileload.getBytes());
 		
-			// Db에 저장
+			// Db�뿉 ���옣
 			isS = eatRestaurantsService.InsertRS(dto);
 			
 			
@@ -97,6 +97,13 @@ public class EatRestaurantsController {
 		}	
 		
 	}
-	
+	//임시 디테일
+	@RequestMapping(value="details.do", method={RequestMethod.GET, RequestMethod.POST})
+	public String details() {
+		logger.info("EatRestaurantsController detail"+new Date());
+	//	logger.info("InsertRS InsertDto.toString:"+dto.toString());
+		
+		return "restaurants/restaurantDetail";
+	}
 	
 }
