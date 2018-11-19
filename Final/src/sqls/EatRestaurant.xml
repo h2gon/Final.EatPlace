@@ -22,4 +22,6 @@
   	SELECT * FROM EAT_RESTAURANT
   
   </select>
+  
+  
   </mapper>
