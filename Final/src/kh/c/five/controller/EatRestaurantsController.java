@@ -138,8 +138,8 @@ public class EatRestaurantsController {
 		model.addAttribute("rs2", rs2);
 		
 		
-		System.out.println(rs.toString());
-		System.out.println(rs2.toString());
+		//System.out.println(rs.toString());
+		//System.out.println(rs2.toString());
 		
 		/*return "restaurants/restaurantDetail?seq="+seq;*/
 		return "restaurants/restaurantDetail";
