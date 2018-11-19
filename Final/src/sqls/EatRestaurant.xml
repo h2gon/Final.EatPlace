@@ -8,13 +8,13 @@
   
   <insert id="InsertRS" parameterType="kh.c.five.model.RegiDto">
   	INSERT INTO EAT_RESTAURANT(SEQ,RS_NAME,RS_ADDRESS1,RS_ADDRESS2,RS_PICTURE,
-  	RS_CATEGORY,RS_MENU,RS_RATING,RS_READCOUNT)
-  		VALUES(0,#{rs_name},#{rs_address1},#{rs_address2},#{rs_picture},#{rs_category},#{rs_menu}
-  		,0,0)
+  	RS_CATEGORY,RS_MENU,RS_RATING,RS_READCOUNT,RS_KEYWORD)
+  		VALUES(SEQ.nextVal,#{rs_name},#{rs_address1},#{rs_address2},#{rs_picture},#{rs_category},#{rs_menu}
+  		,0,0,#{rs_keyword})
   </insert>
   <insert id="InsertDetail" parameterType="kh.c.five.model.RegiDto">
   	INSERT INTO RESTAURANT_INFO(RS_SEQ,RS_NAME,RS_TIME,RS_PHONE,RS_PRICE,RS_PARKING)
-  		VALUES(0,#{rs_name},#{rs_time},#{rs_phone},#{rs_price},#{rs_parking})
+  		VALUES(RS_SEQ.nextVal,#{rs_name},#{rs_time},#{rs_phone},#{rs_price},#{rs_parking})
   </insert>
 
   </mapper>
