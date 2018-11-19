@@ -58,8 +58,8 @@ public class EatRestaurantsController {
 		
 		// upload 寃쎈줈
 		// tomcat
-		String fupload = req.getServletContext().getRealPath("/upload");
-		//String fupload = "\\\\\\\\192.168.30.34\\\\怨듭쑀\\\\tmp";
+		//String fupload = req.getServletContext().getRealPath("/upload");
+		String fupload = "\\\\\\\\192.168.30.34\\\\공유\\\\tmp";
 		logger.info("upload 寃쎈줈:" + fupload);
 		
 		// �뤃�뜑
