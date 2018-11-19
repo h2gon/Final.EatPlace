@@ -150,7 +150,7 @@ input:focus {
     </nav>
 	<%
 		//여기서 list(get review list)
-		
+		//List<String> imagelist = 
 	%>
 	<div class="owl-carousel owl-theme">
 
@@ -173,6 +173,23 @@ input:focus {
 		<div class="item">
 			<img src="img/portfolio/fullsize/6.jpg">
 		</div>
+		<c:forEach var="list" items="${imagelist}" varStatus="vs">
+			<div class="item">
+				<img alt="" src="${list.file_name }">
+			</div>
+		</c:forEach>
+<%-- 		<%
+								// 이미지 리스트에서 파일 이름을 전부 불러옴
+								 for(int i = 1; i < imagelist.size(); i++){
+													
+								String path = imagelist.get(i);
+								%>
+								<div class="item">
+									<img alt="" src="<%=path%>">
+								</div>
+								
+								<%} %> --%>
+							
 		<%-- <%
 	for(int i = 0; i<list.size();i++){ //list: 리뷰 목록
 		%>
@@ -284,7 +301,8 @@ input:focus {
 									${rs2.rs_time }
 								</td>
 							</tr>
-
+						<br>
+						<img src="img/button/hr.png">
 
 
 

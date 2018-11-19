@@ -21,7 +21,9 @@ import org.springframework.web.multipart.MultipartFile;
 import kh.c.five.model.InsertDto;
 import kh.c.five.model.RegiDto;
 import kh.c.five.model.RestaurantDto;
+import kh.c.five.model.fileDto;
 import kh.c.five.service.EatRestaurantsService;
+import kh.c.five.service.EatReviewService;
 import kh.c.five.util.FUpUtil;
 
 
@@ -33,6 +35,9 @@ public class EatRestaurantsController {
 	
 	@Autowired
 	EatRestaurantsService eatRestaurantsService;
+	
+	@Autowired
+	EatReviewService eatReviewService;
 
 	@RequestMapping(value="restaurantsInsert.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String home() {
@@ -137,6 +142,8 @@ public class EatRestaurantsController {
 		model.addAttribute("rs", rs);
 		model.addAttribute("rs2", rs2);
 		
+		List<String> imagelist = eatReviewService.getImage(seq);
+		model.addAttribute("imagelist",imagelist);
 		
 		//System.out.println(rs.toString());
 		//System.out.println(rs2.toString());
