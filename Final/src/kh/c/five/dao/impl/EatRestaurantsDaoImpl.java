@@ -10,6 +10,7 @@ import kh.c.five.dao.EatRestaurantsDao;
 import kh.c.five.model.InsertDto;
 import kh.c.five.model.RegiDto;
 import kh.c.five.model.RestaurantDto;
+import kh.c.five.model.ReviewDto;
 
 
 @Repository
@@ -48,6 +49,14 @@ public class EatRestaurantsDaoImpl implements EatRestaurantsDao {
 	public List<RegiDto> getRankList(RegiDto dto) {
 		return sqlSession.selectList(namespace + "getRankList", dto);
 	}
+
+	@Override
+	public List<ReviewDto> SelectReview(int seq) {
+		List<ReviewDto> list = sqlSession.selectList(namespace+"SelectReview", seq);
+		return list;
+	}
+	
+	
 	
 
 }

@@ -327,39 +327,84 @@ input:focus {
 				</section>
 				<!-- 리뷰 -->
 				<section class="module review-container">
-				<div class="title_fliter_wrap">
-					<!-- <h2 class="title only-desktop">리뷰 <span class="review-container-review-count">(3)</span></h2>
-                <ul class="review_fliter_list">
-                  <li class="review_fliter_item">
-                    <button class="review_fliter_item_btn selected" data-review_count="3" onclick="common_ga(get_now_page_code(), 'CLICK_TASTEALL')" ng-class="{selected: action_values === undefined, not_selected_btn: 3 == 0}" ng-click="get_review_list(undefined, $event)">전체
-                      (3)
+				<!-- 리뷰 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~REVIEW~~~~~~~~~~~~~~~~~~~~~~~~-->
+		<hr>
+		<section class="module review-container">
+            <div class="title_fliter_wrap">
+              <h2 class="title only-mobile">푸줏간생고기점의 리뷰 (36)</h2>
+              <h2 class="title only-desktop">리뷰 <span class="review-container-review-count">(36)</span></h2>
+                <ul class="review_fliter_list" style="text-align: right;">
+                 
+                    <button class="btn active" data-review_count="36" onclick="common_ga(get_now_page_code(), 'CLICK_TASTEALL')" ng-class="{selected: action_values === undefined, not_selected_btn: 36 == 0}" ng-click="get_review_list(undefined, $event)">전체
+                      (36)
                     </button>
-                  </li>
-                  <li class="review_fliter_item">
-                    <button class="review_fliter_item_btn" data-review_count="2" onclick="common_ga(get_now_page_code(), 'CLICK_TASTEGOOD')" ng-class="{selected: action_values === 3, not_selected_btn: 2 == 0}" ng-click="get_review_list(3, $event)">맛있다
+                     <button class="btn" data-review_count="27" onclick="common_ga(get_now_page_code(), 'CLICK_TASTEGOOD')" ng-class="{selected: action_values === 3, not_selected_btn: 27 == 0}" ng-click="get_review_list(3, $event)">맛있다
+                      (27)
+                    </button>
+                    <button class="btn" data-review_count="7" onclick="common_ga(get_now_page_code(), 'CLICK_TASTESOSO')" ng-class="{selected: action_values === 2, not_selected_btn: 7 == 0}" ng-click="get_review_list(2, $event)">괜찮다
+                      (7)
+                    </button>
+                    <button class="btn" data-review_count="2" onclick="common_ga(get_now_page_code(), 'CLICK_TASTEBAD')" ng-class="{selected: action_values === 1, not_selected_btn: 2 == 0}" ng-click="get_review_list(1, $event)">별로
                       (2)
                     </button>
-                  </li>
-                  <li class="review_fliter_item">
-                    <button class="review_fliter_item_btn" data-review_count="1" onclick="common_ga(get_now_page_code(), 'CLICK_TASTESOSO')" ng-class="{selected: action_values === 2, not_selected_btn: 1 == 0}" ng-click="get_review_list(2, $event)">괜찮다
-                      (1)
-                    </button>
-                  </li>
-                  <li class="review_fliter_item">
-                    <button class="review_fliter_item_btn not_selected_btn" data-review_count="0" onclick="common_ga(get_now_page_code(), 'CLICK_TASTEBAD')" ng-class="{selected: action_values === 1, not_selected_btn: 0 == 0}" ng-click="get_review_list(1, $event)">별로
-                      (0)
-                    </button>
-                  </li>
-                </ul> -->
-				</div>
+                  
+                </ul>
+            </div>   
+           
+          </section>
+         
+
+          <div class="review_main">
+          <c:forEach items="${reviewlist }" var="review" varStatus="vs" begin="0" end="4" >
+          <c:if test="${vs.count }"></c:if> 
+         <table border="1">
+         <tr>
+         	<td>
+         	<!-- review_info -->
+         	<div class="review_img_container">
+           
+           <div class="review_date">
+           ${vs.count}
+           </div>
+           	
+           <!-- 	<div class="img">
+           		<img class="photo2" alt="이미지없음" src="./img/soup.jpg">
+           	
+           	</div> -->
+           	
+           	<div class="reviewer_info">
+           	<input type="text" name="review_id" value="${review.id }" readonly="readonly">
+           
+           	</div>
+                     
+           </div>
+         	</td>
+         	<!-- review context -->
+         <td>
+         	<div class="review_content">
+         	<input type="text" name="review_content" value="${review.rs_content }" readonly="readonly">          	
+           </div>
+         </td>         	
+         <td>
+          <!-- 맛있다/괜찮다/별로 -->
+           <div class="review_like">
+           <input type="text" name="review_ratin" value="${review.rs_rating }" readonly="readonly">           
+           </div>
+           <!-- 맛있다/괜찮다/별로 end -->
+         </td>         
+         </tr>
+         
+                               
+          	
+         </table>
+            
+           </c:forEach>
+         <button type="button" id="PlusView">더보기</button>       
+          </div>
+          <!-- review_main end -->
 
 
-				<p class="no_review_message" style="display: none;"
-					onclick="common_ga('PG_RESTAURANT', 'CLICK_DOWNLOAD_REVIEW');go_to_app_restaurant_and_market($('.pg-restaurant').data('restaurant_uuid')); "
-					data-event_term="V1" data-event_name="CLICK_DOWNLOAD_REVIEW">
-					아직 작성된 리뷰가 없네요.<br> <span class="desc">앱에서 해당 식당의 첫 리뷰를
-						작성해주시겠어요?</span>
-				</p>
+				
 				</section>
 			</div>
 		</div>

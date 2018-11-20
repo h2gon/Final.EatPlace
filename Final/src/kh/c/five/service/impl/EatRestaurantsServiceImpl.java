@@ -9,6 +9,7 @@ import kh.c.five.dao.EatRestaurantsDao;
 import kh.c.five.model.InsertDto;
 import kh.c.five.model.RegiDto;
 import kh.c.five.model.RestaurantDto;
+import kh.c.five.model.ReviewDto;
 import kh.c.five.service.EatRestaurantsService;
 
 @Service
@@ -41,5 +42,12 @@ public class EatRestaurantsServiceImpl implements EatRestaurantsService {
 	public List<RegiDto> getRankList(RegiDto dto) {
 		return eatRestaurantsDao.getRankList(dto);
 	}
+
+	@Override
+	public List<ReviewDto> SelectReview(int seq) {
+		return eatRestaurantsDao.SelectReview(seq);
+	}
+	
+	
 
 }

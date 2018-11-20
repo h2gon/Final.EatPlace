@@ -27,10 +27,10 @@ public class EatMembercontroller {
 	@Autowired
 	EatMemberService eatmemberservice;
 
-	@RequestMapping(value="home.do", method={RequestMethod.GET, RequestMethod.POST})
+	/*@RequestMapping(value="home.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String home() {
 		return "home";
-	}
+	}*/
 	
 	@RequestMapping(value="regi.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String regi() {

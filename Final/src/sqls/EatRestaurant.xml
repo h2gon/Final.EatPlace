@@ -41,5 +41,7 @@
   	SELECT * FROM EAT_RESTAURANT ORDER BY RS_RATING
   </select>
   
+  <select parameterType="java.lang.Integer" id="SelectReview" resultType="kh.c.five.model.ReviewDto"> SELECT * FROM RESTAURANT_REVIEW WHERE RS_SEQ=#{seq} </select>
+  
   
   </mapper>

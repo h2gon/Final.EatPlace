@@ -241,7 +241,7 @@ input:focus {
             <a href="#"><img class="card-img-top" src="\image\<%=RankList.get(i).getRs_picture() %>" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
-                <a href="details.do?seq=<%=RankList.get(i).getSeq() %>"><%=RankList.get(i).getRs_name() %></a>
+                <a href="rsdetail.do?seq=<%=RankList.get(i).getSeq() %>"><%=RankList.get(i).getRs_name() %></a>
               </h4>
               <p class="card-text"><%=RankList.get(i).getRs_address1() %> - <%=RankList.get(i).getRs_category() %></p>
             </div>

@@ -2,6 +2,7 @@ package kh.c.five.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import kh.c.five.model.InsertDto;
 import kh.c.five.model.RegiDto;
 import kh.c.five.model.RestaurantDto;
+import kh.c.five.model.ReviewDto;
 import kh.c.five.model.fileDto;
 import kh.c.five.service.EatRestaurantsService;
 import kh.c.five.service.EatReviewService;
@@ -139,6 +141,12 @@ public class EatRestaurantsController {
 		RegiDto rs2 = null;
 		rs2=eatRestaurantsService.getrs2(seq);
 		
+		//review-----
+		List<ReviewDto> list = new ArrayList<ReviewDto>();
+		list = eatRestaurantsService.SelectReview(seq);
+		logger.info("Reviewlist:"+list);
+		model.addAttribute("reviewlist", list);
+		//---------
 		model.addAttribute("rs", rs);
 		model.addAttribute("rs2", rs2);
 		
