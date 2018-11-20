@@ -51,10 +51,19 @@
 <h3><% %>에 대한 솔직한 리뷰를 써주세요.</h3>
 
  <form action = "writeReviewAf.do">
-        <label for = "like"></label>
-        <input type = "radio" name = "like" value = "5" checked="checked">맛있어요
-        <input type = "radio" name = "like" value = "3">괜찮아요
-        <input type = "radio" name = "like" value = "1">별로에요
+   
+		<!-- <div class="star">
+		<img alt="" src="./img/like/1-1.png" id="p1" msg="1" title="1점" onclick="$(this).attr('src','./img/like/1-2.png');">
+		<img alt="" src="./img/like/3-1.png" id="p3" msg="3" title="3점" onclick="$(this).attr('src','./img/like/3-2.png');">
+		<img alt="" src="./img/like/5-1.png" id="p5" msg="5" title="5점" onclick="$(this).attr('src','./img/like/5-2.png');">
+		</div> -->
+
+
+		<div class="star">
+		<img alt="" src="./img/like/1-1.png" id="p1" msg="1" title="1점" >
+		<img alt="" src="./img/like/3-1.png" id="p3" msg="3" title="3점" >
+		<img alt="" src="./img/like/5-1.png" id="p5" msg="5" title="5점" >
+		</div> 
        
         <br><br><br>
      
@@ -68,7 +77,7 @@
         <input type="button" value="돌아가기" onclick="history.back();">
     </form>
                
-               
+     <br><br>          
                
                
                
@@ -99,6 +108,44 @@ $('.owl-carousel').owlCarousel({
     }
 })
 </script>
+
+<script type="text/javascript">
+$(function () {
+	$("#p1").click(function () {
+		var aName = $(this).attr("msg");
+		$("#p1").attr('src','./img/like/1-2.png');
+		$("#p3").attr('src','./img/like/3-1.png');
+		$("#p5").attr('src','./img/like/5-1.png');
+		
+		alert(aName + "점입니다");
+	});	
+	
+	
+	$("#p3").click(function () {
+		var aName = $(this).attr("msg");
+		$("#p1").attr('src','./img/like/1-1.png');
+		$("#p3").attr('src','./img/like/3-2.png');
+		$("#p5").attr('src','./img/like/5-1.png');
+		
+		alert(aName + "점입니다");
+	});	
+	
+	$("#p5").click(function () {
+		var aName = $(this).attr("msg");
+		$("#p1").attr('src','./img/like/1-1.png');
+		$("#p3").attr('src','./img/like/3-1.png');
+		$("#p5").attr('src','./img/like/5-2.png');
+		
+		alert(aName + "점입니다");
+	});	
+	
+});
+
+
+</script>
+
+
+
 
 </body>
 </html>
