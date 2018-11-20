@@ -183,6 +183,48 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
  	margin-right: auto; 	
 </style>
 
+<!-- SEARCH -->
+<style>
+   
+    .in-line{
+      width:660px;	/* 350 */
+      height:60px;	/* 40 */
+    }
+   
+    input[type="text"]{
+      width:70%;
+      height:100%;
+      border:none;
+      font-size:1.213rem;
+      padding-left: 20px;
+      font-style: oblique;
+      display:inline;
+      outline:none;
+      box-sizing: border-box;
+      color:black;
+
+    }
+    input[type=button]{
+      width: 30%;
+      height:100%;
+      background-color: lightgray;
+      border:none;
+      background-color: white;
+      font-size:1.313rem;
+      color:#042AaC;
+      outline:none;
+      display:inline;
+      margin-left: -25px;
+      box-sizing: border-box;
+    }
+ 
+  </style>
+
+
+
+
+
+
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript"> 
 //<![CDATA[
@@ -274,6 +316,8 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 //]]>
 </script>
 
+
+
   <head>
 
     <meta charset="utf-8">
@@ -343,18 +387,18 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 	            <h1 style="color: white;"><strong>솔직한 리뷰, 믿을 수 있는 평점!</strong></h1>
 	              <h1 style="color: white;"><strong>EAT PLACE</strong></h1> 
 	             
-	             <form action="" id="main-search" name="main-search" method="post">
-	              <div style="padding-top: 64px; width: 550px; margin-left: 375px;">				
-				    <input type="search" id="main-keyword" name="main-keyword" onkeypress="if(event.keyCode==13){search();}" style="width: 150%; height: 60px; padding: 12px 24px; background-color: transparent; color: #575756; background-color: #e9ecef;
-    						border-radius: 50px; border: 5px solid #ff7100; float: left;" placeholder="지역, 식당 또는 음식">	        			 
-        		  </div>       		  
-	 			 </form>
-	 			 
+	 			<form action="" id="main-search" name="main-search" method="post"> 
+	 			 <div class="in-line" style="margin-left: 470px; ">
+			      <strong><input type="text" id="main-keyword" name="main-keyword" value="" placeholder="지역, 식당 또는 음식" style="color: #575756; border-bottom-left-radius: 20px; border-top-left-radius: 20px"></strong>
+			      <strong><input type="button" name="name" value="검색" style="border-bottom-right-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-top-left-radius: 20px; background-color: darkorange; color: white;"></strong>
+			     </div>
+			   </form>
+			   
 	          </div> 
 	        </div>
 	      </div>
 	  
-    </header>
+   </header>
 
 
 	<br><br>
@@ -388,7 +432,7 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
             <a href="rsdetail.do?seq=<%=RankList.get(i).getSeq() %>"><img class="card-img-top" src="\image\<%=RankList.get(i).getRs_picture() %>" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
-                <a href="rsdetail.do?seq=<%=RankList.get(i).getSeq() %>"><%=RankList.get(i).getRs_name() %></a>
+                <a href="rsdetail.do?seq=<%=RankList.get(i).getSeq() %>"><%=RankList.get(i).getRs_name() %>&nbsp;&nbsp;<strong><span style="color:#ff792a; font-size: 1.37rem;"><%=RankList.get(i).getRs_rating() %></span></strong></a>
               </h4>
               <p class="card-text"><%=RankList.get(i).getRs_address1() %> - <%=RankList.get(i).getRs_category() %></p>
             </div>
@@ -396,10 +440,14 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
         </div>  	    
 	 	<%}%>
 	 <%} %>
+		    
+    </div>
+    <br><br>
+      
+	<img alt="" src="img/button/hr.png" style="width: 100%"> 
 	
+	<br><br><br><br> 
 	
-	    
-       </div>
  	<section class="p-0" id="portfolio">
       <div class="container-fluid p-0">
         <div class="row no-gutters popup-gallery">
