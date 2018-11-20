@@ -301,7 +301,7 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
   <body>
 
     <!-- Navigation -->
-     <nav class="navbar fixed-top navbar-expand-lg navbar-dark fixed-top" style="background-color: #f05f40; padding-bottom: 10px">
+     <nav class="navbar fixed-top navbar-expand-lg navbar-dark fixed-top" style="background-color: #c53211; padding-bottom: 10px">
       <div class="container">
         <a class="navbar-brand" href="home.do">EAT PLACE</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -321,8 +321,10 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
             <li class="nav-item">
               <a class="nav-link" href="restaurantsInsert.do"><strong style="color: white;margin-left: 20px">맛집 추가</strong></a>
             </li>
- 			<li class="nav-item">
- 				  <a class="nav-link openMask" href="#"><strong style="color: white; margin-left: 20px">로그인</strong></a> 
+ 			<li class="nav-item" style="margin-left: 20px">
+ 				  <a class="nav-link openMask" href="#">
+ 				  	<img alt="" src="img/main/man-user.png">
+ 				  </a> 
  			</li>          	
           </ul>
         </div>
@@ -369,7 +371,7 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
         <div class="col-lg-4 col-sm-6 portfolio-item" style="height: 400px; width: 430px;">
         
           <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="\image\<%=RankList.get(i).getRs_picture() %>" alt=""></a>
+            <a href="rsdetail.do?seq=<%=RankList.get(i).getSeq() %>"><img class="card-img-top" src="\image\<%=RankList.get(i).getRs_picture() %>" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
                 <a href="rsdetail.do?seq=<%=RankList.get(i).getSeq() %>"><%=RankList.get(i).getRs_name() %></a>
