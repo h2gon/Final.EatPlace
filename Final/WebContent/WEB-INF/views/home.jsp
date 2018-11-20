@@ -365,9 +365,23 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
     
      <%
      List<RegiDto> RankList = (List<RegiDto>)request.getAttribute("RankList");
-    
-     for(int i=0; i<6; i++){
-    %>	 
+         
+     if(RankList == null){
+      %>
+   		 <div class="col-lg-4 col-sm-6 portfolio-item" style="height: 400px; width: 430px;">
+       
+          <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#"></a>
+              </h4>
+              <p class="card-text"></p>
+            </div>
+          </div>
+        </div>
+      <%}else{ %>      
+     	<%for(int i=0; i<6; i++){%>	 
         <div class="col-lg-4 col-sm-6 portfolio-item" style="height: 400px; width: 430px;">
         
           <div class="card h-100">
@@ -379,10 +393,12 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
               <p class="card-text"><%=RankList.get(i).getRs_address1() %> - <%=RankList.get(i).getRs_category() %></p>
             </div>
           </div>
-        </div>
-   
-    <%}%>
-    
+        </div>  	    
+	 	<%}%>
+	 <%} %>
+	
+	
+	    
        </div>
  	<section class="p-0" id="portfolio">
       <div class="container-fluid p-0">
@@ -573,7 +589,7 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 function search() {
 	
 	  var keyword = $("#main-keyword").val();
-	  //alert("main-keyword = " + keyword);
+	  alert("main-keyword = " + keyword);
 	  
 }
     
