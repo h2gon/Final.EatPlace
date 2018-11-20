@@ -55,7 +55,118 @@ input:focus {
     height:500px;
     background-color:#FFF;
     z-index:10000;   
+    
+    font-family: 'Open Sans', sans-serif;
+    background: #092756;
+    background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%),-moz-linear-gradient(top,  rgba(57,173,219,.25) 0%, rgba(42,60,87,.4) 100%), -moz-linear-gradient(-45deg,  #670d10 0%, #092756 100%);
+    background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -webkit-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -webkit-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+    background: -o-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -o-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -o-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+    background: -ms-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -ms-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -ms-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+    background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), linear-gradient(to bottom,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), linear-gradient(135deg,  #670d10 0%,#092756 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
  }
+ 
+ /* 마스크 뛰우기 */
+#mask1 {  
+    position:absolute;  
+    z-index:9000;  
+    background-color:#000;  
+    display:none;  
+    left:0;
+    top:0;
+} 
+/* 팝업으로 뜨는 윈도우 css  */ 
+.window1 {
+    display: none;
+    position:absolute;  
+    top:30px;
+	border-top: "-50px";
+    padding-left: 60px;
+    margin-left: -500px;
+    width:400px;
+    height:700px;
+    background-color:#FFF;
+    z-index:10000;   
+  
+    font-family: 'Open Sans', sans-serif;
+    background: #092756;
+    background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%),-moz-linear-gradient(top,  rgba(57,173,219,.25) 0%, rgba(42,60,87,.4) 100%), -moz-linear-gradient(-45deg,  #670d10 0%, #092756 100%);
+    background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -webkit-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -webkit-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+    background: -o-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -o-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -o-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+    background: -ms-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -ms-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -ms-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+    background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), linear-gradient(to bottom,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), linear-gradient(135deg,  #670d10 0%,#092756 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
+ }
+ 
+/* 로그인 */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+.btn { display: inline-block; *display: inline; *zoom: 1; padding: 4px 10px 4px; margin-bottom: 0; font-size: 13px; line-height: 18px; color: #333333; text-align: center;text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75); vertical-align: middle; background-color: #f5f5f5; background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6); background-image: -ms-linear-gradient(top, #ffffff, #e6e6e6); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6)); background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6); background-image: -o-linear-gradient(top, #ffffff, #e6e6e6); background-image: linear-gradient(top, #ffffff, #e6e6e6); background-repeat: repeat-x; filter: progid:dximagetransform.microsoft.gradient(startColorstr=#ffffff, endColorstr=#e6e6e6, GradientType=0); border-color: #e6e6e6 #e6e6e6 #e6e6e6; border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25); border: 1px solid #e6e6e6; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); cursor: pointer; *margin-left: .3em; }
+.btn:hover, .btn:active, .btn.active, .btn.disabled, .btn[disabled] { background-color: #e6e6e6; }
+.btn-large { padding: 9px 14px; font-size: 15px; line-height: normal; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; }
+.btn:hover { color: #333333; text-decoration: none; background-color: #e6e6e6; background-position: 0 -15px; -webkit-transition: background-position 0.1s linear; -moz-transition: background-position 0.1s linear; -ms-transition: background-position 0.1s linear; -o-transition: background-position 0.1s linear; transition: background-position 0.1s linear; }
+.btn-primary, .btn-primary:hover { text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); color: #ffffff; }
+.btn-primary.active { color: rgba(255, 255, 255, 0.75); }
+.btn-primary { background-color: #4a77d4; background-image: -moz-linear-gradient(top, #6eb6de, #4a77d4); background-image: -ms-linear-gradient(top, #6eb6de, #4a77d4); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#6eb6de), to(#4a77d4)); background-image: -webkit-linear-gradient(top, #6eb6de, #4a77d4); background-image: -o-linear-gradient(top, #6eb6de, #4a77d4); background-image: linear-gradient(top, #6eb6de, #4a77d4); background-repeat: repeat-x; filter: progid:dximagetransform.microsoft.gradient(startColorstr=#6eb6de, endColorstr=#4a77d4, GradientType=0);  border: 1px solid #3762bc; text-shadow: 1px 1px 1px rgba(0,0,0,0.4); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.5); }
+.btn-primary:hover, .btn-primary:active, .btn-primary.active, .btn-primary.disabled, .btn-primary[disabled] { filter: none; background-color: #4a77d4; }
+.btn-block { width: 100%; display:block; }
+
+* { -webkit-box-sizing:border-box; -moz-box-sizing:border-box; -ms-box-sizing:border-box; -o-box-sizing:border-box; box-sizing:border-box; }
+
+html { width: 100%; height:100%; overflow:hidden; }
+ 
+ 
+body { 
+    width: 100%;
+    height:100%;
+    font-family: 'Open Sans', sans-serif;
+    background: #092756;
+    background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%),-moz-linear-gradient(top,  rgba(57,173,219,.25) 0%, rgba(42,60,87,.4) 100%), -moz-linear-gradient(-45deg,  #670d10 0%, #092756 100%);
+    background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -webkit-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -webkit-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+    background: -o-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -o-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -o-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+    background: -ms-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -ms-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -ms-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+    background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), linear-gradient(to bottom,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), linear-gradient(135deg,  #670d10 0%,#092756 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
+}
+.login { 
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    margin: -150px 0 0 -150px;
+    width:300px;
+    height:300px;
+}
+.login h1 { color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
+
+.regi { 
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    margin: -150px 0 0 -150px;
+    width:300px;
+    height:300px;
+}
+.regi h1 { color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
+
+input { 
+    width: 100%; 
+    margin-bottom: 10px; 
+    background: rgba(0,0,0,0.3);
+    border: none;
+    outline: none;
+    padding: 10px;
+    font-size: 13px;
+    color: #fff;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+    border: 1px solid rgba(0,0,0,0.3);
+    border-radius: 4px;
+    box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);
+    -webkit-transition: box-shadow .5s ease;
+    -moz-transition: box-shadow .5s ease;
+    -o-transition: box-shadow .5s ease;
+    -ms-transition: box-shadow .5s ease;
+    transition: box-shadow .5s ease;
+}
+input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); }
  
  img.card-img-top{
  	max-width: 453px;
@@ -66,6 +177,7 @@ input:focus {
  	margin-left: auto;
  	margin-right: auto; 	
  }
+ 
 </style>
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -113,6 +225,49 @@ input:focus {
  
     });
  
+
+    function wrapWindowByMask1(){
+    	 
+        //화면의 높이와 너비를 구한다.
+        var maskHeight = $(document).height();  
+        var maskWidth = $(window).width();  
+ 
+        //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
+        $("#mask1").css({"width":maskWidth,"height":maskHeight});  
+ 
+        //애니메이션 효과 - 일단 0초동안 까맣게 됐다가 60% 불투명도로 간다.
+ 
+        $("#mask1").fadeIn(0);      
+        $("#mask1").fadeTo("slow",0.6);    
+ 
+        //윈도우 같은 거 띄운다.
+        $(".window1").show();
+ 
+    }
+    
+    $(document).ready(function(){
+        //검은 막 띄우기
+        $(".openMask1").click(function(e){
+            e.preventDefault();
+            wrapWindowByMask1();
+        });
+ 
+        //닫기 버튼을 눌렀을 때
+        $(".window1 .close").click(function (e) {  
+            //링크 기본동작은 작동하지 않도록 한다.
+            e.preventDefault();  
+            $("#mask1, .window1").hide();  
+        });       
+ 
+        //검은 막을 눌렀을 때
+        $("#mask1").click(function () {  
+            $(this).hide();  
+            $(".window1").hide();  
+ 
+        });      
+ 
+    });
+    
 //]]>
 </script>
 
@@ -160,38 +315,110 @@ input:focus {
             <li class="nav-item">
               <a class="nav-link" href="restaurantsInsert.do">맛집 추가</a>
             </li>
- 			<li>
- 				  <a href="#" class="openMask">로그인</a>
+ 			<li class="nav-item">
+ 				  <a class="nav-link openMask" href="#">로그인</a>
  			</li>       
         <!-- 로그인 팝업참 -->
-            <div class="dropdown-item" id="mask"></div>
+           <div class="dropdown-item" id="mask"></div> 
             <div class="window">
-				<table style="width: 100%">
-				<tr>
-					<td style="align-content: center;">
-						<input type="text" id="_userid" name="id" value="" data-msg="ID를 " 
-										size="15" title="아이디" style="border: 1px solid #dddddd;">
-					</td>
-				
-				</tr>
-				<tr>
-					<td>
-						<input type="text" id="_pwd" name="pwd" value="" data-msg="패스워드를 " 
-										size="15" title="패스워드" style="border: 1px solid #dddddd;">
-					</td>
-				
-				</tr>
-				<tr>
-					<td>
-						<a  class="dropdown-item" id="kakao-login-btn">	
-						 <a  class="dropdown-item" href="login.do" style="text-align: center;">로그인</a>
-               			 <a  class="dropdown-item" href="regi.do" style="text-align: center;">회원가입</a>
-					</td>
-				</tr>
-	
-				</table>
-				
+		   		<div class="login">
+					<h1>Login</h1>
+					<br>
+					<form action="loginAf.do" name="frmForm" id="_frmForm"  method="post">
+					     <input type="text" name="id" placeholder="Username" id="_userid" required="required" />
+					     <input type="password" name="pwd" placeholder="Password" id="_pwd" required="required" />
+					     <button type="submit" class="btn btn-primary btn-block btn-large" id="_btnLogin" style="text-align: center;">로그인</button>
+		               	 <a  class="btn btn-primary btn-block btn-large openMask1" href="#" style="text-align: center;">회원가입</a>
+		               	 <a  class="dropdown-item" id="kakao-login-btn"></a>
+					 </form>
+				</div>
             </div>
+            
+            
+            <!-- 회원가입 팝업창 -->
+        	<div class="dropdown-item" id="mask1"></div> 
+            <div class="window1">
+		   		<div class="regi">
+					<h1>회원가입</h1>
+					<br>
+					<div id="login_wrap">
+					<form action="" method="post" id="_frmForm" name="frmForm">
+					
+					<table class="content_table" style="width: 100%">
+					<colgroup>
+						<col style="width:40%">
+						<col style="width:60%">
+					</colgroup>
+					
+					<tr>
+						<th>아이디 첵크</th>
+						<td>
+							<input type="text" name="sid" id="_id" size="40" placeholder="id"><br>
+							<a href="#none" id="_btnGetId" class="btn btn-primary btn-block btn-large" title="회원가입" style="height: 30px;">아이디체크</a>
+							<div id="_rgetid"></div>
+						</td>
+						
+					</tr>
+					
+					
+					<tr>
+						<th>아이디</th>
+						<td>
+							<input type="text" name="id" id="_userid" size="40" data-msg="아이디를 " readonly="readonly"> 
+						</td>
+					</tr>
+					
+					<tr>
+						<th>패스워드</th>
+						<td>
+							<input type="text" name="pwd" id="_pwd"  size="40" placeholder="password" data-msg="패스워드를 "> 
+						</td>
+					</tr>
+					
+					<tr>
+						<th>이름</th>
+						<td>
+							<input type="text" name="name" id="_name" size="40" placeholder="name" data-msg="성함을 "> 
+						</td>
+					</tr>
+					<tr>
+						<th>닉네임 첵크</th>
+						<td>
+							<input type="text" name="sid" id="_nickname" size="40" placeholder="nickname"><br>
+							<a href="#none" id="_btnGetNickName" class="btn btn-primary btn-block btn-large" title="회원가입" style="height: 30px;">아이디체크</a>
+							<div id="_rgetnickname"></div>
+						</td>
+						
+					</tr>
+					<tr>
+						<th>닉네임</th>
+						<td>
+							<input type="text" name="nickname" id="_usernickname" size="40" data-msg="별명을 " readonly="readonly"> 
+						</td>
+					</tr>
+					<tr>
+						<th>이메일</th>
+						<td>
+							<input type="text" name="email" id="_email" size="40" placeholder="e-mail" data-msg="이메일을 "> 
+						</td>
+					</tr>
+					
+					<tr>
+						<td colspan="2" style="height: 50px; text-align: center;">
+						
+						<a href="#none" id="_btnRegi" class="btn btn-primary btn-block btn-large" style="height: 30px; title="회원가입">회원가입</a>
+						
+						<!-- <a href="#none" id="_btnLogin" class="btn btn-primary btn-block btn-large" style="height: 30px; title="로그인">로그인</a> -->					
+						
+						</td>					
+					</tr>					
+					
+					</table>					
+					
+					</form>				
+				
+				</div>
+				</div>
         
           </ul>
         </div>
@@ -444,6 +671,100 @@ function search() {
 	  
 }
     
+$("#_btnLogin").click(function () {
+	location.href = "login.do";
+});
+
+$("#_btnRegi").click(function() {
+	if($("#_userid").val() == ""){
+		alert($("#_userid").attr("data-msg") + " 입력해 주십시오" );
+		$("#_id").focus();
+	} 
+	else if($("#_pwd").val() == ""){
+		alert($("#_pwd").attr("data-msg") + " 입력해 주십시오" );
+		$("#_pwd").focus();
+	} 
+	else if($("#_name").val() == ""){
+		alert($("#_name").attr("data-msg") + " 입력해 주십시오" );
+		$("#_name").focus();
+	} 
+	else if($("#_nickname").val() == ""){
+		alert($("#_nickname").attr("data-msg") + " 입력해 주십시오" );
+		$("#_nickname").focus();
+	} 
+	else if($("#_email").val() == ""){
+		alert($("#_email").attr("data-msg") + " 입력해 주십시오" );
+		$("#_email").focus();
+	}
+	else{
+		$("#_frmForm").attr("action", "regiAf.do").submit();
+	}
+});
+
+/* 아이디체크 */
+
+$("#_btnGetId").click(function () {
+	var id = $("#_id").val();
+	if(_id == ""){
+		alert("아이디를 입력해 주십시오");
+	}else{
+		idCheckFunc(_id);
+	}	
+});
+
+ function idCheckFunc(id) {
+	
+	$.ajax({
+		type:"post",
+		url:"getID.do",
+		data:"id=" + id,
+		async:true,
+		success:function(msg){			
+			if(msg.message == 'YES'){
+				$("#_rgetid").html("사용할 수 없는 아이디입니다");
+				$("#_rgetid").css("background-color", "#ff0000");
+			}	
+			else{
+				$("#_rgetid").html("사용하실 수 있습니다");
+				$("#_rgetid").css("background-color", "#0000ff");
+				$("#_userid").val( $("#_id").val() );
+			}
+		}		
+	});
+	
+}
+
+/* 닉네임 체크 */
+$("#_btnGetNickName").click(function () {
+	var nickname = $("#_nickname").val();
+	if(_nickname == ""){
+		alert("닉네임을 입력해 주십시오");
+	}else{
+		nicknameCheckFunc(_nickname);
+	}	
+});
+
+ function nicknameCheckFunc(nickname) {
+	
+	$.ajax({
+		type:"post",
+		url:"getNickName.do",
+		data:"nickname=" + nickname,
+		async:true,
+		success:function(msg){			
+			if(msg.message == 'YES'){
+				$("#_rgetnickname").html("사용할 수 없는 닉네임입니다");
+				$("#_rgetnickname").css("background-color", "#ff0000");
+			}	
+			else{
+				$("#_rgetnickname").html("사용하실 수 있습니다");
+				$("#_rgetnickname").css("background-color", "#0000ff");
+				$("#_usernickname").val( $("#_nickname").val() );
+			}
+		}		
+	});
+	
+}
  
 
 

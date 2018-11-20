@@ -30,11 +30,13 @@ public class EatMemberDaoImpl implements EatMemberDao {
 	}
 	
 	@Override
+	public int getNickName(EatMemberDto mem) {
+		return sqlSession.selectOne(namespace + "getNickName", mem);
+	}
+	
+	@Override
 	public EatMemberDto login(EatMemberDto mem) throws Exception {
 		return sqlSession.selectOne(namespace + "login", mem);
 	}
-
-	
-	
 
 }

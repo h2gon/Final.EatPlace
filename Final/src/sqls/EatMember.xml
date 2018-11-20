@@ -18,16 +18,20 @@
 	WHERE ID=#{id}
 </select>
 
-<!-- 
-<select id="login" parameterType="kh.c.five.model.MemberDto"
-	resultType="kh.c.five.model.MemberDto">
+<select id="getNickName" 
+	parameterType="kh.c.five.model.EatMemberDto"
+	resultType="java.lang.Integer">
+	SELECT NVL(COUNT(*), 0)
+	FROM EATMEMBER
+	WHERE NICKNAME=#{nickname}
+</select>
+
+<select id="login" parameterType="kh.c.five.model.EatMemberDto"
+	resultType="kh.c.five.model.EatMemberDto">
 	SELECT ID, NAME, EMAIL, AUTH
 	FROM EATMEMBER
 	WHERE ID=#{id} AND PWD=#{pwd}
 </select>
-
-
- -->
 
 
 </mapper>  

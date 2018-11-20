@@ -26,6 +26,13 @@ public class EatMemberServiceImpl implements EatMemberService {
 		return eatmemberdao.getID(mem);
 	}
 	
+
+	@Override
+	public int getNickName(EatMemberDto mem) {
+		// TODO Auto-generated method stub
+		return eatmemberdao.getNickName(mem);
+	}
+	
 	@Override
 	public EatMemberDto login(EatMemberDto mem) throws Exception {
 		// TODO Auto-generated method stub

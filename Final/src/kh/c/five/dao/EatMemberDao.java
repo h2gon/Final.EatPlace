@@ -9,6 +9,8 @@ public interface EatMemberDao {
 	
 	int getID(EatMemberDto mem);
 	
+	int getNickName(EatMemberDto mem);
+	
 	EatMemberDto login(EatMemberDto mem) throws Exception;
 	
 }
