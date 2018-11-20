@@ -1,3 +1,5 @@
+<%@page import="kh.c.five.model.ReviewDto"%>
+<%@page import="java.util.List"%>
 <%@page import="kh.c.five.model.RegiDto"%>
 <%@page import="java.io.File"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -9,11 +11,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
+<%!
+public String makeTable(List<ReviewDto> dto){
+	String s="";
+	
+		
+	s="<table class='review'>";
+	
+	s+="</table>";
+	return s;
+}
+
+%>
+
 <script type="text/javascript">
 function WriteReview(seq) {
 	location.href='WriteReview.do?seq='+seq;
-}
-		
+}		
 </script>
 
 
@@ -98,6 +112,12 @@ input:focus {
     background-color:#FFF;
     z-index:10000;   
  }
+
+.table1 {
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
 </style>
 </head>
 <body>
@@ -361,28 +381,50 @@ input:focus {
             </div>   
            
           </section>
+          
+          <%
+          
+          List<ReviewDto> list = (List<ReviewDto>)request.getAttribute("reviewlist");
+          
+          final int LIST = 5;
+          int totalCnt = list.size();
+          int pagingCount = totalCnt / LIST;
+          int remainList = totalCnt % LIST;
+          
+                    
+          %>
          
-
-          <div id="js-load" class="review_main">
-          <c:forEach items="${reviewlist }" var="review" varStatus="vs" begin="0" end="4" >
-          <c:if test="${vs.count }"></c:if> 
-         <table border="1">
+		<div class="review_main">
+		          
+         
+         
+         <%-- <c:forEach items="${reviewlist }" var="review" varStatus="vs">  --%>
+         
+         <%for(int i=0 ; i<totalCnt;i++) {
+         	if(totalCnt<=LIST){
+         %>
+         <table id="table" class="table1">
+         
+         <thead>
+        	<tr>
+        		<th>ID</th>
+        		<th>Content</th>
+        		<th>평점</th>
+        	</tr>
+         </thead>
+         
          <tr>
          	<td>
          	<!-- review_info -->
          	<div class="review_img_container">
            
-           <div class="review_date">
-           ${vs.count}
-           </div>
-           	
-           <!-- 	<div class="img">
-           		<img class="photo2" alt="이미지없음" src="./img/soup.jpg">
-           	
-           	</div> -->
-           	
+           
+          
+           
+                             	
            	<div class="reviewer_info">
-           	<input type="text" name="review_id" value="${review.id }" readonly="readonly">
+           	 <%=i+1 %>
+           	<input type="text" name="review_id" style="width: 20%;" value="<%=list.get(i).getId() %>" readonly="readonly">
            
            	</div>
                      
@@ -391,29 +433,79 @@ input:focus {
          	<!-- review context -->
          <td>
          	<div class="review_content">
-         	<input type="text" name="review_content" value="${review.rs_content }" readonly="readonly">          	
-           </div>
+         	<input type="text" name="review_content" style="width: 70%;" value="<%=list.get(i).getRs_content() %>" readonly="readonly">          	
+            </div>
          </td>         	
          <td>
           <!-- 맛있다/괜찮다/별로 -->
            <div class="review_like">
-           <input type="text" name="review_ratin" value="${review.rs_rating }" readonly="readonly">           
+           <input type="text" name="review_ratin" style="width: 10%;" value="<%=list.get(i).getRs_rating() %>" readonly="readonly">           
            </div>
            <!-- 맛있다/괜찮다/별로 end -->
          </td>         
          </tr>
+                             
          
-                               
-          	
+         
          </table>
-            
-           </c:forEach>
-          
-          <div id="js-btn-wrap" class="btn-wrap">
-         <a href="javascript:;" class="button">더보기</a>
+         <%}
+         	else if(pagingCount>1 && remainList != 0){
+         	 pagingCount++;
+         	%>
+         	
+         <table id="table" class="table1">
          
-         </div>      
+         <thead>
+        	<tr>
+        		<th>ID</th>
+        		<th>Content</th>
+        		<th>평점</th>
+        	</tr>
+         </thead>
          
+         <tr>
+         	<td>
+         	<!-- review_info -->
+         	<div class="review_img_container">
+           
+           <div class="review_date">
+           <%=i+1 %>
+           </div>
+                             	
+           	<div class="reviewer_info">
+           	<input type="text" name="review_id" style="width: 20%;" value="<%=list.get(i).getId() %>" readonly="readonly">
+           
+           	</div>
+                     
+           </div>
+         	</td>
+         	<!-- review context -->
+         <td>
+         	<div class="review_content">
+         	<input type="text" name="review_content" style="width: 70%;" value="<%=list.get(i).getRs_content() %>" readonly="readonly">          	
+            </div>
+         </td>         	
+         <td>
+          <!-- 맛있다/괜찮다/별로 -->
+           <div class="review_like">
+           <input type="text" name="review_ratin" style="width: 10%;" value="<%=list.get(i).getRs_rating() %>" readonly="readonly">           
+           </div>
+           <!-- 맛있다/괜찮다/별로 end -->
+         </td>         
+         </tr>
+                 
+         
+         </table>			
+         		
+         	
+         	
+         	<%}
+      
+         }
+         %>
+         <a>더보기</a>
+          <%-- </c:forEach>
+           --%>
           </div>
           <!-- review_main end -->
 
@@ -425,30 +517,8 @@ input:focus {
 	</div>
 	
 	
-	<script type="text/javascript">
-	$(window).on('load', function () {
-		load('#js-load','5');
-		$("#js-btn-wrap.button").on("click", function () {
-			
-			load('#js-load','5','#js-btn-wrap');
-		});
-		
-	});
-	
-	function load(id, cnt, btn) {
-		var r_list = id + ".js-load:not(.active)";
-		var r_length = $(r_list).length;
-		var r_total_cut;
-		if(cnt<r_length){
-			r_total_cnt = cnt;
-		}else{
-			r_total_cnt = r_length;
-			$('.button').hide()
-		}
-		$(r_list+":lt("+r_total_cnt+")").addClass("active");
-	}
-	
-	</script>
+
+
 
 	<script type="text/javascript">
 		//plugin call

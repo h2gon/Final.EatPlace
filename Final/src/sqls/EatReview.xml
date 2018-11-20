@@ -7,7 +7,7 @@
   <mapper namespace="EatReview">
   
   
-  <select id="getReviewList" resultType="kh.c.five.model.EATReviewDto">
+ <select id="getReviewList" resultType="kh.c.five.model.EATReviewDto">
 	SELECT SEQ, ID, REF, STEP, DEPTH, 
 				TITLE, CONTENT, WDATE, PARENT, 
 				DEL, READCOUNT
