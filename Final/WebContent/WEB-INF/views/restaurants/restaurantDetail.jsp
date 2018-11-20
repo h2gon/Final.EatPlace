@@ -363,7 +363,7 @@ input:focus {
           </section>
          
 
-          <div class="review_main">
+          <div id="js-load" class="review_main">
           <c:forEach items="${reviewlist }" var="review" varStatus="vs" begin="0" end="4" >
           <c:if test="${vs.count }"></c:if> 
          <table border="1">
@@ -408,7 +408,12 @@ input:focus {
          </table>
             
            </c:forEach>
-         <button type="button" id="PlusView">더보기</button>       
+          
+          <div id="js-btn-wrap" class="btn-wrap">
+         <a href="javascript:;" class="button">더보기</a>
+         
+         </div>      
+         
           </div>
           <!-- review_main end -->
 
@@ -418,9 +423,32 @@ input:focus {
 			</div>
 		</div>
 	</div>
-	<table style="width: 70%">
-
-	</table>
+	
+	
+	<script type="text/javascript">
+	$(window).on('load', function () {
+		load('#js-load','5');
+		$("#js-btn-wrap.button").on("click", function () {
+			
+			load('#js-load','5','#js-btn-wrap');
+		});
+		
+	});
+	
+	function load(id, cnt, btn) {
+		var r_list = id + ".js-load:not(.active)";
+		var r_length = $(r_list).length;
+		var r_total_cut;
+		if(cnt<r_length){
+			r_total_cnt = cnt;
+		}else{
+			r_total_cnt = r_length;
+			$('.button').hide()
+		}
+		$(r_list+":lt("+r_total_cnt+")").addClass("active");
+	}
+	
+	</script>
 
 	<script type="text/javascript">
 		//plugin call
