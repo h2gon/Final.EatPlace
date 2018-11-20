@@ -9,7 +9,7 @@
 
 <!DOCTYPE html>
 <html>
-<style>
+<!-- <style>
 @use postcss-color-function;
 @use postcss-nested;
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,700,900');
@@ -114,7 +114,7 @@ input:focus {
 
 html { width: 100%; height:100%; overflow:hidden; }
  
- 
+
 body { 
     width: 100%;
     height:100%;
@@ -126,7 +126,7 @@ body {
     background: -ms-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -ms-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -ms-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
     background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), linear-gradient(to bottom,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), linear-gradient(135deg,  #670d10 0%,#092756 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
-}
+} 
 .login { 
     position: absolute;
     top: 200px;
@@ -167,7 +167,12 @@ input {
     transition: box-shadow .5s ease;
 }
 input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); }
+
+ }
  
+</style> -->
+
+<style>
  img.card-img-top{
  	max-width: 453px;
  	min-width: 453px;
@@ -176,8 +181,6 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
  	display: block;
  	margin-left: auto;
  	margin-right: auto; 	
- }
- 
 </style>
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -298,128 +301,29 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
   <body>
 
     <!-- Navigation -->
-     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+     <nav class="navbar fixed-top navbar-expand-lg navbar-dark fixed-top" style="background-color: #f05f40; padding-bottom: 10px">
       <div class="container">
-        <a class="navbar-brand" href="index.html">EAT PLACE</a>
+        <a class="navbar-brand" href="home.do">EAT PLACE</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
+      </div>
+      
+      <div class="container">
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="about.html">About</a>
+              <a class="nav-link" href="about.html"><strong style="color: white;margin-left: 20px">About</strong></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="restaurntsList.do">맛집 리스트</a>
+              <a class="nav-link" href="restaurntsList.do"><strong style="color: white;margin-left: 20px">맛집 리스트</strong></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="restaurantsInsert.do">맛집 추가</a>
+              <a class="nav-link" href="restaurantsInsert.do"><strong style="color: white;margin-left: 20px">맛집 추가</strong></a>
             </li>
  			<li class="nav-item">
- 				  <a class="nav-link openMask" href="#">로그인</a>
- 			</li>       
-        <!-- 로그인 팝업참 -->
-           <div class="dropdown-item" id="mask"></div> 
-            <div class="window">
-		   		<div class="login">
-					<h1>Login</h1>
-					<br>
-					<form action="loginAf.do" name="frmForm" id="_frmForm"  method="post">
-					     <input type="text" name="id" placeholder="Username" id="_userid" required="required" />
-					     <input type="password" name="pwd" placeholder="Password" id="_pwd" required="required" />
-					     <button type="submit" class="btn btn-primary btn-block btn-large" id="_btnLogin" style="text-align: center;">로그인</button>
-		               	 <a  class="btn btn-primary btn-block btn-large openMask1" href="#" style="text-align: center;">회원가입</a>
-		               	 <a  class="dropdown-item" id="kakao-login-btn"></a>
-					 </form>
-				</div>
-            </div>
-            
-            
-            <!-- 회원가입 팝업창 -->
-        	<div class="dropdown-item" id="mask1"></div> 
-            <div class="window1">
-		   		<div class="regi">
-					<h1>회원가입</h1>
-					<br>
-					<div id="login_wrap">
-					<form action="" method="post" id="_frmForm" name="frmForm">
-					
-					<table class="content_table" style="width: 100%">
-					<colgroup>
-						<col style="width:40%">
-						<col style="width:60%">
-					</colgroup>
-					
-					<tr>
-						<th>아이디 첵크</th>
-						<td>
-							<input type="text" name="sid" id="_id" size="40" placeholder="id"><br>
-							<a href="#none" id="_btnGetId" class="btn btn-primary btn-block btn-large" title="회원가입" style="height: 30px;">아이디체크</a>
-							<div id="_rgetid"></div>
-						</td>
-						
-					</tr>
-					
-					
-					<tr>
-						<th>아이디</th>
-						<td>
-							<input type="text" name="id" id="_userid" size="40" data-msg="아이디를 " readonly="readonly"> 
-						</td>
-					</tr>
-					
-					<tr>
-						<th>패스워드</th>
-						<td>
-							<input type="text" name="pwd" id="_pwd"  size="40" placeholder="password" data-msg="패스워드를 "> 
-						</td>
-					</tr>
-					
-					<tr>
-						<th>이름</th>
-						<td>
-							<input type="text" name="name" id="_name" size="40" placeholder="name" data-msg="성함을 "> 
-						</td>
-					</tr>
-					<tr>
-						<th>닉네임 첵크</th>
-						<td>
-							<input type="text" name="sid" id="_nickname" size="40" placeholder="nickname"><br>
-							<a href="#none" id="_btnGetNickName" class="btn btn-primary btn-block btn-large" title="회원가입" style="height: 30px;">아이디체크</a>
-							<div id="_rgetnickname"></div>
-						</td>
-						
-					</tr>
-					<tr>
-						<th>닉네임</th>
-						<td>
-							<input type="text" name="nickname" id="_usernickname" size="40" data-msg="별명을 " readonly="readonly"> 
-						</td>
-					</tr>
-					<tr>
-						<th>이메일</th>
-						<td>
-							<input type="text" name="email" id="_email" size="40" placeholder="e-mail" data-msg="이메일을 "> 
-						</td>
-					</tr>
-					
-					<tr>
-						<td colspan="2" style="height: 50px; text-align: center;">
-						
-						<a href="#none" id="_btnRegi" class="btn btn-primary btn-block btn-large" style="height: 30px; title="회원가입">회원가입</a>
-						
-						<!-- <a href="#none" id="_btnLogin" class="btn btn-primary btn-block btn-large" style="height: 30px; title="로그인">로그인</a> -->					
-						
-						</td>					
-					</tr>					
-					
-					</table>					
-					
-					</form>				
-				
-				</div>
-				</div>
-        
+ 				  <a class="nav-link openMask" href="#"><strong style="color: white; margin-left: 20px">로그인</strong></a> 
+ 			</li>          	
           </ul>
         </div>
       </div>
@@ -456,7 +360,7 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
     
     <p style="margin-left: 58px; font-size: 24px; color: #ff7100"><strong>평점이 높은 식당</strong></p>
       <div class="row" style="margin-left: 65px; margin-right: 65px">
-      
+    
      <%
      List<RegiDto> RankList = (List<RegiDto>)request.getAttribute("RankList");
     
