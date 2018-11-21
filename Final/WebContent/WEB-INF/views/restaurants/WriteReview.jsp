@@ -81,7 +81,7 @@ RegiDto dto = (RegiDto)request.getAttribute("dto");
 		
         <br><br><br>
      
-        <textarea rows="10" cols="50" name='rs_content' id="rs_content"></textarea>
+        <textarea rows="10" cols="50" name='rs_content' id="rs_content" placeholder ="<%=login.getName()%>님, 어떠셨어요?"></textarea>
         
         
         

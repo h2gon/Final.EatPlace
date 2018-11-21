@@ -594,10 +594,10 @@ input:focus {
 	            <h1 style="color: white;"><strong>솔직한 리뷰, 믿을 수 있는 평점!</strong></h1>
 	              <h1 style="color: white;"><strong>EAT PLACE</strong></h1> 
 	             
-	 			<form action="" id="main-search" name="main-search" method="post"> 
+	 			<form action="" id="main-search" name="main-search" method="get"> 
 	 			 <div class="in-line" style="margin-left: 470px; ">
-			      <strong><input type="text" id="main-keyword" name="main-keyword" value="" placeholder="지역, 식당 또는 음식" style="color: #575756; border-bottom-left-radius: 20px; border-top-left-radius: 20px"></strong>
-			      <strong><input type="button" name="name" value="검색" style="border-bottom-right-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-top-left-radius: 20px; background-color: darkorange; color: white;"></strong>
+			      <strong><input type="text" onkeypress="if(event.keyCode==13) {search();}"  id="main-keyword" name="s_keyword" value="" placeholder="지역, 식당 또는 음식" style="color: #575756; border-bottom-left-radius: 20px; border-top-left-radius: 20px"></strong>
+			      <strong><input type="button" onclick="search()"  value="검색" style="border-bottom-right-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-top-left-radius: 20px; background-color: darkorange; color: white;"></strong>
 			     </div>
 			   </form>
 			   
@@ -844,19 +844,28 @@ input:focus {
 function search() {
 	
 	  var keyword = $("#main-keyword").val();
-	  alert("main-keyword = " + keyword);
+	  if (keyword == "" || keyword == null) {
+		alert("검색어를 입력해주세요")
+		
+	}else{
+		alert("main-keyword = " + keyword);
+		
+		$("#main-search").attr({"target":"_self", "action":"search.do"}).submit();
+	}
+	
+	  
 	  
 }
     
 $("#_btnLogin").click(function () {
 	 /* location.href = "login.do";  */
-	 redirect:/"login.do";  
+	"login.do";  
 });
 
 
 $("#_btnLogout").click(function () {
 	/* location.href = "logout.do"; */
- 	redirect:/"logout.do";
+ 	"logout.do";
 });
 
 

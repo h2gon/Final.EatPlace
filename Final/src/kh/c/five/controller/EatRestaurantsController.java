@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import kh.c.five.model.EatParam;
 import kh.c.five.model.InsertDto;
 import kh.c.five.model.RegiDto;
 import kh.c.five.model.RestaurantDto;
@@ -177,6 +178,28 @@ public class EatRestaurantsController {
 		model.addAttribute("RankList", list);
 		
 		return "home";
+	}
+	
+	@RequestMapping(value="search.do",  method={RequestMethod.GET, RequestMethod.POST})
+	public String search(String s_keyword, EatParam param) {
+		
+		System.out.println("검색어 : "+s_keyword);
+		System.out.println("param: "+param.toString());
+		
+		// paging 처리
+		int sn = param.getPageNumber();
+		int start = (sn) * param.getRecordCountPerPage() + 1;
+		int end = (sn+1) * param.getRecordCountPerPage();
+				
+		param.setStart(start);
+		param.setEnd(end);
+		
+		List<RegiDto> list = eatRestaurantsService.getRs_List();
+		
+		
+		
+		return "redirect:/home.do";
+		//return "restaurants/restaurntsSearchList";
 	}
 	
 	
