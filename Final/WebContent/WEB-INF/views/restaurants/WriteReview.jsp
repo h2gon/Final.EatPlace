@@ -1,3 +1,4 @@
+<%@page import="kh.c.five.model.EatMemberDto"%>
 <%@page import="kh.c.five.model.RegiDto"%>
 <%@page import="java.io.File"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -27,6 +28,11 @@
 <body>
 <%
 
+//로그인 세션
+EatMemberDto login = (EatMemberDto)request.getSession().getAttribute("login");
+
+//System.out.println(login.toString());
+
 //맛집 정보 dto
 RegiDto dto = (RegiDto)request.getAttribute("dto");
 //여기서 list(get review list)
@@ -51,13 +57,13 @@ RegiDto dto = (RegiDto)request.getAttribute("dto");
 				<div class="restaurant_title_wrap">
                
    
-<h4 style="color: grey"><% %>회원님</h4>
+<h4 style="color: grey"><%=login.getId() %>회원님</h4>
 <h3><%=dto.getRs_name() %>에 대한 솔직한 리뷰를 써주세요.</h3>
 
  <form action = "writeReviewAf.do" method="post" enctype="multipart/form-data">
  
  <input type="hidden" name="rs_seq" value="<%=dto.getSeq()%>">
- 	<input type="hidden" name="id" value="1">
+ 	<input type="hidden" name="id" value="<%=login.getId()%>">
    
 		<!-- <div class="star">
 		<img alt="" src="./img/like/1-1.png" id="p1" msg="1" title="1점" onclick="$(this).attr('src','./img/like/1-2.png');">
