@@ -7,19 +7,19 @@ public class fileDto implements Serializable {
     private String o_name;
     private String file_name;
     private long file_size;
-    private int rv_seq;
+    private int rs_seq;
     
     public fileDto() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public fileDto(int seq, String o_name, String file_name, long file_size, int rv_seq) {
+	public fileDto(int seq, String o_name, String file_name, long file_size, int rs_seq) {
 		super();
 		this.seq = seq;
 		this.o_name = o_name;
 		this.file_name = file_name;
 		this.file_size = file_size;
-		this.rv_seq = rv_seq;
+		this.rs_seq = rs_seq;
 	}
 
 	public int getSeq() {
@@ -54,18 +54,18 @@ public class fileDto implements Serializable {
 		this.file_size = file_size;
 	}
 
-	public int getRv_seq() {
-		return rv_seq;
+	public int getrs_seq() {
+		return rs_seq;
 	}
 
-	public void setRv_seq(int rv_seq) {
-		this.rv_seq = rv_seq;
+	public void setrs_seq(int rs_seq) {
+		this.rs_seq = rs_seq;
 	}
 
 	@Override
 	public String toString() {
 		return "fileDto [seq=" + seq + ", o_name=" + o_name + ", file_name=" + file_name + ", file_size=" + file_size
-				+ ", rv_seq=" + rv_seq + "]";
+				+ ", rs_seq=" + rs_seq + "]";
 	}
     
     

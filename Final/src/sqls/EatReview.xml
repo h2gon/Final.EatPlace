@@ -21,4 +21,22 @@
 	WHERE RV_SEQ=#{rs_seq}
   </select>
   
+  
+  <insert id="addReview" parameterType="kh.c.five.model.ReviewDto" >
+  	INSERT INTO RESTAURANT_REVIEW(SEQ, ID, RS_SEQ, RS_CONTENT, RS_RATING)
+  	VALUES(REIVEW_SEQ.NEXTVAL, #{id}, #{rs_seq}, #{rs_content}, #{rs_rating})
+  	
+  	<selectKey resultType="int" keyProperty="seq" order="AFTER">
+  		SELECT REIVEW_SEQ.CURRVAL FROM DUAL
+  	</selectKey>
+  
+  </insert>
+  
+  <insert id="addFile" parameterType="kh.c.five.model.fileDto">
+  	
+   INSERT INTO RS_FILE (SEQ, O_NAME, FILE_NAME, FILE_SIZE, RV_SEQ, RS_SEQ)
+	VALUES(RSFILE_SEQ.NEXTVAL,#{o_name},#{file_name},#{file_size},#{seq},#{rs_seq})
+  
+  </insert>
+  
   </mapper>

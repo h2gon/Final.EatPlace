@@ -179,14 +179,6 @@ public class EatRestaurantsController {
 		return "home";
 	}
 	
-	@RequestMapping(value="WriteReview.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String WriteReview(int seq) {
-		
-		logger.info("EatRestaurantsController WriteReview"+new Date());
-
-		
-		return "restaurants/WriteReview";
-	}
 	
 
 }

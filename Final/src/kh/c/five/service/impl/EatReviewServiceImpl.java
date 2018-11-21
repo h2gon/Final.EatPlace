@@ -9,6 +9,8 @@ import kh.c.five.dao.EatRestaurantsDao;
 import kh.c.five.dao.EatReviewDao;
 import kh.c.five.model.InsertDto;
 import kh.c.five.model.RegiDto;
+import kh.c.five.model.ReviewDto;
+import kh.c.five.model.fileDto;
 import kh.c.five.service.EatRestaurantsService;
 import kh.c.five.service.EatReviewService;
 
@@ -22,6 +24,18 @@ public class EatReviewServiceImpl implements EatReviewService {
 	public List<String> getImage(int rv_seq) {
 		
 		return eatreviewdao.getImage(rv_seq);
+	}
+
+	@Override
+	public Integer addReview(ReviewDto rdto) {
+		// TODO Auto-generated method stub
+		return eatreviewdao.addReview(rdto);
+	}
+
+	@Override
+	public void addFile(fileDto fdto) {
+		// TODO Auto-generated method stub
+		eatreviewdao.addFile(fdto);
 	}
 	
 

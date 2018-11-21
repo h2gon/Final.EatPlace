@@ -1,3 +1,4 @@
+<%@page import="kh.c.five.model.RegiDto"%>
 <%@page import="java.io.File"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -25,6 +26,9 @@
 </head>
 <body>
 <%
+
+//맛집 정보 dto
+RegiDto dto = (RegiDto)request.getAttribute("dto");
 //여기서 list(get review list)
 
 %>
@@ -48,9 +52,12 @@
                
    
 <h4 style="color: grey"><% %>회원님</h4>
-<h3><% %>에 대한 솔직한 리뷰를 써주세요.</h3>
+<h3><%=dto.getRs_name() %>에 대한 솔직한 리뷰를 써주세요.</h3>
 
  <form action = "writeReviewAf.do">
+ 
+ <input type="hidden" name="rs_seq" value="<%=dto.getSeq()%>">
+ 	<input type="hidden" name="id" value="1">
    
 		<!-- <div class="star">
 		<img alt="" src="./img/like/1-1.png" id="p1" msg="1" title="1점" onclick="$(this).attr('src','./img/like/1-2.png');">
@@ -64,10 +71,12 @@
 		<img alt="" src="./img/like/3-1.png" id="p3" msg="3" title="3점" >
 		<img alt="" src="./img/like/5-1.png" id="p5" msg="5" title="5점" >
 		</div> 
+		
+		<input type = "hidden" id="rs_rating" name = "rs_rating" value = "5">
        
         <br><br><br>
      
-        <textarea rows="10" cols="50" name='content' id="content"></textarea>
+        <textarea rows="10" cols="50" name='rs_content' id="rs_content"></textarea>
         
         
         
@@ -116,6 +125,7 @@ $(function () {
 		$("#p1").attr('src','./img/like/1-2.png');
 		$("#p3").attr('src','./img/like/3-1.png');
 		$("#p5").attr('src','./img/like/5-1.png');
+	/* 	$("#rs_rating").val(1); */
 		
 		alert(aName + "점입니다");
 	});	
