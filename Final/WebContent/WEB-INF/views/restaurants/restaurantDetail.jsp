@@ -496,6 +496,10 @@ input:focus {
 
 						</tbody>
 					</table>
+					
+					
+				<button class="review_writing_button" onclick="WriteReview('${rs.seq}');">리뷰쓰기</button>
+					
 				</div>
 				<div style="float: left;width: 10%">
 					<p>  </p>

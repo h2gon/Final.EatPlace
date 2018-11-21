@@ -67,13 +67,12 @@ RegiDto dto = (RegiDto)request.getAttribute("dto");
 
 
 		<div class="star">
+		<input type = "hidden" id="rs_rating" name = "rs_rating" value = "5">
 		<img alt="" src="./img/like/1-1.png" id="p1" msg="1" title="1점" >
 		<img alt="" src="./img/like/3-1.png" id="p3" msg="3" title="3점" >
-		<img alt="" src="./img/like/5-1.png" id="p5" msg="5" title="5점" >
+		<img alt="" src="./img/like/5-2.png" id="p5" msg="5" title="5점" >
 		</div> 
 		
-		<input type = "hidden" id="rs_rating" name = "rs_rating" value = "5">
-       
         <br><br><br>
      
         <textarea rows="10" cols="50" name='rs_content' id="rs_content"></textarea>
@@ -125,9 +124,11 @@ $(function () {
 		$("#p1").attr('src','./img/like/1-2.png');
 		$("#p3").attr('src','./img/like/3-1.png');
 		$("#p5").attr('src','./img/like/5-1.png');
-	/* 	$("#rs_rating").val(1); */
 		
-		alert(aName + "점입니다");
+		
+		$("#rs_rating").val(1); 
+		
+		alert($("#rs_rating").val());
 	});	
 	
 	
@@ -137,7 +138,9 @@ $(function () {
 		$("#p3").attr('src','./img/like/3-2.png');
 		$("#p5").attr('src','./img/like/5-1.png');
 		
-		alert(aName + "점입니다");
+		$("#rs_rating").val(3); 
+		
+		alert($("#rs_rating").val());
 	});	
 	
 	$("#p5").click(function () {
@@ -146,7 +149,9 @@ $(function () {
 		$("#p3").attr('src','./img/like/3-1.png');
 		$("#p5").attr('src','./img/like/5-2.png');
 		
-		alert(aName + "점입니다");
+		$("#rs_rating").val(5); 
+		
+		alert($("#rs_rating").val());
 	});	
 	
 });
