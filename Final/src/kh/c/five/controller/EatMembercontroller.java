@@ -91,7 +91,7 @@ public class EatMembercontroller {
 	public String login() {
 		logger.info("KhMemberController login " + new Date());
 		
-		return "login";
+		return "loginAf.do";
 	}
 	
 	@RequestMapping(value="loginAf.do", method={RequestMethod.GET, RequestMethod.POST})
@@ -102,14 +102,15 @@ public class EatMembercontroller {
 		
 		if(login != null && !login.getId().equals("")) {			
 			req.getSession().setAttribute("login", login);
-			// bbslist로 이동	
-			return "home";
-		}else {
+
+			return "redirect:/home.do";
+		}/*else {
 			return "login";
-			/*"redirect:/bbslist.do"*/
-		}				
+			"redirect:/bbslist.do"
+		}	*/		
+		return "redirect:/home.do";
 	}
-	/*
+	
 	
 	@RequestMapping(value="logout.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String logout(HttpServletRequest req) {
@@ -117,8 +118,7 @@ public class EatMembercontroller {
 		
 		req.getSession().invalidate(); 
 
-		
-		return "login";
-	}*/
+		return "redirect:/home.do";
+	}
 	
 }

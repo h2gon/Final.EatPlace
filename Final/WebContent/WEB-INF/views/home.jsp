@@ -1,3 +1,4 @@
+<%@page import="kh.c.five.model.EatMemberDto"%>
 <%@page import="kh.c.five.model.RegiDto"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,10 +7,13 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib  prefix="form" uri="http://www.springframework.org/tags/form" %>
 <fmt:requestEncoding value="UTF-8"/>
-
+<%
+EatMemberDto user = (EatMemberDto)session.getAttribute("login");
+%>
 <!DOCTYPE html>
 <html>
-<!-- <style>
+
+<style>
 @use postcss-color-function;
 @use postcss-nested;
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,700,900');
@@ -35,7 +39,37 @@ input:focus {
             border-radius: 0;
             background-position: 100% center;
         } 
-        
+/* 마스크 뛰우기 */
+#mask3 {  
+    position:absolute;  
+    z-index:9000;  
+    background-color:#000;  
+    display:none;  
+    left:0;
+    top:0;
+} 
+/* 팝업으로 뜨는 윈도우 css  */ 
+.window3 {
+    display: none;
+    position:absolute;  
+    top:50px;
+    margin-left: -500px;
+    width:400px;
+    height:500px;
+    background-color:#FFF;
+    z-index:10000;   
+    
+    font-family: 'Open Sans', sans-serif;
+    background: #092756;
+    background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%),-moz-linear-gradient(top,  rgba(57,173,219,.25) 0%, rgba(42,60,87,.4) 100%), -moz-linear-gradient(-45deg,  #670d10 0%, #092756 100%);
+    background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -webkit-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -webkit-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+    background: -o-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -o-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -o-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+    background: -ms-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -ms-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -ms-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+    background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), linear-gradient(to bottom,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), linear-gradient(135deg,  #670d10 0%,#092756 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
+ }      
+
+/*----------- 로그인 팝업창------ */  
 /* 마스크 뛰우기 */
 #mask {  
     position:absolute;  
@@ -65,7 +99,7 @@ input:focus {
     background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), linear-gradient(to bottom,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), linear-gradient(135deg,  #670d10 0%,#092756 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
  }
- 
+ /* ----------회원가입 팝업창 ---------*/
  /* 마스크 뛰우기 */
 #mask1 {  
     position:absolute;  
@@ -112,10 +146,7 @@ input:focus {
 
 * { -webkit-box-sizing:border-box; -moz-box-sizing:border-box; -ms-box-sizing:border-box; -o-box-sizing:border-box; box-sizing:border-box; }
 
-html { width: 100%; height:100%; overflow:hidden; }
- 
-
-body { 
+.popbody { 
     width: 100%;
     height:100%;
     font-family: 'Open Sans', sans-serif;
@@ -126,7 +157,18 @@ body {
     background: -ms-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -ms-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -ms-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
     background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), linear-gradient(to bottom,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), linear-gradient(135deg,  #670d10 0%,#092756 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
-} 
+}
+ 
+.gologin { 
+    position: absolute;
+    top: 200px;
+    left: 80%;
+    margin: -150px 0 0 -150px;
+    width:300px;
+    height:300px;
+}
+.gologin h1 { color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
+
 .login { 
     position: absolute;
     top: 200px;
@@ -147,7 +189,7 @@ body {
 }
 .regi h1 { color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
 
-input { 
+.pinput { 
     width: 100%; 
     margin-bottom: 10px; 
     background: rgba(0,0,0,0.3);
@@ -166,11 +208,11 @@ input {
     -ms-transition: box-shadow .5s ease;
     transition: box-shadow .5s ease;
 }
-input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); }
+.pinput:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); }
 
  }
  
-</style> -->
+</style>
 
 <style>
  img.card-img-top{
@@ -181,6 +223,7 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
  	display: block;
  	margin-left: auto;
  	margin-right: auto; 	
+ 	}
 </style>
 
 <!-- SEARCH -->
@@ -228,6 +271,50 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript"> 
 //<![CDATA[
+	
+	////////////
+	 function wrapWindowByMask3(){
+ 
+        //화면의 높이와 너비를 구한다.
+        var maskHeight = $(document).height();  
+        var maskWidth = $(window).width();  
+ 
+        //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
+        $("#mask3").css({"width":maskWidth,"height":maskHeight});  
+ 
+        //애니메이션 효과 - 일단 0초동안 까맣게 됐다가 60% 불투명도로 간다.
+ 
+        $("#mask3").fadeIn(0);      
+        $("#mask3").fadeTo("slow",0.6);    
+ 
+        //윈도우 같은 거 띄운다.
+        $(".window3").show();
+ 
+    }
+ 
+    $(document).ready(function(){
+        //검은 막 띄우기
+        $(".openMask3").click(function(e){
+            e.preventDefault();
+            wrapWindowByMask3();
+        });
+ 
+        //닫기 버튼을 눌렀을 때
+        $(".window3 .close").click(function (e) {  
+            //링크 기본동작은 작동하지 않도록 한다.
+            e.preventDefault();  
+            $("#mask3, .window3").hide();  
+        });       
+ 
+        //검은 막을 눌렀을 때
+        $("#mask3").click(function () {  
+            $(this).hide();  
+            $(".window3").hide();  
+ 
+        });      
+ 
+    });
+	////////////
     function wrapWindowByMask(){
  
         //화면의 높이와 너비를 구한다.
@@ -270,7 +357,7 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
  
     });
  
-
+//////////////
     function wrapWindowByMask1(){
     	 
         //화면의 높이와 너비를 구한다.
@@ -344,32 +431,152 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 
   <body>
 
-    <!-- Navigation -->
-     <nav class="navbar fixed-top navbar-expand-lg navbar-dark fixed-top" style="background-color: #c53211; padding-bottom: 10px">
+   <!-- Navigation -->
+     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="home.do">EAT PLACE</a>
+        <a class="navbar-brand" href="index.html">EAT PLACE</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-      </div>
-      
-      <div class="container">
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="about.html"><strong style="color: white;margin-left: 20px">About</strong></a>
+              <a class="nav-link" href="about.html">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="restaurntsList.do"><strong style="color: white;margin-left: 20px">맛집 리스트</strong></a>
+              <a class="nav-link" href="restaurntsList.do">맛집 리스트</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="restaurantsInsert.do"><strong style="color: white;margin-left: 20px">맛집 추가</strong></a>
+              <a class="nav-link" href="restaurantsInsert.do">맛집 추가</a>
             </li>
- 			<li class="nav-item" style="margin-left: 20px">
- 				  <a class="nav-link openMask" href="#">
- 				  	<img alt="" src="img/main/man-user.png">
- 				  </a> 
- 			</li>          	
+            <li class="nav-item" style="margin-left: 20px">
+            	<a class="nav-link openMask3" href="#">
+            		<img alt=""	src="img/main/man-user.png">
+				</a>
+			</li>
+			
+ 			<li class="nav-item">
+ 		
+ 				  <%if(user == null){%>
+					
+						<a class="nav-link openMask" href="#">로그인</a>
+						<%} else{%>
+						<a class="nav-link" href="#" ><%=user.getId()%>님</a>
+						<a id="_btnLogout" class="nav-link" href="logout.do" > 로그아웃 </a>
+				<%} %>	
+ 				  
+ 			</li>  
+ 			 <!-- 가고싶다 팝업창 및 로그인  -->
+           <div class="dropdown-item popbody" id="mask3"></div> 
+            <div class="window3">
+		   		<div class="gologin">
+					
+				</div>
+            </div>
+            
+ 			     
+        <!-- 로그인 팝업참 -->
+           <div class="dropdown-item popbody" id="mask"></div> 
+            <div class="window">
+		   		<div class="login">
+					<h1>Login</h1>
+					<br>
+					<form action="loginAf.do" name="frmForm" id="_frmForm"  method="post">
+					     <input type="text" name="id" class="pinput" placeholder="Username" id="_userid" required="required" />
+					     <input type="password" name="pwd" class="pinput" placeholder="Password" id="_pwd" required="required" />
+					     <button type="submit" class="btn btn-primary btn-block btn-large" id="_btnLogin" style="text-align: center;">로그인</button>
+		               	 <a  class="btn btn-primary btn-block btn-large openMask1" href="#" style="text-align: center;">회원가입</a>
+		               	 <a  class="dropdown-item" id="kakao-login-btn"></a>
+					 </form>
+				</div>
+            </div>
+            
+            
+            <!-- 회원가입 팝업창 -->
+        	<div class="dropdown-item" id="mask1"></div> 
+            <div class="window1">
+		   		<div class="regi">
+					<h1>회원가입</h1>
+					<br>
+					<div id="login_wrap">
+					<form action="" method="post" id="_frmForm" name="frmForm">
+					
+					<table class="content_table" style="width: 100%">
+					<colgroup>
+						<col style="width:40%">
+						<col style="width:60%">
+					</colgroup>
+					
+					<tr>
+						<th>아이디 첵크</th>
+						<td>
+							<input type="text" name="sid" id="_id" class="pinput" size="40" placeholder="id"><br>
+							<a href="#none" id="_btnGetId" class="btn btn-primary btn-block btn-large" title="회원가입" style="height: 30px;">아이디체크</a>
+							<div id="_rgetid"></div>
+						</td>
+						
+					</tr>
+					
+					
+					<tr>
+						<th>아이디</th>
+						<td>
+							<input type="text" name="id" id="_userid" class="pinput" size="40" data-msg="아이디를 " readonly="readonly"> 
+						</td>
+					</tr>
+					
+					<tr>
+						<th>패스워드</th>
+						<td>
+							<input type="text" name="pwd" id="_pwd" class="pinput" size="40" placeholder="password" data-msg="패스워드를 "> 
+						</td>
+					</tr>
+					
+					<tr>
+						<th>이름</th>
+						<td>
+							<input type="text" name="name" id="_name" class="pinput" size="40" placeholder="name" data-msg="성함을 "> 
+						</td>
+					</tr>
+					<tr>
+						<th>닉네임 첵크</th>
+						<td>
+							<input type="text" name="snickname" id="_nickname" class="pinput" size="40" placeholder="nickname"><br>
+							<a href="#none" id="_btnGetNickName" class="btn btn-primary btn-block btn-large" title="회원가입" style="height: 30px;">닉네임체크</a>
+							<div id="_rgetnickname"></div>
+						</td>
+						
+					</tr>
+					<tr>
+						<th>닉네임</th>
+						<td>
+							<input type="text" name="nickname" id="_usernickname" class="pinput" size="40" data-msg="별명을 " readonly="readonly"> 
+						</td>
+					</tr>
+					<tr>
+						<th>이메일</th>
+						<td>
+							<input type="text" name="email" id="_email" size="40" class="pinput" placeholder="e-mail" data-msg="이메일을 "> 
+						</td>
+					</tr>
+					
+					<tr>
+						<td colspan="2" style="height: 50px; text-align: center;">
+						
+						<a href="#none" id="_btnRegi" class="btn btn-primary btn-block btn-large" style="height: 30px; title="회원가입">회원가입</a>
+						
+						<!-- <a href="#none" id="_btnLogin" class="btn btn-primary btn-block btn-large" style="height: 30px; title="로그인">로그인</a> -->					
+						
+						</td>					
+					</tr>					
+					
+					</table>					
+					
+					</form>				
+				
+				</div>
+				</div>
+        
           </ul>
         </div>
       </div>
@@ -642,8 +849,16 @@ function search() {
 }
     
 $("#_btnLogin").click(function () {
-	location.href = "login.do";
+	 /* location.href = "login.do";  */
+	 redirect:/"login.do";  
 });
+
+
+$("#_btnLogout").click(function () {
+	/* location.href = "logout.do"; */
+ 	redirect:/"logout.do";
+});
+
 
 $("#_btnRegi").click(function() {
 	if($("#_userid").val() == ""){
