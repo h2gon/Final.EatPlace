@@ -54,7 +54,7 @@ RegiDto dto = (RegiDto)request.getAttribute("dto");
 <h4 style="color: grey"><% %>회원님</h4>
 <h3><%=dto.getRs_name() %>에 대한 솔직한 리뷰를 써주세요.</h3>
 
- <form action = "writeReviewAf.do">
+ <form action = "writeReviewAf.do" method="post" enctype="multipart/form-data">
  
  <input type="hidden" name="rs_seq" value="<%=dto.getSeq()%>">
  	<input type="hidden" name="id" value="1">
@@ -80,7 +80,7 @@ RegiDto dto = (RegiDto)request.getAttribute("dto");
         
         
         <br><br>
-         <input type="button" value="이미지추가" onclick="">
+         <input type="file" name="file" multiple="multiple">
         <input type = "submit" value ="리뷰작성">
         <input type="button" value="돌아가기" onclick="history.back();">
     </form>

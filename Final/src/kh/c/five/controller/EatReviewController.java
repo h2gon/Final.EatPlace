@@ -130,7 +130,7 @@ public class EatReviewController {
 		
 		
 		
-		return "home";
+		return "redirect:/home.do";
 	}
 	
 
