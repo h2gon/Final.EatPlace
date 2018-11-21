@@ -43,5 +43,18 @@
   
   <select parameterType="java.lang.Integer" id="SelectReview" resultType="kh.c.five.model.ReviewDto"> SELECT * FROM RESTAURANT_REVIEW WHERE RS_SEQ=#{seq} </select>
   
+  <!-- restaurant readcount -->
+  <update id="readcount" parameterType="java.lang.Integer">
+  	UPDATE EAT_RESTAURANT SET RS_READCOUNT = RS_READCOUNT+1 WHERE SEQ=#{seq}
+  </update>
   
+  <!-- total number of reviews -->
+  <select id="getReviewNumber" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+  SELECT COUNT (*) FROM RESTAURANT_REVIEW WHERE RS_SEQ=#{seq}
+  
+  </select>
+  <!-- count of likes -->
+  <select id="getLikesNumber"  parameterType="java.lang.Integer" resultType="java.lang.Integer">
+  SELECT COUNT (*) FROM RESTAURANT_LIKES WHERE RS_SEQ=#{seq}
+  </select>
   </mapper>

@@ -47,6 +47,24 @@ public class EatRestaurantsServiceImpl implements EatRestaurantsService {
 	public List<ReviewDto> SelectReview(int seq) {
 		return eatRestaurantsDao.SelectReview(seq);
 	}
+
+	@Override
+	public void readcount(int seq) {
+		eatRestaurantsDao.readcount(seq);
+		
+	}
+
+	@Override
+	public int getReviewNum(int seq) {
+		return eatRestaurantsDao.getReviewNum(seq);
+		 
+	}
+
+	@Override
+	public int getLikesCount(int seq) {
+		
+		return eatRestaurantsDao.getLikesCount(seq);
+	}
 	
 	
 

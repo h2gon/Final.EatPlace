@@ -22,4 +22,10 @@ public interface EatRestaurantsDao {
 	//detail -> review
 	public List<ReviewDto> SelectReview(int seq);
 	
+	//readcount
+	public void readcount(int seq);
+	//review count
+	int getReviewNum(int seq);
+	//like count
+	int getLikesCount(int seq);
 }

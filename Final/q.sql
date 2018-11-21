@@ -20,6 +20,10 @@ alter table eat_restaurant modify (rs_menu varchar2(4000));
 select * from eat_restaurant
 select * from restaurant_review
 
+select count(*) from RESTAURANT_REVIEW where rs_seq=23
+SELECT COUNT (*) FROM RESTAURANT_LIKES where RS_SEQ=23
+select * from restaurant_review where rs_seq=23
+
 --���� ����
 CREATE TABLE RESTAURANT_INFO(
 	RS_NAME VARCHAR2(100) NOT NULL, --���� �̸�
@@ -92,6 +96,7 @@ CREATE TABLE RS_FILE (
 );
 
 -- 식당 DETAIL위의 네비게이션에 출력해줄 이미지를 위해서는 리뷰별 출력이 아니라 파일 테이블에서 식당번호로 뽑아 출력하는게 낫다고 생각.
+-- 리뷰 별 출력: 리뷰를 하나 불러오면 그 리뷰 시퀀스에 맞는 사진이 이미 불러진 상태고, 이것을 뿌려주면 되기 때문.
 
 ALTER TABLE RS_FILE
 	ADD CONSTRAINT FILE_RSSEQ_FK

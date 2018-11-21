@@ -231,6 +231,52 @@ input:focus {
     border-collapse: collapse;
     border: 1px solid black;
 }
+/*new css for new main*/
+<style>
+ img.card-img-top{
+ 	max-width: 453px;
+ 	min-width: 453px;
+ 	max-height: 300px;
+ 	min-height: 300px; 
+ 	display: block;
+ 	margin-left: auto;
+ 	margin-right: auto; 	
+</style>
+
+<!-- SEARCH -->
+<style>
+   
+    .in-line{
+      width:660px;	/* 350 */
+      height:60px;	/* 40 */
+    }
+   
+    input[type="text"]{
+      width:70%;
+      height:100%;
+      border:none;
+      font-size:1.213rem;
+      padding-left: 20px;
+      font-style: oblique;
+      display:inline;
+      outline:none;
+      box-sizing: border-box;
+      color:black;
+
+    }
+    input[type=button]{
+      width: 30%;
+      height:100%;
+      background-color: lightgray;
+      border:none;
+      background-color: white;
+      font-size:1.313rem;
+      color:#042AaC;
+      outline:none;
+      display:inline;
+      margin-left: -25px;
+      box-sizing: border-box;
+    }
 
 </style>
 </head>
@@ -239,7 +285,7 @@ input:focus {
     <!-- Navigation -->
      <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="index.html">EAT PLACE</a>
+        <a class="navbar-brand" href="home.do">EAT PLACE</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -368,17 +414,17 @@ input:focus {
 						 
 						<span class="cnt hit">
 							<span class="hidden"><img src="img/button/readcount.png"></span>
-						<!-- 조회수 -->
+						<!-- 조회수 --> ${rs.rs_readcount }
 						</span> 
 						<span class="cnt review">
 							<span class="hidden"><img src="img/button/review.png"></span>
 							<span>
-									<!-- 리뷰수 -->
+						<!-- 리뷰수 -->${reviewcount }
 							</span>
 						</span> 
 						<span class="cnt favorite">
 							<span class="hidden"><img src="img/button/fav.png"></span>
-							<!-- 즐겨찾기 수 -->
+						<!-- 즐겨찾기 수 -->${likescount }
 						</span>
 						<br>
 						<img src="img/button/hr.png">

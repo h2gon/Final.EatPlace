@@ -134,6 +134,14 @@ public class EatRestaurantsController {
 		logger.info("EatRestaurantsController detail"+new Date());
 	//	logger.info("InsertRS InsertDto.toString:"+dto.toString());
 		
+		//readcount
+		eatRestaurantsService.readcount(seq);
+		//review count
+		int reviewcount =eatRestaurantsService.getReviewNum(seq);
+		model.addAttribute("reviewcount", reviewcount);
+		//likes count
+		int likescount = eatRestaurantsService.getLikesCount(seq);
+		model.addAttribute("likescount",likescount);
 		
 		RegiDto rs=null;		
 		rs=eatRestaurantsService.getrs(seq);

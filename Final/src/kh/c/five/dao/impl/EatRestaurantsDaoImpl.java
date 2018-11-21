@@ -55,6 +55,24 @@ public class EatRestaurantsDaoImpl implements EatRestaurantsDao {
 		List<ReviewDto> list = sqlSession.selectList(namespace+"SelectReview", seq);
 		return list;
 	}
+
+	@Override
+	public void readcount(int seq) {
+		sqlSession.update(namespace+"readcount", seq);
+		
+	}
+
+	@Override
+	public int getReviewNum(int seq) {
+		int number= sqlSession.selectOne(namespace+"getReviewNumber", seq);
+		return number;
+	}
+
+	@Override
+	public int getLikesCount(int seq) {
+		
+		return sqlSession.selectOne(namespace+"getLikesNumber",seq);
+	}
 	
 	
 	
