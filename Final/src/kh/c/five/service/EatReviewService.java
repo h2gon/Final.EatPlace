@@ -10,5 +10,5 @@ public interface EatReviewService {
 	
 	public Integer addReview(ReviewDto rdto);
 	public void addFile(fileDto fdto);
-
+	public int getreviewcount(String id);
 }

@@ -39,4 +39,6 @@
   
   </insert>
   
+ <select resultType="java.lang.Integer" id="getreviewcount"> SELECT COUNT(*) FROM RESTAURANT_REVIEW WHERE ID = #{id} </select>
+  
   </mapper>

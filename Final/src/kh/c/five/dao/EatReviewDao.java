@@ -11,4 +11,8 @@ public interface EatReviewDao {
 	Integer addReview(ReviewDto rdto);
 	
 	void addFile(fileDto fdto);
+	
+
+	int getreviewcount(String id);
+	
 }

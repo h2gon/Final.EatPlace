@@ -19,12 +19,32 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="owlcarousel/owl.carousel.min.js"></script>
 
-<!-- owl carousel css -->
-<link rel="stylesheet" href="owlcarousel/owl.carousel.min.css">
-<link rel="stylesheet" href="owlcarousel/owl.theme.default.min.css">
+
+
+<!-- Bootstrap core CSS -->
+<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="css/modern-business.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/creative.min.css"
+	rel="stylesheet">
+
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/vendor/magnific-popup/magnific-popup.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<!-- 지도API -->
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7b79e9996c3bab29b8e5285b04135813"></script>
+
+
+
 </head>
+
+
 <body>
 <%
 
@@ -37,27 +57,46 @@ EatMemberDto login = (EatMemberDto)request.getSession().getAttribute("login");
 RegiDto dto = (RegiDto)request.getAttribute("dto");
 //여기서 list(get review list)
 
+int reviewcount = (int)request.getAttribute("reviewcount");
+
 %>
-<div class="owl-carousel owl-theme">
 
 
-	<div class="item"><img src="img/portfolio/fullsize/1.jpg"></div>
-	<div class="item"><img src="img/portfolio/fullsize/2.jpg"></div>
-	<div class="item"><img src="img/portfolio/fullsize/3.jpg"></div>
-	<div class="item"><img src="img/portfolio/fullsize/4.jpg"></div>
-	<div class="item"><img src="img/portfolio/fullsize/5.jpg"></div>
-	<div class="item"><img src="img/portfolio/fullsize/6.jpg"></div>
-	
-</div>
+<!-- Navigation -->
+	<nav class="navbar fixed-top navbar-expand-lg navbar-dark fixed-top"
+		style="background-color: #c53211; padding-bottom: 10px">
+		<div class="container">
+			<a class="navbar-brand" href="home.do">EAT PLACE</a>
+			<button class="navbar-toggler navbar-toggler-right" type="button"
+				data-toggle="collapse" data-target="#navbarResponsive"
+				aria-controls="navbarResponsive" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		</div>
 
+		<div class="container">
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item"><a class="nav-link" href="about.html"><strong
+							style="color: white; margin-left: 20px">About</strong></a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="restaurntsList.do"><strong
+							style="color: white; margin-left: 20px">맛집 리스트</strong></a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="restaurantsInsert.do"><strong
+							style="color: white; margin-left: 20px">맛집 추가</strong></a></li>
+					<li class="nav-item" style="margin-left: 20px"><a
+						class="nav-link openMask" href="#"> <img alt=""
+							src="img/main/man-user.png">
+					</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 
-<!-- 레스토랑 상세 -->
-		<section class="restaurant-detail">
-			<header>
-				<div class="restaurant_title_wrap">
-               
-   
-<h4 style="color: grey"><%=login.getId() %>회원님</h4>
+<div align="center">
+<br>
 <h3><%=dto.getRs_name() %>에 대한 솔직한 리뷰를 써주세요.</h3>
 
  <form action = "writeReviewAf.do" method="post" enctype="multipart/form-data">
@@ -65,13 +104,6 @@ RegiDto dto = (RegiDto)request.getAttribute("dto");
  <input type="hidden" name="rs_seq" value="<%=dto.getSeq()%>">
  	<input type="hidden" name="id" value="<%=login.getId()%>">
    
-		<!-- <div class="star">
-		<img alt="" src="./img/like/1-1.png" id="p1" msg="1" title="1점" onclick="$(this).attr('src','./img/like/1-2.png');">
-		<img alt="" src="./img/like/3-1.png" id="p3" msg="3" title="3점" onclick="$(this).attr('src','./img/like/3-2.png');">
-		<img alt="" src="./img/like/5-1.png" id="p5" msg="5" title="5점" onclick="$(this).attr('src','./img/like/5-2.png');">
-		</div> -->
-
-
 		<div class="star">
 		<input type = "hidden" id="rs_rating" name = "rs_rating" value = "5">
 		<img alt="" src="./img/like/1-1.png" id="p1" msg="1" title="1점" >
@@ -79,49 +111,47 @@ RegiDto dto = (RegiDto)request.getAttribute("dto");
 		<img alt="" src="./img/like/5-2.png" id="p5" msg="5" title="5점" >
 		</div> 
 		
-        <br><br><br>
+		<table>
+			<tr>
+				<td>아이디</td>
+				<td><%=login.getId() %></td>
+			</tr>
+			<tr>
+				<td><p style="color: grey">리뷰수</p></td>
+				<td><%=reviewcount %></td>
+			</tr>
+			
+			
+		</table>
+		
+        
+        <br>
+        <br>
      
-        <textarea rows="10" cols="50" name='rs_content' id="rs_content" placeholder ="<%=login.getName()%>님, 어떠셨어요?"></textarea>
+        <textarea rows="10" cols="50" name='rs_content' style="resize: none" placeholder="<%=login.getName() %> 회원님 솔직한 리뷰 부탁드립니다." id="rs_content"></textarea>
         
-        
+  
         
         <br><br>
-         <input type="file" name="file" multiple="multiple">
+         <!-- <input type="file" name="file" multiple="multiple"> -->
+       <input name="file" type=file id="input_imgs" multiple/>
+		<div class="imgs_wrap">
+		<br>
+       
+       	</div>
+       	
+       	<br><br>
         <input type = "submit" value ="리뷰작성">
         <input type="button" value="돌아가기" onclick="history.back();">
     </form>
                
      <br><br>          
                
-               
-               
-               
-               
-               
-               
-              </div>
+      </div>
             
-			</header>
+</header>
+</div>
 
-<script type="text/javascript">
-//plugin call
-$('.owl-carousel').owlCarousel({
-    loop:true,
-    margin:10,
-    nav:true,
-    responsive:{
-        0:{
-            items:1
-        },
-        600:{
-            items:3
-        },
-        1000:{
-            items:5
-        }
-    }
-})
-</script>
 
 <script type="text/javascript">
 $(function () {
@@ -134,7 +164,7 @@ $(function () {
 		
 		$("#rs_rating").val(1); 
 		
-		alert($("#rs_rating").val());
+/* 		alert($("#rs_rating").val()); */
 	});	
 	
 	
@@ -146,7 +176,7 @@ $(function () {
 		
 		$("#rs_rating").val(3); 
 		
-		alert($("#rs_rating").val());
+	/* 	alert($("#rs_rating").val()); */
 	});	
 	
 	$("#p5").click(function () {
@@ -157,11 +187,52 @@ $(function () {
 		
 		$("#rs_rating").val(5); 
 		
-		alert($("#rs_rating").val());
+	/* 	alert($("#rs_rating").val()); */
 	});	
 	
 });
 
+
+</script>
+
+
+
+
+<script type="text/javascript">
+var sel_files = [];
+
+$(document).ready(function() {
+    $("#input_imgs").on("change", handleImgsFilesSelect);
+}); 
+
+function handleImgsFilesSelect(e) {
+    var files = e.target.files;
+    var filesArr = Array.prototype.slice.call(files);
+
+    filesArr.forEach(function(f) {
+        if(!f.type.match("image.*")) {
+            alert("확장자는 이미지 확장자만 가능합니다.");
+            return;
+        }
+
+        
+        $(".imgs_wrap").empty();
+        
+        sel_files.push(f);
+
+        var reader = new FileReader();
+        reader.onload = function(e) {
+           /*  
+           var img_html = "<img src=\"" + e.target.result + "\" />";
+             */
+           
+       var img_html = "<img src=\"" + e.target.result + "\" height=200 width=200  />";  
+           
+            $(".imgs_wrap").append(img_html);
+        }
+        reader.readAsDataURL(f);
+    });
+}
 
 </script>
 

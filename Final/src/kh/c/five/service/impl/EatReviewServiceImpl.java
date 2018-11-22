@@ -39,4 +39,9 @@ public class EatReviewServiceImpl implements EatReviewService {
 	}
 	
 
+	@Override
+	public int getreviewcount(String id) {
+		return eatreviewdao.getreviewcount(id);
+	}
+	
 }

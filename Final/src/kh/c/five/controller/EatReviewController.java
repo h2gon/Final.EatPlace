@@ -21,11 +21,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import kh.c.five.model.EatMemberDto;
 import kh.c.five.model.InsertDto;
 import kh.c.five.model.RegiDto;
 import kh.c.five.model.RestaurantDto;
 import kh.c.five.model.ReviewDto;
 import kh.c.five.model.fileDto;
+import kh.c.five.service.EatMemberService;
 import kh.c.five.service.EatRestaurantsService;
 import kh.c.five.service.EatReviewService;
 import kh.c.five.util.FUpUtil;
@@ -38,6 +40,9 @@ public class EatReviewController {
 	= LoggerFactory.getLogger(EatReviewController.class);
 	
 	@Autowired
+	EatMemberService eatmemberservice;
+	
+	@Autowired
 	EatRestaurantsService eatRestaurantsService;
 	
 	@Autowired
@@ -46,11 +51,16 @@ public class EatReviewController {
 	
 	
 	@RequestMapping(value="WriteReview.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String WriteReview(int seq, Model model) {
+	public String WriteReview(int seq, Model model, HttpServletRequest req) {
 		
 		logger.info("EatRestaurantsController WriteReview"+new Date());
 		
 		RegiDto dto = null;
+		
+		EatMemberDto login = (EatMemberDto)req.getSession().getAttribute("login");
+		int reviewcount =  eatReviewService.getreviewcount(login.getId());
+		
+		System.out.println("리뷰카운트 : " + reviewcount);
 		
 		try {
 			dto = eatRestaurantsService.getrs(seq);
@@ -59,6 +69,7 @@ public class EatReviewController {
 			e.printStackTrace();
 		}
 		model.addAttribute("dto", dto);
+		model.addAttribute("reviewcount", reviewcount);
 		
 		return "restaurants/WriteReview";
 	}

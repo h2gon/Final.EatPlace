@@ -44,7 +44,12 @@ public class EatReviewDaoImpl implements EatReviewDao {
 	}
 
 
-	
+	@Override
+	public int getreviewcount(String id) {
+		int n = sqlSession.selectOne(namespace+"getreviewcount", id);
+		return n;
+	}
+
 	
 
 }
