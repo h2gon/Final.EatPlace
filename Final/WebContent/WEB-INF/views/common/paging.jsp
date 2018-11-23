@@ -1,133 +1,172 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    
+ 
 
 <%
-	int totalRecordCount;	// 전체 글수
-	int pageNumber;			// 현재 페이지의 넘버	23 -> 3		0 1 2
-	int pageCountPerScreen;	// 스크린당 페이지 수
-	int recordCountPerPage;	// 페이지당 글수
-	
-	String st1 = request.getParameter("totalRecordCount");
-	if(st1 == null) totalRecordCount = 0;	
-	else			totalRecordCount = Integer.parseInt(st1);
+String actionPath = request.getParameter("actionPath");	// actionPath:bbslist.jsp
 
-	String st2 = request.getParameter("pageNumber");
-	if(st2 == null) pageNumber = 0;	
-	else			pageNumber = Integer.parseInt(st2);
-	
-	String st3 = request.getParameter("pageCountPerScreen");
-	if(st3 == null) pageCountPerScreen = 0;	
-	else			pageCountPerScreen = Integer.parseInt(st3);
-	
-	String st4 = request.getParameter("recordCountPerPage");
-	if(st4 == null) recordCountPerPage = 0;	
-	else			recordCountPerPage = Integer.parseInt(st4);
-	
-	// 총페이지 수
-	int totalPageCount = totalRecordCount / recordCountPerPage;
-	//		1 		   =			12	  /	10
-	//      		
-	
-	if((totalRecordCount % recordCountPerPage) != 0){
-		totalPageCount++;
-	}
-	
-	//						  1       2    	  3		 4	
-	// 0 1 2 ~ 9			1 ~ 10 11 ~ 20 21 ~ 30   31 ~ 40
-	int screenStartPageIndex = ((pageNumber+1) / pageCountPerScreen) * pageCountPerScreen;
-	//			0  10          =			9 + 1            10                   10 
-	int screenEndPageIndex = (((pageNumber+1) / pageCountPerScreen) * pageCountPerScreen) + pageCountPerScreen;
-	//			10  20         = 			9 + 1 / 		10				  10					+ 10		
-			
-	if(screenEndPageIndex > totalPageCount) screenEndPageIndex = totalPageCount;
+String sNowPage = request.getParameter("nowPage");		// 현재 페이지
+String sTotalCount = request.getParameter("totalCount");// 올린 글수
+String sCountPerPage = request.getParameter("countPerPage");	// 10
+String sBlockCount = request.getParameter("blockCount");		// 10
 
-	
-	if((pageNumber + 1) % pageCountPerScreen == 0){
-		screenStartPageIndex = ((pageNumber + 1) / pageCountPerScreen) - pageCountPerScreen;
-		screenEndPageIndex = pageNumber + 1;		
-	}
-	
-	/*
-	totalRecordCount : 12	<- 예
-	pageNumber:0
-	pageCountPerScreen : 10
-	recordCountPerPage : 10
-	totalPageCount : 2
-	screenStartPageIndex : 0
-	screenEndPageIndex : 2
-	
-	totalRecordCount : 123	<- 예
-	pageNumber:11	<- 현재 페이지
-	pageCountPerScreen : 10
-	recordCountPerPage : 10
-	totalPageCount : 13
-	screenStartPageIndex : 10
-	screenEndPageIndex : 4
-	
-	*/
-	
-	
-	
-	
-	
-%>    
+String color = request.getParameter("color");
 
-<div style="float: left; width:96%; text-align: center;">
-	<!-- << -->
-	<a href="#none" title="처음페이지" onclick="goPage('0');">
-		<img alt="처음페이지" src="image/arrow_first.gif" style="width: 9px;height: 9px">
-	</a>&nbsp;
-		<%
-		// <
-		if(screenStartPageIndex > 1){	// 글의 수가 100개 넘었을 때 보임
-			%>
-			<a href="#none" title="이전페이지" onclick="goPage('<%=screenStartPageIndex-1 %>')">
-				<img alt="이전페이지" src="image/arrow_prev.gif" style="width: 9px;height: 9px">
-			</a>&nbsp;
-			<%
-		}
+int nowPage = (sNowPage == null || sNowPage.trim().equals(""))?1:Integer.parseInt(sNowPage);
+int totalCount = (sTotalCount == null || sTotalCount.trim().equals(""))?1:Integer.parseInt(sTotalCount);
+int countPerPage = (sCountPerPage == null || sCountPerPage.trim().equals(""))?1:Integer.parseInt(sCountPerPage);
+int countPerBlock = (sBlockCount == null || sBlockCount.trim().equals(""))?1:Integer.parseInt(sBlockCount);
+
+//String findWord = request.getParameter("findWord");
+
+String choice = request.getParameter("choice");
+
+/* 
+if(findWord == null || findWord.equals("")){
+	choice = "sel";
+}
+ */
+
+// total page
+int totalPage = (int)((totalCount - 1) / countPerPage) + 1;
+//		3     =			(23        - 1  / 10)  
+
+int totalBlock = (int)((totalPage - 1) / countPerBlock);
+//							3          /      10    -> 0   [1] ~ [10] [11] ~ [20]
+int nowBlock = (int)((nowPage - 1) / countPerBlock);
+// nowBlock : 0 -> [1] ~ [10]
+// nowBlock : 1 -> [11] ~ [20]		
+
+int firstPage = 0;	
+int prevPage = 0;	// [첫번째페이지][이전페이지][1][2][3][다음페이지][끝페이지]
+int nextPage = 0;
+int lastPage = 0;
+
+if(nowBlock > 0){
+	firstPage = 1;
+}
+if(nowPage > 1){
+	prevPage = nowPage - 1;
+}
+
+int startPage = nowBlock * countPerBlock + 1;
+//    1		 0		 *		10       + 1
+int endPage = countPerBlock * (nowBlock + 1);
+//	10				10		* (	 0      + 1)	
+
+
+// 최대 페이지보다 끝페이지가 큰경우
+if(endPage > totalPage) endPage = totalPage;
+
+if(nowPage < totalPage){
+	nextPage = nowPage + 1;
+}
+if(nowBlock < totalBlock){	// 0(1 ~ 10) 1(11 ~ 20) 2
+	lastPage = totalPage;
+}
+
+System.out.println("nowPage = " + nowPage);
+System.out.println("totalCount = " + totalCount);
+System.out.println("countPerPage = " + countPerPage);
+System.out.println("countPerBlock = " + countPerBlock);
+System.out.println("totalBlock = " + totalBlock);
+System.out.println("nowBlock = " + nowBlock);
+
+System.out.println("startPage = " + startPage);
+System.out.println("endPage = " + endPage);
+System.out.println("firstPage = " + firstPage);
+System.out.println("prevPage = " + prevPage);
+System.out.println("nextPage = " + nextPage);
+System.out.println("lastPage = " + lastPage);
+%>
+
+<style>
+.center {
+    text-align: center;
+}
+
+.pagination {
+    display: inline-block;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+    margin: 0 4px;
+}
+
+.pagination a.active {
+    background-color: #86c4f0;
+    color: white;
+    border: 1px solid #86c4f0;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+</style>
+
+<form action="<%=actionPath %>" name="frmPaging" method="get">
+	<input type="hidden" name="nowPage">
+	<%-- <input type="hidden" name="findWord" value="<%=findWord %>"> --%>
+	<input type="hidden" name="choice" value="<%=choice %>">
+	
+	<div class="center">
+  <div class="pagination">
+    <!-- 첫페이지로 (총 글수가 100개 이상일 시에 보임)-->
+		<%if(firstPage > 0){ %>		
+			<a href="#" onclick="gotoPage('<%=firstPage %>')" style="font-family: monospace; font-size: 15px;">처음페이지</a>
+		<%} %>
+		<!-- 이전페이지로 -->
+		<%if(prevPage > 0){ %>	
+			<a href="#" onclick="gotoPage('<%=prevPage %>')" style="font-family: monospace; font-size: 15px;">이전</a>
+		<%} %>
 		
-		// [1] 2 [3]
-		for(int i = screenStartPageIndex;i < screenEndPageIndex; i++){
-			if(i == pageNumber){
-				%>
-				<span style="font-size: 9pt; color: #000000; font-weight: bold;">
-					<%=i+1 %>	<!-- 현재 페이지 -->
-				</span>&nbsp;
-				<%
+		<!-- [1][2][3]4[5][6] --> 
+		<%
+		for(int i = startPage; i <= endPage; i++){
+			if(i == nowPage){	
+			%>	
+				<a href="#"class="active" onclick="gotoPage('<%=i %>')" style="font-family: monospace; font-size: 15px;"><%=i %></a>
+			
+			<%	
 			}else{
-				%>
-				<a href="#none" title="<%=i+1 %>페이지" onclick="goPage(<%=i %>)" 
-					style="font-size: 7.5pt; color: #000000; font-weight: normal;">
-					[<%=i+1 %>]	
-				</a>&nbsp;	
-				<%
-			}			
-		}
-		if(screenEndPageIndex < totalPageCount){// [1][2] ~ 9[10] 		
 			%>
-			<a href="#none" title="다음페이지" onclick="goPage(<%=screenEndPageIndex %>)">
-				<img alt="다음페이지"	src="image/arrow_next.gif" style="width: 9px; height: 9px">
-			</a>&nbsp;
-			<%
-		}		
 				
-		int end_page = 0;
-		if(totalPageCount > 0){
-			end_page = totalPageCount - 1;
-		}
+				<a href="#" onclick="gotoPage('<%=i %>')" style="font-family: monospace; font-size: 15px;"><span><%=i %></span></a>
+			<%
+			}			
+		}		
 		%>
-
-	<a href=" #none" title="마지막페이지" onclick="goPage(<%=end_page %>)">
-		<img alt="마지막페이지" src="image/arrow_end.gif" style="width: 9px; height: 9px">
-	</a> 
+		<!-- 다음 페이지 -->
+		<%if(nextPage > 0){ %>
+			<a href="#" onclick="gotoPage('<%=nextPage %>')" style="font-family: monospace; font-size: 15px;">다음</a>
+		<%} %>
+		
+		<!-- 끝페이지 (총 글수가 100개 이상일 시에 보임)-->
+		<%if(lastPage > 0){ %>
+			<a href="#" onclick="gotoPage('<%=lastPage %>')" style="font-family: monospace; font-size: 15px;">끝페이지</a>
+		<%} %>
+		
+		<input type="hidden" name="color" value="<%=color%>">
+  </div>
 </div>
 
-<div style="float: left; width: 4%; text-align: center;">
-	<span style="font-size: 1em; color: #000000">
-		<%=pageNumber+1 %>/<%=totalPageCount %>
-	</span>
-</div>
+
+</form>
+
+<script type="text/javascript">
+function gotoPage(pageNum) {
+	var objForm = document.frmPaging;
+	objForm.nowPage.value = pageNum;
+	objForm.submit();
+}
+
+</script>
 
 
 

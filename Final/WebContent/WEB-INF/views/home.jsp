@@ -659,7 +659,7 @@ input:focus {
       <div class="container-fluid p-0">
         <div class="row no-gutters popup-gallery">
           <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="img/portfolio/fullsize/1.jpg">
+            <a class="portfolio-box" href="category.do?category=한식">
               <img class="img-fluid" src="img/portfolio/fullsize/k.jpg" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
@@ -674,7 +674,7 @@ input:focus {
             </a>
           </div>
           <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="img/portfolio/fullsize/2.jpg">
+            <a class="portfolio-box" href="category.do?category=양식">
               <img class="img-fluid" src="img/portfolio/fullsize/a.jpg" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
@@ -689,7 +689,7 @@ input:focus {
             </a>
           </div>
           <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="img/portfolio/fullsize/3.jpg">
+            <a class="portfolio-box" href="category.do?category=일식">
               <img class="img-fluid" src="img/portfolio/fullsize/j.jpg" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
@@ -704,7 +704,7 @@ input:focus {
             </a>
           </div>
           <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="img/portfolio/fullsize/4.jpg">
+            <a class="portfolio-box" href="category.do?category=중식">
               <img class="img-fluid" src="img/portfolio/fullsize/china.jpg" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
@@ -719,7 +719,7 @@ input:focus {
             </a>
           </div>
           <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="img/portfolio/fullsize/5.jpg">
+            <a class="portfolio-box" href="category.do?category=카페">
               <img class="img-fluid" src="img/portfolio/fullsize/cafe.jpg" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
@@ -734,7 +734,7 @@ input:focus {
             </a>
           </div>
           <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="img/portfolio/fullsize/6.jpg">
+            <a class="portfolio-box" href="category.do?category=뷔페">
               <img class="img-fluid" src="img/portfolio/fullsize/v.jpg" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
@@ -742,7 +742,7 @@ input:focus {
                     Category
                   </div>
                   <div class="project-name">
-                    	뷔폐
+                    	뷔페
                   </div>
                 </div>
               </div>

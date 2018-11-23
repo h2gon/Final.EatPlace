@@ -57,4 +57,95 @@
   <select id="getLikesNumber"  parameterType="java.lang.Integer" resultType="java.lang.Integer">
   SELECT COUNT (*) FROM RESTAURANT_LIKES WHERE RS_SEQ=#{seq}
   </select>
+  
+  <!-- search -->
+  
+  
+<select id="getSearchPagingSeq"
+	parameterType="kh.c.five.model.EatParam"
+	resultType="kh.c.five.model.RegiDto">
+	
+SELECT RNUM,SEQ
+FROM(
+SELECT ROWNUM AS RNUM, SEQ
+FROM(SELECT SEQ
+FROM EAT_RESTAURANT	 
+WHERE (RS_NAME || RS_ADDRESS1 || RS_ADDRESS2 || RS_MENU || RS_KEYWORD) LIKE '%'||#{s_keyword}||'%'
+UNION
+SELECT RS_SEQ AS SEQ
+FROM RESTAURANT_REVIEW 
+WHERE RS_CONTENT LIKE '%'||#{s_keyword}||'%'))
+WHERE RNUM BETWEEN ${start} AND ${end}	
+
+	
+		 
+</select>
+
+<select id="getSearchCount"
+	parameterType="kh.c.five.model.EatParam"
+	resultType="java.lang.Integer">
+
+SELECT NVL(COUNT(SEQ), 0) AS CNT
+FROM(
+SELECT SEQ
+FROM EAT_RESTAURANT 
+WHERE 1=1
+	 <if test="s_keyword != '' and s_keyword != null">	 	
+	AND (RS_NAME || RS_ADDRESS1 || RS_ADDRESS2 || RS_MENU || RS_KEYWORD) LIKE '%'||#{s_keyword}||'%'
+	 
+	 </if>
+UNION
+SELECT RS_SEQ AS SEQ 
+FROM RESTAURANT_REVIEW 
+WHERE 1=1
+ <if test="s_keyword != '' and s_keyword != null">	
+AND RS_CONTENT LIKE '%'||#{s_keyword}||'%')
+ </if>
+
+
+</select>
+
+<select id="getSearchPagingList" parameterType="kh.c.five.model.RegiDto" resultType="kh.c.five.model.RegiDto">
+
+SELECT SEQ,RS_NAME,RS_ADDRESS1,RS_ADDRESS2,RS_PICTURE,RS_CATEGORY,RS_MENU,RS_RATING,RS_READCOUNT,RS_KEYWORD
+FROM EAT_RESTAURANT 
+WHERE SEQ=#{seq}
+
+
+
+</select>
+
+<select id="getCategoryList"
+	parameterType="kh.c.five.model.EatParam"
+	resultType="kh.c.five.model.RegiDto">
+
+SELECT *
+	FROM 
+		(SELECT ROWNUM AS RNUM,SEQ,RS_NAME,RS_ADDRESS1,RS_ADDRESS2,RS_PICTURE,RS_CATEGORY,RS_MENU,RS_RATING,RS_READCOUNT,RS_KEYWORD
+		 FROM EAT_RESTAURANT	 
+		 WHERE 1=1
+		 <if test="s_category != '' and s_category != null">	
+		 	AND RS_CATEGORY LIKE '%'||#{s_category}||'%'
+		 </if>
+	) A
+	WHERE RNUM BETWEEN ${start} AND ${end}		
+
+</select>
+
+<select id="getCategoryCount"
+	parameterType="kh.c.five.model.EatParam"
+	resultType="java.lang.Integer">
+
+	SELECT NVL(COUNT(*), 0) AS CNT
+	FROM EAT_RESTAURANT
+	WHERE 1=1
+	 <if test="s_category != '' and s_category != null">	 	
+	 	AND RS_CATEGORY LIKE '%'||#{s_category}||'%'	 
+	 </if>
+	
+
+</select>
+  
+  
+  
   </mapper>

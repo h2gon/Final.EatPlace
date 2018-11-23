@@ -91,8 +91,18 @@
 		</p>
 		<div class="row" style="margin-left: 65px; margin-right: 65px">
 			<%
-				List<RegiDto> list = (List<RegiDto>) request.getAttribute("rslist");
-
+				List<RegiDto> list = (List<RegiDto>) request.getAttribute("searchlist");
+				if(list.size()==0 || list ==null){
+				String s_keyword = (String)request.getAttribute("s_keyword");
+				%>
+				
+				<p style="font-size: 25px;line-height: 25px;margin-bottom: 65px;">
+		          '<span ><%=s_keyword %></span>' 에 대한 검색 결과가 없습니다.
+	         	 </p>
+				
+				<%
+				}
+				else{
 				for (int i = 0; i < list.size(); i++) {
 			%>
 			<div class="col-lg-4 col-sm-6 portfolio-item"
@@ -114,13 +124,12 @@
 				</div>
 			</div>
 			<%
-				}
+				}}
 			%>
 
 		</div>
-	</div>
-	
-<!-- 페이징 처리 -->
+				
+		<!-- 페이징 처리 -->
 <div id="paging_wrap">	
 	<jsp:include page="/WEB-INF/views/common/paging.jsp" flush="false">
 		<jsp:param value="${pageNumber }" name="pageNumber"/>		
@@ -129,6 +138,9 @@
 		<jsp:param value="${totalRecordCount }" name="totalRecordCount"/>	
 	</jsp:include>	
 </div>
+	</div>
+	
+
 	
 		<!-- 지도 -->
 	<div style="float: left; width: 27%">
@@ -136,6 +148,7 @@
 	</div>
 
 		<br>
+
 
 		 <!-- Footer -->
 		<!-- <footer class="py-5 bg-dark">

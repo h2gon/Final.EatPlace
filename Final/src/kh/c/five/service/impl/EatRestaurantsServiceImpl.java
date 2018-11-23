@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kh.c.five.dao.EatRestaurantsDao;
+import kh.c.five.model.EatParam;
 import kh.c.five.model.InsertDto;
 import kh.c.five.model.RegiDto;
 import kh.c.five.model.RestaurantDto;
@@ -64,6 +65,36 @@ public class EatRestaurantsServiceImpl implements EatRestaurantsService {
 	public int getLikesCount(int seq) {
 		
 		return eatRestaurantsDao.getLikesCount(seq);
+	}
+
+	@Override
+	public List<RegiDto> getSearchPagingSeq(EatParam param) {
+		// TODO Auto-generated method stub
+		return eatRestaurantsDao.getSearchPagingSeq(param);
+	}
+
+	@Override
+	public int getSearchCount(EatParam param) {
+		// TODO Auto-generated method stub
+		return eatRestaurantsDao.getSearchCount(param);
+	}
+
+	@Override
+	public RegiDto getSearchPagingList(RegiDto seqlist) {
+		// TODO Auto-generated method stub
+		return eatRestaurantsDao.getSearchPagingList(seqlist);
+	}
+
+	@Override
+	public List<RegiDto> getCategoryList(EatParam param) {
+		// TODO Auto-generated method stub
+		return eatRestaurantsDao.getCategoryList(param);
+	}
+
+	@Override
+	public int getCategoryCount(EatParam param) {
+		// TODO Auto-generated method stub
+		return eatRestaurantsDao.getCategoryCount(param);
 	}
 	
 	

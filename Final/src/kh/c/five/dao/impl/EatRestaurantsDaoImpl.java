@@ -1,5 +1,6 @@
 package kh.c.five.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.c.five.dao.EatRestaurantsDao;
+import kh.c.five.model.EatParam;
 import kh.c.five.model.InsertDto;
 import kh.c.five.model.RegiDto;
 import kh.c.five.model.RestaurantDto;
@@ -73,6 +75,58 @@ public class EatRestaurantsDaoImpl implements EatRestaurantsDao {
 		
 		return sqlSession.selectOne(namespace+"getLikesNumber",seq);
 	}
+
+	@Override
+	public List<RegiDto> getSearchPagingSeq(EatParam param) {
+		/*List<RegiDto> seqlist = sqlSession.selectList(namespace+"getSearchPagingSeq", param);
+		
+		List<RegiDto> list = new ArrayList<>();
+		
+		for (int i = 0; i < dto.size(); i++) {
+			System.out.println(dto.get(i).toString());
+		//	List<RegiDto> _list = sqlSession.selectList(namespace+"getSearchPagingList",dto.get(i));
+			List<RegiDto> _list = sqlSession.selectList(namespace+"getSearchPagingList",dto.get(i));
+		//	RegiDto r = sqlSession.selectOne(namespace+"getSearchPagingList",dto.get(i));
+		//	list.add(r);
+		//	System.out.println(list.get(i).toString());
+			System.out.println("_list.size():" + _list.size());
+			for (int j = 0; j < _list.size(); j++) {
+				System.out.println(_list.get(j).toString());
+			}
+		}*/
+				
+		return sqlSession.selectList(namespace+"getSearchPagingSeq", param);
+	}
+	
+	@Override
+	public RegiDto getSearchPagingList(RegiDto seqlist) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+"getSearchPagingList", seqlist);
+	}
+
+	@Override
+	public int getSearchCount(EatParam param) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+"getSearchCount", param);
+	}
+
+	@Override
+	public List<RegiDto> getCategoryList(EatParam param) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+"getCategoryList", param);
+	}
+
+	@Override
+	public int getCategoryCount(EatParam param) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+"getCategoryCount", param);
+	}
+
+	
+
+	
+
+
 	
 	
 	

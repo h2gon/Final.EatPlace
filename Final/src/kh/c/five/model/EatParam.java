@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class EatParam implements Serializable {
 
 	// ----------- search
-		//private String s_category;	// 제목, 내용, 작성자
+		private String s_category;	// 제목, 내용, 작성자
 		private String s_keyword;	// 검색어
 		
 		// ----------- paging
@@ -18,13 +18,13 @@ public class EatParam implements Serializable {
 		public EatParam() {		
 		}
 
-	/*	public String getS_category() {
+		public String getS_category() {
 			return s_category;
 		}
 
 		public void setS_category(String s_category) {
 			this.s_category = s_category;
-		}*/
+		}
 
 		public String getS_keyword() {
 			return s_keyword;
@@ -68,9 +68,11 @@ public class EatParam implements Serializable {
 
 		@Override
 		public String toString() {
-			return "EatParam [ s_keyword=" + s_keyword + ", recordCountPerPage="
+			return "EatParam [s_category=" + s_category + ", s_keyword=" + s_keyword + ", recordCountPerPage="
 					+ recordCountPerPage + ", pageNumber=" + pageNumber + ", start=" + start + ", end=" + end + "]";
 		}
+
+		
 
 		
 }

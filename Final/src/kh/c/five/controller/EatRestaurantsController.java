@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -181,7 +182,7 @@ public class EatRestaurantsController {
 	}
 	
 	@RequestMapping(value="search.do",  method={RequestMethod.GET, RequestMethod.POST})
-	public String search(String s_keyword, EatParam param) {
+	public String search(String s_keyword, EatParam param, Model model) {
 		
 		System.out.println("검색어 : "+s_keyword);
 		System.out.println("param: "+param.toString());
@@ -194,12 +195,62 @@ public class EatRestaurantsController {
 		param.setStart(start);
 		param.setEnd(end);
 		
-		List<RegiDto> list = eatRestaurantsService.getRs_List();
+		List<RegiDto> seqlist = eatRestaurantsService.getSearchPagingSeq(param);
+		List<RegiDto> searchlist = new ArrayList<>();
+		for (int i = 0; i < seqlist.size(); i++) {
+			
+			RegiDto dto = (RegiDto) eatRestaurantsService.getSearchPagingList(seqlist.get(i));
+			searchlist.add(dto);
+			System.out.println(searchlist.get(i).toString());
+		}
+		int totalRecordCount = eatRestaurantsService.getSearchCount(param);
 		
 		
+		model.addAttribute("searchlist", searchlist);
 		
-		return "redirect:/home.do";
-		//return "restaurants/restaurntsSearchList";
+		model.addAttribute("pageNumber", sn);
+		model.addAttribute("pageCountPerScreen", 10);	
+		model.addAttribute("recordCountPerPage", param.getRecordCountPerPage());
+		model.addAttribute("totalRecordCount", totalRecordCount);
+		
+		
+		model.addAttribute("s_keyword",param.getS_keyword());
+				
+		
+		
+		//return "redirect:/home.do";
+		return "restaurants/restaurntsSearchList";
+	}
+	
+	@RequestMapping(value="category.do",  method={RequestMethod.GET, RequestMethod.POST})
+	public String category(String category, EatParam param, Model model) {
+		
+		System.out.println("category : "+category);
+		param.setS_category(category);
+		System.out.println("param: "+param.toString());
+		
+		// paging 처리
+		int sn = param.getPageNumber();
+		int start = (sn) * param.getRecordCountPerPage() + 1;
+		int end = (sn+1) * param.getRecordCountPerPage();
+				
+		param.setStart(start);
+		param.setEnd(end);
+		
+		List<RegiDto> searchlist =eatRestaurantsService.getCategoryList(param);
+		int totalRecordCount = eatRestaurantsService.getCategoryCount(param);
+		
+		model.addAttribute("searchlist", searchlist);
+		
+		model.addAttribute("pageNumber", sn);
+		model.addAttribute("pageCountPerScreen", 10);	
+		model.addAttribute("recordCountPerPage", param.getRecordCountPerPage());
+		model.addAttribute("totalRecordCount", totalRecordCount);
+		
+		
+		//model.addAttribute("s_keyword",param.getS_keyword());
+		
+		return "restaurants/restaurntsSearchList";
 	}
 	
 	

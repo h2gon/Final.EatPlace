@@ -2,6 +2,7 @@ package kh.c.five.service;
 
 import java.util.List;
 
+import kh.c.five.model.EatParam;
 import kh.c.five.model.InsertDto;
 import kh.c.five.model.RegiDto;
 import kh.c.five.model.RestaurantDto;
@@ -27,4 +28,13 @@ public interface EatRestaurantsService {
 	public int getReviewNum(int seq);
 	//likes count
 	public int getLikesCount(int seq);
+	
+	//search 
+	public List<RegiDto> getSearchPagingSeq(EatParam param);
+	public RegiDto getSearchPagingList(RegiDto seqlist);
+	
+	public int getSearchCount(EatParam param);
+	
+	public List<RegiDto> getCategoryList(EatParam param);
+	public int getCategoryCount(EatParam param);
 }
