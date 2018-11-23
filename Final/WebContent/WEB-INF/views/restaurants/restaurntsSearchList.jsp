@@ -1,4 +1,3 @@
-
 <%@page import="kh.c.five.model.RegiDto"%>
 <%@page import="java.util.List"%>
 
@@ -38,14 +37,37 @@
 
 
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+
 <!-- 지도API -->
 <script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7b79e9996c3bab29b8e5285b04135813"></script>
-
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7b79e9996c3bab29b8e5285b04135813&libraries=services"></script>
 
 </head>
 
 <body>
+
+<%!
+public String dot3(String msg){
+	String s = "";
+	if(msg.length() >= 3){
+		s = msg.substring(0, 3);
+		s += "...";
+	}else{
+		s = msg.trim();
+	}
+	return s;
+}
+
+
+public String ss(String msg){
+	
+	String s[] = msg.split(" ");
+	String re = s[0] + " " + s[1];
+
+	return re;
+}
+
+%>
 
 	<!-- Navigation -->
 	<nav class="navbar fixed-top navbar-expand-lg navbar-dark fixed-top"
@@ -83,8 +105,8 @@
 	<br>
 	<br>
 
-	
-	<!-- Portfolio Section -->	
+
+	<!-- Portfolio Section -->
 	<div style="float: left; width: 73%">
 		<p style="margin-left: 58px; font-size: 24px; color: #ff7100">
 			<strong>전체 맛집 리스트</strong>
@@ -97,7 +119,7 @@
 				%>
 				
 				<p style="font-size: 25px;line-height: 25px;margin-bottom: 65px;">
-		          '<span ><%=s_keyword %></span>' 에 대한 검색 결과가 없습니다.
+		          '<span ><%=s_keyword %></span>'에 대한 검색 결과가 없습니다.
 	         	 </p>
 				
 				<%
@@ -128,8 +150,7 @@
 			%>
 
 		</div>
-				
-		<!-- 페이징 처리 -->
+				<!-- 페이징 처리 -->
 <div id="paging_wrap">	
 	<jsp:include page="/WEB-INF/views/common/paging.jsp" flush="false">
 		<jsp:param value="${pageNumber }" name="pageNumber"/>		
@@ -139,25 +160,22 @@
 	</jsp:include>	
 </div>
 	</div>
-	
 
-	
-		<!-- 지도 -->
+	<!-- 지도 -->
 	<div style="float: left; width: 27%">
-	<div id="map" style="width: 400px; height: 500px;"></div>
+		<div id="map" style="width: 400px; height: 500px;"></div>
 	</div>
 
-		<br>
+	<br>
 
-
-		 <!-- Footer -->
-		<!-- <footer class="py-5 bg-dark">
+	<!-- Footer -->
+	<!-- <footer class="py-5 bg-dark">
 			<div class="container">
 				<p class="m-0 text-center text-white">Copyright &copy; Your
 					Website 2018</p>
 			</div>
 			
-		</footer> -->  
+		</footer> -->
 
 	<!-- Bootstrap core JavaScript -->
 	<script src="vendor/jquery/jquery.min.js"></script>
@@ -165,38 +183,87 @@
 	<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 	<script src="vendor/scrollreveal/scrollreveal.min.js"></script>
 	<script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+
 </body> 
 
 <script>
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-	mapOption = {
-		center : new daum.maps.LatLng(37.56899, 126.97247), // 지도의 중심좌표
-		level : 8, // 지도의 확대 레벨
-		mapTypeId : daum.maps.MapTypeId.ROADMAP
-	// 지도종류
-	};
+<%
 
-	// 지도를 생성한다 
-	var map = new daum.maps.Map(mapContainer, mapOption);
+%>
 
-	// 지도에 확대 축소 컨트롤을 생성한다
-	var zoomControl = new daum.maps.ZoomControl();
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+mapOption = {
+	center : new daum.maps.LatLng(37.56899, 126.97247), // 지도의 중심좌표
+	level : 5
+};  
 
-	// 지도의 우측에 확대 축소 컨트롤을 추가한다
-	map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
+//지도를 생성합니다    
+var map = new daum.maps.Map(mapContainer, mapOption); 
+//주소-좌표 변환 객체를 생성합니다
+var geocoder = new Array();
+<%
+for(int j=0;j<list.size();j++){
+%> 
+geocoder[<%=j %>] = new daum.maps.services.Geocoder();
 
-	// 지도에 마커를 생성하고 표시한다
-	var marker = new daum.maps.Marker({
-		position : new daum.maps.LatLng(37.56899, 126.97247), // 마커의 좌표
-		map : map
-	// 마커를 표시할 지도 객체
-	});
+//주소로 좌표를 검색합니다
+geocoder[<%=j %>].addressSearch('<%=list.get(j).getRs_address1() %>', function(result, status) {
 
-	// 마커에 클릭 이벤트를 등록한다 (우클릭 : rightclick)
-	daum.maps.event.addListener(marker, 'click', function() {
-		alert('마커를 클릭했습니다!');
-	});
+    // 정상적으로 검색이 완료됐으면 
+     if (status === daum.maps.services.Status.OK) {
+
+        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new daum.maps.Marker({
+            map: map,
+            position: coords
+        });
+        
+   		// 마커에 클릭 이벤트를 등록한다 (우클릭 : rightclick)
+		daum.maps.event.addListener(marker, 'click', function() {
+		    //alert('마커를 클릭했습니다!');
+		  
+		    // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+			<%-- var iwContent = "<div style='padding:5px;'><img s src='/image/<%=list.get(j).getRs_picture() %>'></div>" --%>
+			<%-- var iwContent ='<div style="width: 200px; height: 100px;" class="card h-100"><a href="rsdetail.do?seq=<%=list.get(j).getSeq() %>"><img class="card-img-top" src="/image/<%=list.get(j).getRs_picture() %>" alt=""></a><div class="card-body"><h4 class="card-title"><a href="rsdetail.do?seq=<%=list.get(j).getSeq() %>"><%=list.get(j).getRs_name() %>&nbsp;&nbsp;<strong><span style="color:#ff792a; font-size: 1.37rem;"><%=list.get(j).getRs_rating() %></span></strong></a></h4><p class="card-text"><%=list.get(j).getRs_address1() %> - <%=list.get(j).getRs_category() %></p></div></div>', --%> 
+			<%-- var iwContent ='<div style="width: 200px; height: 100px;" class="card h-100"><a href="rsdetail.do?seq=<%=list.get(j).getSeq() %>"><img class="card-img-top" src="/image/<%=list.get(j).getRs_picture() %>" alt=""></a></div><div class="card-body"><h4 class="card-title"><a href="rsdetail.do?seq=<%=list.get(j).getSeq() %>"><%=list.get(j).getRs_name() %>&nbsp;&nbsp;<strong><span style="color:#ff792a; font-size: 1.37rem;"><%=list.get(j).getRs_rating() %></span></strong></a></h4><p class="card-text"><%=list.get(j).getRs_address1() %> - <%=list.get(j).getRs_category() %></p></div>', --%>
+			var iwContent = '<figure style="margin-left: 10px; margin-right: 10px;"><div style="float: left;"><a href="rsdetail.do?seq=<%=list.get(j).getSeq() %>"><img style="width: 110px; height: 125px; padding-bottom:15px;" src="/image/<%=list.get(j).getRs_picture() %>" alt=""></a></div> <figcaption><div style="margin-left: 120px; width: 140px;"><h4><a href="rsdetail.do?seq=<%=list.get(j).getSeq() %>"><strong><%=dot3(list.get(j).getRs_name()) %><strong>&nbsp;&nbsp;&nbsp;&nbsp;<strong><span style="color:#ff792a; font-size: 1.37rem;"><%=list.get(j).getRs_rating() %></span></strong></a></h4><p style="width: 130px;"><%=ss(list.get(j).getRs_address1()) %> - <%=list.get(j).getRs_category() %></p></div></figcaption></figure>',
+			iwPosition = new daum.maps.LatLng(33.450701, 126.570667); //인포윈도우 표시 위치입니다
+
+			// 인포윈도우를 생성합니다
+			var infowindow = new daum.maps.InfoWindow({
+			    position : iwPosition, 
+			    content : iwContent,
+			    removable : true
+			});
+			  
+			// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+			infowindow.open(map, marker); 
+			
+			// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+			function makeOutListener(infowindow) {
+				return function() { 
+					infowindow.close();
+				};
+			};
+		    
+		  
+		});
+        
+     	// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+     	
+     	
+     	
+    } 
+}); 
+<%}%>
+
+
 </script>
+
 
 
 

@@ -7,6 +7,7 @@ public class FUpUtil {
 	//f.substring(3) .zip
 	//f.substring(0,3) abc
 	public static String getNewFile(String f){
+		
 		String filename="";
 		String fpost="";
 		//String fre="";
