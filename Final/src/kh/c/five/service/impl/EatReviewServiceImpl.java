@@ -10,6 +10,7 @@ import kh.c.five.dao.EatReviewDao;
 import kh.c.five.model.InsertDto;
 import kh.c.five.model.RegiDto;
 import kh.c.five.model.ReviewDto;
+import kh.c.five.model.ReviewParam;
 import kh.c.five.model.fileDto;
 import kh.c.five.service.EatRestaurantsService;
 import kh.c.five.service.EatReviewService;
@@ -42,6 +43,16 @@ public class EatReviewServiceImpl implements EatReviewService {
 	@Override
 	public int getreviewcount(String id) {
 		return eatreviewdao.getreviewcount(id);
+	}
+
+	@Override
+	public int getRvCount(ReviewParam param) {
+		return eatreviewdao.getRvCount(param);
+	}
+
+	@Override
+	public int getLikeCount(ReviewParam param) {
+		return eatreviewdao.getLikeCount(param);
 	}
 	
 }

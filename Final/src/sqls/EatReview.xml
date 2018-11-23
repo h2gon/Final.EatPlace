@@ -41,4 +41,16 @@
   
  <select resultType="java.lang.Integer" id="getreviewcount"> SELECT COUNT(*) FROM RESTAURANT_REVIEW WHERE ID = #{id} </select>
   
+ <select id="getRvCount" parameterType="kh.c.five.model.ReviewParam" resultType="java.lang.Integer">
+  SELECT COUNT(*)
+	FROM RESTAURANT_REVIEW 
+	WHERE RS_SEQ=#{seq}
+  </select> 
+  
+  <select id="getLikeCount" parameterType="kh.c.five.model.ReviewParam" resultType="java.lang.Integer">
+  	SELECT COUNT(*)
+  		FROM RESTAURANT_LIKES
+  			WHERE RS_SEQ=#{seq}
+  </select>
+  
   </mapper>

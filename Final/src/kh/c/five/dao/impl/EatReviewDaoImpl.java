@@ -7,11 +7,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import kh.c.five.dao.EatRestaurantsDao;
 import kh.c.five.dao.EatReviewDao;
-import kh.c.five.model.InsertDto;
-import kh.c.five.model.RegiDto;
 import kh.c.five.model.ReviewDto;
+import kh.c.five.model.ReviewParam;
 import kh.c.five.model.fileDto;
 
 
@@ -48,6 +46,17 @@ public class EatReviewDaoImpl implements EatReviewDao {
 	public int getreviewcount(String id) {
 		int n = sqlSession.selectOne(namespace+"getreviewcount", id);
 		return n;
+	}
+
+	@Override
+	public int getRvCount(ReviewParam param) {		
+		
+		return sqlSession.selectOne(namespace + "getRvCount", param);
+	}
+
+	@Override
+	public int getLikeCount(ReviewParam param) {
+		return sqlSession.selectOne(namespace + "getLikeCount", param);
 	}
 
 	

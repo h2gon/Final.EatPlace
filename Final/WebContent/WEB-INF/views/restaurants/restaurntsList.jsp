@@ -1,4 +1,5 @@
 
+<%@page import="kh.c.five.model.ReviewParam"%>
 <%@page import="kh.c.five.model.RegiDto"%>
 <%@page import="java.util.List"%>
 
@@ -8,7 +9,6 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <fmt:requestEncoding value="UTF-8" />
-
 
 <!DOCTYPE html>
 <html>
@@ -47,6 +47,9 @@
 
 <body>
 
+
+
+
 <%!
 public String dot3(String msg){
 	String s = "";
@@ -67,6 +70,7 @@ public String ss(String msg){
 
 	return re;
 }
+
 
 %>
 
@@ -167,10 +171,12 @@ public String ss(String msg){
 	<script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 </body>
 
-<script>
 <%
+List<ReviewParam> rplist = (List<ReviewParam>)request.getAttribute("rplist");
 
 %>
+
+<script>
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 mapOption = {
@@ -209,7 +215,7 @@ geocoder[<%=j %>].addressSearch('<%=list.get(j).getRs_address1() %>', function(r
 			<%-- var iwContent = "<div style='padding:5px;'><img s src='/image/<%=list.get(j).getRs_picture() %>'></div>" --%>
 			<%-- var iwContent ='<div style="width: 200px; height: 100px;" class="card h-100"><a href="rsdetail.do?seq=<%=list.get(j).getSeq() %>"><img class="card-img-top" src="/image/<%=list.get(j).getRs_picture() %>" alt=""></a><div class="card-body"><h4 class="card-title"><a href="rsdetail.do?seq=<%=list.get(j).getSeq() %>"><%=list.get(j).getRs_name() %>&nbsp;&nbsp;<strong><span style="color:#ff792a; font-size: 1.37rem;"><%=list.get(j).getRs_rating() %></span></strong></a></h4><p class="card-text"><%=list.get(j).getRs_address1() %> - <%=list.get(j).getRs_category() %></p></div></div>', --%> 
 			<%-- var iwContent ='<div style="width: 200px; height: 100px;" class="card h-100"><a href="rsdetail.do?seq=<%=list.get(j).getSeq() %>"><img class="card-img-top" src="/image/<%=list.get(j).getRs_picture() %>" alt=""></a></div><div class="card-body"><h4 class="card-title"><a href="rsdetail.do?seq=<%=list.get(j).getSeq() %>"><%=list.get(j).getRs_name() %>&nbsp;&nbsp;<strong><span style="color:#ff792a; font-size: 1.37rem;"><%=list.get(j).getRs_rating() %></span></strong></a></h4><p class="card-text"><%=list.get(j).getRs_address1() %> - <%=list.get(j).getRs_category() %></p></div>', --%>
-			var iwContent = '<figure style="margin-left: 10px; margin-right: 10px;"><div style="float: left;"><a href="rsdetail.do?seq=<%=list.get(j).getSeq() %>"><img style="width: 110px; height: 125px; padding-bottom:15px;" src="/image/<%=list.get(j).getRs_picture() %>" alt=""></a></div> <figcaption><div style="margin-left: 120px; width: 140px;"><h4><a href="rsdetail.do?seq=<%=list.get(j).getSeq() %>"><strong><%=dot3(list.get(j).getRs_name()) %><strong>&nbsp;&nbsp;&nbsp;&nbsp;<strong><span style="color:#ff792a; font-size: 1.37rem;"><%=list.get(j).getRs_rating() %></span></strong></a></h4><p style="width: 130px;"><%=ss(list.get(j).getRs_address1()) %> - <%=list.get(j).getRs_category() %></p></div></figcaption></figure>',
+			var iwContent = '<figure style="margin-left: 10px; margin-right: 10px;"><div style="float: left;"><a href="rsdetail.do?seq=<%=list.get(j).getSeq() %>"><img style="width: 110px; height: 125px; padding-bottom:15px;" src="/image/<%=list.get(j).getRs_picture() %>" alt=""></a></div> <figcaption><div style="margin-left: 120px; width: 140px;"><h4><a href="rsdetail.do?seq=<%=list.get(j).getSeq() %>"><strong><%=dot3(list.get(j).getRs_name()) %><strong>&nbsp;&nbsp;&nbsp;&nbsp;<strong><span style="color:#ff792a; font-size: 1.37rem;"><%=list.get(j).getRs_rating() %></span></strong></a></h4><p style="width: 130px;"><%=ss(list.get(j).getRs_address1()) %> - <%=list.get(j).getRs_category() %></p><br><p style="color: gray;"><img src="img/map/pen.png">&nbsp;<%=rplist.get(j).getReviewCount() %>&nbsp;&nbsp;<img src="img/map/star.png">&nbsp;<%=rplist.get(j).getLike() %></p></div></figcaption></figure>',
 			iwPosition = new daum.maps.LatLng(33.450701, 126.570667); //인포윈도우 표시 위치입니다
 
 			// 인포윈도우를 생성합니다
@@ -240,6 +246,7 @@ geocoder[<%=j %>].addressSearch('<%=list.get(j).getRs_address1() %>', function(r
     } 
 }); 
 <%}%>
+<%-- <%}%> --%>
 
 
 </script>

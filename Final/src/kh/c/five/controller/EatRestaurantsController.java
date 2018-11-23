@@ -25,6 +25,7 @@ import kh.c.five.model.InsertDto;
 import kh.c.five.model.RegiDto;
 import kh.c.five.model.RestaurantDto;
 import kh.c.five.model.ReviewDto;
+import kh.c.five.model.ReviewParam;
 import kh.c.five.model.fileDto;
 import kh.c.five.service.EatRestaurantsService;
 import kh.c.five.service.EatReviewService;
@@ -116,12 +117,30 @@ public class EatRestaurantsController {
 		logger.info("EatRestaurantsController restaurntsList"+new Date());
 		
 		List<RegiDto> rslist = eatRestaurantsService.getRs_List();
+		List<ReviewParam> rplist = new ArrayList<>();
+		for (int i = 0; i < rslist.size(); i++) {
+			ReviewParam rparm = new ReviewParam();
+			rparm.setSeq(rslist.get(i).getSeq());
+			
+			int n = eatReviewService.getRvCount(rparm);
+			rparm.setReviewCount(n);
+			
+			int m = eatReviewService.getLikeCount(rparm);
+			rparm.setLike(m);
+			
+			rplist.add(rparm);
+			
+			System.out.println(rparm.toString());
+			
+		}
 		
+		
+		
+		model.addAttribute("rplist", rplist);
 		model.addAttribute("rslist", rslist);
 		
-		for (int i = 0; i < rslist.size(); i++) {
-			rslist.get(i).toString();
-		}
+	
+		
 		
 		
 		
@@ -176,7 +195,10 @@ public class EatRestaurantsController {
 		
 		List<RegiDto> list = eatRestaurantsService.getRankList(dto);
 		
+		
+		
 		model.addAttribute("RankList", list);
+		            
 		
 		return "home";
 	}
