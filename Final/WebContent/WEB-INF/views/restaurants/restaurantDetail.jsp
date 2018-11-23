@@ -1,3 +1,9 @@
+<%@page import="kh.c.five.dao.impl.EatReviewDaoImpl"%>
+<%@page import="kh.c.five.dao.EatReviewDao"%>
+<%@page import="kh.c.five.model.fileDto"%>
+<%@page import="kh.c.five.service.impl.EatReviewServiceImpl"%>
+<%@page import="org.springframework.beans.factory.annotation.Autowired"%>
+<%@page import="kh.c.five.service.EatReviewService"%>
 <%@page import="kh.c.five.model.ReviewDto"%>
 <%@page import="java.util.List"%>
 <%@page import="kh.c.five.model.RegiDto"%>
@@ -11,18 +17,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
-<%!
-public String makeTable(List<ReviewDto> dto){
-	String s="";
-	
-		
-	s="<table class='review'>";
-	
-	s+="</table>";
-	return s;
-}
 
-%>
 
 <script type="text/javascript">
 function WriteReview(seq) {
@@ -517,27 +512,64 @@ input:focus {
 				<div style="float: left; width: 60%;"></div>
 
 				</section>
-				<!-- 리뷰 -->
-				<section class="module review-container">
-				<!-- 리뷰 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~REVIEW~~~~~~~~~~~~~~~~~~~~~~~~-->
+			<!-- 리뷰 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~REVIEW~~~~~~~~~~~~~~~~~~~~~~~~-->
+		 <%          
+         // EatReviewService eatReviewService ;
+		  EatReviewDao eatReviewDao = EatReviewDaoImpl.getInstance();
+                  
+          List<ReviewDto> list = (List<ReviewDto>)request.getAttribute("reviewlist");
+          
+          
+          final int LIST = 5;
+          int totalCnt = list.size();
+          int pagingCount = totalCnt / LIST;
+          int remainList = totalCnt % LIST; 
+          int Good=0;
+          int soso=0;
+          int notGood=0;
+          int totalCount = 0;
+          String fileName = "";
+          
+          if(!list.isEmpty()){
+          
+          for(int i =0;i<list.size();i++){
+        	  
+        	  switch(list.get(i).getRs_rating()){
+        	  
+        	  case 1:
+        		  notGood = notGood+1; break;
+        	  case 3:
+        		  soso = soso+1; break; 
+        	  case 5:
+        		  Good = Good+1; break;
+        	  }
+        	  
+          }totalCount = Good+soso+notGood;
+          System.out.println("notGood Count:"+notGood+"soso Count:"+soso+"Good:"+Good);
+         
+                  
+                    
+          %>
+		
+				
 		<hr>
 		<section class="module review-container">
             <div class="title_fliter_wrap">
-              <h2 class="title only-mobile">푸줏간생고기점의 리뷰 (36)</h2>
-              <h2 class="title only-desktop">리뷰 <span class="review-container-review-count">(36)</span></h2>
+              <h2 class="title only-mobile">${rs.rs_name }'s 리뷰</h2>
+              <h2 class="title only-desktop">리뷰 <span class="review-container-review-count">(<%=totalCount %>)</span></h2>
                 <ul class="review_fliter_list" style="text-align: right;">
                  
-                    <button class="btn active" data-review_count="36" onclick="common_ga(get_now_page_code(), 'CLICK_TASTEALL')" ng-class="{selected: action_values === undefined, not_selected_btn: 36 == 0}" ng-click="get_review_list(undefined, $event)">전체
-                      (36)
+                    <button class="btn active" data-review_count="<%=totalCount %>" onclick="common_ga(get_now_page_code(), 'CLICK_TASTEALL')" ng-class="{selected: action_values === undefined, not_selected_btn: 36 == 0}" ng-click="get_review_list(undefined, $event)">전체
+                      (<%=totalCount %>)
                     </button>
-                     <button class="btn" data-review_count="27" onclick="common_ga(get_now_page_code(), 'CLICK_TASTEGOOD')" ng-class="{selected: action_values === 3, not_selected_btn: 27 == 0}" ng-click="get_review_list(3, $event)">맛있다
-                      (27)
+                     <button class="btn" data-review_count="<%=Good %>" onclick="common_ga(get_now_page_code(), 'CLICK_TASTEGOOD')" ng-class="{selected: action_values === 3, not_selected_btn: 27 == 0}" ng-click="get_review_list(3, $event)">맛있다
+                      (<%=Good %>)
                     </button>
-                    <button class="btn" data-review_count="7" onclick="common_ga(get_now_page_code(), 'CLICK_TASTESOSO')" ng-class="{selected: action_values === 2, not_selected_btn: 7 == 0}" ng-click="get_review_list(2, $event)">괜찮다
-                      (7)
+                    <button class="btn" data-review_count="<%=soso %>" onclick="common_ga(get_now_page_code(), 'CLICK_TASTESOSO')" ng-class="{selected: action_values === 2, not_selected_btn: 7 == 0}" ng-click="get_review_list(2, $event)">괜찮다
+                      (<%=soso %>)
                     </button>
-                    <button class="btn" data-review_count="2" onclick="common_ga(get_now_page_code(), 'CLICK_TASTEBAD')" ng-class="{selected: action_values === 1, not_selected_btn: 2 == 0}" ng-click="get_review_list(1, $event)">별로
-                      (2)
+                    <button class="btn" data-review_count="<%=notGood %>" onclick="common_ga(get_now_page_code(), 'CLICK_TASTEBAD')" ng-class="{selected: action_values === 1, not_selected_btn: 2 == 0}" ng-click="get_review_list(1, $event)">별로
+                      (<%=notGood %>)
                     </button>
                   
                 </ul>
@@ -545,137 +577,126 @@ input:focus {
            
           </section>
           
-          <%
-          
-          List<ReviewDto> list = (List<ReviewDto>)request.getAttribute("reviewlist");
-          
-          final int LIST = 5;
-          int totalCnt = list.size();
-          int pagingCount = totalCnt / LIST;
-          int remainList = totalCnt % LIST;
-          
-                    
-          %>
+         
          
 		<div class="review_main">
-		          
-         
-         
-         <%-- <c:forEach items="${reviewlist }" var="review" varStatus="vs">  --%>
-         
-         <%for(int i=0 ; i<totalCnt;i++) {
-         	if(totalCnt<=LIST){
-         %>
-         <table id="table" class="table1">
-         
-         <thead>
-        	<tr>
-        		<th>ID</th>
-        		<th>Content</th>
-        		<th>평점</th>
-        	</tr>
-         </thead>
-         
-         <tr>
-         	<td>
-         	<!-- review_info -->
-         	<div class="review_img_container">
-           
-           
-          
-           
-                             	
-           	<div class="reviewer_info">
-           	 <%=i+1 %>
-           	<input type="text" name="review_id" style="width: 20%;" value="<%=list.get(i).getId() %>" readonly="readonly">
-           
-           	</div>
-                     
-           </div>
-         	</td>
-         	<!-- review context -->
-         <td>
-         	<div class="review_content">
-         	<input type="text" name="review_content" style="width: 70%;" value="<%=list.get(i).getRs_content() %>" readonly="readonly">          	
-            </div>
-         </td>         	
-         <td>
-          <!-- 맛있다/괜찮다/별로 -->
-           <div class="review_like">
-           <input type="text" name="review_ratin" style="width: 10%;" value="<%=list.get(i).getRs_rating() %>" readonly="readonly">           
-           </div>
-           <!-- 맛있다/괜찮다/별로 end -->
-         </td>         
-         </tr>
-                             
-         
-         
-         </table>
+		
+		
+		<table border="1">
+		<%if(list.size()<5){
+		
+			for(int i = 0 ; i< list.size();i++){	
+		%>
+		<tr>
+		
+		 <td style="width: 700px;">
+		<label>
+		
+		<%switch(list.get(i).getRs_rating()){
+		case 1:
+		%>						
+		<img alt="" src="./img/like/1-1.png" style="width: 60px;" id="p1" msg="1" title="1점" >
+		<%break;
+		case 3: %>
+		<img alt="" src="./img/like/3-1.png" style="width: 60px;" id="p3" msg="3" title="3점" >
+		<%break;
+		case 5: %>
+		<img alt="" src="./img/like/5-2.png" style="width: 60px;" id="p5" msg="5" title="5점" >
+		<%break;
+		default: %>
+		<img alt="" src="./img/like/3-1.png" style="width: 60px;" id="p3" msg="3" title="3점" >
+		<%} %>
+		</label>
+		아이디 : <%=list.get(i).getId() %>	
+		<input type="text" style="width: 480px;" name="content" value="<%=list.get(i).getRs_content()%>">
+		<%List<fileDto> f_list = eatReviewDao.getRv_Image(list.get(i).getRs_seq());
+		if(f_list != null){
+			System.out.println("not null");
+			for(int a = 0;a<f_list.size();a++){
+				fileName = f_list.get(a).getFile_name();
+				%>
+				<img alt="" src="/image/<%=fileName %>" style="width: 75px; height: 75px;">
+				<%
+				System.out.println("fileName:"+fileName);
+			}
+		}else if(f_list == null){
+			System.out.println("null");
+		}			
+		%>
+	
+			
+							 
+		 </td>	
+		 			       
+        </tr>
+		
+		
+		
+		<%} %>	
+		
+		<%}else{ %>
+		<%for(int i =0 ; i<5 ; i++){ %>
+		<tr>
+		
+		 <td style="width: 700px;">
+		<label>
+		
+		<%switch(list.get(i).getRs_rating()){
+		case 1:
+		%>						
+		<img alt="" src="./img/like/1-1.png" style="width: 60px;" id="p1" msg="1" title="1점" >
+		<%break;
+		case 3: %>
+		<img alt="" src="./img/like/3-1.png" style="width: 60px;" id="p3" msg="3" title="3점" >
+		<%break;
+		case 5: %>
+		<img alt="" src="./img/like/5-2.png" style="width: 60px;" id="p5" msg="5" title="5점" >
+		<%break;
+		default: %>
+		<img alt="" src="./img/like/3-1.png" style="width: 60px;" id="p3" msg="3" title="3점" >
+		<%} %>
+		</label>
+		아이디 : <%=list.get(i).getId() %>	
+		
+		<input type="text" style="width: 480px;" name="content" value="<%=list.get(i).getRs_content()%>">
+		<%List<fileDto> f_list = eatReviewDao.getRv_Image(list.get(i).getRs_seq());
+		if(f_list != null){
+			System.out.println("not null");
+			for(int a = 0;a<f_list.size();a++){
+			fileName = f_list.get(a).getFile_name();
+			%>
+			<img alt="" src="/image/<%=fileName %>" style="width: 75px; height: 75px;">
+			<%
+			System.out.println("fileName:"+fileName);
+			}
+		}else if(f_list == null){
+			System.out.println("null");
+		}	
+		
+		
+		%>
+		
+		
+		
+		
+		
+			 
+		 </td>	
+		 			       
+        </tr>
          <%}
-         	else if(pagingCount>1 && remainList != 0){
-         	 pagingCount++;
-         	%>
-         	
-         <table id="table" class="table1">
-         
-         <thead>
-        	<tr>
-        		<th>ID</th>
-        		<th>Content</th>
-        		<th>평점</th>
-        	</tr>
-         </thead>
-         
-         <tr>
-         	<td>
-         	<!-- review_info -->
-         	<div class="review_img_container">
-           
-           <div class="review_date">
-           <%=i+1 %>
-           </div>
-                             	
-           	<div class="reviewer_info">
-           	<input type="text" name="review_id" style="width: 20%;" value="<%=list.get(i).getId() %>" readonly="readonly">
-           
-           	</div>
-                     
-           </div>
-         	</td>
-         	<!-- review context -->
-         <td>
-         	<div class="review_content">
-         	<input type="text" name="review_content" style="width: 70%;" value="<%=list.get(i).getRs_content() %>" readonly="readonly">          	
-            </div>
-         </td>         	
-         <td>
-          <!-- 맛있다/괜찮다/별로 -->
-           <div class="review_like">
-           <input type="text" name="review_ratin" style="width: 10%;" value="<%=list.get(i).getRs_rating() %>" readonly="readonly">           
-           </div>
-           <!-- 맛있다/괜찮다/별로 end -->
-         </td>         
-         </tr>
-                 
-         
-         </table>			
-         		
-         	
-         	
-         	<%}
-      
-         }
+		}
+		}
          %>
-         <a>더보기</a>
-          <%-- </c:forEach>
-           --%>
-          </div>
+         </table>
+         
+         </div>
+       
           <!-- review_main end -->
 
 
-				
-				</section>
-			</div>
+	
+		</div>
 		</div>
 	</div>
 		<!-- The Modal will open  -->

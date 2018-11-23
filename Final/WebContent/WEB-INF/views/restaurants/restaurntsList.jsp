@@ -9,9 +9,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <fmt:requestEncoding value="UTF-8" />
 
-<%
-	
-%>
+
 <!DOCTYPE html>
 <html>
 
@@ -48,6 +46,29 @@
 </head>
 
 <body>
+
+<%!
+public String dot3(String msg){
+	String s = "";
+	if(msg.length() >= 3){
+		s = msg.substring(0, 3);
+		s += "...";
+	}else{
+		s = msg.trim();
+	}
+	return s;
+}
+
+
+public String ss(String msg){
+	
+	String s[] = msg.split(" ");
+	String re = s[0] + " " + s[1];
+
+	return re;
+}
+
+%>
 
 	<!-- Navigation -->
 	<nav class="navbar fixed-top navbar-expand-lg navbar-dark fixed-top"
@@ -147,10 +168,14 @@
 </body>
 
 <script>
+<%
+
+%>
+
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 mapOption = {
 	center : new daum.maps.LatLng(37.56899, 126.97247), // 지도의 중심좌표
-	level : 6
+	level : 5
 };  
 
 //지도를 생성합니다    
@@ -182,19 +207,29 @@ geocoder[<%=j %>].addressSearch('<%=list.get(j).getRs_address1() %>', function(r
 		  
 		    // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 			<%-- var iwContent = "<div style='padding:5px;'><img s src='/image/<%=list.get(j).getRs_picture() %>'></div>" --%>
-			var iwContent ='<div style="width: 200px; height: 100px;" class="card h-100"><a href="rsdetail.do?seq=<%=list.get(j).getSeq() %>"><img class="card-img-top" src="/image/<%=list.get(j).getRs_picture() %>" alt=""></a><div class="card-body"><h4 class="card-title"><a href="rsdetail.do?seq=<%=list.get(j).getSeq() %>"><%=list.get(j).getRs_name() %>&nbsp;&nbsp;<strong><span style="color:#ff792a; font-size: 1.37rem;"><%=list.get(j).getRs_rating() %></span></strong></a></h4><p class="card-text"><%=list.get(j).getRs_address1() %> - <%=list.get(j).getRs_category() %></p></div></div>', 
-		    iwPosition = new daum.maps.LatLng(33.450701, 126.570667); //인포윈도우 표시 위치입니다
+			<%-- var iwContent ='<div style="width: 200px; height: 100px;" class="card h-100"><a href="rsdetail.do?seq=<%=list.get(j).getSeq() %>"><img class="card-img-top" src="/image/<%=list.get(j).getRs_picture() %>" alt=""></a><div class="card-body"><h4 class="card-title"><a href="rsdetail.do?seq=<%=list.get(j).getSeq() %>"><%=list.get(j).getRs_name() %>&nbsp;&nbsp;<strong><span style="color:#ff792a; font-size: 1.37rem;"><%=list.get(j).getRs_rating() %></span></strong></a></h4><p class="card-text"><%=list.get(j).getRs_address1() %> - <%=list.get(j).getRs_category() %></p></div></div>', --%> 
+			<%-- var iwContent ='<div style="width: 200px; height: 100px;" class="card h-100"><a href="rsdetail.do?seq=<%=list.get(j).getSeq() %>"><img class="card-img-top" src="/image/<%=list.get(j).getRs_picture() %>" alt=""></a></div><div class="card-body"><h4 class="card-title"><a href="rsdetail.do?seq=<%=list.get(j).getSeq() %>"><%=list.get(j).getRs_name() %>&nbsp;&nbsp;<strong><span style="color:#ff792a; font-size: 1.37rem;"><%=list.get(j).getRs_rating() %></span></strong></a></h4><p class="card-text"><%=list.get(j).getRs_address1() %> - <%=list.get(j).getRs_category() %></p></div>', --%>
+			var iwContent = '<figure style="margin-left: 10px; margin-right: 10px;"><div style="float: left;"><a href="rsdetail.do?seq=<%=list.get(j).getSeq() %>"><img style="width: 110px; height: 125px; padding-bottom:15px;" src="/image/<%=list.get(j).getRs_picture() %>" alt=""></a></div> <figcaption><div style="margin-left: 120px; width: 140px;"><h4><a href="rsdetail.do?seq=<%=list.get(j).getSeq() %>"><strong><%=dot3(list.get(j).getRs_name()) %><strong>&nbsp;&nbsp;&nbsp;&nbsp;<strong><span style="color:#ff792a; font-size: 1.37rem;"><%=list.get(j).getRs_rating() %></span></strong></a></h4><p style="width: 130px;"><%=ss(list.get(j).getRs_address1()) %> - <%=list.get(j).getRs_category() %></p></div></figcaption></figure>',
+			iwPosition = new daum.maps.LatLng(33.450701, 126.570667); //인포윈도우 표시 위치입니다
 
 			// 인포윈도우를 생성합니다
 			var infowindow = new daum.maps.InfoWindow({
 			    position : iwPosition, 
-			    content : iwContent 
+			    content : iwContent,
+			    removable : true
 			});
 			  
 			// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
 			infowindow.open(map, marker); 
+			
+			// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+			function makeOutListener(infowindow) {
+				return function() { 
+					infowindow.close();
+				};
+			};
 		    
-		    
+		  
 		});
         
      	// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
