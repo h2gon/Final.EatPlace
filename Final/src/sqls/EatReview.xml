@@ -18,7 +18,12 @@
   <select id="getImage" parameterType="java.lang.Integer" resultType="kh.c.five.model.fileDto">
   SELECT FILE_NAME
 	FROM RS_FILE 
-	WHERE RV_SEQ=#{rs_seq}
+	WHERE RV_SEQ=#{seq}
+  </select>
+    <select id="getImageDT" parameterType="java.lang.Integer" resultType="kh.c.five.model.fileDto">
+  SELECT FILE_NAME
+	FROM RS_FILE 
+	WHERE RS_SEQ=#{seq}
   </select>
   
   

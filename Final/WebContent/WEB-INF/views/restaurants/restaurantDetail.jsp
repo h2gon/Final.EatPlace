@@ -64,8 +64,8 @@ function WriteReview(seq) {
   padding-top: 100px;
   left: 0;
   top: 0;
-  width: 100%;
-  height: 100%;
+  width: 80%;
+  height: 80%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.3);
 }
@@ -333,57 +333,25 @@ input:focus {
       </div>
     </nav>
 	<%
-		//여기서 list(get review list)
-		//List<String> imagelist = 
+	List<ReviewDto> rvlist = (List<ReviewDto>)request.getAttribute("reviewlist"); //이거 나중에 리뷰랑 합치고 리뷰에서 불러오는거 지우면 됩니다
+	List<fileDto> imagelist = (List<fileDto>) request.getAttribute("imagelist");
 	%>
-	<div class="owl-carousel owl-theme">
 
-
-		<div class="item">
-			<img src="img/portfolio/fullsize/a.jpg" onclick="openModal(); currentSlide(1)">
-		</div>
-		<div class="item">
-			<img src="img/portfolio/fullsize/cafe.jpg" onclick="openModal(); currentSlide(2)">
-		</div>
-		<div class="item">
-			<img src="img/portfolio/fullsize/china.jpg" onclick="openModal(); currentSlide(3)">
-		</div>
-		<div class="item">
-			<img src="img/portfolio/fullsize/j.jpg"onclick="openModal(); currentSlide(4)">
-		</div>
-		<div class="item">
-			<img src="img/portfolio/fullsize/k.jpg"onclick="openModal(); currentSlide(5)">
-		</div>
-		<div class="item">
-			<img src="img/portfolio/fullsize/v.jpg"onclick="openModal(); currentSlide(6)">
-		</div>
-		<c:forEach var="list" items="${imagelist}" varStatus="vs">
-			<div class="item">
-				<img alt="" src="${list.file_name }">
-			</div>
-		</c:forEach>
-<%-- 		<%
-								// 이미지 리스트에서 파일 이름을 전부 불러옴
-								 for(int i = 1; i < imagelist.size(); i++){
-													
-								String path = imagelist.get(i);
-								%>
-								<div class="item">
-									<img alt="" src="<%=path%>">
-								</div>
-								
-								<%} %> --%>
-							
-		<%-- <%
-	for(int i = 0; i<list.size();i++){ //list: 리뷰 목록
+	<!-- rest images navigation start(thumbnails) -->
+	<div class="owl-carousel">
+	<%
+	for (int i = 0; i < imagelist.size(); i++) {
 		%>
-		 <div class="item"><img src=""></div>
+		
+
+			<div class="item">
+				<img src="\image\<%=imagelist.get(i).getFile_name()%>"	alt="" style="height:300px ;width: auto" onclick="openModal(); currentSlide(<%=i+1%>)">
+			</div>
+		
 		<%
-	}
-	
-	
-   
-    %> --%>
+			}
+
+		%>
 	</div>
 	<div class="column-wrapper">
 		<div class="column-contents">
@@ -703,14 +671,23 @@ input:focus {
 <div class="modal-content" align="center">
   
 <br>
-<div class="test" style="width: 70%; float: left">
+ <%
+   for (int i = 0; i < imagelist.size(); i++) {
+	   %>
+	   <div class="mySlides" style="margin-left: 30px">
+       <img src="\image\<%=imagelist.get(i).getFile_name()%>" style="width:50%;">    
+    	</div>
+	   <%
+   }
+   %>
+<!-- 
    <div class="mySlides" style="margin-left: 30px">
       <div class="numbertext">1 / 6</div>
        <img src="img/portfolio/fullsize/a.jpg" style="width:50%;">    
     </div>
 
     <div class="mySlides">
-      <div class="numbertext">2 / 6<!-- 이부분에 id --></div> 
+      <div class="numbertext">2 / 6이부분에 id</div> 
       <img src="img/portfolio/fullsize/cafe.jpg" style="width:50%">
     </div>
 
@@ -731,7 +708,7 @@ input:focus {
       <div class="numbertext">6 / 6</div>
       <img src="img/portfolio/fullsize/v.jpg" style="width:50%">
     </div> 
-
+ -->
     <!-- Next/previous controls -->
    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
     <a class="next" onclick="plusSlides(1)">&#10095;</a>
@@ -743,31 +720,21 @@ input:focus {
 
 
     <!-- Thumbnail image controls -->
-    
-<div class="owl-carousel" >
-		<div class="item" >
-			<img class="demo" src="img/portfolio/fullsize/a.jpg" onclick="currentSlide(1)" >
-		</div>
-		<div class="item">
-			<img class="demo" src="img/portfolio/fullsize/cafe.jpg" onclick="currentSlide(2)">
-		</div>
-		<div class="item">
-			<img class="demo" src="img/portfolio/fullsize/china.jpg" onclick="currentSlide(3)">
-		</div>
-		<div class="item">
-			<img class="demo" src="img/portfolio/fullsize/j.jpg" onclick="currentSlide(4)">
-		</div>
-		<div class="item">
-			<img class="demo" src="img/portfolio/fullsize/k.jpg" onclick="currentSlide(5)">
-		</div>
-		<div class="item">
-			<img class="demo" src="img/portfolio/fullsize/v.jpg" onclick="currentSlide(6)">
-		</div>
-	</div>
- </div><!-- /test -->
- <div style="width: 30%; float: right">
- <h3>좀 돼라~</h3>
- </div>
+  
+			<div class="owl-carousel">
+		<%
+			for (int i = 0; i < imagelist.size(); i++) {
+				//System.out.println("참고용 imagelist size: "+ imagelist.size());
+			
+			%>
+				<div class="item">
+						<img src="\image\<%=imagelist.get(i).getFile_name()%>"	alt="" style="height:150px ;width: auto" onclick="currentSlide(<%=i%>)">
+						<br>
+				</div>
+			<%
+				}
+			%>
+			</div><!-- /thumbnail -->
   </div> <!-- /content-modals -->
 
 </div> <!-- /modals -->
@@ -819,12 +786,18 @@ function currentSlide(n) {
 
 function showSlides(n) {
   var i;
+  var ii = <%=imagelist.size() %>
+  <%//System.out.println("다시참고용 imagelist size: "+ imagelist.size()); %>
   var slides = document.getElementsByClassName("mySlides");
   var dots = document.getElementsByClassName("demo");
   var captionText = document.getElementById("caption");
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
+ /*  if (n > slides.length) {slideIndex = 1} */
+  if (n > ii) {slideIndex = 1}
+/*   if (n < 1) {slideIndex = slides.length} */
+  if (n < 1) {slideIndex = ii}
+
+  /* for (i = 0; i < slides.length; i++) { */
+	  for (i = 0; i < ii; i++) {
     slides[i].style.display = "none";
   }
   for (i = 0; i < dots.length; i++) {

@@ -54,5 +54,10 @@ public class EatReviewServiceImpl implements EatReviewService {
 	public int getLikeCount(ReviewParam param) {
 		return eatreviewdao.getLikeCount(param);
 	}
+
+	@Override
+	public List<String> getImageDT(int rs_seq) {
+		return eatreviewdao.getImageDT(rs_seq);
+	}
 	
 }

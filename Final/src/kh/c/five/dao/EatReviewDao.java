@@ -8,7 +8,7 @@ import kh.c.five.model.fileDto;
 
 public interface EatReviewDao {
 	public List<String> getImage(int rv_seq);
-	
+	public List<String> getImageDT(int rs_seq); // pickup images per rests 
 	Integer addReview(ReviewDto rdto);
 	
 	void addFile(fileDto fdto);
@@ -21,4 +21,5 @@ public interface EatReviewDao {
 	public int getLikeCount(ReviewParam param);
 	
 	List<fileDto> getRv_Image(int rv_seq);
+	
 }

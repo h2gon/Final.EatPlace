@@ -179,7 +179,9 @@ public class EatRestaurantsController {
 		model.addAttribute("rs", rs);
 		model.addAttribute("rs2", rs2);
 		
-		List<String> imagelist = eatReviewService.getImage(seq);
+		/*List<String> imagelist = eatReviewService.getImage(seq);
+		model.addAttribute("imagelist",imagelist);*/
+		List<String> imagelist = eatReviewService.getImageDT(seq);
 		model.addAttribute("imagelist",imagelist);
 		
 		//System.out.println(rs.toString());

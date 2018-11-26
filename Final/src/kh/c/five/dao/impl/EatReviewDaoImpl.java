@@ -47,6 +47,14 @@ public class EatReviewDaoImpl implements EatReviewDao {
 	
 
 	@Override
+	public List<String> getImageDT(int rs_seq) {
+		List<String> list = new ArrayList<>();
+		list = sqlSession.selectList(namespace+"getImageDT", rs_seq);
+		
+		return list;
+	}
+
+	@Override
 	public Integer addReview(ReviewDto rdto) {
 		int n = sqlSession.insert(namespace+"addReview", rdto);
 		return rdto.getSeq();
