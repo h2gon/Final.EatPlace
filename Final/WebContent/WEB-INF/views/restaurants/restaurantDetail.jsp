@@ -67,7 +67,7 @@ function WriteReview(seq) {
   width: 80%;
   height: 80%;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* Modal Content */
@@ -76,16 +76,16 @@ function WriteReview(seq) {
   background-color: rgba(0, 0, 0);
   margin: auto;
   padding: 0;
-  width: 90%;
+  width: 80%;
   max-width: 1200px;
 }
 
 /* The Close Button */
 .close {
   color: white;
-  position: absolute;
+  position: auto;
   top: 10px;
-  right: 25px;
+  right: 50px;
   font-size: 35px;
   font-weight: bold;
 }
@@ -162,7 +162,7 @@ img.hover-shadow {
 }
 
 .hover-shadow:hover {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 /*~css for modal box*/
 
@@ -655,7 +655,7 @@ input:focus {
          </table>
          
          </div>
-       
+       <br><br>
           <!-- review_main end -->
 
 
@@ -671,44 +671,51 @@ input:focus {
 <div class="modal-content" align="center">
   
 <br>
- <%
-   for (int i = 0; i < imagelist.size(); i++) {
-	   %>
-	   <div class="mySlides" style="margin-left: 30px">
-       <img src="\image\<%=imagelist.get(i).getFile_name()%>" style="width:50%;">    
-    	</div>
-	   <%
-   }
-   %>
-<!-- 
-   <div class="mySlides" style="margin-left: 30px">
-      <div class="numbertext">1 / 6</div>
-       <img src="img/portfolio/fullsize/a.jpg" style="width:50%;">    
-    </div>
+<table >
+<col width= "70%"><col width= "30%">
+	<tr>
+		<td align="center">
+		 <%
+		   for (int i = 0; i < imagelist.size(); i++) {
+			   %>
+			   
+			   <div class="mySlides" style="margin-left: 30px">
+		       <img src="\image\<%=imagelist.get(i).getFile_name()%>" style="width:50%;">    
+		    	</div>
+		    	
+			   <%
+		   }
+		   %>
+  		 </td>
+   <td>
+   <div style="background-color: white; height: auto">
+   <p>tests</p>
+   </div>
+   </td>
+	</tr>
+	<tr>
+		<td>
+		 <!-- Thumbnail image controls -->
+  
+			<div class="owl-carousel">
+		<%
+			for (int i = 0; i < imagelist.size(); i++) {
+				//System.out.println("참고용 imagelist size: "+ imagelist.size());
+			
+			%>
+				<div class="item">
+						<img src="\image\<%=imagelist.get(i).getFile_name()%>"	alt="" style="height:150px ;width: auto" onclick="currentSlide(<%=i+1%>)">
+						<br>
+				</div>
+			<%
+				}
+			%>
+			</div><!-- /thumbnail -->
+		</td>
+	</tr>
+</table>
 
-    <div class="mySlides">
-      <div class="numbertext">2 / 6이부분에 id</div> 
-      <img src="img/portfolio/fullsize/cafe.jpg" style="width:50%">
-    </div>
 
-    <div class="mySlides">
-      <div class="numbertext">3 / 6</div>
-      <img src="img/portfolio/fullsize/china.jpg" style="width:50%">
-    </div>
-
-    <div class="mySlides">
-      <div class="numbertext">4 / 6</div>
-      <img src="img/portfolio/fullsize/j.jpg" style="width:50%">
-    </div>
-        <div class="mySlides">
-      <div class="numbertext">5 / 6</div>
-      <img src="img/portfolio/fullsize/k.jpg" style="width:50%">
-    </div>
-        <div class="mySlides">
-      <div class="numbertext">6 / 6</div>
-      <img src="img/portfolio/fullsize/v.jpg" style="width:50%">
-    </div> 
- -->
     <!-- Next/previous controls -->
    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
     <a class="next" onclick="plusSlides(1)">&#10095;</a>
@@ -719,29 +726,21 @@ input:focus {
     </div>
 
 
-    <!-- Thumbnail image controls -->
-  
-			<div class="owl-carousel">
-		<%
-			for (int i = 0; i < imagelist.size(); i++) {
-				//System.out.println("참고용 imagelist size: "+ imagelist.size());
-			
-			%>
-				<div class="item">
-						<img src="\image\<%=imagelist.get(i).getFile_name()%>"	alt="" style="height:150px ;width: auto" onclick="currentSlide(<%=i%>)">
-						<br>
-				</div>
-			<%
-				}
-			%>
-			</div><!-- /thumbnail -->
+   
   </div> <!-- /content-modals -->
 
 </div> <!-- /modals -->
 	
 
-
-
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
+      </div>
+      <!-- /.container -->
+      
+    </footer>
+  
 <script type="text/javascript">
 	//plugin call
 	$('.owl-carousel').owlCarousel({
@@ -769,7 +768,20 @@ function openModal() {
 // Close the Modal
 function closeModal() {
   document.getElementById('myModal').style.display = "none";
+  /* if(!$(e.target).hasClass("myModal")) { 
+		document.getElementById('myModal').style.display = "none";
+		}  */
 }
+/* 
+$(document).ready(function(){
+	$('html').click(function(e) { if(!$(e.target).hasClass("myModal")) { 
+		document.getElementById('myModal').style.display = "none";
+		}  
+	}); 	
+});
+ */
+
+
 
 var slideIndex = 1;
 showSlides(slideIndex);
@@ -787,7 +799,6 @@ function currentSlide(n) {
 function showSlides(n) {
   var i;
   var ii = <%=imagelist.size() %>
-  <%//System.out.println("다시참고용 imagelist size: "+ imagelist.size()); %>
   var slides = document.getElementsByClassName("mySlides");
   var dots = document.getElementsByClassName("demo");
   var captionText = document.getElementById("caption");
