@@ -14,7 +14,12 @@
 <html>
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-
+<!-- Bootstrap core JavaScript -->
+	<script src="vendor/jquery/jquery.min.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+	<script src="vendor/scrollreveal/scrollreveal.min.js"></script>
+	<script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 <head>
 
 <meta charset="utf-8">
@@ -112,63 +117,69 @@ public String ss(String msg){
 
 
 	<!-- Portfolio Section -->
-	<div style="float: left; width: 73%">
-		<p style="margin-left: 58px; font-size: 24px; color: #ff7100">
+
+
+
+<p style="margin-left: 58px; font-size: 24px; color: #ff7100">
 			<strong>전체 맛집 리스트</strong>
 		</p>
-		<div class="row" style="margin-left: 65px; margin-right: 65px">
-			<%
-				List<RegiDto> list = (List<RegiDto>) request.getAttribute("rslist");
-
-				for (int i = 0; i < list.size(); i++) {
-			%>
-			<div class="col-lg-4 col-sm-6 portfolio-item"
-				style="height: 350px; width: 430px;">
-
-				<div class="card h-100">
-					<a href="rsdetail.do?seq=<%=list.get(i).getSeq()%>"><img
-						class="card-img-top" src="\image\<%=list.get(i).getRs_picture()%>"
-						alt=""></a>
-					<div class="card-body">
-						<h4 class="card-title">
-							<a href="rsdetail.do?seq=<%=list.get(i).getSeq()%>"><%=list.get(i).getRs_name()%>&nbsp;&nbsp;<strong><span
-									style="color: #ff792a; font-size: 1.37rem;"><%=list.get(i).getRs_rating()%></span></strong></a>
-						</h4>
-						<p class="card-text"><%=list.get(i).getRs_address1()%>
-							-
-							<%=list.get(i).getRs_category()%></p>
+		<table>
+		<col width="73%"><col width="27%">
+		<tr>
+			<td>
+				<div class="row" style="margin-left: 65px; margin-right: 65px">
+					<%
+						List<RegiDto> list = (List<RegiDto>) request.getAttribute("rslist");
+		
+						for (int i = 0; i < list.size(); i++) {
+					%>
+					<div class="col-lg-4 col-sm-6 portfolio-item"
+						style="height: 350px; width: 430px;">
+		
+						<div class="card h-100">
+							<a href="rsdetail.do?seq=<%=list.get(i).getSeq()%>"><img
+								class="card-img-top" src="\image\<%=list.get(i).getRs_picture()%>"
+								alt=""></a>
+							<div class="card-body">
+								<h4 class="card-title">
+									<a href="rsdetail.do?seq=<%=list.get(i).getSeq()%>"><%=list.get(i).getRs_name()%>&nbsp;&nbsp;<strong><span
+											style="color: #ff792a; font-size: 1.37rem;"><%=list.get(i).getRs_rating()%></span></strong></a>
+								</h4>
+								<p class="card-text"><%=list.get(i).getRs_address1()%>
+									-
+									<%=list.get(i).getRs_category()%></p>
+							</div>
+						</div>
 					</div>
+					<%
+						}
+					%>
+		
 				</div>
-			</div>
-			<%
-				}
-			%>
+			</td>
+			<td valign="top">
+				<!-- 지도 -->
+				<div style="float: left; width: 27%">
+					<div id="map" style="width: 400px; height: 500px;"></div>
+				</div>
+			</td>
+		</tr>
+		</table>
+	
 
-		</div>
-	</div>
-
-	<!-- 지도 -->
-	<div style="float: left; width: 27%">
-		<div id="map" style="width: 400px; height: 500px;"></div>
-	</div>
 
 	<br>
 
 	<!-- Footer -->
-	<!-- <footer class="py-5 bg-dark">
-			<div class="container">
+	<footer class="py-5 bg-dark" style="position: absolute; width: 100%;">
+			<div class="container" >
 				<p class="m-0 text-center text-white">Copyright &copy; Your
 					Website 2018</p>
-			</div>
-			
-		</footer> -->
 
-	<!-- Bootstrap core JavaScript -->
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-	<script src="vendor/scrollreveal/scrollreveal.min.js"></script>
-	<script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+			</div>
+	</footer>
+
+	
 </body>
 
 <%
@@ -181,7 +192,7 @@ List<ReviewParam> rplist = (List<ReviewParam>)request.getAttribute("rplist");
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 mapOption = {
 	center : new daum.maps.LatLng(37.56899, 126.97247), // 지도의 중심좌표
-	level : 3
+	level : 5
 };  
 
 //지도를 생성합니다    
@@ -231,8 +242,10 @@ geocoder[<%=j %>].addressSearch('<%=list.get(j).getRs_address1() %>', function(r
 			
 			
 			
-		});   		
+		});
+   		
 		
+   		
         
      	// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         map.setCenter(coords);
