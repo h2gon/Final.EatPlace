@@ -608,15 +608,12 @@ input:focus {
 		<%} %>
 		</label>
 		아이디 : <%=list.get(i).getId() %>	
-		<input type="text" style="width: 480px;" name="content" value="<%=list.get(i).getRs_content()%>">
+		
 		<%List<fileDto> f_list = eatReviewDao.getRv_Image(list.get(i).getRs_seq());
 		if(f_list != null){
 			System.out.println("not null");
 			for(int a = 0;a<f_list.size();a++){
 				fileName = f_list.get(a).getFile_name();
-				%>
-				<img alt="" src="/image/<%=fileName %>" style="width: 75px; height: 75px;">
-				<%
 				System.out.println("fileName:"+fileName);
 			}
 		}else if(f_list == null){
@@ -624,7 +621,9 @@ input:focus {
 		}			
 		%>
 	
-			
+		
+		<input type="text" style="width: 480px;" name="content" value="<%=list.get(i).getRs_content()%>">
+		<img alt="" src="/image/<%=fileName %>" style="width: 75px; height: 75px;">
 							 
 		 </td>	
 		 			       
@@ -635,7 +634,9 @@ input:focus {
 		<%} %>	
 		
 		<%}else{ %>
-		<%for(int i =0 ; i<5 ; i++){ %>
+		<%
+		//reviewlist more than 5----------------------------------------------------------
+		for(int i =0 ; i<list.size() ; i++){ %>
 		<tr>
 		
 		 <td style="width: 700px;">
@@ -657,16 +658,11 @@ input:focus {
 		<%} %>
 		</label>
 		아이디 : <%=list.get(i).getId() %>	
-		
-		<input type="text" style="width: 480px;" name="content" value="<%=list.get(i).getRs_content()%>">
 		<%List<fileDto> f_list = eatReviewDao.getRv_Image(list.get(i).getRs_seq());
 		if(f_list != null){
 			System.out.println("not null");
 			for(int a = 0;a<f_list.size();a++){
 			fileName = f_list.get(a).getFile_name();
-			%>
-			<img alt="" src="/image/<%=fileName %>" style="width: 75px; height: 75px;">
-			<%
 			System.out.println("fileName:"+fileName);
 			}
 		}else if(f_list == null){
@@ -676,8 +672,8 @@ input:focus {
 		
 		%>
 		
-		
-		
+		<input type="text" style="width: 480px;" name="content" value="<%=list.get(i).getRs_content()%>">
+		<img alt="" src="/image/<%=fileName %>" style="width: 75px; height: 75px;">
 		
 		
 			 

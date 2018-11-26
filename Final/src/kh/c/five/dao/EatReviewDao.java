@@ -19,4 +19,6 @@ public interface EatReviewDao {
 	public int getRvCount(ReviewParam param);
 	
 	public int getLikeCount(ReviewParam param);
+	
+	List<fileDto> getRv_Image(int rv_seq);
 }
