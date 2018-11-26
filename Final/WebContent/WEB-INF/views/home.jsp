@@ -492,14 +492,14 @@ input:focus {
             </div>
             
             
-            <!-- 회원가입 팝업창 -->
+             <!-- 회원가입 팝업창 -->
         	<div class="dropdown-item" id="mask1"></div> 
             <div class="window1">
 		   		<div class="regi">
 					<h1>회원가입</h1>
 					<br>
 					<div id="login_wrap">
-					<form action="" method="post" id="_frmForm" name="frmForm">
+					<form action="" method="post" id="_frmForm2" name="frmForm2">
 					
 					<table class="content_table" style="width: 100%">
 					<colgroup>
@@ -510,7 +510,7 @@ input:focus {
 					<tr>
 						<th>아이디 첵크</th>
 						<td>
-							<input type="text" name="sid" id="_id" class="pinput" size="40" placeholder="id"><br>
+							<input type="text" name="sid" id="_id2" class="pinput" size="40" placeholder="id"><br>
 							<a href="#none" id="_btnGetId" class="btn btn-primary btn-block btn-large" title="회원가입" style="height: 30px;">아이디체크</a>
 							<div id="_rgetid"></div>
 						</td>
@@ -521,14 +521,14 @@ input:focus {
 					<tr>
 						<th>아이디</th>
 						<td>
-							<input type="text" name="id" id="_userid" class="pinput" size="40" data-msg="아이디를 " readonly="readonly"> 
+							<input type="text" name="id" id="_userid2" class="pinput" size="40" data-msg="아이디를 " readonly="readonly"> 
 						</td>
 					</tr>
 					
 					<tr>
 						<th>패스워드</th>
 						<td>
-							<input type="text" name="pwd" id="_pwd" class="pinput" size="40" placeholder="password" data-msg="패스워드를 "> 
+							<input type="text" name="pwd" id="_pwd2" class="pinput" size="40" placeholder="password" data-msg="패스워드를 "> 
 						</td>
 					</tr>
 					
@@ -870,13 +870,13 @@ $("#_btnLogout").click(function () {
 
 
 $("#_btnRegi").click(function() {
-	if($("#_userid").val() == ""){
+	if($("#_userid2").val() == ""){
 		alert($("#_userid").attr("data-msg") + " 입력해 주십시오" );
-		$("#_id").focus();
+		$("#id").focus();
 	} 
-	else if($("#_pwd").val() == ""){
+	else if($("#_pwd2").val() == ""){
 		alert($("#_pwd").attr("data-msg") + " 입력해 주십시오" );
-		$("#_pwd").focus();
+		$("#pwd").focus();
 	} 
 	else if($("#_name").val() == ""){
 		alert($("#_name").attr("data-msg") + " 입력해 주십시오" );
@@ -891,18 +891,19 @@ $("#_btnRegi").click(function() {
 		$("#_email").focus();
 	}
 	else{
-		$("#_frmForm").attr("action", "regiAf.do").submit();
+	
+		$("#_frmForm2").attr("action", "regiAf.do").submit();
 	}
 });
 
 /* 아이디체크 */
 
 $("#_btnGetId").click(function () {
-	var id = $("#_id").val();
-	if(_id == ""){
+	var id = $("#_id2").val();
+	if(id == ""){
 		alert("아이디를 입력해 주십시오");
 	}else{
-		idCheckFunc(_id);
+		idCheckFunc(id);
 	}	
 });
 
@@ -921,7 +922,7 @@ $("#_btnGetId").click(function () {
 			else{
 				$("#_rgetid").html("사용하실 수 있습니다");
 				$("#_rgetid").css("background-color", "#0000ff");
-				$("#_userid").val( $("#_id").val() );
+				$("#_userid2").val( $("#_id2").val() );
 			}
 		}		
 	});
@@ -934,7 +935,7 @@ $("#_btnGetNickName").click(function () {
 	if(_nickname == ""){
 		alert("닉네임을 입력해 주십시오");
 	}else{
-		nicknameCheckFunc(_nickname);
+		nicknameCheckFunc(nickname);
 	}	
 });
 
