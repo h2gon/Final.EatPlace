@@ -12,11 +12,7 @@ EatMemberDto user = (EatMemberDto)session.getAttribute("login");
 %>
 <!DOCTYPE html>
 <html>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="/lib/w3.css">
-<style>
-.city {display:none}
-</style>
+
 <style>
 @use postcss-color-function;
 @use postcss-nested;
@@ -575,73 +571,133 @@ input:focus {
  <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 
   </head>
+  
+  
+  
+<!-- 최근 & 가고싶다 모달 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/lib/w3.css">
+	<style>
+	.city {display:none}
+	.pagination {
+    display: inline-block;
+}
 
-  <body class="w3-container">
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+/* .w3-container{
+	position: relative;
 
+	width: 400px;
+	
+		
+}  */
+ .w3-animate-zoom{
+	position: relative;
+	top: -45px;
+	right: -600px;
+	width: 380px;
+	height: 500px;
+}
+ .w3-padding{
+ position: absolute;
+ top:500px;
+ width: 380px;
+ 
+ 
+ }
+
+</style>
+
+<body>
+
+<!-- 가고싶어 제발 -->
+<div  class="w3-container">
 <div id="id01" class="w3-modal">
  <div class="w3-modal-content w3-card-4 w3-animate-zoom">
-  <header class="w3-container w3-blue"> 
+ <!--  <header class="w3-container w3-blue"> 
    <span onclick="document.getElementById('id01').style.display='none'" 
    class="w3-closebtn w3-padding-top">&times;</span>
    <h2>Header</h2>
-  </header>
-
-  <ul class="w3-pagination w3-white w3-border-bottom" style="width:100%;">
-   <li><a href="#" class="tablink" onclick="openCity(event, 'London')">London</a></li>
-   <li><a href="#" class="tablink" onclick="openCity(event, 'Paris')">Paris</a></li>
-   <li><a href="#" class="tablink" onclick="openCity(event, 'Tokyo')">Tokyo</a></li>
-  </ul>
-
+  </header> -->
+	
+  <ul class="pagination w3-white w3-border-bottom" style="width:100%;">
+   <li><a href="#" class="tablink" onclick="openCity(event, 'London')">최근 본 맛집</a></li>
+   <li><a href="#" class="tablink" onclick="openCity(event, 'Paris')">가고싶다</a></li>
+  </ul> 
+	<!-- 최근 본 맛집 -->
   <div id="London" class="w3-container city">
    <h1>London</h1>
-   <p>London is the capital city of England. It is the most populous city in the United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
-   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  
   </div>
-
+	<!-- 가고 싶다 -->
   <div id="Paris" class="w3-container city">
    <h1>Paris</h1>
-   <p>Paris is the capital of France.</p>
-   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-  </div>
-
-  <div id="Tokyo" class="w3-container city">
-   <h1>Tokyo</h1>
-   <p>Tokyo is the capital of Japan.</p><br>
+  
   </div>
 
   <div class="w3-container w3-light-grey w3-padding">
   
-	<button onclick="document.getElementById('id02').style.display='block'" class="w3-btn w3-green w3-large">Login</button>
+	<button onclick="document.getElementById('id02').style.display='block'"  class="w3-btn w3-green w3-large">Login</button>
     <button class="w3-btn w3-right w3-white w3-border" onclick="document.getElementById('id01').style.display='none'">Close</button>
   </div>
  </div>
 </div>
+</div>
 
-
-<div id="id02" class="w3-modal">
+<!-- 로그인 모달 -->
+<div id="id02" class="w3-modal" style="">
   <span onclick="document.getElementById('id02').style.display='none'" class="w3-closebtn w3-hover-red w3-container w3-padding-hor-8 w3-display-topright">&times;</span>
-  <div class="w3-modal-content w3-card-8 w3-animate-zoom" style="max-width:600px">
+  <div class="w3-modal-content w3-card-9 w3-animate-zoom" style="right:-10px; max-width:600px">
   
     <div class="w3-center"><br>
-      <img src="img_avatar4.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
+    	<h1>Login</h1>
+    <!--   <img src="img_avatar4.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top"> -->
     </div>
 
     <div class="w3-container">
       <div class="w3-section">
-        <label><b>Username</b></label>
-        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username">
-
-        <label><b>Password</b></label>
-        <input class="w3-input w3-border" type="text" placeholder="Enter Password">
-
-        <button class="w3-btn w3-btn-block w3-green">Login</button>
-        <input class="w3-check w3-margin-top" type="checkbox" checked="checked"> Remember me
+      	<form action="loginAf.do" name="frmForm" id="_frmForm"  method="post">
+	        <label><b>Username</b></label>
+	        <input class="w3-input w3-border w3-margin-bottom" id="_userid" required="required" type="text" placeholder="Username">
+	        <label><b>Password</b></label>
+	        <input class="w3-input w3-border" type="text" id="_pwd" required="required" placeholder="Password">
+	
+			<button class="w3-btn w3-btn-block w3-green">회원가입</button>
+			<!-- <a  class="btn btn-primary btn-block btn-large openMask1" href="#" style="text-align: center;">회원가입</a> -->
+	        <button type="submit" class="w3-btn w3-btn-block w3-green" id="_btnLogin" style="text-align: center;">로그인</button>
+	                
+	        <!-- <input class="w3-check w3-margin-top" type="checkbox" checked="checked"> Remember me -->
+        	<a  class="dropdown-item" id="kakao-login-btn"></a>
+       	</form>
       </div>
     </div>
+    
+    
+	
+<%-- 
+ <div class="dropdown-item popbody" id="mask"></div> 
+            <div class="window">
+		   		<div class="login">
+					<h1>Login</h1>
+					<br>
+					<form action="loginAf.do" name="frmForm" id="_frmForm"  method="post">
+					     <input type="text" name="id" class="pinput" placeholder="Username" id="_userid" required="required" />
+					     <input type="password" name="pwd" class="pinput" placeholder="Password" id="_pwd" required="required" />
+					     <button type="submit" class="btn btn-primary btn-block btn-large" id="_btnLogin" style="text-align: center;">로그인</button>
+		               	 <a  class="btn btn-primary btn-block btn-large openMask1" href="#" style="text-align: center;">회원가입</a>
+		               	 <a  class="dropdown-item" id="kakao-login-btn"></a>
+					 </form>
+				</div>
+            </div> --%>
 
     <div class="w3-container w3-border-top w3-padding-hor-16 w3-light-grey">
       <button onclick="document.getElementById('id02').style.display='none'" type="button" class="w3-btn w3-red">Cancel</button>
-       	 <a  class="dropdown-item" id="kakao-login-btn"></a>
+       
       <span class="w3-right w3-padding w3-hide-small">Forgot <a href="#">password?</a></span>
     </div>
 
@@ -666,37 +722,6 @@ function openCity(evt, cityName) {
 }
 </script>
 
-
-
-<!-- Modal -->
-<!-- 
-<div class="modal fade" id="my80sizeModal" tabindex="-1" role="dialog" aria-labelledby="my80sizeModalLabel">
-  <div class="modal-dialog modal-80size" role="document">
-    <div class="modal-content modal-80size">
-      <div class="modal-header" id="tabLayout">
-       
-  		    <ul>
-		        탭 타이틀에 해당되는 부분 
-		        <li><a href="#tab1">최초탭</a></li>
-		        <li><a href="#tab2">두번째탭</a></li>
-		    </ul>
-      </div>
-      <div class="modal-body">
-      		 첫번째 탭내용
-		    <div id="tab1">탭기능은 아코디언을 가로로 만든거 같네요</div>
-		    두번째 탭내용
-		    <div id="tab2">탭이나 아코디언을 사용하면 내용을 구분하여 출력하는것이 가능합니다.</div>
-      	
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-
-
    <!-- Navigation -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark fixed-top"
 		style="background-color: #c53211; padding-bottom: 10px">
@@ -720,17 +745,10 @@ function openCity(evt, cityName) {
 						href="restaurantsInsert.do"><strong
 							style="color: white; margin-left: 20px">맛집 추가</strong></a></li>
 					<li class="nav-item" style="margin-left: 20px">
-						<a class="nav-link openMask2" href="home.do">
+						<a onclick="document.getElementById('id01').style.display='block'" class="w3-btn">
 						<img alt=""	src="img/main/man-user.png">
 						</a>
 					</li>
-					
-		<button onclick="document.getElementById('id01').style.display='block'" class="w3-btn">Open Tabbed Modal</button>
-					
-				<!-- modal 구동 버튼 (trigger) -->
-<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#my80sizeModal">
-  80%size Modal
-</button> -->
 
 					
  			<%--  <!-- 가고싶다 팝업창 및 로그인  -->
@@ -1154,6 +1172,8 @@ function search() {
 	  
 	  
 }
+$())
+
     
 $("#_btnLogin").click(function () {
 	 /* location.href = "login.do";  */
