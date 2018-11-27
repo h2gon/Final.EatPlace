@@ -71,6 +71,32 @@ input:focus {
 
 /*----------- 로그인 팝업창------ */  
 /* 마스크 뛰우기 */
+#mask2 {  
+    position:absolute;  
+    z-index:9000;  
+    background-color:#000;  
+    display:none;  
+    left:0;
+    top:0;
+} 
+/* 팝업으로 뜨는 윈도우 css  */ 
+.window2 {
+    display: none;
+    position:absolute;  
+    top:50px;
+    right:20px;
+
+    width:300px;
+    height:500px;
+    background-color:#FFF;
+    z-index:10000;   
+    
+    font-family: 'Open Sans', sans-serif;
+ 
+ }      
+
+/*----------- 로그인 팝업창------ */  
+/* 마스크 뛰우기 */
 #mask {  
     position:absolute;  
     z-index:9000;  
@@ -169,6 +195,105 @@ input:focus {
 }
 .gologin h1 { color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
 
+.gologin_main{
+	width: 270px;
+	height: 60px;
+	border: 1px solid blue;
+}
+
+
+
+///
+
+.css-tabs
+{
+    position:relative;
+    text-align:center; /* This is only if you want the tab items at the center */
+}
+.css-tabs ul.menu
+{
+    list-style-type:none;
+    display:inline-block; /* Change this to block or inline for non-center alignment */
+}
+.css-tabs ul.menu > li
+{
+    display:block;
+    float:left;
+
+}
+.css-tabs ul.menu li > a
+{
+    color:#000;
+    text-decoration:none;
+    display:block;
+    text-align:center;
+    width:125px;
+    height: 60px;
+    border:1px solid #808080;
+   	padding:5px 5px 5px 5px;
+    margin-right:5px;
+    border-top-left-radius:5px; -moz-border-radius-topleft:4px; -webkit-border-top-left-radius:5px;
+    border-top-right-radius:5px; -moz-border-radius-topright:4px; -webkit-border-top-right-radius:5px;
+    -moz-user-select:none;
+    cursor:pointer;
+}
+.css-tabs ul.menu li > div
+{
+    display:none;
+    position:absolute;
+    
+    width:100%;
+    left:0;
+    margin: 0 0 0 0;
+    z-index:-1;
+    text-align:left;
+    padding:0;
+}
+.css-tabs ul.menu li > div > p
+{	
+	height: 380px;
+    border:1px solid #808080;
+ 	padding:10px;
+    margin:0;
+}
+.css-tabs ul.menu li > a:focus
+{
+    border-bottom:1px solid #fff;
+}
+.css-tabs ul.menu li:target > a
+{
+    cursor:default;
+    border-bottom:1px solid #fff;
+}
+
+.css-tabs ul.menu li:target > div
+{
+    display:block;
+}
+.gologin_bottom{
+	top: 440px;
+	width: 300px;
+	height: 60px;
+	border: 1px solid black;
+}
+
+////
+
+.gologin_container{
+	width: 270px;
+	height: 360px;
+	border: 1px solid blue;
+}
+
+
+.gologin_bottom{
+	top: 440px;
+	width: 300px;
+	height: 60px;
+	border: 1px solid blue;
+}
+
+
 .login { 
     position: absolute;
     top: 200px;
@@ -266,50 +391,48 @@ input:focus {
 
 
 
-
-
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript"> 
 //<![CDATA[
 	
 	////////////
-	 function wrapWindowByMask3(){
- 
+	 function wrapWindowByMask2(){
+    	 
         //화면의 높이와 너비를 구한다.
         var maskHeight = $(document).height();  
         var maskWidth = $(window).width();  
  
         //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
-        $("#mask3").css({"width":maskWidth,"height":maskHeight});  
+        $("#mask2").css({"width":maskWidth,"height":maskHeight});  
  
         //애니메이션 효과 - 일단 0초동안 까맣게 됐다가 60% 불투명도로 간다.
  
-        $("#mask3").fadeIn(0);      
-        $("#mask3").fadeTo("slow",0.6);    
+        $("#mask2").fadeIn(0);      
+        $("#mask2").fadeTo("slow",0.6);    
  
         //윈도우 같은 거 띄운다.
-        $(".window3").show();
+        $(".window2").show();
  
     }
- 
+    
     $(document).ready(function(){
         //검은 막 띄우기
-        $(".openMask3").click(function(e){
+        $(".openMask2").click(function(e){
             e.preventDefault();
-            wrapWindowByMask3();
+            wrapWindowByMask2();
         });
  
         //닫기 버튼을 눌렀을 때
-        $(".window3 .close").click(function (e) {  
+        $(".window2 .close").click(function (e) {  
             //링크 기본동작은 작동하지 않도록 한다.
             e.preventDefault();  
-            $("#mask3, .window3").hide();  
+            $("#mask2, .window1").hide();  
         });       
  
         //검은 막을 눌렀을 때
-        $("#mask3").click(function () {  
+        $("#mask2").click(function () {  
             $(this).hide();  
-            $(".window3").hide();  
+            $(".window2").hide();  
  
         });      
  
@@ -432,47 +555,72 @@ input:focus {
   <body>
 
    <!-- Navigation -->
-     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <div class="container">
-        <a class="navbar-brand" href="index.html">EAT PLACE</a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="about.html">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="restaurntsList.do">맛집 리스트</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="restaurantsInsert.do">맛집 추가</a>
-            </li>
-            <li class="nav-item" style="margin-left: 20px">
-            	<a class="nav-link openMask3" href="#">
-            		<img alt=""	src="img/main/man-user.png">
-				</a>
-			</li>
-			
- 			<li class="nav-item">
- 		
- 				  <%if(user == null){%>
-					
-						<a class="nav-link openMask" href="#">로그인</a>
-						<%} else{%>
-						<a class="nav-link" href="#" ><%=user.getId()%>님</a>
-						<a id="_btnLogout" class="nav-link" href="logout.do" > 로그아웃 </a>
-				<%} %>	
- 				  
- 			</li>  
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark fixed-top"
+		style="background-color: #c53211; padding-bottom: 10px">
+		<div class="container">
+			<a class="navbar-brand" href="home.do">EAT PLACE</a>
+			<button class="navbar-toggler navbar-toggler-right" type="button"
+				data-toggle="collapse" data-target="#navbarResponsive"
+				aria-controls="navbarResponsive" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		</div>
+
+		<div class="container">
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item"><a class="nav-link" href="about.html"><strong
+							style="color: white; margin-left: 20px">About</strong></a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="restaurntsList.do"><strong
+							style="color: white; margin-left: 20px">맛집 리스트</strong></a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="restaurantsInsert.do"><strong
+							style="color: white; margin-left: 20px">맛집 추가</strong></a></li>
+					<li class="nav-item" style="margin-left: 20px">
+						<a class="nav-link openMask2" href="home.do#item-1">
+						<img alt=""	src="img/main/man-user.png">
+						</a>
+					</li>
  			 <!-- 가고싶다 팝업창 및 로그인  -->
-           <div class="dropdown-item popbody" id="mask3"></div> 
-            <div class="window3">
-		   		<div class="gologin">
-					
+          <div class="dropdown-item popbody" id="mask2"></div> 
+          	  <div class="window2" >
+          	  
+				<div id="tab2" class="css-tabs">
+				    <ul class="menu">
+				    <li id="item-1">
+				        <a href="#item-1">최근 본 맛집</a>
+				        <div>
+				        	<p>최근 본 맛집</p>
+				        </div>
+				        <div class="gologin_bottom">	
+	 				  	<%if(user == null){%>
+							<a class=" openMask" href="#">로그인</a>
+						<%} else{%>
+							<a class="" href="#" ><%=user.getId()%>님</a>
+							<a id="_btnLogout" class="" href="logout.do" > 로그아웃 </a>
+						<%} %>
+						</div>
+				    </li>
+				    <li id="item-2">
+				        <a href="#item-2">가고 싶다</a>
+				        <div>
+				        	<p>가고 싶다</p>
+				        </div>
+				    	<div class="gologin_bottom">	
+	 				  	<%if(user == null){%>
+							<a class="openMask" href="#">로그인</a>
+						<%} else{%>
+							<a class="" href="#" ><%=user.getId()%>님</a>
+							<a id="_btnLogout" class="" href="logout.do" > 로그아웃 </a>
+						<%} %>
+						</div>  
+				        
+				    </li>
+				    
+				    </ul> 
 				</div>
-            </div>
             
  			     
         <!-- 로그인 팝업참 -->
