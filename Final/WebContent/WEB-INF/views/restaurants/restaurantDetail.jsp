@@ -274,6 +274,10 @@ input:focus {
     }
 
 </style>
+
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7b79e9996c3bab29b8e5285b04135813&libraries=services"></script>
+
 </head>
 <body>
 
@@ -467,13 +471,9 @@ input:focus {
 				<div style="float: left;width: 10%">
 					<p>  </p>
 				</div>
-				<div style="float: left; width: 30%">
-					<div class="map-container daum_map_wrap">
-
-						<img class="naver_static_map"
-							src="https://openapi.naver.com/v1/map/staticmap.bin?clientId=_arHno93XUB1pXRNOA9w&amp;url=https%3A%2F%2Fwww.mangoplate.com%2Frestaurants%2FRpNZ-7AuSDm5&amp;center=126.9778416,37.5512226&amp;level=10&amp;w=400&amp;h=328&amp;baselayer=default"
-							alt="naver_map_image">
-					</div>
+				
+				<div style="float: left; width: 30%">					
+						<div id="map" style="width: 400px; height: 450px;"></div>
 				</div>
 				
 				</header>
@@ -739,7 +739,7 @@ input:focus {
       </div>
       <!-- /.container -->
       
-    </footer>
+    </footer>    
   
 <script type="text/javascript">
 	//plugin call
@@ -819,5 +819,54 @@ function showSlides(n) {
   captionText.innerHTML = dots[slideIndex-1].alt;
 }
 	</script>
+
+<script>
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		    mapOption = {
+		        center: new daum.maps.LatLng(37.56682, 126.97865), // 지도의 중심좌표
+		        level: 4, // 지도의 확대 레벨
+		        mapTypeId : daum.maps.MapTypeId.ROADMAP // 지도종류
+		    }; 
+
+		// 지도를 생성한다 
+		var map = new daum.maps.Map(mapContainer, mapOption); 
+		
+		// 마우스 드래그와 모바일 터치를 이용한 지도 이동을 막는다
+		map.setDraggable(false);		
+
+		// 마우스 휠과 모바일 터치를 이용한 지도 확대, 축소를 막는다
+		map.setZoomable(false);   
+
+		// 지도에 마커를 생성하고 표시한다
+		var marker = new daum.maps.Marker({
+		    position: new daum.maps.LatLng(37.56682, 126.97865), // 마커의 좌표
+		    map: map // 마커를 표시할 지도 객체
+		});
+		
+		// 주소-좌표 변환 객체를 생성합니다
+		var geocoder = new daum.maps.services.Geocoder();
+
+		// 주소로 좌표를 검색합니다
+		geocoder.addressSearch('${rs.rs_address1 }', function(result, status) {
+
+		    // 정상적으로 검색이 완료됐으면 
+		     if (status === daum.maps.services.Status.OK) {
+
+		        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+
+		        // 결과값으로 받은 위치를 마커로 표시합니다
+		        var marker = new daum.maps.Marker({
+		            map: map,
+		            position: coords
+		        });
+
+		        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+		        map.setCenter(coords);
+		    }
+		});
+
+		
+</script>	
+	
 </body>
 </html>

@@ -192,7 +192,7 @@ List<ReviewParam> rplist = (List<ReviewParam>)request.getAttribute("rplist");
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 mapOption = {
 	center : new daum.maps.LatLng(37.56899, 126.97247), // 지도의 중심좌표
-	level : 5
+	level : 4
 };  
 
 //지도를 생성합니다    
