@@ -58,8 +58,8 @@
 
 </head>
 <body>
- <!-- Navigation -->
-     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+ <!-- <!-- Navigation -->
+    <!--  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
         <a class="navbar-brand" href="index.html">Start Bootstrap</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,7 +86,7 @@
 				
                 <div  class="dropdown-menu dropdown-menu-right" id="kakao_btn_changed" aria-labelledby="navbarDropdownPortfolio">
 					<a  class="dropdown-item" href="regi.do" style="text-align: center;">regi</a>
-					<!-- href="javascript:loginWithKakao()" -->
+					href="javascript:loginWithKakao()"
 					<a  class="dropdown-item" id="kakao-login-btn">	
 					</a>
 				</div>				
@@ -94,9 +94,9 @@
           </ul>
         </div>
       </div>
-    </nav>
+    </nav> --> 
 	
-	<section>
+	<!-- <section>
 		<div class="container" style="    padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
@@ -106,7 +106,7 @@
     ">
 					<div class="left-sidebar">
 						<h2>Category</h2>
-						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
+						<div class="panel-group category-products" id="accordian">category-productsr
 							
 							<div class="panel panel-default">
 								<div class="panel-heading">
@@ -133,10 +133,10 @@
 									<h4 class="panel-title"><a href="GetOut.jsp">회원탈퇴</a></h4>
 								</div>
 							</div>																					
-						</div><!--/category-products-->
+						</div>/category-products
 	</div>
-</div>
-	
+</div> -->
+	<br><br>
 	<div id="contact-page" class="container" style="width: 970px;padding-right: 15px; padding-left: 15px; margin-right: auto; margin-left: auto;">
 		<h2 class="title text-center" style="color: #86c4f0; font-family: 'Roboto', sans-serif;
     font-size: 18px;
@@ -324,7 +324,7 @@
     }
 </script>
 	
-		<!--/sign up form-->
+<%-- 		<!--/sign up form-->
 
 
 <footer id="footer">
@@ -355,7 +355,7 @@
 								<li><a href="contact-us.jsp">Notice</a></li>
 							</ul>
 							<ul class="nav nav-pills nav-stacked">
-						<%-- 	<%
+							<%
 							if(user==null){
 								%>
 								<li class="log"><a href="contact-us.jsp">My Page</a></li>
@@ -365,7 +365,7 @@
 								<li><a href="Mypage.jsp?id='<%=user.getId()%>'">My Page</a></li>
 							<%
 							}
-							%> --%>
+							%>
 							</ul>
 						</div>
 					</div>
@@ -395,15 +395,7 @@
 			</div>
 		</div>
 		
-		<div class="footer-bottom">
-			<div class="container">
-				<div class="row">
-					<p class="pull-left">Copyright © 2018 AMORE Inc. All rights reserved.</p>
-					<p class="pull-right">Designed by illjoe</p>
-				</div>
-			</div>
-		</div>
-		
+	 --%>	
 	<!-- </footer>/Footer<a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: none;"><i class="fa fa-angle-up"></i></a> -->
 
 
