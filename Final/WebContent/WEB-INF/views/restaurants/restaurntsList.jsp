@@ -48,6 +48,44 @@
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7b79e9996c3bab29b8e5285b04135813&libraries=services"></script>
 
+
+<!-- SEARCH -->
+<style>
+   
+    .in-line{
+      width:900px;	
+      height:42px; 
+    }
+   
+    input[type="text"]{
+      width:70%;
+      height:100%;
+      border:none;
+      font-size:1.213rem;
+      padding-left: 20px;
+      font-style: oblique;
+      display:inline;
+      outline:none;
+      box-sizing: border-box;
+      color:black;
+
+    }
+    input[type=button]{
+      width: 30%;
+      height:100%;
+      background-color: lightgray;
+      border:none;
+      background-color: white;
+      font-size:1.313rem;
+      color:#042AaC;
+      outline:none;
+      display:inline;
+      margin-left: -25px;
+      box-sizing: border-box;
+    }
+ 
+  </style>
+
 </head>
 
 <body>
@@ -82,7 +120,7 @@ public String ss(String msg){
 	<!-- Navigation -->
 	<nav class="navbar fixed-top navbar-expand-lg navbar-dark fixed-top"
 		style="background-color: #c53211; padding-bottom: 10px">
-		<div class="container">
+		<div class="container" style="float: left; width: 20%">
 			<a class="navbar-brand" href="home.do">EAT PLACE</a>
 			<button class="navbar-toggler navbar-toggler-right" type="button"
 				data-toggle="collapse" data-target="#navbarResponsive"
@@ -91,12 +129,20 @@ public String ss(String msg){
 				<span class="navbar-toggler-icon"></span>
 			</button>
 		</div>
-
-		<div class="container">
-			<div class="collapse navbar-collapse" id="navbarResponsive">
+		
+		<div style="float: left; width: 60%">
+		<form action="" id="main-search" name="main-search" method="get"> 
+ 			 <div class="in-line">
+		      <strong><input type="text" onkeypress="if(event.keyCode==13) {search();}"  id="main-keyword" name="s_keyword" value="" placeholder="지역, 식당 또는 음식" style="color: #575756; border-bottom-left-radius: 20px; border-top-left-radius: 20px"></strong>
+		      <strong><input type="button" onclick="search()"  value="검색" style="border-bottom-right-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-top-left-radius: 20px; background-color: darkorange; color: white;"></strong>
+		     </div>
+		</form>
+		</div>
+		
+		<div class="container" style="float: left; width: 20%">
+			<div class="collapse navbar-collapse" id="navbarResponsive">				
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" href="about.html"><strong
-							style="color: white; margin-left: 20px">About</strong></a></li>
+					
 					<li class="nav-item"><a class="nav-link"
 						href="restaurntsList.do"><strong
 							style="color: white; margin-left: 20px">맛집 리스트</strong></a></li>
@@ -186,6 +232,24 @@ public String ss(String msg){
 List<ReviewParam> rplist = (List<ReviewParam>)request.getAttribute("rplist");
 
 %>
+
+<script type="text/javascript">
+function search() {
+	
+	  var keyword = $("#main-keyword").val();
+	  if (keyword == "" || keyword == null) {
+		alert("검색어를 입력해주세요")
+		
+	}else{
+		alert("main-keyword = " + keyword);
+		
+		$("#main-search").attr({"target":"_self", "action":"search.do"}).submit();
+	}
+	
+	  
+	  
+}
+</script>
 
 <script>
 

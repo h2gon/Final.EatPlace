@@ -569,9 +569,7 @@ input:focus {
 
 		<div class="container">
 			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" href="about.html"><strong
-							style="color: white; margin-left: 20px">About</strong></a></li>
+				<ul class="navbar-nav ml-auto">					
 					<li class="nav-item"><a class="nav-link"
 						href="restaurntsList.do"><strong
 							style="color: white; margin-left: 20px">맛집 리스트</strong></a></li>
