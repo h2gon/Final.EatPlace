@@ -282,60 +282,37 @@ input:focus {
 <body>
 
     <!-- Navigation -->
-     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <div class="container">
-        <a class="navbar-brand" href="home.do">EAT PLACE</a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="about.html">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="restaurntsList.do">맛집 리스트</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="restaurantsInsert.do">맛집 추가</a>
-            </li>
- 			<li>
- 				  <a href="#" class="openMask">로그인</a>
- 			</li>       
-        <!-- 로그인 팝업참 -->
-            <div class="dropdown-item" id="mask"></div>
-            <div class="window">
-				<table style="width: 100%">
-				<tr>
-					<td style="align-content: center;">
-						<input type="text" id="_userid" name="id" value="" data-msg="ID를 " 
-										size="15" title="아이디" style="border: 1px solid #dddddd;">
-					</td>
-				
-				</tr>
-				<tr>
-					<td>
-						<input type="text" id="_pwd" name="pwd" value="" data-msg="패스워드를 " 
-										size="15" title="패스워드" style="border: 1px solid #dddddd;">
-					</td>
-				
-				</tr>
-				<tr>
-					<td>
-						<a  class="dropdown-item" id="kakao-login-btn">	
-						 <a  class="dropdown-item" href="login.do" style="text-align: center;">로그인</a>
-               			 <a  class="dropdown-item" href="regi.do" style="text-align: center;">회원가입</a>
-					</td>
-				</tr>
-	
-				</table>
-				
-            </div>
-        
-          </ul>
-        </div>
-      </div>
-    </nav>
+	<nav class="navbar fixed-top navbar-expand-lg navbar-dark fixed-top"
+		style="background-color: #c53211; padding-bottom: 10px">
+		<div class="container">
+			<a class="navbar-brand" href="home.do">EAT PLACE</a>
+			<button class="navbar-toggler navbar-toggler-right" type="button"
+				data-toggle="collapse" data-target="#navbarResponsive"
+				aria-controls="navbarResponsive" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		</div>
+
+		<div class="container">
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item"><a class="nav-link" href="about.html"><strong
+							style="color: white; margin-left: 20px">About</strong></a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="restaurntsList.do"><strong
+							style="color: white; margin-left: 20px">맛집 리스트</strong></a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="restaurantsInsert.do"><strong
+							style="color: white; margin-left: 20px">맛집 추가</strong></a></li>
+					<li class="nav-item" style="margin-left: 20px"><a
+						class="nav-link openMask" href="#"> <img alt=""
+							src="img/main/man-user.png">
+					</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 	<%
 	List<ReviewDto> rvlist = (List<ReviewDto>)request.getAttribute("reviewlist"); //이거 나중에 리뷰랑 합치고 리뷰에서 불러오는거 지우면 됩니다
 	List<fileDto> imagelist = (List<fileDto>) request.getAttribute("imagelist");
