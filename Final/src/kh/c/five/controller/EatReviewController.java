@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -144,16 +145,19 @@ public class EatReviewController {
 		return "redirect:/home.do";
 	}
 	
-	
+	@ResponseBody
 	@RequestMapping(value="getRPdetail.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String getRPdetail(fileDto fdto, Model model) {
 		logger.info("EatReviewController RP"+new Date());
-		// 디테일 페이지에서 다음/그 전 이미지 누를 때마다 레스토랑 시퀀스, 파일이름 들어간 filedto 넘겨줘야함 
+		logger.info(fdto.toString());
+		
 		
 		ReviewDto review = eatReviewService.getReviewWPic(fdto);
+		String rcontent=review.getRs_content();
 		model.addAttribute("review",review);
+		System.out.println(rcontent);
+		return rcontent;
 		
-		return "redirect:/rs.detail.do";
 	}
 
 }

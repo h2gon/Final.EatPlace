@@ -21,7 +21,7 @@ alter table eat_restaurant modify (rs_menu varchar2(4000));
 
 select * from eat_restaurant
 select * from restaurant_review
-select * from RS_FILE
+select * from RESTAURANT_INFO
 select count(*) from RESTAURANT_REVIEW where rs_seq=23
 SELECT COUNT (*) FROM RESTAURANT_LIKES where RS_SEQ=23
 select * from restaurant_review where rs_seq=23

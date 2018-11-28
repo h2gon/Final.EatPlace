@@ -14,7 +14,8 @@ public class RegiDto implements Serializable {
 	private String rs_time; //영업시간
 	private int rs_rating; //별점
 	private int rs_readcount; //조회수
-	private int rs_parking; //주차장시설이 있다 ->1 주차장시설이 없다 ->0
+	private String rs_parking;
+	//private int rs_parking; //주차장시설이 있다 ->1 주차장시설이 없다 ->0
 	private String rs_price; //메뉴에 대한 가격
 	private String rs_phone; //연락처
 	private String rs_keyword; //키워드
@@ -22,7 +23,7 @@ public class RegiDto implements Serializable {
 	public RegiDto() {}
 
 	public RegiDto(int seq, String rs_name, String rs_address1, String rs_address2, String rs_picture,
-			String rs_category, String rs_menu, String rs_time, int rs_rating, int rs_readcount, int rs_parking,
+			String rs_category, String rs_menu, String rs_time, int rs_rating, int rs_readcount, String rs_parking,
 			String rs_price, String rs_phone, String rs_keyword) {
 		super();
 		this.seq = seq;
@@ -121,11 +122,11 @@ public class RegiDto implements Serializable {
 		this.rs_readcount = rs_readcount;
 	}
 
-	public int getRs_parking() {
+	public String getRs_parking() {
 		return rs_parking;
 	}
 
-	public void setRs_parking(int rs_parking) {
+	public void setRs_parking(String rs_parking) {
 		this.rs_parking = rs_parking;
 	}
 

@@ -952,7 +952,7 @@ function openCity(evt, cityName) {
         <div class="col-lg-4 col-sm-6 portfolio-item" style="height: 400px; width: 430px;">
         
           <div class="card h-100">
-            <a href="rsdetail.do?seq=<%=RankList.get(i).getSeq() %>"><img class="card-img-top" src="\image\<%=RankList.get(i).getRs_picture() %>" alt=""></a>
+            <a href="rsdetail.do?seq=<%=RankList.get(i).getSeq() %>"><img class="card-img-top" src="<%=RankList.get(i).getRs_picture() %>" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
                 <a href="rsdetail.do?seq=<%=RankList.get(i).getSeq() %>"><%=RankList.get(i).getRs_name() %>&nbsp;&nbsp;<strong><span style="color:#ff792a; font-size: 1.37rem;"><%=RankList.get(i).getRs_rating() %></span></strong></a>

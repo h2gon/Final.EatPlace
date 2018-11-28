@@ -341,6 +341,7 @@ input:focus {
 				<!-- 레스토랑 상세 -->
 				<section class="restaurant-detail"> 
 				
+				
 				<header>
 				
 				
@@ -350,7 +351,7 @@ input:focus {
 				<div style="float: left; width: 60%">
 					<span class="title">
 						<font size="26" color="#000000">${rs.rs_name }</font>
-						
+						<input type="hidden" value="${rs.seq }" id="rs_seq">
 						
 					</span>
 	
@@ -419,12 +420,12 @@ input:focus {
 							<tr style="text-align: left; color:#4f4f4f">
 								<th style="width: 30%">주차</th>
 								<td>
-								<c:if test="${rs2.rs_parking eq 0}">
-								주차 불가
-								</c:if>
-								<c:if test="${rs2.rs_parking eq 1}">
-								주차 가능
-								</c:if>
+								<c:if test="${null eq rs2.rs_parking}">
+								정보 없음
+								</c:if> 
+								<c:if test="${not empty rs2.rs_parking}">
+								${rs2.rs_parking }
+								</c:if> 
 								
 								</td>
 							</tr>
@@ -459,9 +460,11 @@ input:focus {
 
 				</section>
 			<!-- 리뷰 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~REVIEW~~~~~~~~~~~~~~~~~~~~~~~~-->
+
 		 <%          
          // EatReviewService eatReviewService ;
-		  EatReviewDao eatReviewDao = EatReviewDaoImpl.getInstance();
+
+		 EatReviewDao eatReviewDao = EatReviewDaoImpl.getInstance();
                   
           List<ReviewDto> list = (List<ReviewDto>)request.getAttribute("reviewlist");
           
@@ -496,7 +499,6 @@ input:focus {
                   
                     
           %>
-		
 				
 		<hr>
 		<section class="module review-container">
@@ -524,7 +526,12 @@ input:focus {
           </section>
           
          
-         
+		
+<!-- <table>
+	<tr>
+		<td></td>
+	</tr>
+</table> -->         
 		<div class="review_main">
 		
 		
@@ -676,6 +683,7 @@ input:focus {
 				
 			<a href="\image\<%=imagelist.get(i).getFile_name()%>" target="myFrame">	
 				<img class="_fvalue1" src="\image\<%=imagelist.get(i).getFile_name()%>"	
+				
 					<%-- alt="이미지없음" style="height:150px ;width: auto" onclick="currentSlide(<%=i+1%>)" --%>
 					alt="이미지없음" style="height:150px; width: auto" >
 			</a>
@@ -688,7 +696,7 @@ input:focus {
 	</div><!-- /thumbnail -->
 
 <div style="background-color: white; height: auto">
-   <p>tests</p>
+   <p id="revCont">tests</p>
    </div>
 
     <!-- Next/previous controls -->
@@ -707,26 +715,50 @@ input:focus {
 </div> <!-- /modals -->
 	
 
-    <!-- Footer -->
-    <footer class="py-5 bg-dark">
-      <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
-      </div>
-      <!-- /.container -->
       
-    </footer>    
   
 <script type="text/javascript">
 
-$("._fvalue1").on("click", function () {		
+$("._fvalue1").on("click", function () {
 //	alert("click");
 	var pic_link=$(this).attr("src");
-//	alert(pic_link);
+	alert(pic_link);
+	var filename=pic_link.substring(7);
+//	alert(filename);
 //	alert($(this).attr("src"));
 	$('#myframe').attr("src",pic_link);
 	showSlides(slideIndex = <%=imagelist.size() %>);
+	
 
+
+	
+var rs_seq=$("#rs_seq").val();
+var file_name=$(this).attr("src"); 
+ 	var revData={
+			//int seq, String o_name, String file_name, long file_size, int rs_seq
+			seq: 120, //temp
+			o_name: null,
+			file_name: filename,
+			file_size: 1231540, //temp
+			rs_seq: $("rs.seq").val()
+	};
+	$.ajax({
+		dataType: 'json',
+		url:"getRPdetail.do",
+		data: revData,
+		type:'post',
+		success:function(data){
+			alert("success");
+	//		alert(rcontent);
+			
+		},
+		error:function(req, stu, err){
+			alert("error");
+		}
+	}); 
+ 	
 });
+
 $("._fvalue").on("click", function () {		
 //	alert("click");
 	var pic_link=$(this).attr("src");
@@ -754,6 +786,8 @@ $("._fvalue").on("click", function () {
 			}
 		}
 	});
+	
+	
 	//lightbox
 	// Open the Modal
 function openModal() {
