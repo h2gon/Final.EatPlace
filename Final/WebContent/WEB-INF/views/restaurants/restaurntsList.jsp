@@ -5,7 +5,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <fmt:requestEncoding value="UTF-8" />
@@ -188,8 +188,8 @@ public String ss(String msg){
 								alt=""></a>
 							<div class="card-body">
 								<h4 class="card-title">
-									<a href="rsdetail.do?seq=<%=list.get(i).getSeq()%>"><%=list.get(i).getRs_name()%>&nbsp;&nbsp;<strong><span
-											style="color: #ff792a; font-size: 1.37rem;"><%=list.get(i).getRs_rating()%></span></strong></a>
+									<a href="rsdetail.do?seq=<%=list.get(i).getSeq()%>"><%=list.get(i).getRs_name()%></a>&nbsp;&nbsp;<strong><span
+											style="color: #ff792a; font-size: 1.37rem;"><c:choose><c:when test="<%=list.get(i).getRs_rating()%> == null">0</c:when><c:when test="<%=list.get(i).getRs_rating()%> != null"><%=list.get(i).getRs_rating()%></c:when></c:choose></span></strong>
 								</h4>
 								<p class="card-text"><%=list.get(i).getRs_address1()%>
 									-
