@@ -226,7 +226,7 @@ public class EatRestaurantsController {
 			
 			RegiDto dto = (RegiDto) eatRestaurantsService.getSearchPagingList(seqlist.get(i));
 			searchlist.add(dto);
-			System.out.println(searchlist.get(i).toString());
+			
 		}
 		int totalRecordCount = eatRestaurantsService.getSearchCount(param);
 		
@@ -234,7 +234,7 @@ public class EatRestaurantsController {
 		model.addAttribute("searchlist", searchlist);
 		
 		model.addAttribute("pageNumber", sn);
-		model.addAttribute("pageCountPerScreen", 10);	
+		model.addAttribute("pageCountPerScreen", 9);	
 		model.addAttribute("recordCountPerPage", param.getRecordCountPerPage());
 		model.addAttribute("totalRecordCount", totalRecordCount);
 		
@@ -248,10 +248,10 @@ public class EatRestaurantsController {
 	}
 	
 	@RequestMapping(value="category.do",  method={RequestMethod.GET, RequestMethod.POST})
-	public String category(String category, EatParam param, Model model) {
+	public String category(String s_category, EatParam param, Model model) {
 		
-		System.out.println("category : "+category);
-		param.setS_category(category);
+		System.out.println("category : "+s_category);
+		param.setS_category(s_category);
 		System.out.println("param: "+param.toString());
 		
 		// paging 처리
@@ -263,17 +263,26 @@ public class EatRestaurantsController {
 		param.setEnd(end);
 		
 		List<RegiDto> searchlist =eatRestaurantsService.getCategoryList(param);
+		
 		int totalRecordCount = eatRestaurantsService.getCategoryCount(param);
+		System.out.println("totalRecordCount = "+totalRecordCount);
+		for (int i = 0; i < searchlist.size(); i++) {
+			System.out.println(searchlist.get(i).toString());
+			
+		}
 		
 		model.addAttribute("searchlist", searchlist);
 		
 		model.addAttribute("pageNumber", sn);
-		model.addAttribute("pageCountPerScreen", 10);	
+		model.addAttribute("pageCountPerScreen", 9);	
 		model.addAttribute("recordCountPerPage", param.getRecordCountPerPage());
 		model.addAttribute("totalRecordCount", totalRecordCount);
 		
 		
 		//model.addAttribute("s_keyword",param.getS_keyword());
+		
+		model.addAttribute("s_category",param.getS_category());
+		
 		
 		return "restaurants/restaurntsSearchList";
 	}

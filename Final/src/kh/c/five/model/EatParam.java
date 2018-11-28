@@ -9,11 +9,11 @@ public class EatParam implements Serializable {
 		private String s_keyword;	// 검색어
 		
 		// ----------- paging
-		private int recordCountPerPage = 10;	// 표현할 한페이지의 글수
+		private int recordCountPerPage = 9;	// 표현할 한페이지의 글수
 		private int pageNumber = 0;				// 페이지 넘버
 		
 		private int start = 1;
-		private int end = 10;
+		private int end = 9;
 		
 		public EatParam() {		
 		}

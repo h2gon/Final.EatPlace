@@ -69,6 +69,29 @@ public String ss(String msg){
 
 %>
 
+<%
+String category = (String)request.getAttribute("s_category");
+if(category == null) category = "";
+
+System.out.println("category = "+category);
+
+String keyword = (String)request.getAttribute("s_keyword");
+if(keyword == null) keyword = "";
+
+System.out.println("keyword = "+keyword);
+%>
+<script>
+var str = '<%=category%>';
+var kstr = '<%=keyword%>';
+$(document).ready(function () {
+	
+	$("#_s_category").val(str);
+	$("#main-keyword").val(kstr);
+})
+</script>
+
+
+
 	<!-- Navigation -->
 	<nav class="navbar fixed-top navbar-expand-lg navbar-dark fixed-top"
 		style="background-color: #c53211; padding-bottom: 10px">
@@ -80,6 +103,23 @@ public String ss(String msg){
 				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
+		</div>
+		
+			<div style="float: left; width: 60%">
+		<form action="" id="main-search" name="main-search" method="get"> 
+ 			 <div class="in-line">
+		      <strong><input type="text" onkeypress="if(event.keyCode==13) {search();}"  id="main-keyword" name="s_keyword" value="" placeholder="지역, 식당 또는 음식" style="color: #575756; border-bottom-left-radius: 20px; border-top-left-radius: 20px"></strong>
+		      <strong><input type="button" onclick="search()"  value="검색" style="border-bottom-right-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-top-left-radius: 20px; background-color: darkorange; color: white;"></strong>
+		     <input type="hidden" id="_s_category" name="s_category" value="">
+		     
+		     </div>
+		     
+		     <!-- controller로 넘겨주기 위한 값 -->
+		<input type="hidden" name="pageNumber" id="_pageNumber" value="${(empty pageNumber)?0:pageNumber }">
+		<input type="hidden" name="recordCountPerPage" id="_recordCountPerPage"
+			value="${(empty recordCountPerPage)?9:recordCountPerPage }">
+		     
+		</form>
 		</div>
 
 		<div class="container">
@@ -132,7 +172,7 @@ public String ss(String msg){
 
 				<div class="card h-100">
 					<a href="rsdetail.do?seq=<%=list.get(i).getSeq()%>"><img
-						class="card-img-top" src="\image\<%=list.get(i).getRs_picture()%>"
+						class="card-img-top" src="<%=list.get(i).getRs_picture()%>"
 						alt=""></a>
 					<div class="card-body">
 						<h4 class="card-title">
@@ -150,6 +190,8 @@ public String ss(String msg){
 			%>
 
 		</div>
+
+
 				<!-- 페이징 처리 -->
 <div id="paging_wrap">	
 	<jsp:include page="/WEB-INF/views/common/paging.jsp" flush="false">
@@ -260,6 +302,28 @@ geocoder[<%=j %>].addressSearch('<%=list.get(j).getRs_address1() %>', function(r
     } 
 }); 
 <%}%>
+
+/* 페이지번호를 클릭했을때 */
+function goPage(pageNumber) {
+	$("#_pageNumber").val(pageNumber);
+	alert(pageNumber);
+	
+	var str = '<%=category%>';
+	var kstr = '<%=keyword%>';
+	
+	if (str == "") {
+		alert("카테고리 없");
+		$("#main-search").attr({"target":"_self", "action":"search.do"}).submit();
+	}
+	else if (kstr == ""){
+		alert("검색어 없");
+		$("#main-search").attr({"target":"_self", "action":"category.do"}).submit();
+	}else {
+		alert("?????");
+	}
+	
+	
+}
 
 
 </script>

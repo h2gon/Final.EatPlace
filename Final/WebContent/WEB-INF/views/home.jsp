@@ -915,6 +915,13 @@ function openCity(evt, cityName) {
 			      <strong><input type="text" onkeypress="if(event.keyCode==13) {search();}"  id="main-keyword" name="s_keyword" value="" placeholder="지역, 식당 또는 음식" style="color: #575756; border-bottom-left-radius: 20px; border-top-left-radius: 20px"></strong>
 			      <strong><input type="button" onclick="search()"  value="검색" style="border-bottom-right-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-top-left-radius: 20px; background-color: darkorange; color: white;"></strong>
 			     </div>
+			     
+			     
+				<!-- controller로 넘겨주기 위한 값 -->
+				<input type="hidden" name="pageNumber" id="_pageNumber" value="${(empty pageNumber)?0:pageNumber }">
+				<input type="hidden" name="recordCountPerPage" id="_recordCountPerPage"
+					value="${(empty recordCountPerPage)?9:recordCountPerPage }">
+							     
 			   </form>
 			   
 	          </div> 
@@ -975,7 +982,7 @@ function openCity(evt, cityName) {
       <div class="container-fluid p-0">
         <div class="row no-gutters popup-gallery">
           <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="category.do?category=한식">
+            <a class="portfolio-box" href="category.do?s_category=한식">
               <img class="img-fluid" src="img/portfolio/fullsize/k.jpg" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
@@ -990,7 +997,7 @@ function openCity(evt, cityName) {
             </a>
           </div>
           <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="category.do?category=양식">
+            <a class="portfolio-box" href="category.do?s_category=양식">
               <img class="img-fluid" src="img/portfolio/fullsize/a.jpg" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
@@ -1005,7 +1012,7 @@ function openCity(evt, cityName) {
             </a>
           </div>
           <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="category.do?category=일식">
+            <a class="portfolio-box" href="category.do?s_category=일식">
               <img class="img-fluid" src="img/portfolio/fullsize/j.jpg" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
@@ -1020,7 +1027,7 @@ function openCity(evt, cityName) {
             </a>
           </div>
           <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="category.do?category=중식">
+            <a class="portfolio-box" href="category.do?s_category=중식">
               <img class="img-fluid" src="img/portfolio/fullsize/china.jpg" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
@@ -1035,7 +1042,7 @@ function openCity(evt, cityName) {
             </a>
           </div>
           <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="category.do?category=카페">
+            <a class="portfolio-box" href="category.do?s_category=카페">
               <img class="img-fluid" src="img/portfolio/fullsize/cafe.jpg" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
@@ -1050,7 +1057,7 @@ function openCity(evt, cityName) {
             </a>
           </div>
           <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="category.do?category=뷔페">
+            <a class="portfolio-box" href="category.do?s_category=뷔페">
               <img class="img-fluid" src="img/portfolio/fullsize/v.jpg" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
@@ -1172,7 +1179,7 @@ function search() {
 	  
 	  
 }
-$())
+
 
     
 $("#_btnLogin").click(function () {
