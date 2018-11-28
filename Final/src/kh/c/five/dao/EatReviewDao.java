@@ -9,6 +9,8 @@ import kh.c.five.model.fileDto;
 public interface EatReviewDao {
 	public List<String> getImage(int rv_seq);
 	public List<String> getImageDT(int rs_seq); // pickup images per rests 
+	ReviewDto getReviewWPic (fileDto fdto); // 이미지 파일이름과 레스토랑 번호에 해당하는 리뷰 본문 가져오기
+	
 	Integer addReview(ReviewDto rdto);
 	
 	void addFile(fileDto fdto);

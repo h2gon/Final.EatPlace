@@ -59,5 +59,10 @@ public class EatReviewServiceImpl implements EatReviewService {
 	public List<String> getImageDT(int rs_seq) {
 		return eatreviewdao.getImageDT(rs_seq);
 	}
+
+	@Override
+	public ReviewDto getReviewWPic(fileDto fdto) {
+		return eatreviewdao.getReviewWPic(fdto);
+	}
 	
 }

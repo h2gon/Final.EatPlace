@@ -122,6 +122,13 @@ public class EatRestaurantsDaoImpl implements EatRestaurantsDao {
 		return sqlSession.selectOne(namespace+"getCategoryCount", param);
 	}
 
+	@Override
+	public void getRating(int seq) {
+		
+		sqlSession.update(namespace+"getRating", seq);
+		
+	}
+
 	
 
 	

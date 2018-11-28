@@ -326,7 +326,8 @@ input:focus {
 		
 
 			<div class="item">
-				<img src="\image\<%=imagelist.get(i).getFile_name()%>"	alt="" style="height:300px ;width: auto" onclick="openModal(); currentSlide(<%=i+1%>)">
+				<img class="_fvalue" src="\image\<%=imagelist.get(i).getFile_name()%>"	
+				alt="" style="height:300px ;width: auto" onclick="openModal(); currentSlide(<%=i+1%>)" value="<%=imagelist.get(i).getFile_name()%>">
 			</div>
 		
 		<%
@@ -641,57 +642,54 @@ input:focus {
 		</div>
 	</div>
 		<!-- The Modal will open  -->
-<div id="myModal" class="modal">
-<br>
-<span class="close cursor" onclick="closeModal()">&times;</span>
-  
-<div class="modal-content" align="center">
-  
-<br>
-<table >
-<col width= "70%"><col width= "30%">
-	<tr>
-		<td align="center">
-		 <%
-		   for (int i = 0; i < imagelist.size(); i++) {
+	<div id="myModal" class="modal">
+	<br>
+	<span class="close cursor" onclick="closeModal()">&times;</span>  
+		<div class="modal-content" align="center">
+  		<br>
+  			
+		 <%		 	
+		  //  for (int i = 0; i < imagelist.size(); i++) {
 			   %>
 			   
-			   <div class="mySlides" style="margin-left: 30px">
-		       <img src="\image\<%=imagelist.get(i).getFile_name()%>" style="width:50%;">    
-		    	</div>
+			   <iframe id="myframe"name="myFrame" src="" frameborder="0" marginwidth="0" marginheight="0" frameborder="0" 
+			   style="width: 640px; height: 480px; align-content: center; margin-top: 20px"></iframe>
+			 
+			  <div class="mySlides" style="margin-left: 30px">
+		        <%-- <img class="_fvalue" src="\image\<%=imagelist.get(i).getFile_name()%>" style="width:50%;" value="\image\<%=imagelist.get(i).getFile_name()%>">    
+		       <img id="mySlides" src="" style="width:50%;" value="">   --%>
+		       		       		
+		       </div>
 		    	
 			   <%
-		   }
+	//	   }
 		   %>
-  		 </td>
-   <td>
-   <div style="background-color: white; height: auto">
+		<br>
+
+	<!-- Thumbnail image controls -->
+  
+	<div class="owl-carousel">
+	<%
+		for (int i = 0; i < imagelist.size(); i++) {
+			%>
+			<div class="item">
+				
+			<a href="\image\<%=imagelist.get(i).getFile_name()%>" target="myFrame">	
+				<img class="_fvalue1" src="\image\<%=imagelist.get(i).getFile_name()%>"	
+					<%-- alt="이미지없음" style="height:150px ;width: auto" onclick="currentSlide(<%=i+1%>)" --%>
+					alt="이미지없음" style="height:150px; width: auto" >
+			</a>
+					<%-- value="<%=imagelist.get(i).getFile_name()%>" cslide="<%=i+1%>"> --%>
+				<br>
+			</div>
+			<%
+		}
+	%>
+	</div><!-- /thumbnail -->
+
+<div style="background-color: white; height: auto">
    <p>tests</p>
    </div>
-   </td>
-	</tr>
-	<tr>
-		<td>
-		 <!-- Thumbnail image controls -->
-  
-			<div class="owl-carousel">
-		<%
-			for (int i = 0; i < imagelist.size(); i++) {
-				//System.out.println("참고용 imagelist size: "+ imagelist.size());
-			
-			%>
-				<div class="item">
-						<img src="\image\<%=imagelist.get(i).getFile_name()%>"	alt="" style="height:150px ;width: auto" onclick="currentSlide(<%=i+1%>)">
-						<br>
-				</div>
-			<%
-				}
-			%>
-			</div><!-- /thumbnail -->
-		</td>
-	</tr>
-</table>
-
 
     <!-- Next/previous controls -->
    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -719,6 +717,26 @@ input:focus {
     </footer>    
   
 <script type="text/javascript">
+
+$("._fvalue1").on("click", function () {		
+//	alert("click");
+	var pic_link=$(this).attr("src");
+//	alert(pic_link);
+//	alert($(this).attr("src"));
+	$('#myframe').attr("src",pic_link);
+	showSlides(slideIndex = <%=imagelist.size() %>);
+
+});
+$("._fvalue").on("click", function () {		
+//	alert("click");
+	var pic_link=$(this).attr("src");
+//	alert(pic_link);
+//	alert($(this).attr("src"));
+	$('#myframe').attr("src",pic_link);
+	showSlides(slideIndex = <%=imagelist.size() %>);
+//	showSlides(slideIndex=1);
+});
+
 	//plugin call
 	$('.owl-carousel').owlCarousel({
 		loop : true,
@@ -745,33 +763,26 @@ function openModal() {
 // Close the Modal
 function closeModal() {
   document.getElementById('myModal').style.display = "none";
-  /* if(!$(e.target).hasClass("myModal")) { 
-		document.getElementById('myModal').style.display = "none";
-		}  */
 }
-/* 
-$(document).ready(function(){
-	$('html').click(function(e) { if(!$(e.target).hasClass("myModal")) { 
-		document.getElementById('myModal').style.display = "none";
-		}  
-	}); 	
-});
- */
 
 
-
-var slideIndex = 1;
-showSlides(slideIndex);
+//var slideIndex = 1;
+//showSlides(slideIndex);
 
 // Next/previous controls
 function plusSlides(n) {
   showSlides(slideIndex += n);
 }
 
-// Thumbnail image controls
+/* // Thumbnail image controls
 function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
+	
+	showSlides(slideIndex = n);
+
+} 
+  
+}); */
+ 
 
 function showSlides(n) {
   var i;
@@ -779,13 +790,14 @@ function showSlides(n) {
   var slides = document.getElementsByClassName("mySlides");
   var dots = document.getElementsByClassName("demo");
   var captionText = document.getElementById("caption");
- /*  if (n > slides.length) {slideIndex = 1} */
+
   if (n > ii) {slideIndex = 1}
-/*   if (n < 1) {slideIndex = slides.length} */
+
   if (n < 1) {slideIndex = ii}
 
-  /* for (i = 0; i < slides.length; i++) { */
-	  for (i = 0; i < ii; i++) {
+	    
+ 	  
+  for (i = 0; i < ii; i++) {
     slides[i].style.display = "none";
   }
   for (i = 0; i < dots.length; i++) {
@@ -794,7 +806,10 @@ function showSlides(n) {
   slides[slideIndex-1].style.display = "block";
   dots[slideIndex-1].className += " active";
   captionText.innerHTML = dots[slideIndex-1].alt;
+
 }
+
+  
 	</script>
 
 <script>

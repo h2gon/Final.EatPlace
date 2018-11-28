@@ -131,7 +131,8 @@ public class EatRestaurantsController {
 			rplist.add(rparm);
 			
 			System.out.println(rparm.toString());
-			
+			System.out.println("seq: "+rslist.get(i).getSeq());
+			eatRestaurantsService.getRating(rslist.get(i).getSeq());
 		}
 		
 		

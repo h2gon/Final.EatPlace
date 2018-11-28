@@ -58,6 +58,15 @@
   SELECT COUNT (*) FROM RESTAURANT_LIKES WHERE RS_SEQ=#{seq}
   </select>
   
+  <!-- rating -->
+  <update id="getRating" parameterType="java.lang.Integer">
+
+	UPDATE EAT_RESTAURANT
+	SET RS_RATING=(SELECT ROUND(AVG(RS_RATING),1) FROM RESTAURANT_REVIEW WHERE RS_SEQ=#{seq})
+	WHERE SEQ=#{seq}
+	
+
+  </update>
   <!-- search -->
   
   

@@ -29,6 +29,8 @@ public interface EatRestaurantsDao {
 	int getReviewNum(int seq);
 	//like count
 	int getLikesCount(int seq);
+	// rating
+	void getRating(int seq);
 	
 	// search
 	public List<RegiDto> getSearchPagingSeq(EatParam param);

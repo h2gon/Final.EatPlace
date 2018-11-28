@@ -12,14 +12,16 @@ CREATE TABLE EAT_RESTAURANT(
 	RS_READCOUNT NUMBER NOT NULL
 	
 );
-
+UPDATE EAT_RESTAURANT
+	SET RS_RATING=(SELECT ROUND(AVG(RS_RATING),1) FROM RESTAURANT_REVIEW WHERE RS_SEQ=4)
+	WHERE SEQ=4
 alter table eat_restaurant add (rs_keyword varchar2(4000));
 
 alter table eat_restaurant modify (rs_menu varchar2(4000));
 
 select * from eat_restaurant
 select * from restaurant_review
-
+select * from RS_FILE
 select count(*) from RESTAURANT_REVIEW where rs_seq=23
 SELECT COUNT (*) FROM RESTAURANT_LIKES where RS_SEQ=23
 select * from restaurant_review where rs_seq=23
@@ -42,7 +44,10 @@ ALTER TABLE RESTAURANT_INFO --���� �̸��� �ܷ�Ű�� �Ѱ
 ALTER TABLE RESTAURANT_INFO --������ ��ȣ�� �ܷ�Ű�� �Ѱܹ���
    ADD CONSTRAINT INFO_NUMBER_FK
    FOREIGN KEY (RS_SEQ) REFERENCES EAT_RESTAURANT (SEQ) ON DELETE CASCADE
+select * from RESTAURANT_LIKES
    
+1542789632867.jpg
+
    
 --���� ���� ���̺�
 CREATE TABLE RESTAURANT_REVIEW(
@@ -74,6 +79,15 @@ CREATE TABLE RESTAURANT_LIKES(
 	RS_NAME VARCHAR2(100) NOT NULL
 
 );
+
+	SELECT seq, id, rs_seq, rs_content, rs_rating
+  	FROM RESTAURANT_REVIEW
+  	WHERE RS_SEQ=6 AND SEQ=(SELECT DISTINCT RV_SEQ 
+									FROM RS_FILE 
+									WHERE FILE_NAME='1542791351189.jpg')
+	select * from RS_FILE								
+		  42 soup.jpg      1542874309227.jpg   1433940     29      2
+ 		  25 2.jpg         1542791351189.jpg    794537      2      6
 
 CREATE SEQUENCE LIKES_SEQ
 	START WITH 1 INCREMENT BY 1;
@@ -110,7 +124,7 @@ CREATE SEQUENCE RSFILE_SEQ
 START WITH 1
 INCREMENT BY 1;
 
-select * from FILE_TABLE
+select * from RS_FILE
 
 
 --검색 + 페이징 + 다중테이블 + UNION

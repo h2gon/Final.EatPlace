@@ -96,6 +96,12 @@ public class EatRestaurantsServiceImpl implements EatRestaurantsService {
 		// TODO Auto-generated method stub
 		return eatRestaurantsDao.getCategoryCount(param);
 	}
+
+	@Override
+	public void getRating(int seq) {
+		eatRestaurantsDao.getRating(seq);
+		
+	}
 	
 	
 

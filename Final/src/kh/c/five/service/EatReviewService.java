@@ -10,6 +10,7 @@ import kh.c.five.model.fileDto;
 public interface EatReviewService {
 	public List<String> getImage(int rv_seq);
 	public List<String> getImageDT(int rs_seq);
+	public ReviewDto getReviewWPic (fileDto fdto);
 	
 	public Integer addReview(ReviewDto rdto);
 	public void addFile(fileDto fdto);

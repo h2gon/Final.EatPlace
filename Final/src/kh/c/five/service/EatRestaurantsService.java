@@ -28,6 +28,8 @@ public interface EatRestaurantsService {
 	public int getReviewNum(int seq);
 	//likes count
 	public int getLikesCount(int seq);
+	// rating 
+	public void getRating(int seq);
 	
 	//search 
 	public List<RegiDto> getSearchPagingSeq(EatParam param);

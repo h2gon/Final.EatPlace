@@ -138,6 +138,12 @@ public class EatReviewDaoImpl implements EatReviewDao {
 		return f_list;		
 	}
 
+	@Override
+	public ReviewDto getReviewWPic(fileDto fdto) {
+		return sqlSession.selectOne(namespace+"getReviewWPic", fdto);
+		 
+	}
+
 	
 
 }
