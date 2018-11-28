@@ -89,9 +89,7 @@ public class EatReviewDaoImpl implements EatReviewDao {
 		System.out.println("DB Enter List<fileDto> rv_seq:"+rv_seq);
 		
 		String sql = "SELECT * FROM RS_FILE WHERE RV_SEQ=?";
-		
-		String sql2= "";
-		
+						
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
@@ -137,11 +135,62 @@ public class EatReviewDaoImpl implements EatReviewDao {
 		}
 		return f_list;		
 	}
+	
+	
 
 	@Override
 	public ReviewDto getReviewWPic(fileDto fdto) {
 		return sqlSession.selectOne(namespace+"getReviewWPic", fdto);
 		 
+	}
+
+	@Override
+	public String getNickName(String id) {
+System.out.println("DB getNickName id:"+id);
+		
+		String sql = "SELECT * FROM EATMEMBER WHERE ID=?";
+						
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		String nickName = "";
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@192.168.30.34:1521:xe", "hr", "hr");
+			System.out.println("DBConnection Success!!");
+			
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			System.out.println("PSMT set Success!!");
+			
+			rs = psmt.executeQuery();
+			System.out.println("Query Execute!!");
+		
+			if(rs.next()) {
+				nickName = rs.getString(6);
+			}System.out.println("nickName:"+nickName);
+			
+		} catch (Exception e) {
+			System.err.println(e);
+		}finally {
+			try {
+				if(psmt != null) {
+					psmt.close();
+				}
+				if(conn != null) {
+					conn.close();
+				}
+				if(rs != null) {
+					rs.close();
+				}	
+				System.out.println("DB close Success!!");
+			} catch (Exception e) {
+				System.err.println(e);
+			}
+		}
+		return nickName;	
 	}
 
 	

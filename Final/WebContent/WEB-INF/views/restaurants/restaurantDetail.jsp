@@ -459,12 +459,10 @@ input:focus {
 				<div style="float: left; width: 60%;"></div>
 
 				</section>
-			<!-- 리뷰 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~REVIEW~~~~~~~~~~~~~~~~~~~~~~~~-->
-
-		 <%          
+		<!-- 리뷰 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~REVIEW~~~~~~~~~~~~~~~~~~~~~~~~-->
+				 <%          
          // EatReviewService eatReviewService ;
-
-		 EatReviewDao eatReviewDao = EatReviewDaoImpl.getInstance();
+		  EatReviewDao eatReviewDao = EatReviewDaoImpl.getInstance();
                   
           List<ReviewDto> list = (List<ReviewDto>)request.getAttribute("reviewlist");
           
@@ -477,7 +475,8 @@ input:focus {
           int soso=0;
           int notGood=0;
           int totalCount = 0;
-          String fileName = "";
+          String nickName = "";
+          String fileName[] = new String[0];
           
           if(!list.isEmpty()){
           
@@ -499,6 +498,7 @@ input:focus {
                   
                     
           %>
+		
 				
 		<hr>
 		<section class="module review-container">
@@ -526,12 +526,7 @@ input:focus {
           </section>
           
          
-		
-<!-- <table>
-	<tr>
-		<td></td>
-	</tr>
-</table> -->         
+         
 		<div class="review_main">
 		
 		
@@ -543,8 +538,22 @@ input:focus {
 		<tr>
 		
 		 <td style="width: 700px;">
-		<label>
+		<!-- <label> -->
 		
+		<%
+		 nickName = eatReviewDao.getNickName(list.get(i).getId());
+		 System.out.println("nickName:"+nickName+" id: "+list.get(i).getId());
+		%>
+		
+		<%-- 아이디 : <%=list.get(i).getId() %>	 --%>
+		<div style="size: 100px; position: relative;">
+		<span style="position: absolute; text-align: center; line-height: 60px; width: 63px; height: 100px;">
+		<%=nickName %>
+		</span>
+		<img alt="" src="./image/circular-shape-silhouette (1).png">
+		</div>
+		
+		<%-- 닉네임 : <%=nickName %> --%>
 		<%switch(list.get(i).getRs_rating()){
 		case 1:
 		%>						
@@ -559,15 +568,40 @@ input:focus {
 		default: %>
 		<img alt="" src="./img/like/3-1.png" style="width: 60px;" id="p3" msg="3" title="3점" >
 		<%} %>
-		</label>
-		아이디 : <%=list.get(i).getId() %>	
+	
+		<!-- </label> -->
 		
-		<%List<fileDto> f_list = eatReviewDao.getRv_Image(list.get(i).getRs_seq());
+		<span style="text-align: right;">
+		<input type="text" style="width: 480px;" name="content" value="<%=list.get(i).getRs_content()%>">
+		
+		<%
+		int rv_seq = list.get(i).getSeq();
+		
+		System.out.println("rv_seq:"+rv_seq);
+		
+		List<fileDto> f_list = eatReviewDao.getRv_Image(rv_seq);
 		if(f_list != null){
 			System.out.println("not null");
 			for(int a = 0;a<f_list.size();a++){
-				fileName = f_list.get(a).getFile_name();
-				System.out.println("fileName:"+fileName);
+				
+			if(f_list.size()==1){
+				fileName = new String[1];			
+				fileName[0] = f_list.get(a).getFile_name();
+				System.out.println("f_list.size(): "+f_list.size());
+				System.out.println("fileName has just 1:"+fileName[0]);
+				%>
+				<img alt="" src="/image/<%=fileName[0] %>" style="width: 75px; height: 75px;">
+				<% 
+			}
+			else{
+				fileName = new String[f_list.size()];				
+				fileName[a] = f_list.get(a).getFile_name();
+				System.out.println("f_list.size(): "+f_list.size());
+				System.out.println("fileName more than 1:"+fileName[a]);
+				%>
+				<img alt="" src="/image/<%=fileName[a] %>" style="width: 75px; height: 75px;">
+				<%
+				}
 			}
 		}else if(f_list == null){
 			System.out.println("null");
@@ -575,8 +609,8 @@ input:focus {
 		%>
 	
 		
-		<input type="text" style="width: 480px;" name="content" value="<%=list.get(i).getRs_content()%>">
-		<img alt="" src="/image/<%=fileName %>" style="width: 75px; height: 75px;">
+		
+		</span>
 							 
 		 </td>	
 		 			       
@@ -587,13 +621,31 @@ input:focus {
 		<%} %>	
 		
 		<%}else{ %>
+		
+		
 		<%
 		//reviewlist more than 5----------------------------------------------------------
-		for(int i =0 ; i<list.size() ; i++){ %>
+		/* for(int i =0 ; i<list.size() ; i++){  */
+		for(int i =0 ; i<5 ; i++){ %>
 		<tr>
 		
 		 <td style="width: 700px;">
-		<label>
+		<!-- <label> -->
+		
+		
+		<%
+		 nickName = eatReviewDao.getNickName(list.get(i).getId());
+		 System.out.println("nickName:"+nickName+" id: "+list.get(i).getId());
+		%>
+				
+		<%-- 아이디 : <%=list.get(i).getId() %>	
+		닉네임 : <%=nickName %> --%>
+		<div style="size: 100px; position: relative;">
+		<span style="position: absolute; text-align: center; line-height: 60px; width: 63px; height: 100px;">
+		<%=nickName %>
+		</span>
+		<img alt="" src="./image/circular-shape-silhouette (1).png">
+		</div>
 		
 		<%switch(list.get(i).getRs_rating()){
 		case 1:
@@ -609,27 +661,60 @@ input:focus {
 		default: %>
 		<img alt="" src="./img/like/3-1.png" style="width: 60px;" id="p3" msg="3" title="3점" >
 		<%} %>
-		</label>
-		아이디 : <%=list.get(i).getId() %>	
-		<%List<fileDto> f_list = eatReviewDao.getRv_Image(list.get(i).getRs_seq());
+		
+		<!-- </label> -->
+		<span style="text-align: right;">				
+		<input type="text" style="width: 480px;" name="content" value="<%=list.get(i).getRs_content()%>">
+		
+		<%-- <form action="getImage.do?rv_seq=<%=list.get(i).getSeq() %>"> --%>
+		<%		
+		List<fileDto> f_list = eatReviewDao.getRv_Image(list.get(i).getSeq());
+		//List<String> f_list = (List<String>) request.getAttribute("getImg");
+		
 		if(f_list != null){
 			System.out.println("not null");
 			for(int a = 0;a<f_list.size();a++){
-			fileName = f_list.get(a).getFile_name();
-			System.out.println("fileName:"+fileName);
+				if(f_list.size()==1){
+					fileName = new String[1];			
+					fileName[0] = f_list.get(a).getFile_name();
+					//fileName[0] = f_list.get(a);
+					System.out.println("f_list.size(): "+f_list.size());
+					System.out.println("fileName has just 1:"+fileName[0]);
+					%>
+					<img alt="" src="/image/<%=fileName[0] %>" style="width: 75px; height: 75px;">
+					<% 
+				}
+				else{
+					fileName = new String[f_list.size()];				
+					fileName[a] = f_list.get(a).getFile_name();
+					//fileName[a] = f_list.get(a);
+					System.out.println("f_list.size(): "+f_list.size());
+					System.out.println("fileName more than 1:"+fileName[a]);
+					%>
+					<img alt="" src="/image/<%=fileName[a] %>" style="width: 75px; height: 75px;">
+					<% 
+					}
 			}
 		}else if(f_list == null){
 			System.out.println("null");
 		}	
 		
 		
-		%>
+		%>		
 		
-		<input type="text" style="width: 480px;" name="content" value="<%=list.get(i).getRs_content()%>">
-		<img alt="" src="/image/<%=fileName %>" style="width: 75px; height: 75px;">
+		<!-- <input name="file" type=file id="input_imgs" multiple/>
+		<div class="imgs_wrap">
+		<br>
+       
+       	</div> -->
+       
+     
+        <%-- <img alt="" src="/image/<%=fileName %>" style="width: 75px; height: 75px;"> --%>
+       	
 		
 		
-			 
+		<%-- </form> --%>
+			 </span>
 		 </td>	
 		 			       
         </tr>
@@ -640,6 +725,16 @@ input:focus {
          </table>
          
          </div>
+       <script type="text/javascript">
+       function morelist() {
+    	   var x = d
+       }
+		
+	
+       
+       </script>
+
+		
        <br><br>
           <!-- review_main end -->
 

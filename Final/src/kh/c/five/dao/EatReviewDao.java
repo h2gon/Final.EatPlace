@@ -24,4 +24,6 @@ public interface EatReviewDao {
 	
 	List<fileDto> getRv_Image(int rv_seq);
 	
+	public String getNickName(String id);
+	
 }
