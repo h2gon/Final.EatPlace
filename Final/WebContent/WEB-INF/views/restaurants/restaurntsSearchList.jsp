@@ -1,3 +1,4 @@
+<%@page import="kh.c.five.model.ReviewParam"%>
 <%@page import="kh.c.five.model.RegiDto"%>
 <%@page import="java.util.List"%>
 
@@ -12,6 +13,44 @@
 <html>
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+<!-- SEARCH -->
+<style>
+   
+    .in-line{
+      width:900px;	
+      height:42px; 
+    }
+   
+    input[type="text"]{
+      width:70%;
+      height:100%;
+      border:none;
+      font-size:1.213rem;
+      padding-left: 20px;
+      font-style: inherit;
+      display:inline;
+      outline:none;
+      box-sizing: border-box;
+      color:black;
+
+    }
+    input[type=button]{
+      width: 30%;
+      height:100%;
+      background-color: lightgray;
+      border:none;
+      background-color: white;
+      font-size:1.313rem;
+      color:#042AaC;
+      outline:none;
+      display:inline;
+      margin-left: -25px;
+      box-sizing: border-box;
+    }
+ 
+  </style>
+
 
 <head>
 
@@ -95,7 +134,7 @@ $(document).ready(function () {
 	<!-- Navigation -->
 	<nav class="navbar fixed-top navbar-expand-lg navbar-dark fixed-top"
 		style="background-color: #c53211; padding-bottom: 10px">
-		<div class="container">
+		<div class="container" style="float: left; width: 20%">
 			<a class="navbar-brand" href="home.do">EAT PLACE</a>
 			<button class="navbar-toggler navbar-toggler-right" type="button"
 				data-toggle="collapse" data-target="#navbarResponsive"
@@ -105,28 +144,19 @@ $(document).ready(function () {
 			</button>
 		</div>
 		
-			<div style="float: left; width: 60%">
+		<div style="float: left; width: 60%">
 		<form action="" id="main-search" name="main-search" method="get"> 
  			 <div class="in-line">
 		      <strong><input type="text" onkeypress="if(event.keyCode==13) {search();}"  id="main-keyword" name="s_keyword" value="" placeholder="지역, 식당 또는 음식" style="color: #575756; border-bottom-left-radius: 20px; border-top-left-radius: 20px"></strong>
 		      <strong><input type="button" onclick="search()"  value="검색" style="border-bottom-right-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-top-left-radius: 20px; background-color: darkorange; color: white;"></strong>
-		     <input type="hidden" id="_s_category" name="s_category" value="">
-		     
 		     </div>
-		     
-		     <!-- controller로 넘겨주기 위한 값 -->
-		<input type="hidden" name="pageNumber" id="_pageNumber" value="${(empty pageNumber)?0:pageNumber }">
-		<input type="hidden" name="recordCountPerPage" id="_recordCountPerPage"
-			value="${(empty recordCountPerPage)?9:recordCountPerPage }">
-		     
 		</form>
 		</div>
-
-		<div class="container">
-			<div class="collapse navbar-collapse" id="navbarResponsive">
+		
+		<div class="container" style="float: left; width: 20%">
+			<div class="collapse navbar-collapse" id="navbarResponsive">				
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" href="about.html"><strong
-							style="color: white; margin-left: 20px">About</strong></a></li>
+					
 					<li class="nav-item"><a class="nav-link"
 						href="restaurntsList.do"><strong
 							style="color: white; margin-left: 20px">맛집 리스트</strong></a></li>
@@ -229,10 +259,11 @@ $(document).ready(function () {
 
 </body> 
 
-<script>
 <%
-
+List<ReviewParam> rplist = (List<ReviewParam>)request.getAttribute("rplist");
 %>
+
+<script>
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 mapOption = {
@@ -271,28 +302,30 @@ geocoder[<%=j %>].addressSearch('<%=list.get(j).getRs_address1() %>', function(r
 			<%-- var iwContent = "<div style='padding:5px;'><img s src='/image/<%=list.get(j).getRs_picture() %>'></div>" --%>
 			<%-- var iwContent ='<div style="width: 200px; height: 100px;" class="card h-100"><a href="rsdetail.do?seq=<%=list.get(j).getSeq() %>"><img class="card-img-top" src="/image/<%=list.get(j).getRs_picture() %>" alt=""></a><div class="card-body"><h4 class="card-title"><a href="rsdetail.do?seq=<%=list.get(j).getSeq() %>"><%=list.get(j).getRs_name() %>&nbsp;&nbsp;<strong><span style="color:#ff792a; font-size: 1.37rem;"><%=list.get(j).getRs_rating() %></span></strong></a></h4><p class="card-text"><%=list.get(j).getRs_address1() %> - <%=list.get(j).getRs_category() %></p></div></div>', --%> 
 			<%-- var iwContent ='<div style="width: 200px; height: 100px;" class="card h-100"><a href="rsdetail.do?seq=<%=list.get(j).getSeq() %>"><img class="card-img-top" src="/image/<%=list.get(j).getRs_picture() %>" alt=""></a></div><div class="card-body"><h4 class="card-title"><a href="rsdetail.do?seq=<%=list.get(j).getSeq() %>"><%=list.get(j).getRs_name() %>&nbsp;&nbsp;<strong><span style="color:#ff792a; font-size: 1.37rem;"><%=list.get(j).getRs_rating() %></span></strong></a></h4><p class="card-text"><%=list.get(j).getRs_address1() %> - <%=list.get(j).getRs_category() %></p></div>', --%>
-			var iwContent = '<figure style="margin-left: 10px; margin-right: 10px;"><div style="float: left;"><a href="rsdetail.do?seq=<%=list.get(j).getSeq() %>"><img style="width: 110px; height: 125px; padding-bottom:15px;" src="/image/<%=list.get(j).getRs_picture() %>" alt=""></a></div> <figcaption><div style="margin-left: 120px; width: 140px;"><h4><a href="rsdetail.do?seq=<%=list.get(j).getSeq() %>"><strong><%=dot3(list.get(j).getRs_name()) %><strong>&nbsp;&nbsp;&nbsp;&nbsp;<strong><span style="color:#ff792a; font-size: 1.37rem;"><%=list.get(j).getRs_rating() %></span></strong></a></h4><p style="width: 130px;"><%=ss(list.get(j).getRs_address1()) %> - <%=list.get(j).getRs_category() %></p></div></figcaption></figure>',
+			
+			var iwContent = '<figure style="margin-left: 10px; margin-right: 10px;"><div style="float: left;"><a href="rsdetail.do?seq=<%=list.get(j).getSeq() %>"><img style="width: 110px; height: 125px; padding-bottom:15px;" src="<%=list.get(j).getRs_picture() %>" alt=""></a></div> <figcaption><div style="margin-left: 120px; width: 140px;"><h4><a href="rsdetail.do?seq=<%=list.get(j).getSeq() %>"><strong><%=dot3(list.get(j).getRs_name()) %><strong>&nbsp;&nbsp;&nbsp;&nbsp;<strong><span style="color:#ff792a; font-size: 1.37rem;"><%=list.get(j).getRs_rating() %></span></strong></a></h4><p style="width: 130px;"><%=ss(list.get(j).getRs_address1()) %> - <%=list.get(j).getRs_category() %></p><p style="color: gray;"><img src="img/map/pen.png">&nbsp;<%=rplist.get(j).getReviewCount() %>&nbsp;&nbsp;<img src="img/map/star.png">&nbsp;<%=rplist.get(j).getLike() %></p></div></figcaption></figure>',
 			iwPosition = new daum.maps.LatLng(33.450701, 126.570667); //인포윈도우 표시 위치입니다
 
 			// 인포윈도우를 생성합니다
 			var infowindow = new daum.maps.InfoWindow({
 			    position : iwPosition, 
 			    content : iwContent,
-			    removable : true
+			    
 			});
 			  
 			// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
 			infowindow.open(map, marker); 
 			
-			// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
-			function makeOutListener(infowindow) {
-				return function() { 
-					infowindow.close();
-				};
-			};
-		    
-		  
+			daum.maps.event.addListener(map, 'click', function() {			
+				infowindow.close();
+			});
+			
+			
+			
 		});
+   		
+		
+   		
         
      	// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         map.setCenter(coords);

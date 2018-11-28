@@ -63,7 +63,7 @@
       border:none;
       font-size:1.213rem;
       padding-left: 20px;
-      font-style: oblique;
+      font-style: inherit;
       display:inline;
       outline:none;
       box-sizing: border-box;
@@ -189,11 +189,11 @@ public String ss(String msg){
 							<div class="card-body">
 								<h4 class="card-title">
 									<a href="rsdetail.do?seq=<%=list.get(i).getSeq()%>"><%=list.get(i).getRs_name()%></a>&nbsp;&nbsp;<strong><span
-											style="color: #ff792a; font-size: 1.37rem;"><c:choose><c:when test="<%=list.get(i).getRs_rating()%> == null">0</c:when><c:when test="<%=list.get(i).getRs_rating()%> != null"><%=list.get(i).getRs_rating()%></c:when></c:choose></span></strong>
+											style="color: #ff792a; font-size: 1.37rem;"><%=list.get(i).getRs_rating() %></span></strong>
 								</h4>
 								<p class="card-text"><%=list.get(i).getRs_address1()%>
 									-
-									<%=list.get(i).getRs_category()%></p>
+									<%=list.get(i).getRs_category()%></p> 
 							</div>
 						</div>
 					</div>
@@ -230,7 +230,6 @@ public String ss(String msg){
 
 <%
 List<ReviewParam> rplist = (List<ReviewParam>)request.getAttribute("rplist");
-
 %>
 
 <script type="text/javascript">

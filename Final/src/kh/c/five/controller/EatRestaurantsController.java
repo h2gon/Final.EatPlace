@@ -230,6 +230,27 @@ public class EatRestaurantsController {
 		}
 		int totalRecordCount = eatRestaurantsService.getSearchCount(param);
 		
+		List<ReviewParam> rplist = new ArrayList<>();
+		for (int i = 0; i < searchlist.size(); i++) {
+			ReviewParam rparm = new ReviewParam();
+			rparm.setSeq(searchlist.get(i).getSeq());
+			
+			int n = eatReviewService.getRvCount(rparm);
+			rparm.setReviewCount(n);
+			
+			int m = eatReviewService.getLikeCount(rparm);
+			rparm.setLike(m);
+			
+			rplist.add(rparm);
+			
+			System.out.println(rparm.toString());
+			System.out.println("seq: "+searchlist.get(i).getSeq());
+			eatRestaurantsService.getRating(searchlist.get(i).getSeq());
+		}
+		
+		
+		
+		model.addAttribute("rplist", rplist);
 		
 		model.addAttribute("searchlist", searchlist);
 		
@@ -270,6 +291,28 @@ public class EatRestaurantsController {
 			System.out.println(searchlist.get(i).toString());
 			
 		}
+		
+		List<ReviewParam> rplist = new ArrayList<>();
+		for (int i = 0; i < searchlist.size(); i++) {
+			ReviewParam rparm = new ReviewParam();
+			rparm.setSeq(searchlist.get(i).getSeq());
+			
+			int n = eatReviewService.getRvCount(rparm);
+			rparm.setReviewCount(n);
+			
+			int m = eatReviewService.getLikeCount(rparm);
+			rparm.setLike(m);
+			
+			rplist.add(rparm);
+			
+			System.out.println(rparm.toString());
+			System.out.println("seq: "+searchlist.get(i).getSeq());
+			eatRestaurantsService.getRating(searchlist.get(i).getSeq());
+		}
+		
+		
+		
+		model.addAttribute("rplist", rplist);
 		
 		model.addAttribute("searchlist", searchlist);
 		
