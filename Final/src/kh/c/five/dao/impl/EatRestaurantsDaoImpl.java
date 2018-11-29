@@ -13,6 +13,7 @@ import kh.c.five.model.InsertDto;
 import kh.c.five.model.RegiDto;
 import kh.c.five.model.RestaurantDto;
 import kh.c.five.model.ReviewDto;
+import kh.c.five.model.wannagoDto;
 
 
 @Repository
@@ -129,7 +130,30 @@ public class EatRestaurantsDaoImpl implements EatRestaurantsDao {
 		
 	}
 
+
+	//가고싶다
 	
+	@Override
+	public boolean addwannagolist(wannagoDto dto) {
+		int n= sqlSession.insert(namespace+"addwannagolist", dto);
+		return n>0?true:false;
+	}
+
+	@Override
+	public List<wannagoDto> getwannagolist(String id) {
+		List<wannagoDto> list = sqlSession.selectList(namespace+"getwannagolist", id);
+		return list;
+	}
+
+	@Override
+	public int existwannago(wannagoDto dto) {
+		return sqlSession.selectOne(namespace+"existwannago", dto);
+	}
+
+	@Override
+	public void deletewannagolist(wannagoDto dto) {
+		sqlSession.delete(namespace+"deletewannagolist", dto);
+	}
 
 	
 

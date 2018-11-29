@@ -7,6 +7,7 @@ import kh.c.five.model.InsertDto;
 import kh.c.five.model.RegiDto;
 import kh.c.five.model.RestaurantDto;
 import kh.c.five.model.ReviewDto;
+import kh.c.five.model.wannagoDto;
 
 public interface EatRestaurantsDao {
 	
@@ -39,4 +40,17 @@ public interface EatRestaurantsDao {
 	
 	public List<RegiDto> getCategoryList(EatParam param);
 	public int getCategoryCount(EatParam param);
+	
+	
+	//가고싶다
+		public boolean addwannagolist(wannagoDto dto);
+		
+		//가고싶다
+		List<wannagoDto> getwannagolist(String id);
+		
+		//가고싶다 있는지 확인
+		int existwannago(wannagoDto dto);
+
+		public void deletewannagolist(wannagoDto dto);
+	
 }

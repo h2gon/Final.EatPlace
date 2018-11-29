@@ -11,6 +11,7 @@ import kh.c.five.model.InsertDto;
 import kh.c.five.model.RegiDto;
 import kh.c.five.model.RestaurantDto;
 import kh.c.five.model.ReviewDto;
+import kh.c.five.model.wannagoDto;
 import kh.c.five.service.EatRestaurantsService;
 
 @Service
@@ -103,6 +104,29 @@ public class EatRestaurantsServiceImpl implements EatRestaurantsService {
 		
 	}
 	
+
+	//가고싶다
+	@Override
+	public boolean addwannagolist(wannagoDto dto) {
+		return eatRestaurantsDao.addwannagolist(dto);
+	}
+
+	//가고싶다
+		@Override
+		public List<wannagoDto> getwannagolist(String id) {
+			return eatRestaurantsDao.getwannagolist(id);
+		}
+
+		@Override
+		public int existwannago(wannagoDto dto) {
+			return eatRestaurantsDao.existwannago(dto);
+		}
+
+		@Override
+		public void deletewannagolist(wannagoDto dto) {
+			eatRestaurantsDao.deletewannagolist(dto);
+		}
+
 	
 
 }

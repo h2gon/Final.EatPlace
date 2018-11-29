@@ -23,6 +23,12 @@
 function WriteReview(seq) {
 	location.href='WriteReview.do?seq='+seq;
 }		
+
+
+function wannago_btn_click(rs_seq, rs_name) {
+	location.href='wannago.do?rs_seq='+rs_seq+'&rs_name='+rs_name;
+	}
+
 </script>
 
 
@@ -361,6 +367,17 @@ input:focus {
 					<!-- 죄송^^; 공백 생각이 안 나서; -->
 					<img id="review_btn" class="review_writing_button" onclick="WriteReview('${rs.seq}');" src="img/button/reviewIcon.png">
 					<img id="like_btn" src="img/button/likeIcon.png">
+				
+					
+					 <!-- 가고싶다 -->
+					 
+					<c:if test=""></c:if>
+					  
+					  <button class="wannago_btn" 
+					onclick="wannago_btn_click('${rs.seq}','${rs.rs_name}');">
+						<img src="img/star2.png">
+					</button>
+					
 				<div>
 					
 				</div>

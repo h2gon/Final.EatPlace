@@ -156,6 +156,32 @@ EatMemberDto user = (EatMemberDto)session.getAttribute("login");
 	<!-- 가고 싶다 -->
   <div id="Paris" class="w3-container city">
    <h1>Paris</h1>
+   
+    <table class="wannagolist" border="2">
+						        		<thead>
+						        			<tr>
+						        				<th>가게이름</th>
+						        			</tr>
+						        		</thead>
+						        		
+						        		<tbody>
+						        		
+						        		<c:if test="${empty wannagolist }">
+						        			가고싶은 가게를 추가해주세요~
+						        		</c:if>
+						        		
+						        		<c:forEach items="${wannagolist }" var="wl" varStatus="vs">
+						        		
+						        		<tr>
+						       				<td>${wl.rs_name }</td> 
+						        		</tr>
+						        		
+						        		</c:forEach>
+						        		
+						        		</tbody>
+						        		
+						        	</table>   
+   
   </div>
   <div class="w3-container w3-light-grey w3-padding">
   <%if(user == null){%>

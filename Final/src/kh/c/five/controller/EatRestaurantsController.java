@@ -7,7 +7,9 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import kh.c.five.model.EatMemberDto;
 import kh.c.five.model.EatParam;
 import kh.c.five.model.InsertDto;
 import kh.c.five.model.RegiDto;
@@ -27,6 +30,7 @@ import kh.c.five.model.RestaurantDto;
 import kh.c.five.model.ReviewDto;
 import kh.c.five.model.ReviewParam;
 import kh.c.five.model.fileDto;
+import kh.c.five.model.wannagoDto;
 import kh.c.five.service.EatRestaurantsService;
 import kh.c.five.service.EatReviewService;
 import kh.c.five.util.FUpUtil;
@@ -152,7 +156,7 @@ public class EatRestaurantsController {
 
 	//디테일
 	@RequestMapping(value="rsdetail.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String details(int seq,Model model) throws Exception {
+	public String details(int seq,Model model, HttpServletResponse response) throws Exception {
 		logger.info("EatRestaurantsController detail"+new Date());
 	//	logger.info("InsertRS InsertDto.toString:"+dto.toString());
 		
@@ -184,20 +188,57 @@ public class EatRestaurantsController {
 		model.addAttribute("imagelist",imagelist);*/
 		List<String> imagelist = eatReviewService.getImageDT(seq);
 		model.addAttribute("imagelist",imagelist);
+
+		//쿠키생성
 		
-		//System.out.println(rs.toString());
-		//System.out.println(rs2.toString());
-		
-		/*return "restaurants/restaurantDetail?seq="+seq;*/
-		return "restaurants/restaurantDetail";
+				Cookie cookie_rs_seq = new Cookie("rs_seq"+rs.getSeq(), rs.getSeq()+"");
+				cookie_rs_seq.setMaxAge(60*60*24); // 기간을 하루로 지정
+				response.addCookie(cookie_rs_seq);
+				
+				Cookie cookie_rs_name = new Cookie("rs_name"+rs.getRs_name(), rs.getRs_name());
+				cookie_rs_name.setMaxAge(60*60*24); // 기간을 하루로 지정
+				response.addCookie(cookie_rs_name);
+				
+				
+				//System.out.println(rs.toString());
+				//System.out.println(rs2.toString());
+				
+				/*return "restaurants/restaurantDetail?seq="+seq;*/
+				return "restaurants/restaurantDetail";
 	}
 	
 	@RequestMapping(value="home.do",  method={RequestMethod.GET, RequestMethod.POST})
-	public String getRankList(RegiDto dto, Model model) {
+	public String getRankList(RegiDto dto, Model model, HttpServletRequest req) {
 		logger.info("EatRestaurantsController getRankList"+new Date());
 		
 		List<RegiDto> list = eatRestaurantsService.getRankList(dto);
 		
+
+		//영훈 가고싶다
+		EatMemberDto login = (EatMemberDto)req.getSession().getAttribute("login");
+		
+		if(login != null && !login.getId().equals("")){
+			System.out.println(login.toString());
+			List<wannagoDto> wannagolist = eatRestaurantsService.getwannagolist(login.getId());
+			model.addAttribute("wannagolist", wannagolist);
+
+		}
+		
+		Cookie[] getCookie = req.getCookies();
+		if(getCookie != null){
+
+			for(int i=0; i<getCookie.length; i++){
+
+			Cookie c = getCookie[i];
+
+			String name = c.getName(); // 쿠키 이름 가져오기
+
+			String value = c.getValue(); // 쿠키 값 가져오기
+			
+			System.out.println(name + " " + value);
+			}
+
+			}
 		
 		
 		model.addAttribute("RankList", list);
@@ -330,6 +371,52 @@ public class EatRestaurantsController {
 		return "restaurants/restaurntsSearchList";
 	}
 	
+
+	@RequestMapping(value="wannago.do", method={RequestMethod.GET, RequestMethod.POST})
+	public String wannago(int rs_seq, String rs_name, wannagoDto dto , Model model, HttpServletRequest req) {
+		
+		logger.info("EatRestaurantsController wannago"+new Date());
+		
+		EatMemberDto login = (EatMemberDto)req.getSession().getAttribute("login");
+		
+		
 	
+		System.out.println(rs_seq);
+		System.out.println(rs_name);	
+		
+		if(login != null && !login.getId().equals("")){
+		
+
+			dto.setId(login.getId());
+			dto.setRs_name(rs_name);
+			dto.setRs_seq(rs_seq);
+			
+			boolean isS = false;
+			
+			//이미 추가했는지 확인하기
+			int count = 0;
+			count = eatRestaurantsService.existwannago(dto);
+			
+			//존재하지않음
+			if(count==0) {
+			//추가 안되어있으면 추가하기
+			isS = eatRestaurantsService.addwannagolist(dto);
+			}
+			
+			//추가되어 있으면 삭제하기
+			else {
+			eatRestaurantsService.deletewannagolist(dto);
+			}
+			
+			
+			logger.info("addwannagolist isS:"+isS);
+			
+		}
+		
+		System.out.println("가고싶다 추가/삭제 완료!");
+		
+		return "redirect:/home.do";
+		
+	}
 
 }

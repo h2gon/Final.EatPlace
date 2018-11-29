@@ -156,4 +156,32 @@ SELECT *
   
   
   
+  
+  
+ <!-- 가고싶다 --> 
+
+<insert id="addwannagolist" parameterType="kh.c.five.model.wannagoDto">
+	INSERT INTO RESTAURANT_LIKES(SEQ, ID, RS_SEQ, RS_NAME)
+	VALUES(LIKES_SEQ.nextval, #{id}, #{rs_seq}, #{rs_name})
+</insert>
+
+<select id="getwannagolist" parameterType="String"
+	resultType="kh.c.five.model.wannagoDto">
+	SELECT * FROM RESTAURANT_LIKES
+	WHERE ID=#{id}
+</select>
+  
+<select id="existwannago" parameterType="kh.c.five.model.wannagoDto"
+	resultType="java.lang.Integer">
+	SELECT NVL(COUNT(*), 0) 
+	FROM RESTAURANT_LIKES
+	WHERE ID=#{id} AND RS_SEQ=#{rs_seq}
+</select>  
+
+<delete id="deletewannagolist">
+	DELETE FROM RESTAURANT_LIKES
+	WHERE ID=#{id} AND RS_SEQ=#{rs_seq}
+</delete>
+  
+  
   </mapper>
