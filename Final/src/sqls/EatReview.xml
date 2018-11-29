@@ -67,4 +67,6 @@
 									FROM RS_FILE 
 									WHERE FILE_NAME=#{file_name})
   </select>
+  
+  
   </mapper>

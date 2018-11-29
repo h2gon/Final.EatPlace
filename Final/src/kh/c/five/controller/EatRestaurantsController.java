@@ -412,5 +412,7 @@ public class EatRestaurantsController {
 		
 		return "restaurants/restaurantBest";
 	}
+	
+	
 
 }

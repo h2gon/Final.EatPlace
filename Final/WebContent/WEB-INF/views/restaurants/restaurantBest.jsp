@@ -1,3 +1,4 @@
+<%@page import="kh.c.five.model.ReviewDto"%>
 <%@page import="kh.c.five.model.RegiDto"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -120,7 +121,8 @@
 	
 	<br>
 	<%
-		List<RegiDto> bestlist = (List<RegiDto>)request.getAttribute("bestlist");		
+		List<RegiDto> bestlist = (List<RegiDto>)request.getAttribute("bestlist");
+		List<ReviewDto> reviewlist = (List<ReviewDto>)request.getAttribute("reviewlist");
 	%>
 	<section style="padding-top: 0;">
 		<ul style="list-style: none;">
@@ -139,25 +141,34 @@
 						<img src="<%=bestlist.get(i).getRs_picture() %>" style="width: 238px; height: 238px;">
 					</figure>
 					
-					<figcation style="float:left;">
+					<figcation style="float:left; text-align: left;">
 						<div style="padding-top: 13px">
 							<span style="font-size: 1.8rem;"><%=i+1 %>. <%=bestlist.get(i).getRs_name() %></span>&nbsp;&nbsp;<strong style="font-size: 1.8rem;">4.3</strong>
 							<p style="font-size: 1.063rem; color: gray;"><%=bestlist.get(i).getRs_address1() %></p>
 						</div>
 						
 						<div>
-							<p>리뷰 가져오기</p> 
+							<p><%-- <%=reviewlist.get(i).getRs_content() %> --%>리뷰</p> 
 						</div>						
 					</figcation>										
 				</div>
 			</li>
 			</div>
+			 <img alt="" src="img/button/hr.png" style="width: 55%; margin-left: 460px">
 			</td>
-			</tr>
-			<%} %>	
-			</table>	
+			</tr>			
+			<%} %>				
+			</table>							
 		</ul>
 	</section>
 
+	 <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
+      </div>
+      <!-- /.container -->
+      
+    </footer>
 </body>
 </html>
