@@ -451,7 +451,7 @@ function openCity(evt, cityName) {
 	<input type="radio" name="pos" id="pos2">
 		
 	 <ul>
-		<li style="text-align: center;"><a href="restaurantBest.do"><img alt="" src="img/main/한식.png" style="width: 450px; height: 300px"></a> <a><img alt="" src="img/main/한식.png" style="width: 450px; height: 300px; margin-left: 40px; margin-right: 40px"></a> <a><img alt="" src="img/main/한식.png" style="width: 450px; height: 300px"></a></li>
+		<li style="text-align: center;"><a href="restaurantBest.do?rs_category=한식"><img alt="" src="img/main/한식.png" style="width: 450px; height: 300px"></a> <a><img alt="" src="img/main/한식.png" style="width: 450px; height: 300px; margin-left: 40px; margin-right: 40px"></a> <a><img alt="" src="img/main/한식.png" style="width: 450px; height: 300px"></a></li>
 		<li></li>
 	     
 	</ul>

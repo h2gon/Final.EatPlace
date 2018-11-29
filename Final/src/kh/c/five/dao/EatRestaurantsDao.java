@@ -21,6 +21,8 @@ public interface EatRestaurantsDao {
 	
 	public List<RegiDto> getRankList(RegiDto dto);
 	
+	public List<RegiDto> bestlist(RegiDto dto);
+	
 	//detail -> review
 	public List<ReviewDto> SelectReview(int seq);
 	

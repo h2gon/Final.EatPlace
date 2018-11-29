@@ -154,7 +154,9 @@ SELECT *
 
 </select>
   
-  
+<select id="bestlist" parameterType="kh.c.five.model.RegiDto" resultType="kh.c.five.model.RegiDto">
+	SELECT * FROM EAT_RESTAURANT WHERE RS_CATEGORY=#{rs_category} ORDER BY RS_RATING
+</select>  
   
   
   

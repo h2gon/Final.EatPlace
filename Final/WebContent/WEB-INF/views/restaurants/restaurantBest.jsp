@@ -1,3 +1,5 @@
+<%@page import="kh.c.five.model.RegiDto"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -117,7 +119,38 @@
 	<img alt="" src="img/button/hr.png" style="width: 100%">
 	
 	<br>
-
+	<%
+		List<RegiDto> bestlist = (List<RegiDto>)request.getAttribute("bestlist");		
+	%>
+	<section style="padding-top: 0;">
+		<ul style="list-style: none;">
+			<%
+			for(int i = 0; i<5; i++){
+			%>
+			<div>
+			<li style="text-align: center; margin-left: 430px">
+				<div>
+					<figure style="float: left;"> 
+						<img src="<%=bestlist.get(i).getRs_picture() %>" style="width: 238px; height: 238px;">
+					</figure>
+					
+					<figcation style="float:left;">
+						<div style="padding-top: 13px">
+							<span style="font-size: 1.8rem;"><%=i+1 %>. <%=bestlist.get(i).getRs_name() %></span>&nbsp;&nbsp;<strong style="font-size: 1.8rem;">4.3</strong>
+							<p style="font-size: 1.063rem; color: gray;"><%=bestlist.get(i).getRs_address1() %></p>
+						</div>
+						
+						<div>
+							<p>리뷰 가져오기</p> 
+						</div>						
+					</figcation>										
+				</div>
+			</li>
+			</div>
+			<br><br>
+			<%} %>		
+		</ul>
+	</section>
 
 </body>
 </html>

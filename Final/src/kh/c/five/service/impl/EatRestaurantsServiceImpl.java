@@ -127,6 +127,11 @@ public class EatRestaurantsServiceImpl implements EatRestaurantsService {
 			eatRestaurantsDao.deletewannagolist(dto);
 		}
 
+		@Override
+		public List<RegiDto> bestlist(RegiDto dto) {
+			return eatRestaurantsDao.bestlist(dto);
+		}
+
 	
 
 }

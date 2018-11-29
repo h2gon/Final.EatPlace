@@ -155,6 +155,11 @@ public class EatRestaurantsDaoImpl implements EatRestaurantsDao {
 		sqlSession.delete(namespace+"deletewannagolist", dto);
 	}
 
+	@Override
+	public List<RegiDto> bestlist(RegiDto dto) {
+		return sqlSession.selectList(namespace + "bestlist", dto);
+	}
+
 	
 
 

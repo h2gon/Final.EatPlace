@@ -420,7 +420,12 @@ public class EatRestaurantsController {
 	}
 
 	@RequestMapping(value="restaurantBest.do",  method={RequestMethod.GET, RequestMethod.POST})
-	public String restaurantBest(Model model) {
+	public String restaurantBest(Model model, RegiDto dto) {
+		logger.info("EatRestaurantsController restaurantBest"+new Date());
+		
+		List<RegiDto> bestlist = eatRestaurantsService.bestlist(dto);
+		
+		model.addAttribute("bestlist", bestlist);
 		
 		return "restaurants/restaurantBest";
 	}
