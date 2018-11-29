@@ -191,14 +191,12 @@ public class EatRestaurantsController {
 
 		//쿠키생성
 		
-				Cookie cookie_rs_seq = new Cookie("rs_seq"+rs.getSeq(), rs.getSeq()+"");
-				cookie_rs_seq.setMaxAge(60*60*24); // 기간을 하루로 지정
-				response.addCookie(cookie_rs_seq);
-				
-				Cookie cookie_rs_name = new Cookie("rs_name"+rs.getRs_name(), rs.getRs_name());
-				cookie_rs_name.setMaxAge(60*60*24); // 기간을 하루로 지정
-				response.addCookie(cookie_rs_name);
-				
+		Cookie cookie_visit_rs = new Cookie(rs.getRs_name() , rs.getSeq()+"");
+		cookie_visit_rs.setMaxAge(60*60*24*365); // 기간을 1년으로 지정
+		cookie_visit_rs.setPath("/"); //모든경로에서 접근 가능하게 만듬
+		response.addCookie(cookie_visit_rs);
+		
+		
 				
 				//System.out.println(rs.toString());
 				//System.out.println(rs2.toString());
@@ -213,6 +211,7 @@ public class EatRestaurantsController {
 		
 		List<RegiDto> list = eatRestaurantsService.getRankList(dto);
 		
+	
 
 		//영훈 가고싶다
 		EatMemberDto login = (EatMemberDto)req.getSession().getAttribute("login");
@@ -223,22 +222,6 @@ public class EatRestaurantsController {
 			model.addAttribute("wannagolist", wannagolist);
 
 		}
-		
-		Cookie[] getCookie = req.getCookies();
-		if(getCookie != null){
-
-			for(int i=0; i<getCookie.length; i++){
-
-			Cookie c = getCookie[i];
-
-			String name = c.getName(); // 쿠키 이름 가져오기
-
-			String value = c.getValue(); // 쿠키 값 가져오기
-			
-			System.out.println(name + " " + value);
-			}
-
-			}
 		
 		
 		model.addAttribute("RankList", list);

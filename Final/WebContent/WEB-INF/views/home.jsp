@@ -15,6 +15,53 @@ EatMemberDto user = (EatMemberDto)session.getAttribute("login");
 <!DOCTYPE html>
 <html>
 
+<%-- 
+<!-- 쿠키삭제 -->
+<%
+
+Cookie[] cookies = request.getCookies();            // 요청정보로부터 쿠키를 가져온다.
+
+
+
+for(int i = 0 ; i<cookies.length; i++){                            // 쿠키 배열을 반복문으로 돌린다.
+
+
+
+cookies[i].setMaxAge(0);                        // 특정 쿠키를 더 이상 사용하지 못하게 하기 위해서는 
+
+cookies[i].setPath("/");                         //쿠키의 생성떄와 똑같이 지정해 주지 않으면 삭제가 되질 않는다고 한다(!)
+
+response.addCookie(cookies[i]);            // 해당 쿠키를 응답에 추가(수정)한다.
+
+}
+
+%>
+ --%>
+<%
+
+Cookie[] cookies = request.getCookies();            // 요청정보로부터 쿠키를 가져온다.
+
+
+
+System.out.println("현재 설정된 쿠키의 개수 : " + cookies.length);    // 쿠키가 저장된 배열의 길이를 가져온다.
+
+
+
+for(int i = 0 ; i<cookies.length; i++){                            // 쿠키 배열을 반복문으로 돌린다.
+
+
+
+System.out.println(i + "번째 쿠키 이름 : " + cookies[i].getName());            // 쿠키의 이름을 가져온다.
+
+System.out.println(i + "번째 쿠키에 설정된 값 : " + cookies[i].getValue());    // 쿠키의 값을 가져온다.
+
+
+
+}
+
+%>
+
+
 <!-- slideshow -->
 <style>
 	*{margin:0;padding:0;}
@@ -178,6 +225,27 @@ EatMemberDto user = (EatMemberDto)session.getAttribute("login");
 	<!-- 최근 본 맛집 -->
   <div id="London" class="w3-container city">
    <h1>London</h1>
+ 
+ <table border="1" width="250">
+
+<%
+for (int i=1;i<cookies.length;i++){ 
+
+%>
+
+<tr>
+
+<!-- 표현식 : 변수의 값 출력, 메소드의 결과값 출력, 연산 -->
+
+<%-- JSP주석 소스보기할때 보여지지 않음 --%>
+
+<td><%=i%></td>
+<td><a href="rsdetail.do?seq=<%=cookies[i].getValue()%>"><%= cookies[i].getName()%></a></td>
+
+<%} %>
+
+</table>
+ 
   
   </div>
 	<!-- 가고 싶다 -->
