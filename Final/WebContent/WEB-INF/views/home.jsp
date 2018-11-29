@@ -4,6 +4,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib  prefix="form" uri="http://www.springframework.org/tags/form" %>
 <fmt:requestEncoding value="UTF-8"/>
@@ -166,6 +168,7 @@ EatMemberDto user = (EatMemberDto)session.getAttribute("login");
 						        		
 						        		<tbody>
 						        		
+						        	
 						        		<c:if test="${empty wannagolist }">
 						        			가고싶은 가게를 추가해주세요~
 						        		</c:if>
