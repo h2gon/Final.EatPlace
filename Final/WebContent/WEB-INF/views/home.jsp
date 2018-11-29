@@ -14,332 +14,6 @@ EatMemberDto user = (EatMemberDto)session.getAttribute("login");
 <html>
 
 <style>
-@use postcss-color-function;
-@use postcss-nested;
-@import url('https://fonts.googleapis.com/css?family=Raleway:400,700,900');
-input:hover,
-input:focus {
-            padding: 12px 0;
-            outline: 0;
-            border: 1px solid transparent;
-            border-bottom: 1px solid #575756;
-            border-radius: 0;
-            background-position: 100% center;
-        } 
-        
-@use postcss-color-function;
-@use postcss-nested;
-@import url('https://fonts.googleapis.com/css?family=Raleway:400,700,900');
-input:hover,
-input:focus {
-            padding: 12px 0;
-            outline: 0;
-            border: 1px solid transparent;
-            border-bottom: 1px solid #575756;
-            border-radius: 0;
-            background-position: 100% center;
-        } 
-/* 마스크 뛰우기 */
-#mask3 {  
-    position:absolute;  
-    z-index:9000;  
-    background-color:#000;  
-    display:none;  
-    left:0;
-    top:0;
-} 
-/* 팝업으로 뜨는 윈도우 css  */ 
-.window3 {
-    display: none;
-    position:absolute;  
-    top:50px;
-    margin-left: -500px;
-    width:400px;
-    height:500px;
-    background-color:#FFF;
-    z-index:10000;   
-    
-    font-family: 'Open Sans', sans-serif;
-    background: #092756;
-    background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%),-moz-linear-gradient(top,  rgba(57,173,219,.25) 0%, rgba(42,60,87,.4) 100%), -moz-linear-gradient(-45deg,  #670d10 0%, #092756 100%);
-    background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -webkit-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -webkit-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
-    background: -o-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -o-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -o-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
-    background: -ms-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -ms-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -ms-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
-    background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), linear-gradient(to bottom,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), linear-gradient(135deg,  #670d10 0%,#092756 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
- }      
-
-/*----------- 로그인 팝업창------ */  
-/* 마스크 뛰우기 */
-#mask2 {  
-    position:absolute;  
-    z-index:9000;  
-    background-color:#000;  
-    display:none;  
-    left:0;
-    top:0;
-} 
-/* 팝업으로 뜨는 윈도우 css  */ 
-.window2 {
-    display: none;
-    position:absolute;  
-    top:50px;
-    right:20px;
-
-    width:300px;
-    height:500px;
-    background-color:#FFF;
-    z-index:10000;   
-    
-    font-family: 'Open Sans', sans-serif;
- 
- }      
-
-/*----------- 로그인 팝업창------ */  
-/* 마스크 뛰우기 */
-#mask {  
-    position:absolute;  
-    z-index:9000;  
-    background-color:#000;  
-    display:none;  
-    left:0;
-    top:0;
-} 
-/* 팝업으로 뜨는 윈도우 css  */ 
-.window {
-    display: none;
-    position:absolute;  
-    top:50px;
-    margin-left: -500px;
-    width:400px;
-    height:500px;
-    background-color:#FFF;
-    z-index:10000;   
-    
-    font-family: 'Open Sans', sans-serif;
-    background: #092756;
-    background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%),-moz-linear-gradient(top,  rgba(57,173,219,.25) 0%, rgba(42,60,87,.4) 100%), -moz-linear-gradient(-45deg,  #670d10 0%, #092756 100%);
-    background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -webkit-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -webkit-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
-    background: -o-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -o-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -o-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
-    background: -ms-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -ms-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -ms-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
-    background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), linear-gradient(to bottom,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), linear-gradient(135deg,  #670d10 0%,#092756 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
- }
- /* ----------회원가입 팝업창 ---------*/
- /* 마스크 뛰우기 */
-#mask1 {  
-    position:absolute;  
-    z-index:9000;  
-    background-color:#000;  
-    display:none;  
-    left:0;
-    top:0;
-} 
-/* 팝업으로 뜨는 윈도우 css  */ 
-.window1 {
-    display: none;
-    position:absolute;  
-    top:30px;
-	border-top: "-50px";
-    padding-left: 60px;
-    margin-left: -500px;
-    width:400px;
-    height:700px;
-    background-color:#FFF;
-    z-index:10000;   
-  
-    font-family: 'Open Sans', sans-serif;
-    background: #092756;
-    background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%),-moz-linear-gradient(top,  rgba(57,173,219,.25) 0%, rgba(42,60,87,.4) 100%), -moz-linear-gradient(-45deg,  #670d10 0%, #092756 100%);
-    background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -webkit-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -webkit-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
-    background: -o-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -o-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -o-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
-    background: -ms-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -ms-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -ms-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
-    background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), linear-gradient(to bottom,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), linear-gradient(135deg,  #670d10 0%,#092756 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
- }
- 
-/* 로그인 */
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
-.btn { display: inline-block; *display: inline; *zoom: 1; padding: 4px 10px 4px; margin-bottom: 0; font-size: 13px; line-height: 18px; color: #333333; text-align: center;text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75); vertical-align: middle; background-color: #f5f5f5; background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6); background-image: -ms-linear-gradient(top, #ffffff, #e6e6e6); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6)); background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6); background-image: -o-linear-gradient(top, #ffffff, #e6e6e6); background-image: linear-gradient(top, #ffffff, #e6e6e6); background-repeat: repeat-x; filter: progid:dximagetransform.microsoft.gradient(startColorstr=#ffffff, endColorstr=#e6e6e6, GradientType=0); border-color: #e6e6e6 #e6e6e6 #e6e6e6; border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25); border: 1px solid #e6e6e6; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); cursor: pointer; *margin-left: .3em; }
-.btn:hover, .btn:active, .btn.active, .btn.disabled, .btn[disabled] { background-color: #e6e6e6; }
-.btn-large { padding: 9px 14px; font-size: 15px; line-height: normal; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; }
-.btn:hover { color: #333333; text-decoration: none; background-color: #e6e6e6; background-position: 0 -15px; -webkit-transition: background-position 0.1s linear; -moz-transition: background-position 0.1s linear; -ms-transition: background-position 0.1s linear; -o-transition: background-position 0.1s linear; transition: background-position 0.1s linear; }
-.btn-primary, .btn-primary:hover { text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); color: #ffffff; }
-.btn-primary.active { color: rgba(255, 255, 255, 0.75); }
-.btn-primary { background-color: #4a77d4; background-image: -moz-linear-gradient(top, #6eb6de, #4a77d4); background-image: -ms-linear-gradient(top, #6eb6de, #4a77d4); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#6eb6de), to(#4a77d4)); background-image: -webkit-linear-gradient(top, #6eb6de, #4a77d4); background-image: -o-linear-gradient(top, #6eb6de, #4a77d4); background-image: linear-gradient(top, #6eb6de, #4a77d4); background-repeat: repeat-x; filter: progid:dximagetransform.microsoft.gradient(startColorstr=#6eb6de, endColorstr=#4a77d4, GradientType=0);  border: 1px solid #3762bc; text-shadow: 1px 1px 1px rgba(0,0,0,0.4); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.5); }
-.btn-primary:hover, .btn-primary:active, .btn-primary.active, .btn-primary.disabled, .btn-primary[disabled] { filter: none; background-color: #4a77d4; }
-.btn-block { width: 100%; display:block; }
-
-* { -webkit-box-sizing:border-box; -moz-box-sizing:border-box; -ms-box-sizing:border-box; -o-box-sizing:border-box; box-sizing:border-box; }
-
-.popbody { 
-    width: 100%;
-    height:100%;
-    font-family: 'Open Sans', sans-serif;
-    background: #092756;
-    background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%),-moz-linear-gradient(top,  rgba(57,173,219,.25) 0%, rgba(42,60,87,.4) 100%), -moz-linear-gradient(-45deg,  #670d10 0%, #092756 100%);
-    background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -webkit-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -webkit-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
-    background: -o-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -o-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -o-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
-    background: -ms-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -ms-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -ms-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
-    background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), linear-gradient(to bottom,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), linear-gradient(135deg,  #670d10 0%,#092756 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
-}
- 
-.gologin { 
-    position: absolute;
-    top: 200px;
-    left: 80%;
-    margin: -150px 0 0 -150px;
-    width:300px;
-    height:300px;
-}
-.gologin h1 { color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
-
-.gologin_main{
-	width: 270px;
-	height: 60px;
-	border: 1px solid blue;
-}
-
-
-
-///
-
-.css-tabs
-{
-    position:relative;
-    text-align:center; /* This is only if you want the tab items at the center */
-}
-.css-tabs ul.menu
-{
-    list-style-type:none;
-    display:inline-block; /* Change this to block or inline for non-center alignment */
-}
-.css-tabs ul.menu > li
-{
-    display:block;
-    float:left;
-
-}
-.css-tabs ul.menu li > a
-{
-    color:#000;
-    text-decoration:none;
-    display:block;
-    text-align:center;
-    width:125px;
-    height: 60px;
-    border:1px solid #808080;
-   	padding:5px 5px 5px 5px;
-    margin-right:5px;
-    border-top-left-radius:5px; -moz-border-radius-topleft:4px; -webkit-border-top-left-radius:5px;
-    border-top-right-radius:5px; -moz-border-radius-topright:4px; -webkit-border-top-right-radius:5px;
-    -moz-user-select:none;
-    cursor:pointer;
-}
-.css-tabs ul.menu li > div
-{
-    display:none;
-    position:absolute;
-    
-    width:100%;
-    left:0;
-    margin: 0 0 0 0;
-    z-index:-1;
-    text-align:left;
-    padding:0;
-}
-.css-tabs ul.menu li > div > p
-{	
-	height: 380px;
-    border:1px solid #808080;
- 	padding:10px;
-    margin:0;
-}
-.css-tabs ul.menu li > a:focus
-{
-    border-bottom:1px solid #fff;
-}
-.css-tabs ul.menu li:target > a
-{
-    cursor:default;
-    border-bottom:1px solid #fff;
-}
-
-.css-tabs ul.menu li:target > div
-{
-    display:block;
-}
-.gologin_bottom{
-	top: 440px;
-	width: 300px;
-	height: 60px;
-	border: 1px solid black;
-}
-
-////
-
-.gologin_container{
-	width: 270px;
-	height: 360px;
-	border: 1px solid blue;
-}
-
-
-.gologin_bottom{
-	top: 440px;
-	width: 300px;
-	height: 60px;
-	border: 1px solid blue;
-}
-
-
-.login { 
-    position: absolute;
-    top: 200px;
-    left: 50%;
-    margin: -150px 0 0 -150px;
-    width:300px;
-    height:300px;
-}
-.login h1 { color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
-
-.regi { 
-    position: absolute;
-    top: 200px;
-    left: 50%;
-    margin: -150px 0 0 -150px;
-    width:300px;
-    height:300px;
-}
-.regi h1 { color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
-
-.pinput { 
-    width: 100%; 
-    margin-bottom: 10px; 
-    background: rgba(0,0,0,0.3);
-    border: none;
-    outline: none;
-    padding: 10px;
-    font-size: 13px;
-    color: #fff;
-    text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
-    border: 1px solid rgba(0,0,0,0.3);
-    border-radius: 4px;
-    box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);
-    -webkit-transition: box-shadow .5s ease;
-    -moz-transition: box-shadow .5s ease;
-    -o-transition: box-shadow .5s ease;
-    -ms-transition: box-shadow .5s ease;
-    transition: box-shadow .5s ease;
-}
-.pinput:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); }
-
- }
- 
-</style>
-
-<style>
  img.card-img-top{
  	max-width: 453px;
  	min-width: 453px;
@@ -405,149 +79,6 @@ input:focus {
 }
 </style>
 
-
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script type="text/javascript"> 
-//<![CDATA[
-	
-	////////////
-	 function wrapWindowByMask2(){
-    	 
-        //화면의 높이와 너비를 구한다.
-        var maskHeight = $(document).height();  
-        var maskWidth = $(window).width();  
- 
-        //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
-        $("#mask2").css({"width":maskWidth,"height":maskHeight});  
- 
-        //애니메이션 효과 - 일단 0초동안 까맣게 됐다가 60% 불투명도로 간다.
- 
-        $("#mask2").fadeIn(0);      
-        $("#mask2").fadeTo("slow",0.6);    
- 
-        //윈도우 같은 거 띄운다.
-        $(".window2").show();
- 
-    }
-    
-    $(document).ready(function(){
-        //검은 막 띄우기
-        $(".openMask2").click(function(e){
-            e.preventDefault();
-            wrapWindowByMask2();
-        });
- 
-        //닫기 버튼을 눌렀을 때
-        $(".window2 .close").click(function (e) {  
-            //링크 기본동작은 작동하지 않도록 한다.
-            e.preventDefault();  
-            $("#mask2, .window1").hide();  
-        });       
- 
-        //검은 막을 눌렀을 때
-        $("#mask2").click(function () {  
-            $(this).hide();  
-            $(".window2").hide();  
- 
-        });      
- 
-    });
-	////////////
-    function wrapWindowByMask(){
- 
-        //화면의 높이와 너비를 구한다.
-        var maskHeight = $(document).height();  
-        var maskWidth = $(window).width();  
- 
-        //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
-        $("#mask").css({"width":maskWidth,"height":maskHeight});  
- 
-        //애니메이션 효과 - 일단 0초동안 까맣게 됐다가 60% 불투명도로 간다.
- 
-        $("#mask").fadeIn(0);      
-        $("#mask").fadeTo("slow",0.6);    
- 
-        //윈도우 같은 거 띄운다.
-        $(".window").show();
- 
-    }
- 
-    $(document).ready(function(){
-        //검은 막 띄우기
-        $(".openMask").click(function(e){
-            e.preventDefault();
-            wrapWindowByMask();
-        });
- 
-        //닫기 버튼을 눌렀을 때
-        $(".window .close").click(function (e) {  
-            //링크 기본동작은 작동하지 않도록 한다.
-            e.preventDefault();  
-            $("#mask, .window").hide();  
-        });       
- 
-        //검은 막을 눌렀을 때
-        $("#mask").click(function () {  
-            $(this).hide();  
-            $(".window").hide();  
- 
-        });      
- 
-    });
- 
-//////////////
-    function wrapWindowByMask1(){
-    	 
-        //화면의 높이와 너비를 구한다.
-        var maskHeight = $(document).height();  
-        var maskWidth = $(window).width();  
- 
-        //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
-        $("#mask1").css({"width":maskWidth,"height":maskHeight});  
- 
-        //애니메이션 효과 - 일단 0초동안 까맣게 됐다가 60% 불투명도로 간다.
- 
-        $("#mask1").fadeIn(0);      
-        $("#mask1").fadeTo("slow",0.6);    
- 
-        //윈도우 같은 거 띄운다.
-        $(".window1").show();
- 
-    }
-    
-    $(document).ready(function(){
-        //검은 막 띄우기
-        $(".openMask1").click(function(e){
-            e.preventDefault();
-            wrapWindowByMask1();
-        });
- 
-        //닫기 버튼을 눌렀을 때
-        $(".window1 .close").click(function (e) {  
-            //링크 기본동작은 작동하지 않도록 한다.
-            e.preventDefault();  
-            $("#mask1, .window1").hide();  
-        });       
- 
-        //검은 막을 눌렀을 때
-        $("#mask1").click(function () {  
-            $(this).hide();  
-            $(".window1").hide();  
- 
-        });      
- 
-    });
-    
-    
-    $(function(){
-        $("#tabLayout").tabs();
-   });
-
-//]]>
-</script>
-
-
-
   <head>
 
     <meta charset="utf-8">
@@ -589,14 +120,8 @@ input:focus {
     padding: 8px 16px;
     text-decoration: none;
 }
-/* .w3-container{
-	position: relative;
 
-	width: 400px;
-	
-		
-}  */
- .w3-animate-zoom{
+.w3-animate-zoom{
 	position: relative;
 	top: -45px;
 	right: -600px;
@@ -619,12 +144,6 @@ input:focus {
 <div  class="w3-container">
 <div id="id01" class="w3-modal">
  <div class="w3-modal-content w3-card-4 w3-animate-zoom">
- <!--  <header class="w3-container w3-blue"> 
-   <span onclick="document.getElementById('id01').style.display='none'" 
-   class="w3-closebtn w3-padding-top">&times;</span>
-   <h2>Header</h2>
-  </header> -->
-	
   <ul class="pagination w3-white w3-border-bottom" style="width:100%;">
    <li><a href="#" class="tablink" onclick="openCity(event, 'London')">최근 본 맛집</a></li>
    <li><a href="#" class="tablink" onclick="openCity(event, 'Paris')">가고싶다</a></li>
@@ -637,12 +156,18 @@ input:focus {
 	<!-- 가고 싶다 -->
   <div id="Paris" class="w3-container city">
    <h1>Paris</h1>
-  
   </div>
-
   <div class="w3-container w3-light-grey w3-padding">
-  
-	<button onclick="document.getElementById('id02').style.display='block'"  class="w3-btn w3-green w3-large">Login</button>
+  <%if(user == null){%>
+		<!-- <a class=" openMask" href="#">로그인</a> -->
+		<button onclick="document.getElementById('id02').style.display='block'"  class="w3-btn w3-green w3-large">Login</button>
+  <%} else{%>
+		<a class="" href="#" ><%=user.getId()%>님</a>
+		<button onclick="document.getElementById('id01').style.display='none'"  class="w3-btn w3-green w3-large">
+			<a id="_btnLogout" class="" href="logout.do" > 로그아웃 </a>
+		</button>
+		<!-- <a id="_btnLogout" class="" href="logout.do" > 로그아웃 </a> -->
+  <%} %>
     <button class="w3-btn w3-right w3-white w3-border" onclick="document.getElementById('id01').style.display='none'">Close</button>
   </div>
  </div>
@@ -653,54 +178,87 @@ input:focus {
 <div id="id02" class="w3-modal" style="">
   <span onclick="document.getElementById('id02').style.display='none'" class="w3-closebtn w3-hover-red w3-container w3-padding-hor-8 w3-display-topright">&times;</span>
   <div class="w3-modal-content w3-card-9 w3-animate-zoom" style="right:-10px; max-width:600px">
-  
     <div class="w3-center"><br>
     	<h1>Login</h1>
-    <!--   <img src="img_avatar4.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top"> -->
     </div>
-
     <div class="w3-container">
       <div class="w3-section">
       	<form action="loginAf.do" name="frmForm" id="_frmForm"  method="post">
 	        <label><b>Username</b></label>
-	        <input class="w3-input w3-border w3-margin-bottom" id="_userid" required="required" type="text" placeholder="Username">
+	        <input class="w3-input w3-border w3-margin-bottom" id="_userid" name="_userid" required="required" type="text" placeholder="Username">
 	        <label><b>Password</b></label>
-	        <input class="w3-input w3-border" type="text" id="_pwd" required="required" placeholder="Password">
-	
-			<button class="w3-btn w3-btn-block w3-green">회원가입</button>
-			<!-- <a  class="btn btn-primary btn-block btn-large openMask1" href="#" style="text-align: center;">회원가입</a> -->
-	        <button type="submit" class="w3-btn w3-btn-block w3-green" id="_btnLogin" style="text-align: center;">로그인</button>
-	                
-	        <!-- <input class="w3-check w3-margin-top" type="checkbox" checked="checked"> Remember me -->
+	        <input class="w3-input w3-border w3-margin-bottom" type="password" id="_pwd" name="_pwd" required="required" placeholder="Password">
+			<button onclick="document.getElementById('id03').style.display='block'"  class="w3-btn w3-btn-block w3-green">회원가입</button>
+	      
+	      
+	       <button type="submit" class="w3-btn w3-btn-block w3-green" id="_btnLogin" style="text-align: center;">로그인</button>
+	       <!--  <a href="#none" class="w3-btn w3-btn-block w3-green" id="_btnLogin" title="로그인">로그인</a> -->  
         	<a  class="dropdown-item" id="kakao-login-btn"></a>
        	</form>
       </div>
     </div>
-    
-    
-	
-<%-- 
- <div class="dropdown-item popbody" id="mask"></div> 
-            <div class="window">
-		   		<div class="login">
-					<h1>Login</h1>
-					<br>
-					<form action="loginAf.do" name="frmForm" id="_frmForm"  method="post">
-					     <input type="text" name="id" class="pinput" placeholder="Username" id="_userid" required="required" />
-					     <input type="password" name="pwd" class="pinput" placeholder="Password" id="_pwd" required="required" />
-					     <button type="submit" class="btn btn-primary btn-block btn-large" id="_btnLogin" style="text-align: center;">로그인</button>
-		               	 <a  class="btn btn-primary btn-block btn-large openMask1" href="#" style="text-align: center;">회원가입</a>
-		               	 <a  class="dropdown-item" id="kakao-login-btn"></a>
-					 </form>
-				</div>
-            </div> --%>
-
     <div class="w3-container w3-border-top w3-padding-hor-16 w3-light-grey">
       <button onclick="document.getElementById('id02').style.display='none'" type="button" class="w3-btn w3-red">Cancel</button>
-       
       <span class="w3-right w3-padding w3-hide-small">Forgot <a href="#">password?</a></span>
     </div>
+  </div>
+</div>
 
+
+<!-- 회원가입 모달 -->
+<div id="id03" class="w3-modal" style="">
+  <span onclick="document.getElementById('id03').style.display='none'" class="w3-closebtn w3-hover-red w3-container w3-padding-hor-8 w3-display-topright">&times;</span>
+  <div class="w3-modal-content w3-card-9 w3-animate-zoom" style="right:-10px; width:1000px; height: 700px;">
+  
+    <div class="w3-center"><br>
+    	<h1>회원가입</h1>
+    </div>
+    <div class="w3-container">
+      <div class="w3-section">
+      	<form action="" method="post" id="_frmForm2" name="frmForm2">
+      		<div class="form-group">
+                <label class="col-lg-2 control-label">아이디</label>
+                <div class="col-lg-10">
+					<input type="text" name="sid" id="_id2" class="form-control" size="40" placeholder="id"><br>
+					<a href="#none" id="_btnGetId" class="form-control" title="회원가입" style="height: 30px;">아이디체크</a>
+					<div id="_rgetid"></div>
+					<input type="text" name="id" id="_userid2" class="form-control" size="40" data-msg="아이디를 " readonly="readonly">
+                </div>
+            </div>
+            <div class="form-group">
+            	<label class="col-lg-2 control-label">패스워드</label>
+                <div class="col-lg-10">
+              	  	<input type="password" name="pwd" id="_pwd2" class="form-control" size="40" placeholder="password" data-msg="패스워드를 ">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">이름</label>
+                <div class="col-lg-10">
+               		<input type="text" name="name" id="_name" class="form-control onlyHangul" size="40" placeholder="name" data-msg="성함을 ">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">이메일</label>
+                <div class="col-lg-10">
+                	<input type="text" name="email" id="_email" size="40" class="form-control" placeholder="e-mail" data-msg="이메일을 ">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">별명</label>
+                <div class="col-lg-10">
+                	<input type="text" name="snickname" id="_nickname" class="form-control" placeholder="nickname" size="40">
+                	<a href="#none" id="_btnGetNickName" class="form-control" title="회원가입" style="height: 30px;">닉네임체크</a>
+							<div id="_rgetnickname"></div>
+					<input type="text" name="nickname" id="_usernickname" class="pinput" size="40" data-msg="별명을 " readonly="readonly"> 
+                </div>
+                <a href="#none" id="_btnRegi" class="form-control" style="height: 30px; title="회원가입">회원가입</a>
+            </div>
+       	</form>
+      </div>
+    </div>
+    <div class="w3-container w3-border-top w3-padding-hor-16 w3-light-grey">
+      <button onclick="document.getElementById('id03').style.display='none'" type="button" class="w3-btn w3-red">Cancel</button>      
+    </div>
   </div>
 </div>
 
@@ -749,156 +307,10 @@ function openCity(evt, cityName) {
 						<img alt=""	src="img/main/man-user.png">
 						</a>
 					</li>
-
-					
- 			<%--  <!-- 가고싶다 팝업창 및 로그인  -->
-          <div class="dropdown-item popbody" id="mask2"></div> 
-          	  <div class="window2" >
-          	  
-				<div id="tab2" class="css-tabs">
-				    <ul class="menu">
-				    <li id="item-1">
-				        <a href="#item-1">최근 본 맛집</a>
-				        <div>
-				        	<p>최근 본 맛집</p>
-				        </div>
-				        <div class="gologin_bottom">	
-	 				  	<%if(user == null){%>
-							<a class=" openMask" href="#">로그인</a>
-						<%} else{%>
-							<a class="" href="#" ><%=user.getId()%>님</a>
-							<a id="_btnLogout" class="" href="logout.do" > 로그아웃 </a>
-						<%} %>
-						</div>
-				    </li>
-				    <li id="item-2">
-				        <a href="#item-2">가고 싶다</a>
-				        <div>
-				        	<p>가고 싶다</p>
-				        </div>
-				    	<div class="gologin_bottom">	
-	 				  	<%if(user == null){%>
-							<a class="openMask" href="#">로그인</a>
-						<%} else{%>
-							<a class="" href="#" ><%=user.getId()%>님</a>
-							<a id="_btnLogout" class="" href="logout.do" > 로그아웃 </a>
-						<%} %>
-						</div>  
-				        
-				    </li>
-				    
-				    </ul> 
-				</div>
-            
- 			     
-        <!-- 로그인 팝업참 -->
-           <div class="dropdown-item popbody" id="mask"></div> 
-            <div class="window">
-		   		<div class="login">
-					<h1>Login</h1>
-					<br>
-					<form action="loginAf.do" name="frmForm" id="_frmForm"  method="post">
-					     <input type="text" name="id" class="pinput" placeholder="Username" id="_userid" required="required" />
-					     <input type="password" name="pwd" class="pinput" placeholder="Password" id="_pwd" required="required" />
-					     <button type="submit" class="btn btn-primary btn-block btn-large" id="_btnLogin" style="text-align: center;">로그인</button>
-		               	 <a  class="btn btn-primary btn-block btn-large openMask1" href="#" style="text-align: center;">회원가입</a>
-		               	 <a  class="dropdown-item" id="kakao-login-btn"></a>
-					 </form>
-				</div>
-            </div>
-            
-            
-             <!-- 회원가입 팝업창 -->
-        	<div class="dropdown-item" id="mask1"></div> 
-            <div class="window1">
-		   		<div class="regi">
-					<h1>회원가입</h1>
-					<br>
-					<div id="login_wrap">
-					<form action="" method="post" id="_frmForm2" name="frmForm2">
-					
-					<table class="content_table" style="width: 100%">
-					<colgroup>
-						<col style="width:40%">
-						<col style="width:60%">
-					</colgroup>
-					
-					<tr>
-						<th>아이디 첵크</th>
-						<td>
-							<input type="text" name="sid" id="_id2" class="pinput" size="40" placeholder="id"><br>
-							<a href="#none" id="_btnGetId" class="btn btn-primary btn-block btn-large" title="회원가입" style="height: 30px;">아이디체크</a>
-							<div id="_rgetid"></div>
-						</td>
-						
-					</tr>
-					
-					
-					<tr>
-						<th>아이디</th>
-						<td>
-							<input type="text" name="id" id="_userid2" class="pinput" size="40" data-msg="아이디를 " readonly="readonly"> 
-						</td>
-					</tr>
-					
-					<tr>
-						<th>패스워드</th>
-						<td>
-							<input type="text" name="pwd" id="_pwd2" class="pinput" size="40" placeholder="password" data-msg="패스워드를 "> 
-						</td>
-					</tr>
-					
-					<tr>
-						<th>이름</th>
-						<td>
-							<input type="text" name="name" id="_name" class="pinput" size="40" placeholder="name" data-msg="성함을 "> 
-						</td>
-					</tr>
-					<tr>
-						<th>닉네임 첵크</th>
-						<td>
-							<input type="text" name="snickname" id="_nickname" class="pinput" size="40" placeholder="nickname"><br>
-							<a href="#none" id="_btnGetNickName" class="btn btn-primary btn-block btn-large" title="회원가입" style="height: 30px;">닉네임체크</a>
-							<div id="_rgetnickname"></div>
-						</td>
-						
-					</tr>
-					<tr>
-						<th>닉네임</th>
-						<td>
-							<input type="text" name="nickname" id="_usernickname" class="pinput" size="40" data-msg="별명을 " readonly="readonly"> 
-						</td>
-					</tr>
-					<tr>
-						<th>이메일</th>
-						<td>
-							<input type="text" name="email" id="_email" size="40" class="pinput" placeholder="e-mail" data-msg="이메일을 "> 
-						</td>
-					</tr>
-					
-					<tr>
-						<td colspan="2" style="height: 50px; text-align: center;">
-						
-						<a href="#none" id="_btnRegi" class="btn btn-primary btn-block btn-large" style="height: 30px; title="회원가입">회원가입</a>
-						
-						<!-- <a href="#none" id="_btnLogin" class="btn btn-primary btn-block btn-large" style="height: 30px; title="로그인">로그인</a> -->					
-						
-						</td>					
-					</tr>					
-					
-					</table>					
-					
-					</form>				
-				
-				</div>
-				</div> --%>
-        
-          </ul>
-        </div>
+          		</ul>
+           </div>
       </div>
     </nav>
-	
- 
 	
     <header>
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -1176,20 +588,14 @@ function search() {
 		$("#main-search").attr({"target":"_self", "action":"search.do"}).submit();
 	}
 	
-	  
-	  
 }
 
 
-    
-$("#_btnLogin").click(function () {
-	 /* location.href = "login.do";  */
-	"login.do";  
+$("#_btnLogin").click(function () { 
+ 	 "login.do"; 
 });
 
-
 $("#_btnLogout").click(function () {
-	/* location.href = "logout.do"; */
  	"logout.do";
 });
 
@@ -1216,7 +622,6 @@ $("#_btnRegi").click(function() {
 		$("#_email").focus();
 	}
 	else{
-	
 		$("#_frmForm2").attr("action", "regiAf.do").submit();
 	}
 });
@@ -1290,12 +695,6 @@ $("#_btnGetNickName").click(function () {
 </script>
 
 
-
   </body>
-
-
-
-
-
 
 </html>

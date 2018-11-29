@@ -91,13 +91,19 @@ public class EatMembercontroller {
 	public String login() {
 		logger.info("KhMemberController login " + new Date());
 		
-		return "loginAf.do";
+		return "login";
 	}
 	
 	@RequestMapping(value="loginAf.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String loginAf(HttpServletRequest req, EatMemberDto mem)throws Exception {
 		logger.info("EatMembercontroller loginAf " + new Date());
+		logger.info("EatMembercontroller loginAf " + mem.toString());
+		String id = req.getParameter("_userid");
+		String pwd = req.getParameter("_pwd");
 		
+		mem.setId(id);
+		mem.setPwd(pwd);
+		logger.info("EatMembercontroller loginAf " + mem.toString());
 		EatMemberDto login = eatmemberservice.login(mem);
 		
 		if(login != null && !login.getId().equals("")) {			

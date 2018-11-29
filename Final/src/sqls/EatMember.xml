@@ -28,7 +28,7 @@
 
 <select id="login" parameterType="kh.c.five.model.EatMemberDto"
 	resultType="kh.c.five.model.EatMemberDto">
-	SELECT ID, NAME, EMAIL, AUTH
+	SELECT *
 	FROM EATMEMBER
 	WHERE ID=#{id} AND PWD=#{pwd}
 </select>
