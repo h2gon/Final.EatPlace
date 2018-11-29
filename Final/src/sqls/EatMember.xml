@@ -33,6 +33,16 @@
 	WHERE ID=#{id} AND PWD=#{pwd}
 </select>
 
+<insert id="insertLike" parameterType="kh.c.five.model.LikeDto">
+	INSERT INTO RESTAURANT_LIKES(SEQ, ID, RS_SEQ, RS_NAME)
+	VALUES(LIKES_SEQ.nextval, #{id}, #{rs_seq}, #{rs_name})
+</insert>
+
+<select id="getLike" parameterType="kh.c.five.model.LikeDto" resultType="kh.c.five.model.LikeDto">
+	SELECT *
+	FROM RESTAURANT_LIKES
+	WHERE RS_SEQ=#{rs_seq} AND ID=#{id}
+</select>
 
 </mapper>  
 

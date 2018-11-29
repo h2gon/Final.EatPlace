@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import kh.c.five.dao.EatMemberDao;
 import kh.c.five.model.EatMemberDto;
+import kh.c.five.model.LikeDto;
 
 
 @Repository
@@ -37,6 +38,24 @@ public class EatMemberDaoImpl implements EatMemberDao {
 	@Override
 	public EatMemberDto login(EatMemberDto mem) throws Exception {
 		return sqlSession.selectOne(namespace + "login", mem);
+	}
+
+	@Override
+	public boolean insertLike(LikeDto dto) {
+		int n = sqlSession.insert(namespace+"insertLike", dto);
+		return n>0?true:false;
+	}
+
+	@Override
+	public boolean getLike(LikeDto dto) {
+		LikeDto dt = sqlSession.selectOne(namespace+"getLike", dto);
+		int n=0;
+		if(dt==null) { // 검색 걸리는게 없음. 좋아요 안 해둠.
+			n=0;
+		}else if(dt!=null) {
+			n=1; // 검색 걸리는게 있음. 좋아요 해둠.
+		}
+		return n>0?true:false;
 	}
 
 }

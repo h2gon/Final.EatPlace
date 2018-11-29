@@ -1,6 +1,7 @@
 package kh.c.five.dao;
 
 import kh.c.five.model.EatMemberDto;
+import kh.c.five.model.LikeDto;
 
 public interface EatMemberDao {
 	
@@ -12,5 +13,8 @@ public interface EatMemberDao {
 	int getNickName(EatMemberDto mem);
 	
 	EatMemberDto login(EatMemberDto mem) throws Exception;
+	
+	boolean insertLike(LikeDto dto);
+	boolean getLike(LikeDto dto);
 	
 }

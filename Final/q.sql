@@ -129,8 +129,9 @@ CREATE SEQUENCE RSFILE_SEQ
 START WITH 1
 INCREMENT BY 1;
 
-select * from RS_FILE
-
+select * from RESTAURANT_LIKES
+select * from restaurant_likes
+where id='MangoMango' and rs_seq=3
 
 --검색 + 페이징 + 다중테이블 + UNION
 

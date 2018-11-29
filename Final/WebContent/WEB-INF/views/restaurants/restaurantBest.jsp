@@ -124,9 +124,14 @@
 	%>
 	<section style="padding-top: 0;">
 		<ul style="list-style: none;">
+		<table>
+		
+		
 			<%
 			for(int i = 0; i<5; i++){
 			%>
+			<tr>
+			<td>
 			<div>
 			<li style="text-align: center; margin-left: 430px">
 				<div>
@@ -147,8 +152,10 @@
 				</div>
 			</li>
 			</div>
-			<br><br>
-			<%} %>		
+			</td>
+			</tr>
+			<%} %>	
+			</table>	
 		</ul>
 	</section>
 

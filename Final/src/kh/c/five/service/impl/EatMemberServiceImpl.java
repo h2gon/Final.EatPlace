@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import kh.c.five.dao.EatMemberDao;
 import kh.c.five.model.EatMemberDto;
+import kh.c.five.model.LikeDto;
 import kh.c.five.service.EatMemberService;
 
 
@@ -37,6 +38,18 @@ public class EatMemberServiceImpl implements EatMemberService {
 	public EatMemberDto login(EatMemberDto mem) throws Exception {
 		// TODO Auto-generated method stub
 		return eatmemberdao.login(mem);
+	}
+
+	@Override
+	public boolean insertLike(LikeDto dto) {
+		
+		return eatmemberdao.insertLike(dto);
+	}
+
+	@Override
+	public boolean getLike(LikeDto dto) {
+		
+		return eatmemberdao.getLike(dto);
 	}
 
 }

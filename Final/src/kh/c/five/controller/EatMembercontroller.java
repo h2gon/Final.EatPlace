@@ -8,11 +8,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kh.c.five.model.EatMemberDto;
+import kh.c.five.model.LikeDto;
 import kh.c.five.model.YesMember;
 import kh.c.five.model.YesNickName;
 import kh.c.five.service.EatMemberService;
@@ -126,5 +128,21 @@ public class EatMembercontroller {
 
 		return "redirect:/home.do";
 	}
+	
+	@RequestMapping(value="insertLike.do", method={RequestMethod.GET, RequestMethod.POST})
+	public String insertLike(int rs_seq, String rs_name, String id) {
+		logger.info("EatMembercontroller insertLike " + new Date());
+		LikeDto dto=new LikeDto(0, id, rs_seq, rs_name);
+		boolean b = eatmemberservice.insertLike(dto);
+		
+		if(b) {
+			return "redirect:/rsdetail.do?seq="+rs_seq;
+			//return "rsdetail.do?seq="+rs_seq;
+		}else {
+			return "home";
+		}
+		
+	}
+	
 	
 }
