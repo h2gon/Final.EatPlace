@@ -269,7 +269,8 @@ for (int i=1;i<cookies.length;i++){
 						        		<c:forEach items="${wannagolist }" var="wl" varStatus="vs">
 						        		
 						        		<tr>
-						       				<td>${wl.rs_name }</td> 
+						        		<td><a href="rsdetail.do?seq=${wl.rs_seq }">${wl.rs_name }</a></td>
+						        		
 						        		</tr>
 						        		
 						        		</c:forEach>
