@@ -419,4 +419,10 @@ public class EatRestaurantsController {
 		
 	}
 
+	@RequestMapping(value="restaurantBest.do",  method={RequestMethod.GET, RequestMethod.POST})
+	public String restaurantBest(Model model) {
+		
+		return "restaurants/restaurantBest";
+	}
+
 }

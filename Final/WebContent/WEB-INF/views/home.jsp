@@ -15,6 +15,31 @@ EatMemberDto user = (EatMemberDto)session.getAttribute("login");
 <!DOCTYPE html>
 <html>
 
+<!-- slideshow -->
+<style>
+	*{margin:0;padding:0;}
+	ul,li{list-style:none;}
+	#slide{height:300px;position:relative;overflow:hidden;}
+	#slide ul{width:400%;height:100%;transition:1s;}
+	#slide ul:after{content:"";display:block;clear:both;}
+	#slide li{float:left;width:25%;height:100%;}
+	/*#slide li:nth-child(1){background:#faa;}
+	#slide li:nth-child(2){background:#ffa;}
+	#slide li:nth-child(3){background:#faF;}
+	#slide li:nth-child(4){background:#aaf;} */
+	#slide input{display:none;}
+	#slide label{display:inline-block;vertical-align:middle;width:10px;height:10px;border:2px solid #666;background:#fff;transition:0.3s;border-radius:50%;cursor:pointer;}
+	#slide .pos{text-align:center;position:absolute;bottom:10px;left:0;width:100%;text-align:center;}
+	#pos1:checked~ul{margin-left:0%;}
+	#pos2:checked~ul{margin-left:-100%;}
+	#pos3:checked~ul{margin-left:-200%;}
+	#pos4:checked~ul{margin-left:-300%;}
+	#pos1:checked~.pos>label:nth-child(1){background:#666;}
+	#pos2:checked~.pos>label:nth-child(2){background:#666;}
+	#pos3:checked~.pos>label:nth-child(3){background:#666;}
+	#pos4:checked~.pos>label:nth-child(4){background:#666;}
+</style>
+
 <style>
  img.card-img-top{
  	max-width: 453px;
@@ -413,11 +438,34 @@ function openCity(evt, cityName) {
 	 <%} %>
 		    
     </div>
+    
     <br><br>
-      
-	<img alt="" src="img/button/hr.png" style="width: 100%"> 
-	
-	<br><br><br><br> 
+    <img alt="" src="img/button/hr.png" style="width: 100%">
+    
+    <br><br><br>
+    
+    <p style="margin-left: 58px; font-size: 24px; color: #ff7100"><strong>추천 식당</strong></p>
+<!-- slideshow -->
+  <div id="slide" style="margin-left: 65px; margin-right: 65px; height: 350px">
+	<input type="radio" name="pos" id="pos1" checked>
+	<input type="radio" name="pos" id="pos2">
+		
+	 <ul>
+		<li style="text-align: center;"><a href="restaurantBest.do"><img alt="" src="img/main/한식.png" style="width: 450px; height: 300px"></a> <a><img alt="" src="img/main/한식.png" style="width: 450px; height: 300px; margin-left: 40px; margin-right: 40px"></a> <a><img alt="" src="img/main/한식.png" style="width: 450px; height: 300px"></a></li>
+		<li></li>
+	     
+	</ul>
+	<p class="pos" style="top: 330px">
+		<label for="pos1"></label>
+		<label for="pos2"></label>
+		<!-- <label for="pos3"></label>
+		<label for="pos4"></label> -->
+	</p>
+</div>
+    
+    <br>
+    <img alt="" src="img/button/hr.png" style="width: 100%">
+	<br><br><br>
 	
  	<section class="p-0" id="portfolio">
       <div class="container-fluid p-0">

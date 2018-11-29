@@ -1,0 +1,123 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<fmt:requestEncoding value="UTF-8" />
+    
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- SEARCH -->
+<style>
+   
+    .in-line{
+      width:900px;	
+      height:42px; 
+    }
+   
+    input[type="text"]{
+      width:70%;
+      height:100%;
+      border:none;
+      font-size:1.213rem;
+      padding-left: 20px;
+      font-style: inherit;
+      display:inline;
+      outline:none;
+      box-sizing: border-box;
+      color:black;
+
+    }
+    input[type=button]{
+      width: 30%;
+      height:100%;
+      background-color: lightgray;
+      border:none;
+      background-color: white;
+      font-size:1.313rem;
+      color:#042AaC;
+      outline:none;
+      display:inline;
+      margin-left: -25px;
+      box-sizing: border-box;
+    }
+ 
+</style>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>EAT PLACE: Best Restaurants</title>
+
+<!-- Bootstrap core CSS -->
+<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="css/modern-business.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/creative.min.css"
+	rel="stylesheet">
+
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/vendor/magnific-popup/magnific-popup.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+</head>
+<body>
+
+<!-- Navigation -->
+	<nav class="navbar fixed-top navbar-expand-lg navbar-dark fixed-top"
+		style="background-color: #c53211; padding-bottom: 10px">
+		<div class="container" style="float: left; width: 20%">
+			<a class="navbar-brand" href="home.do">EAT PLACE</a>
+			<button class="navbar-toggler navbar-toggler-right" type="button"
+				data-toggle="collapse" data-target="#navbarResponsive"
+				aria-controls="navbarResponsive" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		</div>
+		
+		<div style="float: left; width: 60%">
+		<form action="" id="main-search" name="main-search" method="get"> 
+ 			 <div class="in-line">
+		      <strong><input type="text" onkeypress="if(event.keyCode==13) {search();}"  id="main-keyword" name="s_keyword" value="" placeholder="지역, 식당 또는 음식" style="color: #575756; border-bottom-left-radius: 20px; border-top-left-radius: 20px"></strong>
+		      <strong><input type="button" onclick="search()"  value="검색" style="border-bottom-right-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-top-left-radius: 20px; background-color: darkorange; color: white;"></strong>
+		     </div>
+		</form>
+		</div>
+		
+		<div class="container" style="float: left; width: 20%">
+			<div class="collapse navbar-collapse" id="navbarResponsive">				
+				<ul class="navbar-nav ml-auto">
+					
+					<li class="nav-item"><a class="nav-link"
+						href="restaurntsList.do"><strong
+							style="color: white; margin-left: 20px">맛집 리스트</strong></a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="restaurantsInsert.do"><strong
+							style="color: white; margin-left: 20px">맛집 추가</strong></a></li>
+					<li class="nav-item" style="margin-left: 20px"><a
+						class="nav-link openMask" href="#"> <img alt=""
+							src="img/main/man-user.png">
+					</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<header>	          		         
+         <div style="text-align: center; padding-top: 50px; background-color: white;">	           
+            <h1 style="color: black;"><strong>EAT PLACE 한식 BEST 5</strong></h1>
+            <h3 style="color: black;"><strong>"혼자 알기 아까운 곳!"</strong></h3>
+            <br>   			   
+        </div> 
+	</header>
+	
+	<img alt="" src="img/button/hr.png" style="width: 100%">
+	
+	<br>
+
+
+</body>
+</html>
