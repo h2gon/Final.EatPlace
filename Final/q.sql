@@ -19,12 +19,17 @@ alter table eat_restaurant add (rs_keyword varchar2(4000));
 
 alter table eat_restaurant modify (rs_menu varchar2(4000));
 
-select * from eat_restaurant
+select * from mango2
 select * from restaurant_review
 select * from RESTAURANT_INFO
 select count(*) from RESTAURANT_REVIEW where rs_seq=23
 SELECT COUNT (*) FROM RESTAURANT_LIKES where RS_SEQ=23
 select * from restaurant_review where rs_seq=23
+
+select * from all_tab_cols
+where table_name = 'EAT_RESTAURANT'
+
+ALTER TABLE EAT_RESTAURANT MODIFY RS_Rating NULL;
 
 --���� ����
 CREATE TABLE RESTAURANT_INFO(

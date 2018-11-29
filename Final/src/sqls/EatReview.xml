@@ -60,7 +60,7 @@
   </select>
   
   <!-- 사진 파일과 레스토랑 번호에 맞는 리뷰 불러오기 -->
-  <select id="getReviewWPic" parameterType="kh.c.five.model.fileDto" resultType="kh.c.five.model.ReviewParam">
+  <select id="getReviewWPic" parameterType="kh.c.five.model.fileDto" resultType="kh.c.five.model.ReviewDto">
   	SELECT *
   	FROM RESTAURANT_REVIEW
   	WHERE RS_SEQ=#{rs_seq} AND SEQ=(SELECT DISTINCT RV_SEQ 

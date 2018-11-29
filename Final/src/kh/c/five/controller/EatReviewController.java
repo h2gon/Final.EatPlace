@@ -152,11 +152,11 @@ public class EatReviewController {
 		logger.info(fdto.toString());
 		
 		
-		ReviewDto review = eatReviewService.getReviewWPic(fdto);
-		String rcontent=review.getRs_content();
-		model.addAttribute("review",review);
-		System.out.println(rcontent);
-		return rcontent;
+	//	ReviewDto review = eatReviewService.getReviewWPic(fdto);
+	//	String rcontent=review.getRs_content();
+	//	model.addAttribute("review",review);
+	//	System.out.println(rcontent);
+		return "test";
 		
 	}
 
