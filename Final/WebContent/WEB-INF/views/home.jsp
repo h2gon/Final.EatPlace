@@ -513,15 +513,15 @@ function openCity(evt, cityName) {
     
     <br><br><br>
     
-    <p style="margin-left: 58px; font-size: 24px; color: #ff7100"><strong>추천 식당</strong></p>
+    <p style="margin-left: 58px; font-size: 24px; color: #ff7100"><strong>믿고 보는 맛집 리스트</strong></p>
 <!-- slideshow -->
   <div id="slide" style="margin-left: 65px; margin-right: 65px; height: 350px">
 	<input type="radio" name="pos" id="pos1" checked>
 	<input type="radio" name="pos" id="pos2">
 		
 	 <ul>
-		<li style="text-align: center;"><a href="restaurantBest.do?rs_category=한식"><img alt="" src="img/main/한식.png" style="width: 450px; height: 300px"></a> <a><img alt="" src="img/main/한식.png" style="width: 450px; height: 300px; margin-left: 40px; margin-right: 40px"></a> <a><img alt="" src="img/main/한식.png" style="width: 450px; height: 300px"></a></li>
-		<li></li>
+		<li style="text-align: center;"><a href="KFBest.do?rs_category=한식"><img alt="" src="img/main/한식.png" style="width: 450px; height: 300px"></a> <a href="GuBest.do?rs_address1=강남"><img alt="" src="img/main/한식.png" style="width: 450px; height: 300px; margin-left: 40px; margin-right: 40px"></a> <a href="keyword.do?rs_keyword=삼겹살"><img alt="" src="img/main/한식.png" style="width: 450px; height: 300px"></a></li>
+		<li style="text-align: center;"><a href="keyword.do?rs_keyword=디저트"><img alt="" src="img/main/한식.png" style="width: 450px; height: 300px"></a> <a href="keyword.do?rs_keyword=술집"><img alt="" src="img/main/한식.png" style="width: 450px; height: 300px; margin-left: 40px; margin-right: 40px"></a> <a href="keyword.do?rs_keyword=데이트코스"><img alt="" src="img/main/한식.png" style="width: 450px; height: 300px"></a></li>
 	     
 	</ul>
 	<p class="pos" style="top: 330px">

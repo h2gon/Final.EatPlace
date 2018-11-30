@@ -160,6 +160,21 @@ public class EatRestaurantsDaoImpl implements EatRestaurantsDao {
 		return sqlSession.selectList(namespace + "bestlist", dto);
 	}
 
+	@Override
+	public ReviewDto BestReview(int seq) {		
+		return sqlSession.selectOne(namespace + "BestReview", seq);
+	}
+
+	@Override
+	public List<RegiDto> Gubestlist(RegiDto dto) {		
+		return sqlSession.selectList(namespace + "Gubestlist", dto);
+	}
+
+	@Override
+	public List<RegiDto> keywordbestlist(RegiDto dto) {
+		return sqlSession.selectList(namespace + "keywordbestlist", dto);
+	}
+
 	
 
 

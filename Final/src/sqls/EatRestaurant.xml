@@ -158,6 +158,13 @@ SELECT *
 	SELECT * FROM EAT_RESTAURANT WHERE RS_CATEGORY=#{rs_category} ORDER BY RS_RATING
 </select>  
   
+<select id="Gubestlist" parameterType="kh.c.five.model.RegiDto" resultType="kh.c.five.model.RegiDto">
+	SELECT * FROM EAT_RESTAURANT WHERE RS_ADDRESS1 LIKE '%'||#{rs_address1}||'%' ORDER BY RS_RATING
+</select>
+
+<select id="keywordbestlist" parameterType="kh.c.five.model.RegiDto" resultType="kh.c.five.model.RegiDto">
+	SELECT * FROM EAT_RESTAURANT WHERE RS_KEYWORD LIKE '%'||#{rs_keyword}||'%' ORDER BY RS_RATING
+</select>
   
   
  <!-- 가고싶다 --> 
@@ -184,6 +191,12 @@ SELECT *
 	DELETE FROM RESTAURANT_LIKES
 	WHERE ID=#{id} AND RS_SEQ=#{rs_seq}
 </delete>
-  
+ 
+ <select parameterType="java.lang.Integer" id="BestReview" resultType="kh.c.five.model.ReviewDto"> 
+ 	
+ 	SELECT RS_CONTENT FROM(
+	select ROWNUM AS RNUM, RS_CONTENT from RESTAURANT_REVIEW WHERE RS_SEQ = #{seq}  order BY RS_RATING DESC)
+	WHERE RNUM = 1
+ </select>  
   
   </mapper>

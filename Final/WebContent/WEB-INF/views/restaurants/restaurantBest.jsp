@@ -47,6 +47,11 @@
       box-sizing: border-box;
     }
  
+p.test {
+    width: 400px;   
+    word-wrap: break-word;
+}
+
 </style>
 
 <head>
@@ -124,7 +129,7 @@
 		List<RegiDto> bestlist = (List<RegiDto>)request.getAttribute("bestlist");
 		List<ReviewDto> reviewlist = (List<ReviewDto>)request.getAttribute("reviewlist");
 	%>
-	<section style="padding-top: 0;">
+	<section style="padding-top: 15px; padding-bottom: 50px">
 		<ul style="list-style: none;">
 		<table>
 		
@@ -148,7 +153,12 @@
 						</div>
 						
 						<div>
-							<p><%-- <%=reviewlist.get(i).getRs_content() %> --%>리뷰</p> 
+							<p class="test"><%if(reviewlist.get(i).getRs_content() == null){ %>
+								리뷰가 아직 없습니다
+								<%}else{ %>
+									<%=reviewlist.get(i).getRs_content() %>
+								<%} %>
+							 </p> 
 						</div>						
 					</figcation>										
 				</div>

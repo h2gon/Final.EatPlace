@@ -21,9 +21,14 @@ public interface EatRestaurantsService {
 
 	public List<RegiDto> getRankList(RegiDto dto);
 	
+	// bestlist
 	public List<RegiDto> bestlist(RegiDto dto);
+	public List<RegiDto> Gubestlist(RegiDto dto);
+	public List<RegiDto> keywordbestlist(RegiDto dto);
 	
 	public List<ReviewDto> SelectReview(int seq);
+	
+	public ReviewDto BestReview(int seq);
 	
 	//readcount
 	public void readcount (int seq);

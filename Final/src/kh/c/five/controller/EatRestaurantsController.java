@@ -402,17 +402,67 @@ public class EatRestaurantsController {
 		
 	}
 
-	@RequestMapping(value="restaurantBest.do",  method={RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="KFBest.do",  method={RequestMethod.GET, RequestMethod.POST})
 	public String restaurantBest(Model model, RegiDto dto) {
 		logger.info("EatRestaurantsController restaurantBest"+new Date());
 		
 		List<RegiDto> bestlist = eatRestaurantsService.bestlist(dto);
+		List<ReviewDto> reviewlist = new ArrayList<>();
+		for (int i = 0; i < bestlist.size(); i++) {
+			ReviewDto review = eatRestaurantsService.BestReview(bestlist.get(i).getSeq());
+			System.out.println(review.toString());
+			reviewlist.add(review);
+						
+		}				
 		
+		model.addAttribute("reviewlist", reviewlist);
 		model.addAttribute("bestlist", bestlist);
 		
 		return "restaurants/restaurantBest";
 	}
 	
+	@RequestMapping(value="GuBest.do", method={RequestMethod.GET, RequestMethod.POST})
+	public String GuBest(Model model, RegiDto dto) {
+		logger.info("EatRestaurantsController GuBest "+ new Date());
+		System.out.println(dto.toString());
+		List<RegiDto> GuBestlist = eatRestaurantsService.Gubestlist(dto);
+		List<ReviewDto> reviewlist = new ArrayList<>();
+		for (int i = 0; i < GuBestlist.size(); i++) {
+			ReviewDto review = eatRestaurantsService.BestReview(GuBestlist.get(i).getSeq());
+			eatRestaurantsService.getRating(GuBestlist.get(i).getSeq());
+			reviewlist.add(review);
+			System.out.println(GuBestlist.get(i).toString());
+		}
+		
+		
+		/*for (int i = 0; i < reviewlist.size(); i++) {
+			System.out.println(reviewlist.get(i).toString());
+		}*/
+		
+		model.addAttribute("bestlist", GuBestlist);
+		model.addAttribute("reviewlist", reviewlist);
+		
+		return "restaurants/restaurantBest";
+	}
+	
+	@RequestMapping(value="keyword.do", method={RequestMethod.GET, RequestMethod.POST})
+	public String keyword(Model model, RegiDto dto) {
+		logger.info("EatRestaurantsController GuBest "+ new Date());
+		System.out.println(dto.toString());
+		List<RegiDto> keywordlist = eatRestaurantsService.keywordbestlist(dto);
+		List<ReviewDto> reviewlist = new ArrayList<>();
+		for (int i = 0; i < keywordlist.size(); i++) {
+			ReviewDto review = eatRestaurantsService.BestReview(keywordlist.get(i).getSeq());
+			eatRestaurantsService.getRating(keywordlist.get(i).getSeq());
+			reviewlist.add(review);
+			System.out.println(keywordlist.get(i).toString());
+		}
+		
+		model.addAttribute("bestlist", keywordlist);
+		model.addAttribute("reviewlist", reviewlist);
+		
+		return "restaurants/restaurantBest";
+	}
 	
 
 }

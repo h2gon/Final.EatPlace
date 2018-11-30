@@ -132,6 +132,21 @@ public class EatRestaurantsServiceImpl implements EatRestaurantsService {
 			return eatRestaurantsDao.bestlist(dto);
 		}
 
+		@Override
+		public ReviewDto BestReview(int seq) {
+			return eatRestaurantsDao.BestReview(seq);
+		}
+
+		@Override
+		public List<RegiDto> Gubestlist(RegiDto dto) {
+			return eatRestaurantsDao.Gubestlist(dto);
+		}
+
+		@Override
+		public List<RegiDto> keywordbestlist(RegiDto dto) {
+			return eatRestaurantsDao.keywordbestlist(dto);
+		}
+
 	
 
 }
