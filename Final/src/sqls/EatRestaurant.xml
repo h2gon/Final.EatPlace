@@ -155,15 +155,15 @@ SELECT *
 </select>
   
 <select id="bestlist" parameterType="kh.c.five.model.RegiDto" resultType="kh.c.five.model.RegiDto">
-	SELECT * FROM EAT_RESTAURANT WHERE RS_CATEGORY=#{rs_category} ORDER BY RS_RATING
+	SELECT * FROM EAT_RESTAURANT WHERE RS_CATEGORY=#{rs_category} ORDER BY RS_RATING DESC
 </select>  
   
 <select id="Gubestlist" parameterType="kh.c.five.model.RegiDto" resultType="kh.c.five.model.RegiDto">
-	SELECT * FROM EAT_RESTAURANT WHERE RS_ADDRESS1 LIKE '%'||#{rs_address1}||'%' ORDER BY RS_RATING
+	SELECT * FROM EAT_RESTAURANT WHERE RS_ADDRESS1 LIKE '%'||#{rs_address1}||'%' ORDER BY RS_RATING DESC
 </select>
 
 <select id="keywordbestlist" parameterType="kh.c.five.model.RegiDto" resultType="kh.c.five.model.RegiDto">
-	SELECT * FROM EAT_RESTAURANT WHERE RS_KEYWORD LIKE '%'||#{rs_keyword}||'%' ORDER BY RS_RATING
+	SELECT * FROM EAT_RESTAURANT WHERE RS_KEYWORD LIKE '%'||#{rs_keyword}||'%' ORDER BY RS_RATING DESC
 </select>
   
   

@@ -148,7 +148,7 @@ p.test {
 					
 					<figcation style="float:left; text-align: left;">
 						<div style="padding-top: 13px">
-							<span style="font-size: 1.8rem;"><%=i+1 %>. <%=bestlist.get(i).getRs_name() %></span>&nbsp;&nbsp;<strong style="font-size: 1.8rem;">4.3</strong>
+							<span style="font-size: 1.8rem;"><%=i+1 %>. <%=bestlist.get(i).getRs_name() %></span>&nbsp;&nbsp;<strong style="font-size: 1.8rem;"><%=bestlist.get(i).getRs_rating() %></strong>
 							<p style="font-size: 1.063rem; color: gray;"><%=bestlist.get(i).getRs_address1() %></p>
 						</div>
 						
