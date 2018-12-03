@@ -191,10 +191,10 @@ public class EatRestaurantsController {
 
 		//쿠키생성
 		
-		Cookie cookie_visit_rs = new Cookie(rs.getRs_name() , rs.getSeq()+"");
+		/*Cookie cookie_visit_rs = new Cookie(rs.getRs_name() , rs.getSeq()+"");
 		cookie_visit_rs.setMaxAge(60*60*24*365); // 기간을 1년으로 지정
 		cookie_visit_rs.setPath("/"); //모든경로에서 접근 가능하게 만듬
-		response.addCookie(cookie_visit_rs);
+		response.addCookie(cookie_visit_rs);*/
 		
 		
 				
