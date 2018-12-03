@@ -465,4 +465,110 @@ public class EatRestaurantsController {
 	}
 	
 
+	//레스토랑 정보 수정 view
+	
+			@RequestMapping(value="rsedit.do", method={RequestMethod.GET, RequestMethod.POST})
+			public String rsedit(int seq,Model model, HttpServletResponse response) throws Exception {
+				logger.info("EatRestaurantsController detail"+new Date());
+				//	logger.info("InsertRS InsertDto.toString:"+dto.toString());
+					
+					//readcount
+					eatRestaurantsService.readcount(seq);
+					//review count
+					int reviewcount =eatRestaurantsService.getReviewNum(seq);
+					model.addAttribute("reviewcount", reviewcount);
+					//likes count
+					int likescount = eatRestaurantsService.getLikesCount(seq);
+					model.addAttribute("likescount",likescount);
+					
+					RegiDto rs=null;		
+					rs=eatRestaurantsService.getrs(seq);
+					
+					RegiDto rs2 = null;
+					rs2=eatRestaurantsService.getrs2(seq);
+					
+					//review-----
+					List<ReviewDto> list = new ArrayList<ReviewDto>();
+					list = eatRestaurantsService.SelectReview(seq);
+					logger.info("Reviewlist:"+list);
+					model.addAttribute("reviewlist", list);
+					//---------
+					model.addAttribute("rs", rs);
+					model.addAttribute("rs2", rs2);
+					
+					/*List<String> imagelist = eatReviewService.getImage(seq);
+					model.addAttribute("imagelist",imagelist);*/
+					List<String> imagelist = eatReviewService.getImageDT(seq);
+					model.addAttribute("imagelist",imagelist);
+
+					//쿠키생성
+					/*
+					Cookie cookie_visit_rs = new Cookie(rs.getRs_name() , rs.getSeq()+"");
+					cookie_visit_rs.setMaxAge(60*60*24*365); // 기간을 1년으로 지정
+					cookie_visit_rs.setPath("/"); //모든경로에서 접근 가능하게 만듬
+					response.addCookie(cookie_visit_rs);
+					*/
+					
+							
+							//System.out.println(rs.toString());
+							//System.out.println(rs2.toString());
+							
+							/*return "restaurants/restaurantDetail?seq="+seq;*/
+					return "restaurants/rsedit";
+			}
+			
+
+			@RequestMapping(value="rseditAF_1.do", method={RequestMethod.GET, RequestMethod.POST})
+			public String rseditAF_1(int seq, HttpServletRequest req) throws Exception{
+				
+				logger.info("EatRestaurantsController rseditAF_1"+new Date());
+				
+				RegiDto rs = null;
+				rs=eatRestaurantsService.getrs(seq);
+				
+				RegiDto rs2 = null;
+				rs2=eatRestaurantsService.getrs2(seq);
+			
+				rs.setRs_name(req.getParameter("form1_rs_name"));
+				rs.setRs_address1(req.getParameter("form1_rs_address1"));
+				rs.setRs_address2(req.getParameter("form1_rs_address2"));
+				rs.setRs_category(req.getParameter("form1_rs_category"));
+				rs.setRs_menu(req.getParameter("form1_rs_menu"));
+				rs.setRs_rating(Integer.parseInt(req.getParameter("form1_rs_rating")));
+				rs.setRs_readcount(Integer.parseInt(req.getParameter("form1_rs_readcount")));
+				rs.setRs_keyword(req.getParameter("form1_rs_keyword"));
+			
+				
+				System.out.println(rs.toString());
+					
+				eatRestaurantsService.editrs(rs);
+				
+				return "redirect:/home.do";
+			}
+			
+			@RequestMapping(value="rseditAF_2.do", method={RequestMethod.GET, RequestMethod.POST})
+			public String rseditAF_2(int seq, HttpServletRequest req) throws Exception{
+				
+				logger.info("EatRestaurantsController rseditAF_2"+new Date());
+				
+				RegiDto rs = null;
+				rs = eatRestaurantsService.getrs(seq);
+				
+				RegiDto rs2 = null;
+				rs2=eatRestaurantsService.getrs2(seq);
+				
+				rs2.setSeq(seq);
+				rs2.setRs_name(req.getParameter("form2_rs_name"));
+				rs2.setRs_time(req.getParameter("form2_rs_time"));
+				rs2.setRs_phone(req.getParameter("form2_rs_phone")); 
+				rs2.setRs_price(req.getParameter("form2_rs_price"));
+				rs2.setRs_parking(req.getParameter("form2_rs_parking"));
+				
+				System.out.println(rs2.toString());
+				
+				eatRestaurantsService.editrs2(rs2);
+				
+				return "redirect:/home.do";
+			}
+			
 }

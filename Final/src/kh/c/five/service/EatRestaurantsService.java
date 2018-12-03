@@ -59,4 +59,10 @@ public interface EatRestaurantsService {
 	public int existwannago(wannagoDto dto);
 
 	public void deletewannagolist(wannagoDto dto);
+	
+
+	public void editrs(RegiDto dto);
+	
+	public void editrs2(RegiDto dto);
+	
 }

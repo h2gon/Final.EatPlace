@@ -61,4 +61,6 @@ public interface EatRestaurantsDao {
 
 		public void deletewannagolist(wannagoDto dto);
 	
+		void editrs(RegiDto dto);
+		void editrs2(RegiDto dto);
 }

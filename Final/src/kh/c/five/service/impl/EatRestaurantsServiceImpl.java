@@ -147,6 +147,14 @@ public class EatRestaurantsServiceImpl implements EatRestaurantsService {
 			return eatRestaurantsDao.keywordbestlist(dto);
 		}
 
-	
+		@Override
+		public void editrs(RegiDto dto) {
+			eatRestaurantsDao.editrs(dto);
+		}
+
+		@Override
+		public void editrs2(RegiDto dto) {
+			eatRestaurantsDao.editrs2(dto);
+		}
 
 }

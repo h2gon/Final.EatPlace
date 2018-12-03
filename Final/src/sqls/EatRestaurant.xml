@@ -198,5 +198,24 @@ SELECT *
 	select ROWNUM AS RNUM, RS_CONTENT from RESTAURANT_REVIEW WHERE RS_SEQ = #{seq}  order BY RS_RATING DESC)
 	WHERE RNUM = 1
  </select>  
-  
+
+ 
+ 
+ <update id="editrs" parameterType="kh.c.five.model.RegiDto">
+
+	UPDATE EAT_RESTAURANT SET
+	RS_ADDRESS1=#{rs_address1}, RS_ADDRESS2=#{rs_address2}, RS_CATEGORY=#{rs_category}, RS_MENU=#{rs_menu}, RS_RATING=#{rs_rating}, RS_READCOUNT=#{rs_readcount}, RS_KEYWORD=#{rs_keyword}    
+	WHERE SEQ=#{seq}
+	
+</update>
+
+<update id="editrs2" parameterType="kh.c.five.model.RegiDto">
+
+	UPDATE RESTAURANT_INFO SET 
+	RS_TIME=#{rs_time}, RS_PHONE=#{rs_phone}, RS_PRICE=#{rs_price}, RS_PARKING=#{rs_parking}
+	WHERE RS_SEQ = #{seq}
+	
+</update>
+ 
+
   </mapper>

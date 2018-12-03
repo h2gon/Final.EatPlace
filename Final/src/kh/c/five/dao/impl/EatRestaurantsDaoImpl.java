@@ -176,7 +176,15 @@ public class EatRestaurantsDaoImpl implements EatRestaurantsDao {
 	}
 
 	
+	@Override
+	public void editrs(RegiDto dto) {
+		sqlSession.update(namespace +"editrs",dto);
+	}
 
+	@Override
+	public void editrs2(RegiDto dto) {
+		sqlSession.update(namespace +"editrs2",dto);
+	}
 
 	
 	
