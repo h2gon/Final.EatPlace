@@ -64,6 +64,8 @@ System.out.println(i + "번째 쿠키에 설정된 값 : " + cookies[i].getValue
 
 <!-- slideshow -->
 <style>
+
+	
 	*{margin:0;padding:0;}
 	ul,li{list-style:none;}
 	#slide{height:300px;position:relative;overflow:hidden;}
@@ -638,10 +640,39 @@ function openCity(evt, cityName) {
     <!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
+    
+      <div style="text-align:left; color: white; font-size: 35px; padding-top: 20px;">
+      	<p>EAT PLACE</p>
+      <img alt="" src="img/button/hr.png" style="width: 5%; height: 1px">
+      <p style="color: gray; font-size: 13px">Eat, Share, Be Happy</p>
       </div>
-      <!-- /.container -->
       
+      <br> 
+      
+      <div>
+	     <span style="color: gray;">
+	      	<img alt="" src="img/button/hr.png" style="width: 100%; height: 1px">
+	      	 인기지역:<a style="text-decoration: none;" href="search.do?s_keyword=이태원">이태원</a>|<a style="text-decoration: none;" href="search.do?s_keyword=강남" >강남</a>|<a style="text-decoration: none;" href="search.do?s_keyword=홍대">홍대</a>|<a style="text-decoration: none;" href="search.do?s_keyword=가로수길">가로수길</a>|<a style="text-decoration: none;" href="search.do?s_keyword=건대">건대</a>|<a style="text-decoration: none;" href="search.do?s_keyword=대학로">대학로</a>|<a style="text-decoration: none;" href="search.do?s_keyword=신촌">신촌</a>|<a style="text-decoration: none;" href="search.do?s_keyword=혜화">혜화</a>|<a style="text-decoration: none;" href="search.do?s_keyword=잠실">잠실</a>|<a style="text-decoration: none;" href="search.do?s_keyword=왕십리">왕십리</a>|<a style="text-decoration: none;" href="search.do?s_keyword=압구정">압구정</a>|<a style="text-decoration: none;" href="search.do?s_keyword=사당">사당</a>|<a style="text-decoration: none;" href="search.do?s_keyword=명동">명동</a>|<a style="text-decoration: none;" href="search.do?s_keyword=혜화">혜화</a> 
+	      	 <br><br>	       	 	
+	      	<img alt="" src="img/button/hr.png" style="width: 100%; height: 1px">
+	     </span>
+      </div>
+      
+      <div>      
+        <p style="color: gray;">㈜ 잇플레이스
+        	<br>
+			서울특별시 강남구 페이퍼컴퍼니
+			<br>
+			KH정보교육원			
+			<br>			
+			고객센터: 02-0112-0119
+			<br><br>
+			
+			© 2018 Eat Place Co., Ltd. All rights reserved.
+		</p>
+	  </div>
+      <!-- /.container -->
+      </div>
     </footer>
 
     <!-- Bootstrap core JavaScript -->
