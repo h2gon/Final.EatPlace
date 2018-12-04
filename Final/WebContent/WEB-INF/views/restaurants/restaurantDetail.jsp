@@ -358,13 +358,17 @@ input:focus {
 					<div style="align-items: right;vertical-align: center" >
 					
 					<img id="review_btn" class="review_writing_button" onclick="WriteReview('${rs.seq}');" src="img/button/reviewIcon.png">
-
+<%-- 
 					<c:if test="${isLike ne true }">
 					<a href="insertLike.do?rs_seq=${rs.seq }&rs_name=${rs.rs_name}&id=${login.id}"><img id="like_btn" src="img/button/likeIcon.png" ></a>
 					</c:if>
 					<c:if test="${isLike eq true }">
 					<a href="#none"><img id="like_btn_delete" src="img/button/likeIconR.png" ></a>
-					</c:if>
+					</c:if> --%>
+					
+					<a href="wannago.do?rs_seq=${rs.seq }&rs_name=${rs.rs_name}"><img id="like_btn" src="img/button/likeIcon.png" ></a>
+					
+					
 					</div>
 					</div>
 			
