@@ -156,7 +156,7 @@ public class EatRestaurantsController {
 
 	//디테일
 	@RequestMapping(value="rsdetail.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String details(int seq,Model model, HttpServletResponse response) throws Exception {
+	public String details(int seq,Model model, HttpServletResponse response , HttpServletRequest req, wannagoDto dto) throws Exception {
 		logger.info("EatRestaurantsController detail"+new Date());
 	//	logger.info("InsertRS InsertDto.toString:"+dto.toString());
 		
@@ -189,6 +189,26 @@ public class EatRestaurantsController {
 		List<String> imagelist = eatReviewService.getImageDT(seq);
 		model.addAttribute("imagelist",imagelist);
 
+		
+		EatMemberDto login = (EatMemberDto)req.getSession().getAttribute("login");
+		
+		if(login != null && !login.getId().equals("")){
+			
+
+			dto.setId(login.getId());
+			dto.setRs_name(rs.getRs_name());
+			dto.setRs_seq(rs.getSeq());
+			
+			boolean isS = false;
+			
+			//이미 추가했는지 확인하기
+			int count = 0;
+			count = eatRestaurantsService.existwannago(dto);
+			
+			model.addAttribute("count",count);
+			}
+			
+	
 		//쿠키생성
 		
 		/*Cookie cookie_visit_rs = new Cookie(rs.getRs_name() , rs.getSeq()+"");

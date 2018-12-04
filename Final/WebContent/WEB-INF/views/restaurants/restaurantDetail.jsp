@@ -366,7 +366,13 @@ input:focus {
 					<a href="#none"><img id="like_btn_delete" src="img/button/likeIconR.png" ></a>
 					</c:if> --%>
 					
+					<c:if test="${count eq 0 }">
 					<a href="wannago.do?rs_seq=${rs.seq }&rs_name=${rs.rs_name}"><img id="like_btn" src="img/button/likeIcon.png" ></a>
+					</c:if>
+					
+					<c:if test="${count ne 0 }">
+					<a href="wannago.do?rs_seq=${rs.seq }&rs_name=${rs.rs_name}"><img id="like_btn" src="img/button/likeIconR.png" ></a>
+					</c:if>
 					
 					
 					</div>
