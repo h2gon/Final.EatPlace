@@ -144,7 +144,20 @@ if(imagelist==null||imagelist.size()<3){
 	<%
 }else{
 	%>
-	<div class="container" id="rs_seq" value="${rs.seq }">
+	<div class="owl-carousel123 owl-theme" >
+<%
+for(int i=0;i<imagelist.size();i++){
+%>
+	<div class="item" >
+	<a href="#" data-toggle="modal" data-target="#carouselModal">
+		<img src="<%=imagelist.get(i).getFile_name()%>" style="height: 300px;width:auto">
+	</a>
+	</div>
+<%
+}
+%>
+</div>
+	<%-- <div class="container" id="rs_seq" value="${rs.seq }">
 		<div class="row">
 		<%
 		for (int i=0;i<3;i++){
@@ -167,12 +180,33 @@ if(imagelist==null||imagelist.size()<3){
 			</div>
 		<%} %>
 	  </div> 
-	</div> 
+	</div>  --%>
 	
 	<%
 }
 %>
 
+<script type="text/javascript">
+//plugin call
+$(document).ready(function(){
+$('.owl-carousel123').owlCarousel({
+	loop : true,
+	margin : 10,
+    autoWidth:true,
+	responsive : {
+		0 : {
+			items : 1
+		},
+		600 : {
+			items : 3
+		},
+		1000 : {
+			items : 5
+		}
+	}
+})
+});
+</script>
 
 <div class="modal fade" id="carouselModal" tabindex="-1" role="dialog" aria-labelledby="carouselModalLabel">
   <div class="modal-dialog" role="document">
@@ -192,21 +226,23 @@ if(imagelist==null||imagelist.size()<3){
         </div>
 	<div>
 	<p id="p_id">${review.id }</p>
-	<c:choose>
-	<c:when test="${review.rs_rating eq 1 }">
-	<img alt="" src="./img/like/1-1.png" style="width: 60px;" msg="1" title="1점" >
-	</c:when>
-	<c:when test="${review.rs_rating eq 3 }">
-	<img alt="" src="./img/like/3-1.png" style="width: 60px;" msg="3" title="3점" >
-	</c:when>
-	<c:when test="${review.rs_rating eq 5 }">
-	<img alt="" src="./img/like/5-1.png" style="width: 60px;" msg="5" title="5점" >
-	</c:when>
-	</c:choose>
-
+	<span id = "p_rating" value="">
+		<img id = "p_ratingP" alt="" src="./img/like/3-1.png" style="width: 60px;" msg="3" title="3점" >
+		<%-- <c:choose>
+		<c:when test="${review.rs_rating eq 1 }">
+		<img alt="" src="./img/like/1-1.png" style="width: 60px;" msg="1" title="1점" >
+		</c:when>
+		<c:when test="${review.rs_rating eq 3 }">
+		<img alt="" src="./img/like/3-1.png" style="width: 60px;" msg="3" title="3점" >
+		</c:when>
+		<c:when test="${review.rs_rating eq 5 }">
+		<img alt="" src="./img/like/5-1.png" style="width: 60px;" msg="5" title="5점" >
+		</c:when>
+		</c:choose> --%>
+	</span>
 	<p id="pause">${review.rs_content }</p>
 	</div>
-        <div id="sync2" class="owl-carousel thumbnails-wrap" style="width: 700px"> <!-- 이게 아래에 있는 썸네일 -->
+        <div id="sync2" class="owl-carousel thumbnails-wrap"> <!-- 이게 아래에 있는 썸네일 -->
         		<%
 		for (int i=0;i<imagelist.size();i++){
 			if(imagelist.get(i).getFile_name().contains("https://")){
@@ -356,7 +392,7 @@ if(imagelist==null||imagelist.size()<3){
 
 				</section>
 				
-				<!-- 리뷰 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~REVIEW~~~~~~~~~~~~~~~~~~~~~~~~-->
+		<!-- 리뷰 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~REVIEW~~~~~~~~~~~~~~~~~~~~~~~~-->
 				 <%          
          // EatReviewService eatReviewService ;
 		  EatReviewDao eatReviewDao = EatReviewDaoImpl.getInstance();
@@ -423,34 +459,50 @@ if(imagelist==null||imagelist.size()<3){
           </section>
           
          
-         
 		<div class="review_main">
 		
-		
-		<table border="1">
+		<table>
 		<%if(list.size()<5){
 		
 			for(int i = 0 ; i< list.size();i++){	
 		%>
-		<tr>
+		<tr style="border: none;">
 		
-		 <td style="width: 700px;">
-		<!-- <label> -->
+		 <td style="text-align: center; width: 66; border: none;" >
 		
 		<%
 		 nickName = eatReviewDao.getNickName(list.get(i).getId());
 		 System.out.println("nickName:"+nickName+" id: "+list.get(i).getId());
 		%>
 		
-		<%-- 아이디 : <%=list.get(i).getId() %>	 --%>
-		<div style="size: 100px; position: relative;">
+		<%if(nickName != "" || !nickName.isEmpty()){ %>		
+		<div style="size: 80px; position: relative;">
 		<span style="position: absolute; text-align: center; line-height: 60px; width: 63px; height: 100px;">
 		<%=nickName %>
 		</span>
-		<img alt="" src="./image/circular-shape-silhouette (1).png">
+		<img alt="" src="./img/circular-shape-silhouette (1).png">
+		</div>
+		<%}else{ %>
+		<div style="size: 80px; position: relative;">
+		<span style="position: absolute; text-align: center; line-height: 60px; width: 63px; height: 100px;">
+		<%=list.get(i).getId() %>
+		</span>
+		<img alt="" src="./img/circular-shape-silhouette (1).png">
 		</div>
 		
-		<%-- 닉네임 : <%=nickName %> --%>
+		<%} %>		
+						
+		</td>
+		
+		<!-- 내용  -->		
+		<td width="80" style="border: none">
+		<%-- <input type="text" style="width: 480px;" name="content" value="<%=list.get(i).getRs_content()%>"> --%>
+		<textarea rows="7" cols="70" style="border: 0;" readonly="readonly"><%=list.get(i).getRs_content()%></textarea>
+		</td>
+		
+		<!-- 좋아요,싫어요,별로 -->
+		<td width="30" style="border: none">
+		
 		<%switch(list.get(i).getRs_rating()){
 		case 1:
 		%>						
@@ -465,12 +517,13 @@ if(imagelist==null||imagelist.size()<3){
 		default: %>
 		<img alt="" src="./img/like/3-1.png" style="width: 60px;" id="p3" msg="3" title="3점" >
 		<%} %>
-	
-		<!-- </label> -->
-		
-		<span style="text-align: right;">
-		<input type="text" style="width: 480px;" name="content" value="<%=list.get(i).getRs_content()%>">
-		
+		</td>
+		</tr>
+		<!--  -->
+		<tr>
+		<td width="66" style="border: none">
+		</td> 
+		<td width= "80" style="border: none" >
 		<%
 		int rv_seq = list.get(i).getSeq();
 		
@@ -486,35 +539,47 @@ if(imagelist==null||imagelist.size()<3){
 				fileName[0] = f_list.get(a).getFile_name();
 				System.out.println("f_list.size(): "+f_list.size());
 				System.out.println("fileName has just 1:"+fileName[0]);
+				if(fileName[0].contains("https://")){
+					%>
+					<img alt="" src="<%=fileName[0] %>" style="width: 75px; height: 75px;" onclick="reviewDetail(<%=rv_seq%>)">
+					<% 
+				}else{
 				%>
-				<img alt="" src="/image/<%=fileName[0] %>" style="width: 75px; height: 75px;">
-				<% 
+				<img alt="" src="/image/<%=fileName[0] %>" style="width: 75px; height: 75px;" onclick="reviewDetail(<%=rv_seq%>)">
+				<%} 
 			}
 			else{
 				fileName = new String[f_list.size()];				
 				fileName[a] = f_list.get(a).getFile_name();
 				System.out.println("f_list.size(): "+f_list.size());
 				System.out.println("fileName more than 1:"+fileName[a]);
+				if(fileName[a].contains("https://")){
+					%>
+					<img alt="" src="<%=fileName[a] %>" style="width: 75px; height: 75px;" onclick="reviewDetail(<%=rv_seq%>)">
+					<%
+				}else{
 				%>
-				<img alt="" src="/image/<%=fileName[a] %>" style="width: 75px; height: 75px;">
+				<img alt="" src="/image/<%=fileName[a] %>" style="width: 75px; height: 75px;" onclick="reviewDetail(<%=rv_seq%>)">
 				<%
+				 }
 				}
 			}
 		}else if(f_list == null){
 			System.out.println("null");
 		}			
-		%>
-	
+		%>		
+		</td>
 		
-		
-		</span>
-							 
-		 </td>	
-		 			       
+		<td style="border: none">
+		</td>
+					 			       
         </tr>
-		
-		
-		
+        
+        <tr style="border: none">
+		<td colspan="3" width="80" style="border-bottom: 1px solid #c8c8c8;"><!-- <img alt="-----------------------------------------------" src=""> --></td>
+		</tr>		 			       
+        	
+        
 		<%} %>	
 		
 		<%}else{ %>
@@ -522,11 +587,10 @@ if(imagelist==null||imagelist.size()<3){
 		
 		<%
 		//reviewlist more than 5----------------------------------------------------------
-		/* for(int i =0 ; i<list.size() ; i++){  */
-		for(int i =0 ; i<5 ; i++){ %>
-		<tr>
-		
-		 <td style="width: 700px;">
+		for(int i =0 ; i<list.size() ; i++){ %> 
+		<%-- for(int i =0 ; i<5 ; i++){ %> --%>
+		<tr style="border: none" id="_tr<%=i %>" name="_tr<%=i %>">		
+		<td style="text-align: center; border: none;" width="66;">
 		<!-- <label> -->
 		
 		
@@ -535,15 +599,28 @@ if(imagelist==null||imagelist.size()<3){
 		 System.out.println("nickName:"+nickName+" id: "+list.get(i).getId());
 		%>
 				
-		<%-- 아이디 : <%=list.get(i).getId() %>	
-		닉네임 : <%=nickName %> --%>
-		<div style="size: 100px; position: relative;">
+		<%if(nickName != "" || !nickName.isEmpty()){ %>		
+		<div style="size: 80px; position: relative;">
 		<span style="position: absolute; text-align: center; line-height: 60px; width: 63px; height: 100px;">
 		<%=nickName %>
 		</span>
-		<img alt="" src="./image/circular-shape-silhouette (1).png">
+		<img alt="" src="./img/circular-shape-silhouette (1).png">
+		</div>
+		<%}else{ %>
+		<div style="size: 80px; position: relative;">
+		<span style="position: absolute; text-align: center; line-height: 60px; width: 63px; height: 100px;">
+		<%=list.get(i).getId() %>
+		</span>
+		<img alt="" src="./img/circular-shape-silhouette (1).png">
 		</div>
 		
+		<%} %>
+		</td>		
+		<td style="border: none">
+		<textarea rows="7" cols="70" style="border: 0;" readonly="readonly"><%=list.get(i).getRs_content()%></textarea>
+		</td>
+		<!-- 좋아요 별로 -->
+		<td width="30" style="border: none">
 		<%switch(list.get(i).getRs_rating()){
 		case 1:
 		%>						
@@ -558,12 +635,15 @@ if(imagelist==null||imagelist.size()<3){
 		default: %>
 		<img alt="" src="./img/like/3-1.png" style="width: 60px;" id="p3" msg="3" title="3점" >
 		<%} %>
+		</td>		
+		</tr>
 		
-		<!-- </label> -->
-		<span style="text-align: right;">				
-		<input type="text" style="width: 480px;" name="content" value="<%=list.get(i).getRs_content()%>">
 		
-		<%-- <form action="getImage.do?rv_seq=<%=list.get(i).getSeq() %>"> --%>
+		<!--  -->
+		<tr style="border: none" id="_tr<%=i %>" name="_tr<%=i %>">
+		<td width="66" style="border: none">
+		</td> 
+		<td style="border: none">
 		<%		
 		List<fileDto> f_list = eatReviewDao.getRv_Image(list.get(i).getSeq());
 		//List<String> f_list = (List<String>) request.getAttribute("getImg");
@@ -577,9 +657,15 @@ if(imagelist==null||imagelist.size()<3){
 					//fileName[0] = f_list.get(a);
 					System.out.println("f_list.size(): "+f_list.size());
 					System.out.println("fileName has just 1:"+fileName[0]);
+					if(fileName[0].contains("https://")){
+						%>
+						<img alt="" src="<%=fileName[0] %>" style="width: 75px; height: 75px;" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
+						<% 
+					}else{
 					%>
-					<img alt="" src="/image/<%=fileName[0] %>" style="width: 75px; height: 75px;">
-					<% 
+					<img alt="" src="/image/<%=fileName[0] %>" style="width: 75px; height: 75px;" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
+					
+					<%} 
 				}
 				else{
 					fileName = new String[f_list.size()];				
@@ -587,9 +673,14 @@ if(imagelist==null||imagelist.size()<3){
 					//fileName[a] = f_list.get(a);
 					System.out.println("f_list.size(): "+f_list.size());
 					System.out.println("fileName more than 1:"+fileName[a]);
+					if(fileName[a].contains("https://")){
 					%>
-					<img alt="" src="/image/<%=fileName[a] %>" style="width: 75px; height: 75px;">
-					<% 
+					<img alt="" src="<%=fileName[a] %>" style="width: 75px; height: 75px;" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
+					<%
+					}else{
+					%>
+					<img alt="" src="/image/<%=fileName[a] %>" style="width: 75px; height: 75px;" data-toggle="modal" data-target="#myModal"<%-- onclick="reviewDetail(<%=list.get(i).getSeq()%>)" --%>>
+					<% }
 					}
 			}
 		}else if(f_list == null){
@@ -597,19 +688,85 @@ if(imagelist==null||imagelist.size()<3){
 		}	
 		
 		
-		%>		
-
-			 </span>
-		 </td>	
-		 			       
-        </tr>
+		%>	
+		</td>
+		<td style="border: none">
+		</td>	
+		</tr>
+				
+		
+		<tr style="border: none">
+		<td colspan="3" width="80" style="border-bottom: 1px solid #c8c8c8;"><!-- <img alt="-----------------------------------------------" src=""> --></td>
+		
+		</tr>
+		
+                               
          <%}
-		}
+		 }
 		}
          %>
          </table>
+  <!-- Review Modal -->       
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal with Dark Overlay</h4>
+        </div>
+        <div class="modal-body">
+          <p>This modal has a dark overlay.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
          
+         <%if(list.size()>5){
+         %>
+         
+         <button onclick="show_morelist()">더보기</button> 
+         
+         <%}
+          
+         %>
          </div>
+         
+       
+         
+       <script type="text/javascript">
+     	function reviewDetail(seq) {
+			alert("seq:"+seq);
+			$("#myModal").modal({backdrop:"static"});
+			
+			//location.href = "reviewDetail.do?seq="+seq;
+		}
+       
+       function show_morelist(index) {
+    	  /*  var Rv_array = [];
+    	   var temp, item, a, i, id;
+    	      	   
+    	   console.log("review_item: "+review_item);
+    	   Rv_array = review_item.split("],");
+    	   console.log("Rv_array.length: "+Rv_array.length);
+    	   
+    	   var remain_array = new Array[Rv_array.length - 5];
+    	       	       	   
+    	    for(i = 0;i<Rv_array.length;i++){
+    	  	console.log("console array: "+Rv_array[i]);
+    	    } */
+    	  	
+    	   	    	  
+       }       
+       </script>
+		
+       <br><br>
+          <!-- review_main end -->
 <script type="text/javascript">
 
 
@@ -643,10 +800,18 @@ $(document).ready(function(){
 			type:'post',
 			async:true,
 			success:function(data){
-				alert("success");
+			//	alert("success");
 			//	alert(data.review.rs_content);
 				$("#pause").html(data.review.rs_content);
 				$("#p_id").html(data.review.id);
+				//$("#p_rating").attr('value',data.review.rs_rating);
+				/* if(data.review.rs_rating==1){
+					$("#p_ratingP").attr('src','./img/like/1-1.png');	
+				}else if(data.review.rs_rating==3){
+					$("#p_ratingP").attr('src','./img/like/3-1.png');
+				}else(("#p_rating").attr('value')==5){
+					$("#p_ratingP").attr('src','./img/like/5-1.png');
+				}  */
 			},
 			error:function(req, stu, err){
 				alert("error");

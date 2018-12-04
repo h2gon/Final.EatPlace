@@ -66,6 +66,7 @@
   	WHERE RS_SEQ=#{rs_seq} AND SEQ=(SELECT DISTINCT RV_SEQ 
 									FROM RS_FILE 
 									WHERE FILE_NAME=#{file_name})
+
   </select>
   
   
