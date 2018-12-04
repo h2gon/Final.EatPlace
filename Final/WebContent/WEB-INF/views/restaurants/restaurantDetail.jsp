@@ -374,7 +374,6 @@ input:focus {
 					<a href="wannago.do?rs_seq=${rs.seq }&rs_name=${rs.rs_name}"><img id="like_btn" src="img/button/likeIconR.png" ></a>
 					</c:if>
 					
-					
 					</div>
 					</div>
 			
