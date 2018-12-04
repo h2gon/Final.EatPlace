@@ -4,12 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,15 +17,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import kh.c.five.model.EatMemberDto;
-import kh.c.five.model.InsertDto;
 import kh.c.five.model.RegiDto;
-import kh.c.five.model.RestaurantDto;
 import kh.c.five.model.ReviewDto;
 import kh.c.five.model.fileDto;
 import kh.c.five.service.EatMemberService;
@@ -160,17 +157,23 @@ public class EatReviewController {
 	
 	@ResponseBody
 	@RequestMapping(value="getRPdetail.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String getRPdetail(fileDto fdto, Model model) {
+	public Map<String, Object> getRPdetail(String filename, int rseq, Model model) {
 		logger.info("EatReviewController RP"+new Date());
-		logger.info(fdto.toString());
 		
+		
+		fileDto fdto = new fileDto(0,null,filename, 0,rseq);
+		ReviewDto review= eatReviewService.getReviewWPic(fdto);
+		
+		//model.addAttribute("review", review);
+		Map<String, Object> rmap = new HashMap<String, Object>();
+		rmap.put("review", review);
 		
 	//	ReviewDto review = eatReviewService.getReviewWPic(fdto);
 	//	String rcontent=review.getRs_content();
 	//	model.addAttribute("review",review);
 	//	System.out.println(rcontent);
-		return "test";
+		
+		return rmap;
 		
 	}
-
 }

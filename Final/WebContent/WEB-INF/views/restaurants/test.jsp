@@ -186,19 +186,26 @@ if(imagelist==null||imagelist.size()<3){
   <a class="prev"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
   <a class="next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
 </div>
-<table>
-<tr>
-	<td>
+
 	    <div id="sync1" class="owl-carousel"><!-- 이게 큰거 -->
         	<div class="item"><img id="mainImage" src="" class="img-responsive"></div>
         </div>
-	</td>
-	<td rowspan="2" style="background-color: white; width: 300px">
-	<p>${review.rs_content }</p>
-	</td>
-</tr>
-<tr>
-<td>
+	<div>
+	<p id="p_id">${review.id }</p>
+	<c:choose>
+	<c:when test="${review.rs_rating eq 1 }">
+	<img alt="" src="./img/like/1-1.png" style="width: 60px;" msg="1" title="1점" >
+	</c:when>
+	<c:when test="${review.rs_rating eq 3 }">
+	<img alt="" src="./img/like/3-1.png" style="width: 60px;" msg="3" title="3점" >
+	</c:when>
+	<c:when test="${review.rs_rating eq 5 }">
+	<img alt="" src="./img/like/5-1.png" style="width: 60px;" msg="5" title="5점" >
+	</c:when>
+	</c:choose>
+
+	<p id="pause">${review.rs_content }</p>
+	</div>
         <div id="sync2" class="owl-carousel thumbnails-wrap" style="width: 700px"> <!-- 이게 아래에 있는 썸네일 -->
         		<%
 		for (int i=0;i<imagelist.size();i++){
@@ -215,14 +222,7 @@ if(imagelist==null||imagelist.size()<3){
 		}
           %>
           
-        </div>
-</td>
-</tr>
-</table>
-<p id="pause">${review.rs_content }</p>
-        
-
-       
+        </div>     
       </div>
       
     </div>
@@ -617,11 +617,11 @@ $(document).ready(function(){
 	 $("#sync2 div img").click(function(){
 		 
 		var img=$(this).attr('src');
-		var	filename=img.substring(7);
+		//var	filename=img.substring(7);
 		
-		 if(img.indexOf("https://")){
+		 if(img.indexOf("https://") !=-1){
 			var	filename=img;
-		}else{
+		}else if(img.indexOf("https://")==-1){
 			var filename=img.substring(7);
 		} 
 		
@@ -635,7 +635,6 @@ $(document).ready(function(){
 				'rseq':$("#rs_seq").attr("value")
 		};
 		
-		//var test=$("#rs_seq").attr("value");
 		
 		 $.ajax({
 			url:"getRPdetail.do",
@@ -644,9 +643,10 @@ $(document).ready(function(){
 			type:'post',
 			async:true,
 			success:function(data){
-				//alert("success");
-				alert(data.review.rs_content);
+				alert("success");
+			//	alert(data.review.rs_content);
 				$("#pause").html(data.review.rs_content);
+				$("#p_id").html(data.review.id);
 			},
 			error:function(req, stu, err){
 				alert("error");
@@ -789,6 +789,10 @@ $(function(){
 		$(this).attr('src','img/button/likeIcon.png')	
 	});
  });
+ 
+function WriteReview(seq) {
+	location.href='WriteReview.do?seq='+seq;
+}	
 </script>
 <script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
