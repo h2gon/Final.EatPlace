@@ -254,13 +254,9 @@ for (int i=1;i<cookies.length;i++){
   <div id="Paris" class="w3-container city">
    <h1>Paris</h1>
    
-    <table class="wannagolist" border="2">
-						        		<thead>
-						        			<tr>
-						        				<th>가게이름</th>
-						        			</tr>
-						        		</thead>
-						        		
+   <table class="wannagolist" border="2">
+						        	
+					
 						        		<tbody>
 						        		
 						        	
@@ -272,7 +268,7 @@ for (int i=1;i<cookies.length;i++){
 						        		
 						        		<tr>
 						        		<td><a href="rsdetail.do?seq=${wl.rs_seq }">${wl.rs_name }</a></td>
-						        		
+						        		<td><a href="wannago.do?rs_seq=${wl.rs_seq }&rs_name=${wl.rs_name}">안갈래!</a></td>
 						        		</tr>
 						        		
 						        		</c:forEach>
@@ -282,6 +278,8 @@ for (int i=1;i<cookies.length;i++){
 						        	</table>   
    
   </div>
+  
+  
   <div class="w3-container w3-light-grey w3-padding">
   <%if(user == null){%>
 		<!-- <a class=" openMask" href="#">로그인</a> -->

@@ -1090,12 +1090,12 @@ function currentSlide(n) {
 	$("#review_btn").mouseout(function(){
 		$(this).attr('src','img/button/reviewIcon.png')	
 	});
-	$("#like_btn").mouseover(function(){
+	/* $("#like_btn").mouseover(function(){
 		$(this).attr('src','img/button/likeIconR.png')	
 	});
 	$("#like_btn").mouseout(function(){
 		$(this).attr('src','img/button/likeIcon.png')	
-	});
+	}); */
  });
 
 
