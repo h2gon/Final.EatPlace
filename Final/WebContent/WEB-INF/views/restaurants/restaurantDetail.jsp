@@ -537,34 +537,50 @@ input:focus {
           </section>
           
          
-         
 		<div class="review_main">
 		
-		
-		<table border="1">
+		<table>
 		<%if(list.size()<5){
 		
 			for(int i = 0 ; i< list.size();i++){	
 		%>
-		<tr>
+		<tr style="border: none;">
 		
-		 <td style="width: 700px;">
-		<!-- <label> -->
+		 <td style="text-align: center; width: 66; border: none;" >
 		
 		<%
 		 nickName = eatReviewDao.getNickName(list.get(i).getId());
 		 System.out.println("nickName:"+nickName+" id: "+list.get(i).getId());
 		%>
 		
-		<%-- 아이디 : <%=list.get(i).getId() %>	 --%>
-		<div style="size: 100px; position: relative;">
+		<%if(nickName != "" || !nickName.isEmpty()){ %>		
+		<div style="size: 80px; position: relative;">
 		<span style="position: absolute; text-align: center; line-height: 60px; width: 63px; height: 100px;">
 		<%=nickName %>
 		</span>
-		<img alt="" src="./image/circular-shape-silhouette (1).png">
+		<img alt="" src="./img/circular-shape-silhouette (1).png">
+		</div>
+		<%}else{ %>
+		<div style="size: 80px; position: relative;">
+		<span style="position: absolute; text-align: center; line-height: 60px; width: 63px; height: 100px;">
+		<%=list.get(i).getId() %>
+		</span>
+		<img alt="" src="./img/circular-shape-silhouette (1).png">
 		</div>
 		
-		<%-- 닉네임 : <%=nickName %> --%>
+		<%} %>		
+						
+		</td>
+		
+		<!-- 내용  -->		
+		<td width="80" style="border: none">
+		<%-- <input type="text" style="width: 480px;" name="content" value="<%=list.get(i).getRs_content()%>"> --%>
+		<textarea rows="7" cols="70" style="border: 0;" readonly="readonly"><%=list.get(i).getRs_content()%></textarea>
+		</td>
+		
+		<!-- 좋아요,싫어요,별로 -->
+		<td width="30" style="border: none">
+		
 		<%switch(list.get(i).getRs_rating()){
 		case 1:
 		%>						
@@ -579,12 +595,13 @@ input:focus {
 		default: %>
 		<img alt="" src="./img/like/3-1.png" style="width: 60px;" id="p3" msg="3" title="3점" >
 		<%} %>
-	
-		<!-- </label> -->
-		
-		<span style="text-align: right;">
-		<input type="text" style="width: 480px;" name="content" value="<%=list.get(i).getRs_content()%>">
-		
+		</td>
+		</tr>
+		<!--  -->
+		<tr>
+		<td width="66" style="border: none">
+		</td> 
+		<td width= "80" style="border: none" >
 		<%
 		int rv_seq = list.get(i).getSeq();
 		
@@ -600,35 +617,47 @@ input:focus {
 				fileName[0] = f_list.get(a).getFile_name();
 				System.out.println("f_list.size(): "+f_list.size());
 				System.out.println("fileName has just 1:"+fileName[0]);
+				if(fileName[0].contains("https://")){
+					%>
+					<img alt="" src="<%=fileName[0] %>" style="width: 75px; height: 75px;" onclick="reviewDetail(<%=rv_seq%>)">
+					<% 
+				}else{
 				%>
-				<img alt="" src="/image/<%=fileName[0] %>" style="width: 75px; height: 75px;">
-				<% 
+				<img alt="" src="/image/<%=fileName[0] %>" style="width: 75px; height: 75px;" onclick="reviewDetail(<%=rv_seq%>)">
+				<%} 
 			}
 			else{
 				fileName = new String[f_list.size()];				
 				fileName[a] = f_list.get(a).getFile_name();
 				System.out.println("f_list.size(): "+f_list.size());
 				System.out.println("fileName more than 1:"+fileName[a]);
+				if(fileName[a].contains("https://")){
+					%>
+					<img alt="" src="<%=fileName[a] %>" style="width: 75px; height: 75px;" onclick="reviewDetail(<%=rv_seq%>)">
+					<%
+				}else{
 				%>
-				<img alt="" src="/image/<%=fileName[a] %>" style="width: 75px; height: 75px;">
+				<img alt="" src="/image/<%=fileName[a] %>" style="width: 75px; height: 75px;" onclick="reviewDetail(<%=rv_seq%>)">
 				<%
+				 }
 				}
 			}
 		}else if(f_list == null){
 			System.out.println("null");
 		}			
-		%>
-	
+		%>		
+		</td>
 		
-		
-		</span>
-							 
-		 </td>	
-		 			       
+		<td style="border: none">
+		</td>
+					 			       
         </tr>
-		
-		
-		
+        
+        <tr style="border: none">
+		<td colspan="3" width="80" style="border-bottom: 1px solid #c8c8c8;"><!-- <img alt="-----------------------------------------------" src=""> --></td>
+		</tr>		 			       
+        	
+        
 		<%} %>	
 		
 		<%}else{ %>
@@ -636,11 +665,10 @@ input:focus {
 		
 		<%
 		//reviewlist more than 5----------------------------------------------------------
-		/* for(int i =0 ; i<list.size() ; i++){  */
-		for(int i =0 ; i<5 ; i++){ %>
-		<tr>
-		
-		 <td style="width: 700px;">
+		for(int i =0 ; i<list.size() ; i++){ %> 
+		<%-- for(int i =0 ; i<5 ; i++){ %> --%>
+		<tr style="border: none" id="_tr<%=i %>" name="_tr<%=i %>">		
+		<td style="text-align: center; border: none;" width="66;">
 		<!-- <label> -->
 		
 		
@@ -649,15 +677,28 @@ input:focus {
 		 System.out.println("nickName:"+nickName+" id: "+list.get(i).getId());
 		%>
 				
-		<%-- 아이디 : <%=list.get(i).getId() %>	
-		닉네임 : <%=nickName %> --%>
-		<div style="size: 100px; position: relative;">
+		<%if(nickName != "" || !nickName.isEmpty()){ %>		
+		<div style="size: 80px; position: relative;">
 		<span style="position: absolute; text-align: center; line-height: 60px; width: 63px; height: 100px;">
 		<%=nickName %>
 		</span>
-		<img alt="" src="./image/circular-shape-silhouette (1).png">
+		<img alt="" src="./img/circular-shape-silhouette (1).png">
+		</div>
+		<%}else{ %>
+		<div style="size: 80px; position: relative;">
+		<span style="position: absolute; text-align: center; line-height: 60px; width: 63px; height: 100px;">
+		<%=list.get(i).getId() %>
+		</span>
+		<img alt="" src="./img/circular-shape-silhouette (1).png">
 		</div>
 		
+		<%} %>
+		</td>		
+		<td style="border: none">
+		<textarea rows="7" cols="70" style="border: 0;" readonly="readonly"><%=list.get(i).getRs_content()%></textarea>
+		</td>
+		<!-- 좋아요 별로 -->
+		<td width="30" style="border: none">
 		<%switch(list.get(i).getRs_rating()){
 		case 1:
 		%>						
@@ -672,12 +713,15 @@ input:focus {
 		default: %>
 		<img alt="" src="./img/like/3-1.png" style="width: 60px;" id="p3" msg="3" title="3점" >
 		<%} %>
+		</td>		
+		</tr>
 		
-		<!-- </label> -->
-		<span style="text-align: right;">				
-		<input type="text" style="width: 480px;" name="content" value="<%=list.get(i).getRs_content()%>">
 		
-		<%-- <form action="getImage.do?rv_seq=<%=list.get(i).getSeq() %>"> --%>
+		<!--  -->
+		<tr style="border: none" id="_tr<%=i %>" name="_tr<%=i %>">
+		<td width="66" style="border: none">
+		</td> 
+		<td style="border: none">
 		<%		
 		List<fileDto> f_list = eatReviewDao.getRv_Image(list.get(i).getSeq());
 		//List<String> f_list = (List<String>) request.getAttribute("getImg");
@@ -691,9 +735,15 @@ input:focus {
 					//fileName[0] = f_list.get(a);
 					System.out.println("f_list.size(): "+f_list.size());
 					System.out.println("fileName has just 1:"+fileName[0]);
+					if(fileName[0].contains("https://")){
+						%>
+						<img alt="" src="<%=fileName[0] %>" style="width: 75px; height: 75px;" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
+						<% 
+					}else{
 					%>
-					<img alt="" src="/image/<%=fileName[0] %>" style="width: 75px; height: 75px;">
-					<% 
+					<img alt="" src="/image/<%=fileName[0] %>" style="width: 75px; height: 75px;" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
+					
+					<%} 
 				}
 				else{
 					fileName = new String[f_list.size()];				
@@ -701,9 +751,14 @@ input:focus {
 					//fileName[a] = f_list.get(a);
 					System.out.println("f_list.size(): "+f_list.size());
 					System.out.println("fileName more than 1:"+fileName[a]);
+					if(fileName[a].contains("https://")){
 					%>
-					<img alt="" src="/image/<%=fileName[a] %>" style="width: 75px; height: 75px;">
-					<% 
+					<img alt="" src="<%=fileName[a] %>" style="width: 75px; height: 75px;" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
+					<%
+					}else{
+					%>
+					<img alt="" src="/image/<%=fileName[a] %>" style="width: 75px; height: 75px;" data-toggle="modal" data-target="#myModal"<%-- onclick="reviewDetail(<%=list.get(i).getSeq()%>)" --%>>
+					<% }
 					}
 			}
 		}else if(f_list == null){
@@ -711,40 +766,82 @@ input:focus {
 		}	
 		
 		
-		%>		
+		%>	
+		</td>
+		<td style="border: none">
+		</td>	
+		</tr>
+				
 		
-		<!-- <input name="file" type=file id="input_imgs" multiple/>
-		<div class="imgs_wrap">
-		<br>
-       
-       	</div> -->
-       
-     
-        <%-- <img alt="" src="/image/<%=fileName %>" style="width: 75px; height: 75px;"> --%>
-       	
+		<tr style="border: none">
+		<td colspan="3" width="80" style="border-bottom: 1px solid #c8c8c8;"><!-- <img alt="-----------------------------------------------" src=""> --></td>
 		
+		</tr>
 		
-		<%-- </form> --%>
-			 </span>
-		 </td>	
-		 			       
-        </tr>
+                               
          <%}
-		}
+		 }
 		}
          %>
          </table>
+  <!-- Review Modal -->       
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal with Dark Overlay</h4>
+        </div>
+        <div class="modal-body">
+          <p>This modal has a dark overlay.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
          
+         <%if(list.size()>5){
+         %>
+         
+         <button onclick="show_morelist()">더보기</button> 
+         
+         <%}
+          
+         %>
          </div>
-       <script type="text/javascript">
-       function morelist() {
-    	   var x = d
-       }
-		
-	
+         
        
+         
+       <script type="text/javascript">
+     	function reviewDetail(seq) {
+			alert("seq:"+seq);
+			$("#myModal").modal({backdrop:"static"});
+			
+			//location.href = "reviewDetail.do?seq="+seq;
+		}
+       
+       function show_morelist(index) {
+    	  /*  var Rv_array = [];
+    	   var temp, item, a, i, id;
+    	      	   
+    	   console.log("review_item: "+review_item);
+    	   Rv_array = review_item.split("],");
+    	   console.log("Rv_array.length: "+Rv_array.length);
+    	   
+    	   var remain_array = new Array[Rv_array.length - 5];
+    	       	       	   
+    	    for(i = 0;i<Rv_array.length;i++){
+    	  	console.log("console array: "+Rv_array[i]);
+    	    } */
+    	  	
+    	   	    	  
+       }       
        </script>
-
 		
        <br><br>
           <!-- review_main end -->
@@ -840,19 +937,6 @@ input:focus {
 	%>
 	</div><!-- /thumbnail -->
 
-<div style="background-color: white; height: auto">
-   <p id="revCont">tests</p>
-   </div>
-
-    <!-- Next/previous controls -->
-   <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
-    <!-- Caption text -->
-    <div class="caption-container">
-      <p id="caption"></p>
-      
-    </div>
 
 
    

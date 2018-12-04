@@ -50,6 +50,19 @@ public class EatReviewController {
 	EatReviewService eatReviewService;
 
 	
+	@RequestMapping(value="reviewDetail.do", method={RequestMethod.GET, RequestMethod.POST})
+	public String reviewDetail(int seq, Model model, HttpServletRequest req) {
+		logger.info("EatReviewController reviewDetail:"+new Date());
+		
+		List<ReviewDto> reviewlist = new ArrayList<ReviewDto>();
+		reviewlist = eatRestaurantsService.SelectReview(seq);
+		
+		//model.addAttribute("rvseq", seq);
+		req.setAttribute("rvseq", seq);
+		model.addAttribute("reviewDetail", reviewlist);
+		
+		return "reviewDetail";
+	}
 	
 	@RequestMapping(value="WriteReview.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String WriteReview(int seq, Model model, HttpServletRequest req) {
