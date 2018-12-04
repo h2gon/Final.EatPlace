@@ -222,7 +222,11 @@ public class EatRestaurantsController {
 				//System.out.println(rs2.toString());
 				
 				/*return "restaurants/restaurantDetail?seq="+seq;*/
-				return "restaurants/restaurantDetail";
+				
+		//잠시 디테일 테스트용으로 test로 바꿔뒀어요
+		return "restaurants/restaurantDetail";
+		
+				//return "restaurants/test";
 	}
 	
 	@RequestMapping(value="home.do",  method={RequestMethod.GET, RequestMethod.POST})
