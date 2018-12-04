@@ -38,7 +38,7 @@
   </select>
   
     <select id="getRankList" parameterType="kh.c.five.model.RegiDto" resultType="kh.c.five.model.RegiDto">
-  	SELECT * FROM EAT_RESTAURANT ORDER BY RS_RATING
+  	SELECT * FROM EAT_RESTAURANT WHERE RS_RATING IS NOT NULL ORDER BY RS_RATING DESC
   </select>
   
   <select parameterType="java.lang.Integer" id="SelectReview" resultType="kh.c.five.model.ReviewDto"> SELECT * FROM RESTAURANT_REVIEW WHERE RS_SEQ=#{seq} </select>

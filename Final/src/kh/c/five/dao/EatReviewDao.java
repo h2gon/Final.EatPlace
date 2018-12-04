@@ -6,6 +6,7 @@ import kh.c.five.model.ReviewDto;
 import kh.c.five.model.ReviewParam;
 import kh.c.five.model.fileDto;
 
+
 public interface EatReviewDao {
 	public List<String> getImage(int rv_seq);
 	public List<String> getImageDT(int rs_seq); // pickup images per rests 
@@ -26,4 +27,5 @@ public interface EatReviewDao {
 	
 	public String getNickName(String id);
 	
+
 }

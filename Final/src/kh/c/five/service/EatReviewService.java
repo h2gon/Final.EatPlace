@@ -18,4 +18,6 @@ public interface EatReviewService {
 	
 	public int getRvCount(ReviewParam param);
 	public int getLikeCount(ReviewParam param);
+	
+
 }

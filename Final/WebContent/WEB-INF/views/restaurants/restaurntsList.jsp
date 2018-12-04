@@ -184,7 +184,7 @@ public String ss(String msg){
 		
 						<div class="card h-100">
 							<a href="rsdetail.do?seq=<%=list.get(i).getSeq()%>"><img
-								class="card-img-top" src="\image\<%=list.get(i).getRs_picture()%>"
+								class="card-img-top" src="<%=list.get(i).getRs_picture()%>"
 								alt=""></a>
 							<div class="card-body">
 								<h4 class="card-title">

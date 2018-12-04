@@ -72,7 +72,7 @@ public class EatReviewDaoImpl implements EatReviewDao {
 		int n = sqlSession.selectOne(namespace+"getreviewcount", id);
 		return n;
 	}
-
+	
 	@Override
 	public int getRvCount(ReviewParam param) {		
 		
@@ -192,6 +192,8 @@ System.out.println("DB getNickName id:"+id);
 		}
 		return nickName;	
 	}
+
+
 
 	
 

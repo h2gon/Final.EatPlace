@@ -291,8 +291,8 @@ public class EatRestaurantsController {
 			
 			rplist.add(rparm);
 			
-			System.out.println(rparm.toString());
-			System.out.println("seq: "+searchlist.get(i).getSeq());
+			/*System.out.println(rparm.toString());
+			System.out.println("seq: "+searchlist.get(i).getSeq());*/
 			eatRestaurantsService.getRating(searchlist.get(i).getSeq());
 		}
 		
@@ -303,7 +303,7 @@ public class EatRestaurantsController {
 		model.addAttribute("searchlist", searchlist);
 		
 		model.addAttribute("pageNumber", sn);
-		model.addAttribute("pageCountPerScreen", 9);	
+		model.addAttribute("pageCountPerScreen", 10);	
 		model.addAttribute("recordCountPerPage", param.getRecordCountPerPage());
 		model.addAttribute("totalRecordCount", totalRecordCount);
 		
@@ -353,8 +353,8 @@ public class EatRestaurantsController {
 			
 			rplist.add(rparm);
 			
-			System.out.println(rparm.toString());
-			System.out.println("seq: "+searchlist.get(i).getSeq());
+			/*System.out.println(rparm.toString());
+			System.out.println("seq: "+searchlist.get(i).getSeq());*/
 			eatRestaurantsService.getRating(searchlist.get(i).getSeq());
 		}
 		
@@ -365,7 +365,7 @@ public class EatRestaurantsController {
 		model.addAttribute("searchlist", searchlist);
 		
 		model.addAttribute("pageNumber", sn);
-		model.addAttribute("pageCountPerScreen", 9);	
+		model.addAttribute("pageCountPerScreen", 10);	
 		model.addAttribute("recordCountPerPage", param.getRecordCountPerPage());
 		model.addAttribute("totalRecordCount", totalRecordCount);
 		

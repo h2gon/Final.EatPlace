@@ -92,9 +92,9 @@ System.out.println(i + "번째 쿠키에 설정된 값 : " + cookies[i].getValue
 <style>
  img.card-img-top{
  	max-width: 453px;
- 	min-width: 453px;
+ 	
  	max-height: 300px;
- 	min-height: 300px; 
+ 	
  	display: block;
  	margin-left: auto;
  	margin-right: auto; 	

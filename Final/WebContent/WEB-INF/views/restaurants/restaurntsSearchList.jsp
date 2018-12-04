@@ -150,6 +150,12 @@ $(document).ready(function () {
 		      <strong><input type="text" onkeypress="if(event.keyCode==13) {search();}"  id="main-keyword" name="s_keyword" value="" placeholder="지역, 식당 또는 음식" style="color: #575756; border-bottom-left-radius: 20px; border-top-left-radius: 20px"></strong>
 		      <strong><input type="button" onclick="search()"  value="검색" style="border-bottom-right-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-top-left-radius: 20px; background-color: darkorange; color: white;"></strong>
 		     </div>
+		<!-- controller로 넘겨주기 위한 값 -->
+		<input type="hidden" name="pageNumber" id="_pageNumber" value="${(empty pageNumber)?0:pageNumber }">
+		<input type="hidden" name="recordCountPerPage" id="_recordCountPerPage"
+			value="${(empty recordCountPerPage)?9:recordCountPerPage }">
+				
+		
 		</form>
 		</div>
 		
@@ -177,11 +183,12 @@ $(document).ready(function () {
 
 
 	<!-- Portfolio Section -->
-	<div style="float: left; width: 73%">
+	<div style=" content:'';display: table;clear: both;    min-height: 300px;">
+	<div style="float: left; width: calc(100% - 400px);     min-width: 850px;">
 		<p style="margin-left: 58px; font-size: 24px; color: #ff7100">
 			<strong>전체 맛집 리스트</strong>
 		</p>
-		<div class="row" style="margin-left: 65px; margin-right: 65px">
+		<div class="row" style="margin-left: 55px; margin-right: 10px">
 			<%
 				List<RegiDto> list = (List<RegiDto>) request.getAttribute("searchlist");
 				if(list.size()==0 || list ==null){
@@ -191,6 +198,11 @@ $(document).ready(function () {
 				<p style="font-size: 25px;line-height: 25px;margin-bottom: 65px;">
 		          '<span ><%=s_keyword %></span>'에 대한 검색 결과가 없습니다.
 	         	 </p>
+	         	 
+	         	 <script type="text/javascript">
+		         	$(document).ready(function () {
+		         		$("#map").css("display","none");})	         		
+	         	 </script>
 				
 				<%
 				}
@@ -198,7 +210,7 @@ $(document).ready(function () {
 				for (int i = 0; i < list.size(); i++) {
 			%>
 			<div class="col-lg-4 col-sm-6 portfolio-item"
-				style="height: 350px; width: 430px;">
+				style="height: 350px; width: 430px;max-width: 430px;min-width: 300px;">
 
 				<div class="card h-100">
 					<a href="rsdetail.do?seq=<%=list.get(i).getSeq()%>"><img
@@ -232,15 +244,57 @@ $(document).ready(function () {
 	</jsp:include>	
 </div>
 	</div>
+	
 
 	<!-- 지도 -->
-	<div style="float: left; width: 27%">
+	<div id="map" style="float: left;position: relative;right: 15px;">
 		<div id="map" style="width: 400px; height: 500px;"></div>
 	</div>
-
+	
+	</div>
+	<br>
 	<br>
 
 	<!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+    
+      <div style="text-align:left; color: white; font-size: 35px; padding-top: 20px;">
+      	<p>EAT PLACE</p>
+      <img alt="" src="img/button/hr.png" style="width: 5%; height: 1px">
+      <p style="color: gray; font-size: 13px">Eat, Share, Be Happy</p>
+      </div>
+      
+      <br> 
+      
+      <div>
+	     <span style="color: gray;">
+	      	<img alt="" src="img/button/hr.png" style="width: 100%; height: 1px">
+	      	 인기지역:<a style="text-decoration: none;" href="search.do?s_keyword=이태원">이태원</a>|<a style="text-decoration: none;" href="search.do?s_keyword=강남" >강남</a>|<a style="text-decoration: none;" href="search.do?s_keyword=홍대">홍대</a>|<a style="text-decoration: none;" href="search.do?s_keyword=가로수길">가로수길</a>|<a style="text-decoration: none;" href="search.do?s_keyword=건대">건대</a>|<a style="text-decoration: none;" href="search.do?s_keyword=대학로">대학로</a>|<a style="text-decoration: none;" href="search.do?s_keyword=신촌">신촌</a>|<a style="text-decoration: none;" href="search.do?s_keyword=혜화">혜화</a>|<a style="text-decoration: none;" href="search.do?s_keyword=잠실">잠실</a>|<a style="text-decoration: none;" href="search.do?s_keyword=왕십리">왕십리</a>|<a style="text-decoration: none;" href="search.do?s_keyword=압구정">압구정</a>|<a style="text-decoration: none;" href="search.do?s_keyword=사당">사당</a>|<a style="text-decoration: none;" href="search.do?s_keyword=명동">명동</a>|<a style="text-decoration: none;" href="search.do?s_keyword=혜화">혜화</a> 
+	      	 <br><br>	       	 	
+	      	<img alt="" src="img/button/hr.png" style="width: 100%; height: 1px">
+	     </span>
+      </div>
+      
+      <div>      
+        <p style="color: gray;">㈜ 잇플레이스
+        	<br>
+			서울특별시 강남구 페이퍼컴퍼니
+			<br>
+			KH정보교육원			
+			<br>			
+			고객센터: 02-0112-0119
+			<br><br>
+			
+			© 2018 Eat Place Co., Ltd. All rights reserved.
+		</p>
+	  </div>
+      <!-- /.container -->
+      </div>
+    </footer>
+    
+
+	
 	<!-- <footer class="py-5 bg-dark">
 			<div class="container">
 				<p class="m-0 text-center text-white">Copyright &copy; Your
@@ -339,17 +393,17 @@ geocoder[<%=j %>].addressSearch('<%=list.get(j).getRs_address1() %>', function(r
 /* 페이지번호를 클릭했을때 */
 function goPage(pageNumber) {
 	$("#_pageNumber").val(pageNumber);
-	alert(pageNumber);
+	/* alert(pageNumber); */
 	
 	var str = '<%=category%>';
 	var kstr = '<%=keyword%>';
 	
 	if (str == "") {
-		alert("카테고리 없");
+		/* alert("카테고리 없"); */
 		$("#main-search").attr({"target":"_self", "action":"search.do"}).submit();
 	}
 	else if (kstr == ""){
-		alert("검색어 없");
+		/* alert("검색어 없"); */
 		$("#main-search").attr({"target":"_self", "action":"category.do"}).submit();
 	}else {
 		alert("?????");
@@ -362,7 +416,23 @@ function goPage(pageNumber) {
 </script>
 
 
-
+<script type="text/javascript">
+function search() {
+	$("#_pageNumber").val(0);
+	  var keyword = $("#main-keyword").val();
+	  if (keyword == "" || keyword == null) {
+		alert("검색어를 입력해주세요")
+		
+	}else{
+		alert("main-keyword = " + keyword);
+		
+		$("#main-search").attr({"target":"_self", "action":"search.do"}).submit();
+	}
+	
+	  
+	  
+}
+</script>
 
 
 
