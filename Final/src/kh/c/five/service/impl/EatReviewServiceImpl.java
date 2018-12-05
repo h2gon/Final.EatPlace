@@ -21,9 +21,15 @@ public class EatReviewServiceImpl implements EatReviewService {
 	
 	@Autowired
 	EatReviewDao eatreviewdao;
+	
+	@Override
+	public ReviewDto getReviewDetail(int rv_seq) {
+		
+		return eatreviewdao.getReviewDetail(rv_seq);
+	}
 
 	@Override
-	public List<String> getImage(int rv_seq) {
+	public List<fileDto> getImage(int rv_seq) {
 		
 		return eatreviewdao.getImage(rv_seq);
 	}

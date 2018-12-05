@@ -8,7 +8,7 @@ import kh.c.five.model.fileDto;
 
 
 public interface EatReviewService {
-	public List<String> getImage(int rv_seq);
+	public List<fileDto> getImage(int rv_seq);
 	public List<String> getImageDT(int rs_seq);
 	public ReviewDto getReviewWPic (fileDto fdto);
 	
@@ -19,5 +19,5 @@ public interface EatReviewService {
 	public int getRvCount(ReviewParam param);
 	public int getLikeCount(ReviewParam param);
 	
-
+	public ReviewDto getReviewDetail(int rv_seq);
 }

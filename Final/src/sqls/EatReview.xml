@@ -68,6 +68,9 @@
 									WHERE FILE_NAME=#{file_name})
 
   </select>
+  <select resultType="kh.c.five.model.ReviewDto" id="getReviewDetail" parameterType="java.lang.Integer">
+  SELECT * FROM RESTAURANT_REVIEW WHERE SEQ=#{seq}
+  </select>
   
   
   </mapper>

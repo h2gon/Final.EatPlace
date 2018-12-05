@@ -37,8 +37,8 @@ public class EatReviewDaoImpl implements EatReviewDao {
 	
 	
 	@Override
-	public List<String> getImage(int rv_seq) {
-		List<String> list = new ArrayList<>();
+	public List<fileDto> getImage(int rv_seq) {
+		List<fileDto> list = new ArrayList<>();
 		list = sqlSession.selectList(namespace+"getImage", rv_seq);
 		
 		return list;
@@ -191,6 +191,11 @@ System.out.println("DB getNickName id:"+id);
 			}
 		}
 		return nickName;	
+	}
+	@Override
+	public ReviewDto getReviewDetail(int rv_seq) {
+		
+		return sqlSession.selectOne(namespace+"getReviewDetail", rv_seq);
 	}
 
 

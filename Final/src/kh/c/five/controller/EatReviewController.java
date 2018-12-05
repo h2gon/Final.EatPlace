@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,7 +24,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import kh.c.five.model.EatMemberDto;
 import kh.c.five.model.RegiDto;
+import kh.c.five.model.ReviewDetail;
 import kh.c.five.model.ReviewDto;
+import kh.c.five.model.WildCard;
 import kh.c.five.model.fileDto;
 import kh.c.five.service.EatMemberService;
 import kh.c.five.service.EatRestaurantsService;
@@ -175,5 +178,36 @@ public class EatReviewController {
 		
 		return rmap;
 		
+	}
+	@ResponseBody	
+	@RequestMapping(value="getReviewDetail.do",method= {RequestMethod.GET, RequestMethod.POST})
+	public WildCard<ReviewDto,List<String>> getReviewDetail(HttpServletRequest req, Model model){
+		
+		//영곤짱 리턴값 위와 같이 쓸 수 있어요~ ㅎㅎ
+		
+		logger.info("EatReviewController getReviewDetail"+new Date());
+		//seq = rv_seq
+		int seq = Integer.parseInt(req.getParameter("seq"));
+		System.out.println("getReviewDetail seq:"+seq);
+				
+		List<fileDto> file_name_list = new ArrayList<fileDto>();	
+		List<String> flist = new ArrayList<String>();
+				
+		ReviewDto rdto = eatReviewService.getReviewDetail(seq);
+		file_name_list = eatReviewService.getImage(seq);
+		
+		if(flist != null) {
+		for(int i = 0; i<file_name_list.size();i++) {
+			System.out.println("flist=>"+file_name_list.get(i));
+			flist.add(file_name_list.get(i).getFile_name());		
+		 }
+		}
+		System.out.println(rdto.toString());
+		System.out.println("flist.size: "+flist.size());
+		WildCard<ReviewDto,List<String>> wildCard = new WildCard<>(rdto, flist);
+		for(int i =0;i<flist.size();i++) {
+		System.out.println("wildCard: list: "+wildCard.getFlist().get(i)+" //rdto content: "+wildCard.getRdto().getRs_content());	
+		}		
+		return wildCard;		
 	}
 }

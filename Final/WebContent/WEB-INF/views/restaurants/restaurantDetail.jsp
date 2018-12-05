@@ -762,7 +762,7 @@ input:focus {
 					<%
 					}else{
 					%>
-					<img alt="" src="/image/<%=fileName[a] %>" style="width: 75px; height: 75px;" data-toggle="modal" data-target="#myModal"<%-- onclick="reviewDetail(<%=list.get(i).getSeq()%>)" --%>>
+					<img alt="" src="/image/<%=fileName[a] %>" style="width: 75px; height: 75px;" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
 					<% }
 					}
 			}
@@ -790,7 +790,7 @@ input:focus {
          %>
          </table>
   <!-- Review Modal -->       
-  <div class="modal fade" id="myModal" role="dialog">
+  <div class="modal fade" id="_myModal" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
@@ -801,6 +801,7 @@ input:focus {
         </div>
         <div class="modal-body">
           <p>This modal has a dark overlay.</p>
+          <img id="img" alt="" src="">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -809,24 +810,42 @@ input:focus {
       
     </div>
   </div>
-         
-         <%if(list.size()>5){
-         %>
-         
-         <button onclick="show_morelist()">더보기</button> 
-         
-         <%}
-          
-         %>
-         </div>
-         
-       
+        
+        
+ </div>
+               
          
        <script type="text/javascript">
      	function reviewDetail(seq) {
 			alert("seq:"+seq);
-			$("#myModal").modal({backdrop:"static"});
+
+			$.ajax({
+				url:"getReviewDetail.do",					
+				type:"POST",
+				data:"seq="+seq,
+				dataType:"json",				
+								
+				success:function(json){
+					alert("success");
+					console.log(json);
+					//alert(data.review.rs_content);
+					//$("#pause").html(data.review.rs_content);
+					/* for (var i = 0; i < json.length; i++) {
+						$("#img").attr("src",json[i]);
+						console.log(json[i]);
+						//$("#test").append(json[i].key);
+					}	 */				
+					//$("#test").html(json);
+				},
+				error:function(req, stu, err){
+					alert("error");
+					alert(stu + " " + err+""+req);					
+				}
+			});
+			//$("#modal_rv_seq").val(seq).submit();
 			
+			//location.href="getReviewDetail.do?seq="+seq
+			modal.style.display = "block";
 			//location.href = "reviewDetail.do?seq="+seq;
 		}
        
@@ -845,8 +864,38 @@ input:focus {
     	    } */
     	  	
     	   	    	  
-       }       
+        }       
        </script>
+             <script type="text/javascript">
+          
+       // Get the modal
+          var modal = document.getElementById('_myModal');
+
+          // Get the button that opens the modal
+          var btn = document.getElementById("_myBtn");
+
+          // Get the <span> element that closes the modal
+          var span = document.getElementsByClassName("close")[0];
+
+          // When the user clicks on the button, open the modal 
+         /*  btn.onclick = function() {
+              modal.style.display = "block";
+          } */
+        
+
+          // When the user clicks on <span> (x), close the modal
+          span.onclick = function() {
+              modal.style.display = "none";
+          }
+
+          // When the user clicks anywhere outside of the modal, close it
+          window.onclick = function(event) {
+              if (event.target == modal) {
+                  modal.style.display = "none";
+              }
+          }          
+          
+          </script>
 		
        <br><br>
           <!-- review_main end -->
@@ -895,33 +944,33 @@ input:focus {
       </div>
     </footer>
 		<!-- The Modal will open  -->
-	<div id="myModal" class="modal">
+	<%-- <div id="myModal" class="modal">
 	<br>
 	<span class="close cursor" onclick="closeModal()">&times;</span>  
 		<div class="modal-content" align="center">
   		<br>
   			
 		 <%		 	
-		  //  for (int i = 0; i < imagelist.size(); i++) {
+		    for (int i = 0; i < imagelist.size(); i++) {
 			   %>
 			   
 			   <iframe id="myframe"name="myFrame" src="" frameborder="0" marginwidth="0" marginheight="0" frameborder="0" 
 			   style="width: 640px; height: 480px; align-content: center; margin-top: 20px"></iframe>
 			 
 			  <div class="mySlides" style="margin-left: 30px; width: 640px; height: auto" >
-		        <%-- <img class="_fvalue" src="\image\<%=imagelist.get(i).getFile_name()%>" style="width:50%;" value="\image\<%=imagelist.get(i).getFile_name()%>">    
-		       <img id="mySlides" src="" style="width:50%;" value="">   --%>
+		        <img class="_fvalue" src="\image\<%=imagelist.get(i).getFile_name()%>" style="width:50%;" value="\image\<%=imagelist.get(i).getFile_name()%>">    
+		       <img id="mySlides" src="" style="width:50%;" value="">  
 		       		       		
 		       </div>
 		    	
 			   <%
 	//	   }
 		   %>
-		<br>
+		<br>  --%>
 
 	<!-- Thumbnail image controls -->
   
-	<div class="owl-carousel">
+	<%-- <div class="owl-carousel">
 	<button onclick="func()">button</button>
 	<%
 		for (int i = 0; i < imagelist.size(); i++) {
@@ -931,16 +980,16 @@ input:focus {
 			<a href="\image\<%=imagelist.get(i).getFile_name()%>" target="myFrame">	
 				<img class="_fvalue1" id="_fvalue1" src="\image\<%=imagelist.get(i).getFile_name()%>"	
 				
-					<%-- alt="이미지없음" style="height:150px ;width: auto" onclick="currentSlide(<%=i+1%>)" --%>
+					alt="이미지없음" style="height:150px ;width: auto" onclick="currentSlide(<%=i+1%>)"
 					alt="이미지없음" style="height:150px; width: auto; max-width: 300px; margin-right: 3px" >
 			</a>
-					<%-- value="<%=imagelist.get(i).getFile_name()%>" cslide="<%=i+1%>"> --%>
+					value="<%=imagelist.get(i).getFile_name()%>" cslide="<%=i+1%>">
 				<br>
 			</div>
 			<%
 		}
 	%>
-	</div><!-- /thumbnail -->
+	</div> --%><!-- /thumbnail -->
 
 
 
@@ -984,7 +1033,7 @@ function func() {
 	}); 
 }
  
-
+<%-- 
 $("._fvalue1").on("click", function () {
 	var pic_link=$(this).attr("src");
 	var filename=pic_link.substring(7);
@@ -993,7 +1042,7 @@ $("._fvalue1").on("click", function () {
 	
 //	$("._fvalue1").attr("width",640px);
 //	$("._fvalue1").attr("height",480px);
-
+ --%>
 	
 var rs_seq=$("#rs_seq").val();
 var file_name=$(this).attr("src"); 
@@ -1025,7 +1074,7 @@ var file_name=$(this).attr("src");
 	}); 
  	
 });
-
+<%-- 
 $("._fvalue").on("click", function () {		
 //	alert("click");
 	var pic_link=$(this).attr("src");
@@ -1034,7 +1083,7 @@ $("._fvalue").on("click", function () {
 	$('#myframe').attr("src",pic_link);
 	showSlides(slideIndex = <%=imagelist.size() %>);
 //	showSlides(slideIndex=1);
-});
+}); --%>
 
 	//plugin call
 	$('.owl-carousel').owlCarousel({
@@ -1098,7 +1147,7 @@ function currentSlide(n) {
 	}); */
  });
 
-
+<%-- 
 function showSlides(n) {
   var i;
   var ii = <%=imagelist.size() %>
@@ -1122,7 +1171,7 @@ function showSlides(n) {
   dots[slideIndex-1].className += " active";
   captionText.innerHTML = dots[slideIndex-1].alt;
 
-}
+} --%>
 
   
 	</script>

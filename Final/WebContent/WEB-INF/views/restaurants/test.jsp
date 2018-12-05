@@ -148,7 +148,7 @@ List<fileDto> imagelist = (List<fileDto>) request.getAttribute("imagelist");
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="carouselModalLabel">${rs.rs_name }</h4>
+        <h4 class="modal-title" id="carouselModalLabel">이름1234<%-- ${rs.rs_name } --%></h4>
       </div>
       <div class="modal-body">
 <div class="customNavigation">
@@ -162,7 +162,7 @@ List<fileDto> imagelist = (List<fileDto>) request.getAttribute("imagelist");
    <table>
    	<tr>
    		<td>
-   			<p id="p_id">${review.id }</p>
+   			<p id="p_id">아이디123<%-- ${review.id } --%></p>
    		</td>
    		<td>
    		<span id = "p_rating" value="">
@@ -172,30 +172,18 @@ List<fileDto> imagelist = (List<fileDto>) request.getAttribute("imagelist");
    	</tr>
    	<tr>
    		<td colspan="2">
-   			<p id="pause">${review.rs_content }</p>
+   			<p id="pause">리뷰내용1234<%-- ${review.rs_content } --%></p>
    		</td>
    	</tr>
    </table>
 	<div>
 	
-	
-		
-		<%-- <c:choose>
-		<c:when test="${review.rs_rating eq 1 }">
-		<img alt="" src="./img/like/1-1.png" style="width: 60px;" msg="1" title="1점" >
-		</c:when>
-		<c:when test="${review.rs_rating eq 3 }">
-		<img alt="" src="./img/like/3-1.png" style="width: 60px;" msg="3" title="3점" >
-		</c:when>
-		<c:when test="${review.rs_rating eq 5 }">
-		<img alt="" src="./img/like/5-1.png" style="width: 60px;" msg="5" title="5점" >
-		</c:when>
-		</c:choose> --%>
-	
-	
 	</div>
         <div id="sync2" class="owl-carousel thumbnails-wrap"> <!-- 이게 아래에 있는 썸네일 -->
-        		<%
+        <div class="item">
+        <img id="img" alt="" src="" class="img-responsive" onclick="goimage2()">
+        </div>
+        		<%-- <%
 		for (int i=0;i<imagelist.size();i++){
 			if(imagelist.get(i).getFile_name().contains("https://")){
 				%>
@@ -209,7 +197,7 @@ List<fileDto> imagelist = (List<fileDto>) request.getAttribute("imagelist");
 		
 		}
           %>
-          
+           --%>
         </div>     
       </div>
       
@@ -262,7 +250,8 @@ if(imagelist==null||imagelist.size()<3){
 for(int i=0;i<imagelist.size();i++){
 %>
 	<div class="item" id="owlImages">
-	<a href="#" data-toggle="modal" data-target="#carouselModal">
+	<!-- <a href="#" data-toggle="modal" data-target="#carouselModal"> -->
+	<a href=#>
 		<img src="<%=imagelist.get(i).getFile_name()%>" style="height: 300px;width:auto">
 		<!-- 이거 id owl Images로 바꾸고 경로 다시 설정해야함 -->
 	</a>
@@ -738,7 +727,7 @@ $('.owl-carousel123').owlCarousel({
 					<%
 					}else{
 					%>
-					<img alt="" src="/image/<%=fileName[a] %>" style="width: 75px; height: 75px;" data-toggle="modal" data-target="#myModal"<%-- onclick="reviewDetail(<%=list.get(i).getSeq()%>)" --%>>
+					<img alt="" src="/image/<%=fileName[a] %>" style="width: 75px; height: 75px;" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
 					<% }
 					}
 			}
@@ -766,7 +755,7 @@ $('.owl-carousel123').owlCarousel({
          %>
          </table>
   <!-- Review Modal -->       
-  <div class="modal fade" id="myModal" role="dialog">
+  <div class="modal fade" id="_myModal" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
@@ -800,10 +789,40 @@ $('.owl-carousel123').owlCarousel({
          
        <script type="text/javascript">
      	function reviewDetail(seq) {
-			alert("seq:"+seq);
-			$("#myModal").modal({backdrop:"static"});
+     		alert("seq:"+seq);
+			/* var data = JSON.stringify(seq);
+			var sendData = JSON.parse(data); */
 			
-			//location.href = "reviewDetail.do?seq="+seq;
+
+			$.ajax({
+				url:"getReviewDetail.do",					
+				type:"POST",
+				data:"seq="+seq,
+				dataType:"json",
+				async:true,
+								
+				success:function(json){
+					alert("success");
+					console.log(json);
+					//alert(data.review.rs_content);
+					//$("#pause").html(data.review.rs_content);
+					for (var i = 0; i < json.length; i++) {
+						//$("#img").attr("src",json[i]);
+						console.log(json[i]);
+						//$("#test").append(json[i].key);
+					}					
+					//$("#test").html(json);
+				},
+				error:function(req, stu, err){
+					alert("error");
+					alert(stu + " " + err+""+req);					
+				}
+			});
+			//$("#modal_rv_seq").val(seq).submit();
+			
+			//location.href="getReviewDetail.do?seq="+seq
+			//$("#carouselModal").style.display = "block";
+			modal.style.display = "block";
 		}
        
        function show_morelist(index) {
@@ -823,6 +842,37 @@ $('.owl-carousel123').owlCarousel({
     	   	    	  
        }       
        </script>
+           <script type="text/javascript">
+          
+       // Get the modal
+          var modal = document.getElementById('_myModal');
+
+          // Get the button that opens the modal
+          var btn = document.getElementById("_myBtn");
+
+          // Get the <span> element that closes the modal
+          var span = document.getElementsByClassName("close")[0];
+
+          // When the user clicks on the button, open the modal 
+         /*  btn.onclick = function() {
+              modal.style.display = "block";
+          } */
+        
+
+          // When the user clicks on <span> (x), close the modal
+          span.onclick = function() {
+              modal.style.display = "none";
+          }
+
+          // When the user clicks anywhere outside of the modal, close it
+          window.onclick = function(event) {
+              if (event.target == modal) {
+                  modal.style.display = "none";
+              }
+          }
+          
+          
+          </script>
 		
        <br><br>
           <!-- review_main end -->
