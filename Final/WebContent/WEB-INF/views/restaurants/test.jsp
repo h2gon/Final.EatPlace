@@ -22,9 +22,14 @@
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="owlcarousel/owl.carousel.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+
+<!-- Bootstrap core CSS -->
+<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <!-- script for owl with modal -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.js"></script>
+
+
 
 <!-- owl carousel css -->
 <link rel="stylesheet" href="owlcarousel/owl.carousel.min.css">
@@ -137,6 +142,114 @@
 List<ReviewDto> rvlist = (List<ReviewDto>)request.getAttribute("reviewlist"); //이거 나중에 리뷰랑 합치고 리뷰에서 불러오는거 지우면 됩니다
 List<fileDto> imagelist = (List<fileDto>) request.getAttribute("imagelist");
 %>
+
+<div class="modal fade" id="carouselModal" tabindex="-1" role="dialog" aria-labelledby="carouselModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="carouselModalLabel">${rs.rs_name }</h4>
+      </div>
+      <div class="modal-body">
+<div class="customNavigation">
+  <a class="prev"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+  <a class="next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+</div>
+	    <div id="sync1" class="owl-carousel"><!-- 이게 큰거 -->
+        	<div class="item"><img id="mainImage" src="" class="img-responsive"></div>
+        </div>
+        
+   <table>
+   	<tr>
+   		<td>
+   			<p id="p_id">${review.id }</p>
+   		</td>
+   		<td>
+   		<span id = "p_rating" value="">
+   			<img id = "p_ratingP" alt="" src="./img/like/3-1.png" style="width: 60px;" msg="3" title="3점" >
+   		</span>
+   		</td>
+   	</tr>
+   	<tr>
+   		<td colspan="2">
+   			<p id="pause">${review.rs_content }</p>
+   		</td>
+   	</tr>
+   </table>
+	<div>
+	
+	
+		
+		<%-- <c:choose>
+		<c:when test="${review.rs_rating eq 1 }">
+		<img alt="" src="./img/like/1-1.png" style="width: 60px;" msg="1" title="1점" >
+		</c:when>
+		<c:when test="${review.rs_rating eq 3 }">
+		<img alt="" src="./img/like/3-1.png" style="width: 60px;" msg="3" title="3점" >
+		</c:when>
+		<c:when test="${review.rs_rating eq 5 }">
+		<img alt="" src="./img/like/5-1.png" style="width: 60px;" msg="5" title="5점" >
+		</c:when>
+		</c:choose> --%>
+	
+	
+	</div>
+        <div id="sync2" class="owl-carousel thumbnails-wrap"> <!-- 이게 아래에 있는 썸네일 -->
+        		<%
+		for (int i=0;i<imagelist.size();i++){
+			if(imagelist.get(i).getFile_name().contains("https://")){
+				%>
+				<div class="item"><img src="<%=imagelist.get(i).getFile_name()%>" class="img-responsive" onclick="goimage2()"></div>
+				<%
+			}else{
+				%>
+		          <div class="item"><img src="\image\<%=imagelist.get(i).getFile_name()%>" class="img-responsive" onclick="goimage2()"></div>
+		          <%
+			}
+		
+		}
+          %>
+          
+        </div>     
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<!-- Navigation -->
+	<nav class="navbar fixed-top navbar-expand-lg navbar-dark fixed-top"
+		style="background-color: #c53211; padding-bottom: 10px">
+		<div class="container">
+			<a class="navbar-brand" href="home.do">EAT PLACE</a>
+			<button class="navbar-toggler navbar-toggler-right" type="button"
+				data-toggle="collapse" data-target="#navbarResponsive"
+				aria-controls="navbarResponsive" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		</div>
+
+		<div class="container">
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item"><a class="nav-link" href="about.html"><strong
+							style="color: white; margin-left: 20px">About</strong></a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="restaurntsList.do"><strong
+							style="color: white; margin-left: 20px">맛집 리스트</strong></a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="restaurantsInsert.do"><strong
+							style="color: white; margin-left: 20px">맛집 추가</strong></a></li>
+					<li class="nav-item" style="margin-left: 20px"><a
+						class="nav-link openMask" href="#"> <img alt=""
+							src="img/main/man-user.png">
+					</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
 <%
 if(imagelist==null||imagelist.size()<3){
 	%>
@@ -148,9 +261,10 @@ if(imagelist==null||imagelist.size()<3){
 <%
 for(int i=0;i<imagelist.size();i++){
 %>
-	<div class="item" >
+	<div class="item" id="owlImages">
 	<a href="#" data-toggle="modal" data-target="#carouselModal">
 		<img src="<%=imagelist.get(i).getFile_name()%>" style="height: 300px;width:auto">
+		<!-- 이거 id owl Images로 바꾸고 경로 다시 설정해야함 -->
 	</a>
 	</div>
 <%
@@ -208,62 +322,7 @@ $('.owl-carousel123').owlCarousel({
 });
 </script>
 
-<div class="modal fade" id="carouselModal" tabindex="-1" role="dialog" aria-labelledby="carouselModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="carouselModalLabel">${rs.rs_name }</h4>
-      </div>
-      <div class="modal-body">
-<div class="customNavigation">
-  <a class="prev"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
-  <a class="next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
-</div>
-
-	    <div id="sync1" class="owl-carousel"><!-- 이게 큰거 -->
-        	<div class="item"><img id="mainImage" src="" class="img-responsive"></div>
-        </div>
-	<div>
-	<p id="p_id">${review.id }</p>
-	<span id = "p_rating" value="">
-		<img id = "p_ratingP" alt="" src="./img/like/3-1.png" style="width: 60px;" msg="3" title="3점" >
-		<%-- <c:choose>
-		<c:when test="${review.rs_rating eq 1 }">
-		<img alt="" src="./img/like/1-1.png" style="width: 60px;" msg="1" title="1점" >
-		</c:when>
-		<c:when test="${review.rs_rating eq 3 }">
-		<img alt="" src="./img/like/3-1.png" style="width: 60px;" msg="3" title="3점" >
-		</c:when>
-		<c:when test="${review.rs_rating eq 5 }">
-		<img alt="" src="./img/like/5-1.png" style="width: 60px;" msg="5" title="5점" >
-		</c:when>
-		</c:choose> --%>
-	</span>
-	<p id="pause">${review.rs_content }</p>
-	</div>
-        <div id="sync2" class="owl-carousel thumbnails-wrap"> <!-- 이게 아래에 있는 썸네일 -->
-        		<%
-		for (int i=0;i<imagelist.size();i++){
-			if(imagelist.get(i).getFile_name().contains("https://")){
-				%>
-				<div class="item"><img src="<%=imagelist.get(i).getFile_name()%>" class="img-responsive" onclick="goimage2()"></div>
-				<%
-			}else{
-				%>
-		          <div class="item"><img src="\image\<%=imagelist.get(i).getFile_name()%>" class="img-responsive" onclick="goimage2()"></div>
-		          <%
-			}
-		
-		}
-          %>
-          
-        </div>     
-      </div>
-      
-    </div>
-  </div>
-</div>
+ 
 <div class="column-wrapper">
 		<div class="column-contents">
 			<div class="inner">
@@ -845,6 +904,7 @@ $(document).ready(function(){
 					//alert("success");
 					//alert(data.review.rs_content);
 					$("#pause").html(data.review.rs_content);
+					$("#p_id").html(data.review.id);
 				},
 				error:function(req, stu, err){
 					alert("error");
@@ -852,7 +912,7 @@ $(document).ready(function(){
 				}
 			});  
 	 });
-	 
+
 });
 
 
