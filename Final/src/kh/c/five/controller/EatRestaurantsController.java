@@ -2,6 +2,7 @@ package kh.c.five.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -210,11 +211,13 @@ public class EatRestaurantsController {
 			
 	
 		//쿠키생성
+
+		String cn = URLEncoder.encode(rs.getRs_name(), "utf-8");
 		
-		/*Cookie cookie_visit_rs = new Cookie(rs.getRs_name() , rs.getSeq()+"");
+		Cookie cookie_visit_rs = new Cookie(cn, rs.getSeq()+"");
 		cookie_visit_rs.setMaxAge(60*60*24*365); // 기간을 1년으로 지정
 		cookie_visit_rs.setPath("/"); //모든경로에서 접근 가능하게 만듬
-		response.addCookie(cookie_visit_rs);*/
+		response.addCookie(cookie_visit_rs);
 		
 		
 				
@@ -227,6 +230,41 @@ public class EatRestaurantsController {
 		//return "restaurants/restaurantDetail";
 		
 				return "restaurants/test";
+	}
+	
+	@RequestMapping(value="clear.do", method={RequestMethod.GET, RequestMethod.POST})
+	public String testCookie(HttpServletRequest request, HttpServletResponse response){
+		logger.info("testCookie clear"+new Date());
+		Cookie[] cookies = request.getCookies();
+	
+		/*if(cookies != null){*/
+
+			for(int i=0; i< cookies.length; i++){
+
+				cookies[i].setMaxAge(0); // 유효시간을 0으로 설정
+				cookies[i].setPath("/");  
+				response.addCookie(cookies[i]); // 응답 헤더에 추가
+
+				
+			}
+
+		/*}*/
+		Cookie[] getCookie = request.getCookies();
+
+		if(getCookie != null){
+
+		for(int i=0; i<getCookie.length; i++){
+
+		Cookie c = getCookie[i];
+
+		String name = c.getName(); // 쿠키 이름 가져오기
+
+		String value = c.getValue(); // 쿠키 값 가져오기
+		System.out.println(name + " " + value);
+		}
+
+		}
+		return "redirect:/home.do";
 	}
 	
 	@RequestMapping(value="home.do",  method={RequestMethod.GET, RequestMethod.POST})

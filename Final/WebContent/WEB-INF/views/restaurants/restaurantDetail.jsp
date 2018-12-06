@@ -1,3 +1,5 @@
+<%@page import="kh.c.five.model.EatMemberDto"%>
+<%@page import="java.net.URLDecoder"%>
 <%@page import="kh.c.five.dao.impl.EatReviewDaoImpl"%>
 <%@page import="kh.c.five.dao.EatReviewDao"%>
 <%@page import="kh.c.five.model.fileDto"%>
@@ -173,7 +175,7 @@ img.hover-shadow {
         margin-left:10px;
         margin-right:10px;
     }
-    
+   
    
 @use postcss-color-function;
 @use postcss-nested;
@@ -187,45 +189,8 @@ input:focus {
             border-radius: 0;
             background-position: 100% center;
         } 
-        
-@use postcss-color-function;
-@use postcss-nested;
-@import url('https://fonts.googleapis.com/css?family=Raleway:400,700,900');
-input:hover,
-input:focus {
-            padding: 12px 0;
-            outline: 0;
-            border: 1px solid transparent;
-            border-bottom: 1px solid #575756;
-            border-radius: 0;
-            background-position: 100% center;
-        } 
-        
-/* 마스크 뛰우기 */
-#mask {  
-    position:absolute;  
-    z-index:9000;  
-    background-color:#000;  
-    display:none;  
-    left:0;
-    top:0;
-} 
-/* 팝업으로 뜨는 윈도우 css  */ 
-.window {
-    display: none;
-    position:absolute;  
-    top:50px;
-    margin-left: -500px;
-    width:400px;
-    height:500px;
-    background-color:#FFF;
-    z-index:10000;   
- }
 
-.table1 {
-    border-collapse: collapse;
-    border: 1px solid black;
-}
+ 
 /*new css for new main*/
 <style>
  img.card-img-top{
@@ -275,9 +240,6 @@ input:focus {
 
 </style>
 
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7b79e9996c3bab29b8e5285b04135813&libraries=services"></script>
-
 </head>
 <body>
 
@@ -305,10 +267,11 @@ input:focus {
 					<li class="nav-item"><a class="nav-link"
 						href="restaurantsInsert.do"><strong
 							style="color: white; margin-left: 20px">맛집 추가</strong></a></li>
-					<li class="nav-item" style="margin-left: 20px"><a
-						class="nav-link openMask" href="#"> <img alt=""
-							src="img/main/man-user.png">
-					</a></li>
+					<li class="nav-item" style="margin-left: 20px">
+						<a class="nav-link openMask" href="#">
+							<img alt=""	src="img/main/man-user.png">
+						</a>
+					</li>
 				</ul>
 			</div>
 		</div>

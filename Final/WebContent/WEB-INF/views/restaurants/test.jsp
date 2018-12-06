@@ -1,3 +1,5 @@
+<%@page import="java.net.URLDecoder"%>
+<%@page import="kh.c.five.model.EatMemberDto"%>
 <%@page import="kh.c.five.dao.impl.EatReviewDaoImpl"%>
 <%@page import="kh.c.five.dao.EatReviewDao"%>
 <%@page import="kh.c.five.model.fileDto"%>
@@ -17,23 +19,31 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<%
+ 	EatMemberDto user = (EatMemberDto)session.getAttribute("login");
+ 	Cookie[] cookies = request.getCookies(); 
+    List<RegiDto> RankList = (List<RegiDto>)request.getAttribute("RankList");
+ %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+ 
+    <!--  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="owlcarousel/owl.carousel.min.js"></script>
-
 
 <!-- script for owl with modal -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.js"></script>
 
-
-
 <!-- owl carousel css -->
 <link rel="stylesheet" href="owlcarousel/owl.carousel.min.css">
+
 <link rel="stylesheet" href="owlcarousel/owl.theme.default.min.css">
+
 <!-- owl carousel with modal -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
@@ -148,6 +158,92 @@
 </head>
 <body>
 
+<!-- 로그인 모달 -->
+<div id="id02" class="w3-modal" style="">
+  <span onclick="document.getElementById('id02').style.display='none'" class="w3-closebtn w3-hover-red w3-container w3-padding-hor-8 w3-display-topright">&times;</span>
+  <div class="w3-modal-content w3-card-9 w3-animate-zoom" style="right:-10px; max-width:400px; height: 400px;">
+    <div class="w3-center"><br>
+    	<h1>Login</h1>
+    </div>
+    <div class="w3-container">
+      <div class="w3-section">
+      	<form action="loginAf.do" name="frmForm" id="_frmForm"  method="post">
+	        <label><b>Username</b></label><br>
+	        <input class="w3-input w3-border w3-margin-bottom" id="_userid" name="_userid" required="required" type="text" placeholder="Username"><br>
+	        <label><b>Password</b></label><br>
+	        <input class="w3-input w3-border w3-margin-bottom" type="password" id="_pwd" name="_pwd" required="required" placeholder="Password">
+	        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="w3-btn w3-btn-block w3-green" id="_btnLogin" style="width:70%; text-align: center;">로그인</button><br><br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="document.getElementById('id03').style.display='block'" class="w3-btn w3-btn-block w3-green" style="width:70%; text-align: center;">회원가입</button>
+       	</form>
+      </div>
+    </div>
+    <div class="w3-container w3-border-top w3-padding-hor-16 w3-light-grey">
+      <button onclick="document.getElementById('id02').style.display='none'" type="button" class="w3-btn w3-red" style="float: right;">Cancel</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- 회원가입 모달 -->
+<div id="id03" class="w3-modal" style="">
+  <span onclick="document.getElementById('id03').style.display='none'" class="w3-closebtn w3-hover-red w3-container w3-padding-hor-8 w3-display-topright">&times;</span>
+  <div class="w3-modal-content w3-card-9 w3-animate-zoom" style="right:-10px; top:-50px; width:600px; height: 700px;">
+  
+    <div class="w3-center"><br>
+    	<h1>회원가입</h1>
+    </div>
+    <div class="w3-container">
+      <div class="w3-section">
+      	<form action="" method="post" id="_frmForm2" name="frmForm2">
+      		<div class="form-group">
+                <label class="col-lg-2 control-label">아이디</label>
+                <div class="col-lg-10">
+					<input type="text" name="sid" id="_id2" class="form-control" size="40" placeholder="id"><br>
+					<a href="#none" id="_btnGetId" class="form-control" title="회원가입" style="height: 30px;">아이디체크</a><br>
+					<div id="_rgetid"></div><br>
+					<input type="text" name="id" id="_userid2" class="form-control" size="40" data-msg="아이디를 " readonly="readonly"><br>
+                </div>
+            </div>
+            <div class="form-group">
+            	<label class="col-lg-2 control-label">패스워드</label><br>
+                <div class="col-lg-10"><br>
+              	  	<input type="password" name="pwd" id="_pwd2" class="form-control" size="40" placeholder="password" data-msg="패스워드를 "><br>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">이름</label><br>
+                <div class="col-lg-10">
+               		<input type="text" name="name" id="_name" class="form-control onlyHangul" size="40" placeholder="name" data-msg="성함을 "><br>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">이메일</label><br>
+                <div class="col-lg-10">
+                	<input type="text" name="email" id="_email" size="40" class="form-control" placeholder="e-mail" data-msg="이메일을 "><br>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">별명</label><br>
+                <div class="col-lg-10">
+                	<input type="text" name="snickname" id="_nickname" class="form-control" placeholder="nickname" size="40"><br>
+                	<a href="#none" id="_btnGetNickName" class="form-control" title="회원가입" style="height: 30px;">닉네임체크</a><br>
+					<div id="_rgetnickname"></div><br>
+					<input type="text" name="nickname" id="_usernickname" class="pinput" size="40" data-msg="별명을 " readonly="readonly"><br>
+					<a href="#none" id="_btnRegi" class="form-control" style="height: 30px; title="회원가입">회원가입</a> 
+                </div>
+                <div class="col-lg-10" style="">
+              <!--   <a href="#none" id="_btnRegi" class="form-control" style="height: 30px; title="회원가입">회원가입</a> -->
+                </div>
+            </div>
+       	</form>
+      </div>
+    </div>
+    <div class="w3-container w3-border-top w3-padding-hor-16 w3-light-grey">
+      <button style="float: right;" onclick="document.getElementById('id03').style.display='none'" type="button" class="w3-btn w3-red">Cancel</button>      
+    </div>
+  </div>
+</div>
+
 <nav class="navbar navbar-default navbar-fixed-top" style="background-color: #c53211;  padding-bottom: 10px;">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -175,10 +271,10 @@
         	</a>
         </li>
 		<li class="nav-item" style="margin-left: 20px">
-			<a onclick="document.getElementById('id01').style.display='block'" class="w3-btn">
-				<img alt=""	src="img/main/man-user.png">
-			</a>
-		</li>
+						<a onclick="document.getElementById('id02').style.display='block'" class="w3-btn">
+						<img alt=""	src="img/main/man-user.png">
+						</a>
+					</li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -346,6 +442,7 @@ $('.owl-carousel123').owlCarousel({
 })
 });
 </script>
+
 
  <br>
  <br>
@@ -1100,5 +1197,98 @@ function WriteReview(seq) {
 
 		
 </script>	
+<script type="text/javascript">
+
+$("#_btnRegi").click(function() {
+	if($("#_userid2").val() == ""){
+		alert($("#_userid").attr("data-msg") + " 입력해 주십시오" );
+		$("#id").focus();
+	} 
+	else if($("#_pwd2").val() == ""){
+		alert($("#_pwd").attr("data-msg") + " 입력해 주십시오" );
+		$("#pwd").focus();
+	} 
+	else if($("#_name").val() == ""){
+		alert($("#_name").attr("data-msg") + " 입력해 주십시오" );
+		$("#_name").focus();
+	} 
+	else if($("#_nickname").val() == ""){
+		alert($("#_nickname").attr("data-msg") + " 입력해 주십시오" );
+		$("#_nickname").focus();
+	} 
+	else if($("#_email").val() == ""){
+		alert($("#_email").attr("data-msg") + " 입력해 주십시오" );
+		$("#_email").focus();
+	}
+	else{
+		$("#_frmForm2").attr("action", "regiAf.do").submit();
+	}
+});
+
+/* 아이디체크 */
+
+$("#_btnGetId").click(function () {
+	var id = $("#_id2").val();
+	if(id == ""){
+		alert("아이디를 입력해 주십시오");
+	}else{
+		idCheckFunc(id);
+	}	
+});
+
+ function idCheckFunc(id) {
+	
+	$.ajax({
+		type:"post",
+		url:"getID.do",
+		data:"id=" + id,
+		async:true,
+		success:function(msg){			
+			if(msg.message == 'YES'){
+				$("#_rgetid").html("사용할 수 없는 아이디입니다");
+				$("#_rgetid").css("background-color", "#ff0000");
+			}	
+			else{
+				$("#_rgetid").html("사용하실 수 있습니다");
+				$("#_rgetid").css("background-color", "#0000ff");
+				$("#_userid2").val( $("#_id2").val() );
+			}
+		}		
+	});
+	
+}
+
+/* 닉네임 체크 */
+$("#_btnGetNickName").click(function () {
+	var nickname = $("#_nickname").val();
+	if(_nickname == ""){
+		alert("닉네임을 입력해 주십시오");
+	}else{
+		nicknameCheckFunc(nickname);
+	}	
+});
+
+ function nicknameCheckFunc(nickname) {
+	
+	$.ajax({
+		type:"post",
+		url:"getNickName.do",
+		data:"nickname=" + nickname,
+		async:true,
+		success:function(msg){			
+			if(msg.message == 'YES'){
+				$("#_rgetnickname").html("사용할 수 없는 닉네임입니다");
+				$("#_rgetnickname").css("background-color", "#ff0000");
+			}	
+			else{
+				$("#_rgetnickname").html("사용하실 수 있습니다");
+				$("#_rgetnickname").css("background-color", "#0000ff");
+				$("#_usernickname").val( $("#_nickname").val() );
+			}
+		}		
+	});
+	
+}
+</script>
 </body>
 </html>

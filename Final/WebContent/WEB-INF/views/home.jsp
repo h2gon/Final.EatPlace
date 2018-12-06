@@ -1,3 +1,6 @@
+<%@page import="kh.c.five.dao.impl.EatRestaurantsDaoImpl"%>
+<%@page import="kh.c.five.dao.EatRestaurantsDao"%>
+<%@page import="java.net.URLDecoder"%>
 <%@page import="kh.c.five.model.EatMemberDto"%>
 <%@page import="kh.c.five.model.RegiDto"%>
 <%@page import="java.util.List"%>
@@ -15,28 +18,7 @@ EatMemberDto user = (EatMemberDto)session.getAttribute("login");
 <!DOCTYPE html>
 <html>
 
-<%-- 
-<!-- 쿠키삭제 -->
-<%
-
-Cookie[] cookies = request.getCookies();            // 요청정보로부터 쿠키를 가져온다.
-
-
-
-for(int i = 0 ; i<cookies.length; i++){                            // 쿠키 배열을 반복문으로 돌린다.
-
-
-
-cookies[i].setMaxAge(0);                        // 특정 쿠키를 더 이상 사용하지 못하게 하기 위해서는 
-
-cookies[i].setPath("/");                         //쿠키의 생성떄와 똑같이 지정해 주지 않으면 삭제가 되질 않는다고 한다(!)
-
-response.addCookie(cookies[i]);            // 해당 쿠키를 응답에 추가(수정)한다.
-
-}
-
-%>
- --%>
+ 
 <%
 
 Cookie[] cookies = request.getCookies();            // 요청정보로부터 쿠키를 가져온다.
@@ -49,18 +31,16 @@ System.out.println("현재 설정된 쿠키의 개수 : " + cookies.length);    
 
 for(int i = 0 ; i<cookies.length; i++){                            // 쿠키 배열을 반복문으로 돌린다.
 
+/* URLDecoder.decode(cookies[i].getName(), "utf-8") */
 
-
-System.out.println(i + "번째 쿠키 이름 : " + cookies[i].getName());            // 쿠키의 이름을 가져온다.
+System.out.println(i + "번째 쿠키 이름 : " + URLDecoder.decode(cookies[i].getName(), "utf-8"));            // 쿠키의 이름을 가져온다.
 
 System.out.println(i + "번째 쿠키에 설정된 값 : " + cookies[i].getValue());    // 쿠키의 값을 가져온다.
-
 
 
 }
 
 %>
-
 
 <!-- slideshow -->
 <style>
@@ -105,17 +85,14 @@ System.out.println(i + "번째 쿠키에 설정된 값 : " + cookies[i].getValue
 <style>
    
     .in-line{
-      width:700px;	/* 350 */
-      height:50px;	/* 40 */
-      
+      width:660px;	/* 350 */
+      height:60px;	/* 40 */
     }
    
     input[type="text"]{
-      width:90%;
+      width:70%;
       height:100%;
-      border:3px solid #ff7100;
-      z-index: 50;
-    border-radius: 23px;
+      border:none;
       font-size:1.213rem;
       padding-left: 20px;
       font-style: oblique;
@@ -123,28 +100,20 @@ System.out.println(i + "번째 쿠키에 설정된 값 : " + cookies[i].getValue
       outline:none;
       box-sizing: border-box;
       color:black;
-      
 
     }
     input[type=button]{
-
+      width: 30%;
+      height:100%;
+      background-color: lightgray;
       border:none;
+      background-color: white;
       font-size:1.313rem;
-          outline: none;
-    display: inline;
-    margin-left: -25px;
-    box-sizing: border-box;
-     z-index: 55;
-    border-radius: 23px;
-    background-color: darkorange;
-    color: white;
-    position: relative;
-    left: 454px;
-    right: 0px;
-        bottom: 50px;
-    width: 200px;
-    height: 50px;
-    
+      color:#042AaC;
+      outline:none;
+      display:inline;
+      margin-left: -25px;
+      box-sizing: border-box;
     }
  
   </style>
@@ -165,116 +134,6 @@ System.out.println(i + "번째 쿠키에 설정된 값 : " + cookies[i].getValue
   min-height: 80%;
 }
 </style>
-
-<!-- 검색창 스타일   -->
-<style>
-.search-keywords-container .tab-keywords button {
-
-
-    position: relative;
-    font-size: 0.875rem;
-    color: #7f7f7f;
-    width: 32.5%;
-    height: 50px;
-    text-align: center;
-    text-decoration: none;
-    line-height: 1.2;
-    vertical-align: bottom;
-        cursor: pointer;
-    border: 0px;
-        border-radius: 0 0 3px 3px;
-    background-color: transparent;
-    outline: 0;
-    }
-    
-    .search-keywords-container .tab-keywords button.selected {
-    color: #ff7100;
-}
-.search-keywords-container .tab-keywords button.selected:before {
-    content: '';
-    display: block;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    height: 3px;
-    background-color: #ff7100;
-}
-
-#Vsearch{
-
-   z-index: 1110;  
-   display: none;
-    position: absolute;
-    width: 450px;
-    height: 290px;
-    border-radius: 0px 0px 3px 3px;
-    background-color: rgb(255, 255, 255);
-    margin-left: auto;
-    margin-right: auto;
-    top: 373px;
-    right: 200px;
-    left: 0px;
-    bottom: 0px;
-
-}
-.search-keywords-container .keywords .list-keywords-wrap .list-keywords>li {
-    position: relative;
-    border-bottom: 1px solid #dbdbdb;
-    overflow: hidden;
-}
-.search-keywords-container .keywords .list-keywords-wrap .list-keywords>li a {
-    display: block;
-    padding: 0 45px 0 36px;
-    font-size: 0.875rem;
-    color: #7f7f7f;
-    text-decoration: none;
-    margin: 20px 0;
-    line-height: 1.2rem;
-}
-.search-keywords-container .keywords .list-keywords-wrap .list-keywords>li a:before {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: 7px;
-}
-.search-keywords-container .keywords .list-keywords>li a:before {
-    margin-top: -8.5px;
-    background-image: url(https://mp-seoul-image-develop-s3.mangoplate.com/web/resources/2018022864551sprites_desktop.png?fit=around|*:*&crop=*:*;*,*&output-format=png&output-quality=80);
-    background-position: -974px -752px;
-    width: 17px;
-    height: 17px;
-}
-
-.search-keywords-container .keywords .list-keywords-wrap .list-keywords>li.clear_all {
-    text-align: right;
-    padding: 10px 5px 20px 0;
-    border-bottom: 0;
-    font-size: 0.875rem;
-    color: #7f7f7f;
-     height: 50px;
-     text-decoration: none;
-    line-height: 1.2;
-    vertical-align: bottom;
-        cursor: pointer;
-   
-}
-
-.search-keywords-container {
-    display: none;
-    position: fixed;
-    z-index: 901;
-    background-color: #ffffff;
-    overflow-y: auto;
-}
-
-
-
-
-
-</style>
-
 
   <head>
 
@@ -337,50 +196,92 @@ System.out.println(i + "번째 쿠키에 설정된 값 : " + cookies[i].getValue
 
 <body>
 
-<!-- 블랙스크린 -->
-<div id="black_screen" onclick="displayVsearch()" class="black_screen" style="
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    background: rgba(0,0,0,0.8);
-    display: none;">></div>
-
 <!-- 가고싶어 제발 -->
 <div  class="w3-container">
 <div id="id01" class="w3-modal">
  <div class="w3-modal-content w3-card-4 w3-animate-zoom">
-  <ul class="pagination w3-white w3-border-bottom" style="width:100%;">
-   <li><a href="#" class="tablink" onclick="openCity(event, 'London')">최근 본 맛집</a></li>
-   <li><a href="#" class="tablink" onclick="openCity(event, 'Paris')">가고싶다</a></li>
-  </ul> 
+ 	<div>
+  		<ul class="pagination w3-white w3-border-bottom" style="height:50px; width:100%; position:relative; list-style:none;">
+  		<li style="position:relative; height:100%; width:50%; float:left; text-align: center;"><a href="#" class="tablink" onclick="openCity(event, 'London')" style="width: 100%; height: 100%; border-top: 7px;">최근 본 맛집</a></li>
+  		<li style="position:relative; height:100%; width:50%; float:left; text-align: center;"><a href="#" class="tablink" onclick="openCity(event, 'Paris')" style="width: 100%; height: 100%; border-top: 7px;">가고싶다</a></li>
+  		</ul>
+ 	</div> 
 	<!-- 최근 본 맛집 -->
-  <div id="London" class="w3-container city">
-   <h1>London</h1>
- 
- <table border="1" width="250">
 
+  <div id="London" class="w3-container city">
+  <form action="" name="frmForm5" id="_frmForm5"  method="post">
+  	 <div style="display:inline-block; position:absolute; top:3.3em; right: 10px;">
+  		<a href="#" id="clear" style="text-align: right;"><font style="color: #BDBDBD">x clear all</font></a>
+  	</div> 
+ </form>
+ <%
+ 	
+    List<RegiDto> RankList = (List<RegiDto>)request.getAttribute("RankList");
+ %>
 <%
 for (int i=1;i<cookies.length;i++){ 
-
+String cn = URLDecoder.decode(cookies[i].getName(), "utf-8");
+String cookieAdd = "";
+double cookieRating = 0;
+String cookiePic = "";
+int cookieLike = 0;
+String cookiename = "";
+for(int j =0; j < RankList.size(); j++){
+	
+if( RankList.get(j).getSeq() == Integer.parseInt(cookies[i].getValue())){
+	System.out.println(RankList.get(j).getRs_address1());
+	cookieAdd = RankList.get(j).getRs_address1();
+	cookieRating = RankList.get(j).getRs_rating();
+	cookiePic = RankList.get(j).getRs_picture();
+	cookieLike = RankList.get(j).getSeq();
+	cookiename = RankList.get(j).getRs_name();
+	break;
+}
 %>
+ <%} %>
+
+<div style="width:350px; height:100px; background-color:; box-sizing: border-box; border: 1 solid; ">
+	<!-- 사진 -->
+	<div style="display:inline-block; position:absolute; width: 80px; height: 90px; margin-top:3px; margin-left:10px;">
+		<a><img alt="" src="<%=cookiePic%> " style="width: 80px; height: 90px;"></a>
+	</div>
+	<div>
+		<!-- 이름 -->
+		<div style="display:inline-block; position:relative; width: 30%; height: 45%; top:10px; left:100px;">
+			<a href="rsdetail.do?seq=<%=cookies[i].getValue()%>" style="text-align: center;"><b><font style="font-size: medium;text-align:center;"><%=cn%></font></b></a>
+		</div>
+		<!-- 주소 -->
+		<div style="display:inline-block; position:relative; width: 55%; height: 30%; top:50px; left:-5px;">
+			<a><font style="font-size: x-small;"><%=cookieAdd %></font></a>
+		</div>
+
+		<!-- 평점 --> 
+		<div style="display:inline-block;  position:relative; width: 10%; height: 20%; top:10px; right:90px;">
+			<a><font style="color:#c53211 "><%=cookieRating %></font></a>
+		</div>
+		<!-- 즐찾 -->
+		<div style="display:inline-block;  position:relative; width: 15%; height: 10%; top:-3px; left:295px;">
+			<a href="wannago.do?rs_seq=<%=cookieLike %>&rs_name=<%=cookiename%>"><img id="like_btn" src="img/button/likeIcon.png" style="width: 45px; height: 45px;" ></a>
+		</div>
+ 	</div>
+</div>
+<%-- 
+<table border="1" width="250">
 
 <tr>
 
 <!-- 표현식 : 변수의 값 출력, 메소드의 결과값 출력, 연산 -->
 
-<%-- JSP주석 소스보기할때 보여지지 않음 --%>
+JSP주석 소스보기할때 보여지지 않음
 
 <td><%=i%></td>
-<td><a href="rsdetail.do?seq=<%=cookies[i].getValue()%>"><%= cookies[i].getName()%></a></td>
+<td><a href="rsdetail.do?seq=<%=cookies[i].getValue()%>"><%=cn%></a></td>
 
-<%} %>
 
-</table>
- 
-  
+
+</table> --%>
+
+  <%} %>
   </div>
 	<!-- 가고 싶다 -->
   <div id="Paris" class="w3-container city">
@@ -434,29 +335,24 @@ for (int i=1;i<cookies.length;i++){
 <!-- 로그인 모달 -->
 <div id="id02" class="w3-modal" style="">
   <span onclick="document.getElementById('id02').style.display='none'" class="w3-closebtn w3-hover-red w3-container w3-padding-hor-8 w3-display-topright">&times;</span>
-  <div class="w3-modal-content w3-card-9 w3-animate-zoom" style="right:-10px; max-width:600px">
+  <div class="w3-modal-content w3-card-9 w3-animate-zoom" style="right:-10px; max-width:600px; height: 400px;">
     <div class="w3-center"><br>
     	<h1>Login</h1>
     </div>
     <div class="w3-container">
       <div class="w3-section">
       	<form action="loginAf.do" name="frmForm" id="_frmForm"  method="post">
-	        <label><b>Username</b></label>
-	        <input class="w3-input w3-border w3-margin-bottom" id="_userid" name="_userid" required="required" type="text" placeholder="Username">
-	        <label><b>Password</b></label>
+	        <label><b>Username</b></label><br>
+	        <input class="w3-input w3-border w3-margin-bottom" id="_userid" name="_userid" required="required" type="text" placeholder="Username"><br>
+	        <label><b>Password</b></label><br>
 	        <input class="w3-input w3-border w3-margin-bottom" type="password" id="_pwd" name="_pwd" required="required" placeholder="Password">
-			<button onclick="document.getElementById('id03').style.display='block'"  class="w3-btn w3-btn-block w3-green">회원가입</button>
-	      
-	      
-	       <button type="submit" class="w3-btn w3-btn-block w3-green" id="_btnLogin" style="text-align: center;">로그인</button>
-	       <!--  <a href="#none" class="w3-btn w3-btn-block w3-green" id="_btnLogin" title="로그인">로그인</a> -->  
-        	<a  class="dropdown-item" id="kakao-login-btn"></a>
+	        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="w3-btn w3-btn-block w3-green" id="_btnLogin" style="width:70%; text-align: center;">로그인</button><br><br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="document.getElementById('id03').style.display='block'" class="w3-btn w3-btn-block w3-green" style="width:70%; text-align: center;">회원가입</button>
        	</form>
       </div>
     </div>
     <div class="w3-container w3-border-top w3-padding-hor-16 w3-light-grey">
-      <button onclick="document.getElementById('id02').style.display='none'" type="button" class="w3-btn w3-red">Cancel</button>
-      <span class="w3-right w3-padding w3-hide-small">Forgot <a href="#">password?</a></span>
+      <button onclick="document.getElementById('id02').style.display='none'" type="button" class="w3-btn w3-red" style="float: right;">Cancel</button>
     </div>
   </div>
 </div>
@@ -465,7 +361,7 @@ for (int i=1;i<cookies.length;i++){
 <!-- 회원가입 모달 -->
 <div id="id03" class="w3-modal" style="">
   <span onclick="document.getElementById('id03').style.display='none'" class="w3-closebtn w3-hover-red w3-container w3-padding-hor-8 w3-display-topright">&times;</span>
-  <div class="w3-modal-content w3-card-9 w3-animate-zoom" style="right:-10px; width:1000px; height: 700px;">
+  <div class="w3-modal-content w3-card-9 w3-animate-zoom" style="right:-10px; width:600px; height: 650px;">
   
     <div class="w3-center"><br>
     	<h1>회원가입</h1>
@@ -505,16 +401,18 @@ for (int i=1;i<cookies.length;i++){
                 <div class="col-lg-10">
                 	<input type="text" name="snickname" id="_nickname" class="form-control" placeholder="nickname" size="40">
                 	<a href="#none" id="_btnGetNickName" class="form-control" title="회원가입" style="height: 30px;">닉네임체크</a>
-							<div id="_rgetnickname"></div>
+					<div id="_rgetnickname"></div>
 					<input type="text" name="nickname" id="_usernickname" class="pinput" size="40" data-msg="별명을 " readonly="readonly"> 
                 </div>
+                <div class="col-lg-10" style="">
                 <a href="#none" id="_btnRegi" class="form-control" style="height: 30px; title="회원가입">회원가입</a>
+                </div>
             </div>
        	</form>
       </div>
     </div>
     <div class="w3-container w3-border-top w3-padding-hor-16 w3-light-grey">
-      <button onclick="document.getElementById('id03').style.display='none'" type="button" class="w3-btn w3-red">Cancel</button>      
+      <button style="float: right;" onclick="document.getElementById('id03').style.display='none'" type="button" class="w3-btn w3-red">Cancel</button>      
     </div>
   </div>
 </div>
@@ -539,7 +437,7 @@ function openCity(evt, cityName) {
 
    <!-- Navigation -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark fixed-top"
-		style="background-color: #c53211; padding-bottom: 10px; z-index: 500;">
+		style="background-color: #c53211; padding-bottom: 10px">
 		<div class="container">
 			<a class="navbar-brand" href="home.do">EAT PLACE</a>
 			<button class="navbar-toggler navbar-toggler-right" type="button"
@@ -568,10 +466,6 @@ function openCity(evt, cityName) {
            </div>
       </div>
     </nav>
-    
-  
-			   
-			
 	
     <header>
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -583,36 +477,35 @@ function openCity(evt, cityName) {
 	            <h1 style="color: white;"><strong>솔직한 리뷰, 믿을 수 있는 평점!</strong></h1>
 	              <h1 style="color: white;"><strong>EAT PLACE</strong></h1> 
 	             
-	 			
-			   
-	          </div> 
-	        </div>
-	      </div>
-	      
-	     
-	  
-   </header>
-   
-     <form action="" id="main-search" name="main-search" method="get" style="z-index: 110; position: relative;bottom: 200px;"> 
-	 			 <div class="in-line" style="margin-left: auto; margin-right: auto; ">
-			      <strong><input type="text" onkeypress="if(event.keyCode==13) {search();}" onclick="displayVsearch()"  id="main-keyword" name="s_keyword" value="" placeholder="지역, 식당 또는 음식" autocomplete="off" style="color: #575756; border-bottom-left-radius: 20px; border-top-left-radius: 20px"></strong>
-			      <strong><input type="button" onclick="search()"  value="검색" style="background-color: darkorange; color: white;"></strong>
+	 			<form action="" id="main-search" name="main-search" method="get"> 
+	 			 <div class="in-line" style="margin-left: 470px; ">
+			      <strong><input type="text" onkeypress="if(event.keyCode==13) {search();}"  id="main-keyword" name="s_keyword" value="" placeholder="지역, 식당 또는 음식" style="color: #575756; border-bottom-left-radius: 20px; border-top-left-radius: 20px"></strong>
+			      <strong><input type="button" onclick="search()"  value="검색" style="border-bottom-right-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-top-left-radius: 20px; background-color: darkorange; color: white;"></strong>
 			     </div>
+			     
+			     
 				<!-- controller로 넘겨주기 위한 값 -->
 				<input type="hidden" name="pageNumber" id="_pageNumber" value="${(empty pageNumber)?0:pageNumber }">
 				<input type="hidden" name="recordCountPerPage" id="_recordCountPerPage"
 					value="${(empty recordCountPerPage)?9:recordCountPerPage }">
 							     
-	</form>   
-   
+			   </form>
+			   
+	          </div> 
+	        </div>
+	      </div>
+	  
+   </header>
 
+
+	<br><br>
     <!-- Portfolio Section -->
     
     <p style="margin-left: 58px; font-size: 24px; color: #ff7100"><strong>평점이 높은 식당</strong></p>
       <div class="row" style="margin-left: 65px; margin-right: 65px">
     
      <%
-     List<RegiDto> RankList = (List<RegiDto>)request.getAttribute("RankList");
+
          
      if(RankList == null){
       %>
@@ -811,75 +704,6 @@ function openCity(evt, cityName) {
       <!-- /.container -->
       </div>
     </footer>
-    
-     <!-- 추천 검색어 / 최근검색어 -->
-   
-   <aside id="Vsearch" class="search-keywords-container ng-scope main" ng-controller="mp20_search_list_controller" style="">
-  <nav  class="tab-keywords">
- 
-    <!-- <button class="searching_tap_recommend searching_tap selected" onclick="select_tab_by_recommend()"> -->
-     <button class="searching_tap_recommend searching_tap selected" value="re_btn1">
-      추천 검색어
-    </button>
-    <!-- <button class="searching_tap_trending searching_tap" onclick="select_tab_by_popular()"> -->
-     <button class="searching_tap_trending searching_tap" value="re_btn2" >
-      인기 검색어
-    </button>
-   <!--  <button class="searching_tap_recent searching_tap" onclick="select_tab_by_lately()"> -->
-     <button class="searching_tap_recent searching_tap" value="re_btn3">
-      최근 검색어
-    </button>
-    
-  </nav>
-<%-- <%
-String recomend = "추천검색어테스트";
-
-%>
-<c:set var="recomend" value="추천검색어1"></c:set> --%>
-  <!--  검색 자동완성 -->
-  <div class="keywords">
-	  <div class="list-keywords-wrap">
-	    <ol class="list-keywords" >
-	      <li class="list-keyword" >
-	        <a href="#" category="" onclick="search2(this)" class="ng-binding">존맛</a>
-	        <div class="search_result_delete ng-hide" onclick="search2()">
-          </div>
-	      </li>
-			<li class="list-keyword" >
-	        <a href="#" category="" onclick="search2(this)" class="ng-binding">국물</a>
-	        <div class="search_result_delete ng-hide" onclick="common_ga(get_now_page_code(), 'CLICK_SEARCH_RECENT_CANCEL')">
-          </div>
-	      </li>
-	      <li class="list-keyword" >
-	        <a href="#" category="" onclick="search2(this)" class="ng-binding">혼밥</a>
-	        <div class="search_result_delete ng-hide" onclick="common_ga(get_now_page_code(), 'CLICK_SEARCH_RECENT_CANCEL')">
-          </div>
-	      </li>
-	      <li class="list-keyword" >
-	        <a href="#" category="" onclick="search2(this)" class="ng-binding">맛집</a>
-	        <div class="search_result_delete ng-hide" onclick="common_ga(get_now_page_code(), 'CLICK_SEARCH_RECENT_CANCEL')">
-          </div>
-	      </li>
-	      <li class="list-keyword" >
-	        <a href="#" category="" onclick="search2(this)" class="ng-binding">신사동</a>
-	        <div class="search_result_delete ng-hide" onclick="common_ga(get_now_page_code(), 'CLICK_SEARCH_RECENT_CANCEL')">
-          </div>
-	      </li>
-
-		    <li class="clear_all ng-hide" ng-show="selected_tab === 'lately' &amp;&amp; show_keyword_list.length">
-          <button style="border: 0px; border-radius: 0; background-color: transparent;cursor: pointer; outline: 0;" ng-click="remove_lately_keyword_all()" onclick="common_ga(get_now_page_code(), 'CLICK_SEARCH_RECENT_CLEAR')">
-            x clear all
-          </button>
-        </li>
-
-	      <!-- <li class="no_lately_keyword ng-hide" ng-show="selected_tab === 'lately' &amp;&amp; !show_keyword_list.length">
-          최근 검색어가 없습니다.
-        </li> -->
-	    </ol>
-	  </div>
-  </div>
-</aside>
-
 
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -889,145 +713,13 @@ String recomend = "추천검색어테스트";
     <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
     <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 
-
-
- <script type="text/javascript">
-	      function displayVsearch() {
-	    	
-	    	  $("#Vsearch").toggle();
-	    	  $("#black_screen").toggle();
-	    	  
-	    	    if($("#main-search").css("z-index")=="110"){
-	    	    	$("#main-search").css("z-index","1100")
-	    	    }else{
-	    	    	$("#main-search").css("z-index","110")
-	    	    }
-	    	  
-	    	  
-		}
-	      </script>
-
 <script type="text/javascript">
- $(document).ready(function(){
-	var tab = $('.tab-keywords');
-	tab.find('button').click(function(){ 
-		
-		 $("[class*=selected]").removeClass("selected"); 
-		 $(this).addClass("selected");
-		 var btn = $(this).val();
-		 if (btn == "re_btn1") {
-			
-			$(".list-keywords *").remove();
-			 var re_str = ['존맛','국물','혼밥','맛집','신사동'];
-			for (var i = 0; i < re_str.length; i++) {
-				$(".list-keywords").append(
-					    $('<li>').attr('class','list-keyword').append(
-					            $('<a>').attr('href','#').attr('onclick','search2(this)').append(
-					            		re_str[i]
-					              )));  
-			} 
-			
-		}else if (btn == "re_btn2"){
-			
-			$(".list-keywords *").remove();
-			$(".list-keywords").append(
-				    $('<li>').attr('class','list-keyword').append(
-				            $('<a>').attr('href','#').attr('onclick','search2(this)').append(
-				            		"인기검색어 추가"
-				              )));  
-		}else{
-			alert("최근검색어 클릭");
-		}
-		 
 
-	 })
-
-}) 
-/* 
-$(function(){
-    $('.tab-keywords').click(function(){
-        alert("클릭");
-    });
-}); */
-
-/* 
- function select_tab_by_popular(a) {
-	alert("클릭");
-	$(a).toggleClass('selected');
-} 
- */
-
-
-</script>
-	
-	 
-	
-<script type='text/javascript'>
-	$(document).ready(function(){
-		console.log(Kakao.Auth.getAccessToken());
-		if(Kakao.Auth.getAccessToken() ==null){
-			console.log("nothing");
-		}
-	});
-		  //<![CDATA[
-			// 사용할 앱의 JavaScript 키를 설정해 주세요.
-			Kakao.init('7b79e9996c3bab29b8e5285b04135813');
-			
-			// 카카오 로그인 버튼을 생성합니다.
-			Kakao.Auth.createLoginButton({
-				container: '#kakao-login-btn',
-				success: function(authObj) {
-			
-			/* Kakao.Auth.login({      
-				success: function(authObj) { */
-						
-					// 로그인 성공시, API를 호출합니다.
-					Kakao.API.request({
-						url: '/v1/user/me',
-						success: function(res) {
-							console.log(res);
-							
-							var userID = res.id;						//유저의 카카오톡 고유 id
-							var userEmail = res.kaccount_email;			//유저의 이메일
-							var userNickName = res.properties.nickname;	//유저가 등록한 별명
-							
-							console.log(userID);
-							console.log(userEmail);
-							console.log(userNickName);
-							
-							document.getElementById("before").innerHTML="<li class='nav-item dropdown' id='after'>"+
-							"<a class='nav-link dropdown-toggle' href='#' id='navbarDropdownPortfolio' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>" + 
-			               	userNickName + "</a>" +
-			               	"<div  class='dropdown-menu dropdown-menu-right' aria-labelledby='navbarDropdownPortfolio' style='text-align: center'>" +
-			               	"<a class='dropdown-item'>" + 
-			               	"<button type='button' onclick='Kakao.Auth.logout()'>로그아웃</button>"+
-			               	"</a>"+
-			               	"</div></li>";
-			               	
-			               	
-			               	
-						},
-						fail: function(error) {
-							alert(JSON.stringify(error));
-						}
-
-
-					});
-				},
-				fail: function(err) {
-					alert(JSON.stringify(err));
-				},
-				persistRefreshToken: false,
-				persistAccessToken: false
-				
-			
-			});
-		  //]]>
-		  
-		  
-		</script>
-
-<script type="text/javascript">
+$("#clear").click(function() {
+	 alert("삭제");
+	 /* location.href = "clear.do"; */
+		$("#_frmForm5").attr("action", "clear.do").submit();
+});
 
 function search() {
 	
@@ -1041,13 +733,6 @@ function search() {
 		$("#main-search").attr({"target":"_self", "action":"search.do"}).submit();
 	}
 	
-}
-
-function search2(a) {
-		
-		$("#main-keyword").val(a.innerHTML);
-		$("#main-search").attr({"target":"_self", "action":"search.do"}).submit();
-		
 }
 
 
