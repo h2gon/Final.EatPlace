@@ -595,4 +595,8 @@ public class EatRestaurantsController {
 				return "redirect:/home.do";
 			}
 			
+			@RequestMapping(value="header.do",  method={RequestMethod.GET, RequestMethod.POST})
+			public String header(){
+				return "restaurants/header";
+			}
 }

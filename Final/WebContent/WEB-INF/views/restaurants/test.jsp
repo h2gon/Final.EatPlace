@@ -21,17 +21,13 @@
 <title>Insert title here</title>
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="owlcarousel/owl.carousel.min.js"></script>
-<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 
-<!-- Bootstrap core CSS -->
-<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
 <!-- script for owl with modal -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.js"></script>
-<!-- test owl -->
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
 
 <!-- owl carousel css -->
 <link rel="stylesheet" href="owlcarousel/owl.carousel.min.css">
@@ -51,11 +47,6 @@
 
 
 <style type="text/css">
-.hide-bullets {
-list-style:none;
-margin-left: -40px;
-margin-top:20px;
-}
 
 * { font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif'; }
  .between {
@@ -141,70 +132,132 @@ margin-top:20px;
   border-radius: 0px;
   text-align: center;
 }
+.navbar.navbar-default {
+    background-color: #99ccff;
+    border: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.navbar.navbar-default .navbar-collapse {
+    border: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
 
 </style>
 </head>
 <body>
-<%
-List<ReviewDto> rvlist = (List<ReviewDto>)request.getAttribute("reviewlist"); //이거 나중에 리뷰랑 합치고 리뷰에서 불러오는거 지우면 됩니다
-List<fileDto> imagelist = (List<fileDto>) request.getAttribute("imagelist");
-%>
 
-<div class="modal" id="reviewdetail" style="display: none" tabindex="-1" role="dialog" aria-labelledby="carouselModalLabel">
+<nav class="navbar navbar-default navbar-fixed-top" style="background-color: #c53211;  padding-bottom: 10px;">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="home.do" style="color: white; margin-left: 10px">EAT PLACE</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> 
+      <ul class="nav navbar-nav navbar-right">
+        <li class="nav-item">
+        	<a class="nav-link"	href="restaurntsList.do">
+        		<strong	style="color: white; margin-left: 20px">맛집 리스트</strong>
+        	</a>
+        </li>
+        <li class="nav-item">
+        	<a class="nav-link"	href="restaurantsInsert.do">
+        		<strong	style="color: white; margin-left: 20px">맛집 추가</strong>
+        	</a>
+        </li>
+		<li class="nav-item" style="margin-left: 20px">
+			<a onclick="document.getElementById('id01').style.display='block'" class="w3-btn">
+				<img alt=""	src="img/main/man-user.png">
+			</a>
+		</li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
+<%
+List<ReviewDto> rvlist = (List<ReviewDto>)request.getAttribute("reviewlist");
+List<fileDto> imagelist = (List<fileDto>) request.getAttribute("imagelist");
+%>  
+
+<div class="modal fade" id="carouselModal" tabindex="-1" role="dialog" aria-labelledby="carouselModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="carouselModalLabel">이름1234<%-- ${rs.rs_name } --%></h4>
+        <h4 class="modal-title" id="carouselModalLabel">${rs.rs_name }</h4>
       </div>
       <div class="modal-body">
 <div class="customNavigation">
   <a class="prev"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
   <a class="next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
 </div>
+	<div class="row">
+	<div class=" col-md-8">
 	    <div id="sync1" class="owl-carousel"><!-- 이게 큰거 -->
         	<div class="item"><img id="mainImage" src="" class="img-responsive"></div>
         </div>
-        
-   <table>
-   	<tr>
-   		<td>
-   			<p id="p_id">아이디123<%-- ${review.id } --%></p>
-   		</td>
-   		<td>
-   		<span id = "p_rating" value="">
-   			<img id = "p_ratingP" alt="" src="./img/like/3-1.png" style="width: 60px;" msg="3" title="3점" >
-   		</span>
-   		</td>
-   	</tr>
-   	<tr>
-   		<td colspan="2">
-   			<p id="pause">리뷰내용1234<%-- ${review.rs_content } --%></p>
-   		</td>
-   	</tr>
-   </table>
-	<div>
+     </div>   
+   		<div class="col-md-4">
+   			<div class="col-xs-8">
+	   			<p id="p_id">${review.id }</p>
+	   			<img src="img/button/review.png">review count<img alt="" src="img/button/fav.png">
+	   		</div>
+   			<div class="col-xs-4" style="align-content: right">
+   				<img id = "p_ratingP" alt="" src="./img/like/3-1.png" style="width: 45px; height: auto" msg="3" title="3점" >
+   			</div>
+   			<br>
+   			<hr>
+   			<br>
+   			<div>
+   				<p id="pause" ></p>
+   			</div>
+   		</div>
+   </div>
+	<div>  
+	
+	
+		
+		<%-- <c:choose>
+		<c:when test="${review.rs_rating eq 1 }">
+		<img alt="" src="./img/like/1-1.png" style="width: 60px;" msg="1" title="1점" >
+		</c:when>
+		<c:when test="${review.rs_rating eq 3 }">
+		<img alt="" src="./img/like/3-1.png" style="width: 60px;" msg="3" title="3점" >
+		</c:when>
+		<c:when test="${review.rs_rating eq 5 }">
+		<img alt="" src="./img/like/5-1.png" style="width: 60px;" msg="5" title="5점" >
+		</c:when>
+		</c:choose> --%>
+	
 	
 	</div>
         <div id="sync2" class="owl-carousel thumbnails-wrap"> <!-- 이게 아래에 있는 썸네일 -->
-        <div class="item">
-        <img id="img" alt="" src="" class="img-responsive" onclick="goimage2()">
-        </div>
-        		<%-- <%
+        		<%
 		for (int i=0;i<imagelist.size();i++){
 			if(imagelist.get(i).getFile_name().contains("https://")){
 				%>
-				<div class="item"><img src="<%=imagelist.get(i).getFile_name()%>" class="img-responsive" onclick="goimage2()"></div>
+				<div class="item"><img src="<%=imagelist.get(i).getFile_name()%>" class="img-responsive"></div>
 				<%
 			}else{
 				%>
-		          <div class="item"><img src="\image\<%=imagelist.get(i).getFile_name()%>" class="img-responsive" onclick="goimage2()"></div>
+		          <div class="item"><img src="\image\<%=imagelist.get(i).getFile_name()%>" class="img-responsive"></div>
 		          <%
 			}
 		
 		}
           %>
-           --%>
+          
         </div>     
       </div>
       
@@ -212,7 +265,7 @@ List<fileDto> imagelist = (List<fileDto>) request.getAttribute("imagelist");
   </div>
 </div>
 
-<!-- Navigation -->
+<!-- Navigation
 	<nav class="navbar fixed-top navbar-expand-lg navbar-dark fixed-top"
 		style="background-color: #c53211; padding-bottom: 10px">
 		<div class="container">
@@ -243,8 +296,8 @@ List<fileDto> imagelist = (List<fileDto>) request.getAttribute("imagelist");
 				</ul>
 			</div>
 		</div>
-	</nav>
-<%-- 
+	</nav> -->
+
 <%
 if(imagelist==null||imagelist.size()<3){
 	%>
@@ -252,42 +305,31 @@ if(imagelist==null||imagelist.size()<3){
 	<%
 }else{
 	%>
-	<div class="owl-carousel123 owl-theme" >
+	<br>
+	<br>
+	<br>
+	<div class="owl-carousel123 owl-theme" style="margin-top: 50px" >
 <%
 for(int i=0;i<imagelist.size();i++){
 %>
 	<div class="item" id="owlImages">
-	<!-- <a href="#" data-toggle="modal" data-target="#carouselModal"> -->
-	<a href=#>
-		<img src="<%=imagelist.get(i).getFile_name()%>" style="height: 300px;width:auto">
-		<!-- 이거 id owl Images로 바꾸고 경로 다시 설정해야함 -->
+	<a href="#" data-toggle="modal" data-target="#carouselModal">
+		<img src="<%=imagelist.get(i).getFile_name()%>" style="height: 300px; margin-right: 3px">
 	</a>
 	</div>
 <%
 }
 %>
-</div> --%>
-	<%--  <div class="modal" id="reviewdetail">
-		<div class="row">
-		<%
-		for (int i=0;i<3;i++){
-		%>
-			<div class="col-sm-4 news-events-page--list-page" id="owlImages">
-			  <a href="#" data-toggle="modal" data-target="#carouselModal">
-			 <img alt="이미지없음" src="">
-			    
-			  </a>
-			</div>
-		<%} %>
-	  </div> 
-	</div>  --%>
-	
-	
+</div>
+
+	<%
+}
+%>
+
 <script type="text/javascript">
 //plugin call
 $(document).ready(function(){
 $('.owl-carousel123').owlCarousel({
-	loop : true,
 	margin : 10,
     autoWidth:true,
 	responsive : {
@@ -305,7 +347,8 @@ $('.owl-carousel123').owlCarousel({
 });
 </script>
 
- 
+ <br>
+ <br>
 <div class="column-wrapper">
 		<div class="column-contents">
 			<div class="inner">
@@ -318,19 +361,22 @@ $('.owl-carousel123').owlCarousel({
 				<div style="float: left; width: 10%">
 					<p></p>
 				</div>
-				<div style="float: left; width: 60%">
+				<div style="float: left; width: 60%" >
 					<div>
+					
 						<span class="title">
+					<div class="col-md-8">
 							<font size="26" color="#000000" id="rs_seq" value="${rs.seq }">${rs.rs_name }</font>
-							  
-							<img id="review_btn" class="review_writing_button" onclick="WriteReview('${rs.seq}');" src="img/button/reviewIcon.png">
-							<c:if test="${isLike ne true }">
-							<a href="insertLike.do?rs_seq=${rs.seq }&rs_name=${rs.rs_name}&id=${login.id}"><img id="like_btn" src="img/button/likeIcon.png" ></a>
-							</c:if>
-							<c:if test="${isLike eq true }">
-							<a href="#none"><img id="like_btn_delete" src="img/button/likeIconR.png" ></a>
-							</c:if>
-		
+					</div>		
+							<div class="col-md-4">  
+								<img id="review_btn" class="review_writing_button" onclick="WriteReview('${rs.seq}');" src="img/button/reviewIcon.png">
+								<c:if test="${isLike ne true }">
+								<a href="insertLike.do?rs_seq=${rs.seq }&rs_name=${rs.rs_name}&id=${login.id}"><img id="like_btn" src="img/button/likeIcon.png" ></a>
+								</c:if>
+								<c:if test="${isLike eq true }">
+								<a href="#none"><img id="like_btn_delete" src="img/button/likeIconR.png" ></a>
+								</c:if>
+							</div>
 						</span>
 					
 						
@@ -356,18 +402,6 @@ $('.owl-carousel123').owlCarousel({
 						
 					</div>
 
-					<!-- <div class="restaurant_action_button_wrap">
-                  <button class="review_writing_button" >  -->
-					<!-- data-restaurant_key="레스토랑 번호" -->
-					<!--  <i class="review_writing_button_icon"></i>
-                    <span class="review_writing_button_text">리뷰쓰기</span>
-                  </button>
-
-                  <div class="wannago_wrap">
-                    <button class="btn-type-icon favorite wannago_btn">가고싶다</button>
-                    
-                  </div>
-                </div> -->
                 
                 <table class="info no_menu" style="width: 50%">
 						
@@ -721,7 +755,7 @@ $('.owl-carousel123').owlCarousel({
 					<%
 					}else{
 					%>
-					<img alt="" src="/image/<%=fileName[a] %>" style="width: 75px; height: 75px;" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
+					<img alt="" src="/image/<%=fileName[a] %>" style="width: 75px; height: 75px;" data-toggle="modal" data-target="#myModal"<%-- onclick="reviewDetail(<%=list.get(i).getSeq()%>)" --%>>
 					<% }
 					}
 			}
@@ -748,127 +782,11 @@ $('.owl-carousel123').owlCarousel({
 		}
          %>
          </table>
-  <!-- Review Modal -->  
-  
-  <!-- <div class="container" id="reviewdetail" style="display: none" role="dialog"> -->
-  <!-- <div class="modal" id="reviewdetail" style="display: none">
-  
-        <div id="main_area">
-                Slider
-                <div class="row">
-                    <div class="col-xs-12" id="slider">
-                        Top part of the slider
-                        <div class="row">
-                            <div class="col-sm-8" id="carousel-bounding-box">
-                                <div class="carousel slide" id="myCarousel">
-                                    Carousel items
-                                    <div class="carousel-inner">
-                                        <div class="active item" data-slide-number="0">
-                                        <img src="http://placehold.it/770x300&text=one"></div>
-
-                                        <div class="item" data-slide-number="1">
-                                        <img src="http://placehold.it/770x300&text=two"></div>
-
-                                        <div class="item" data-slide-number="2">
-                                        <img src="http://placehold.it/770x300&text=three"></div>
-
-                                        <div class="item" data-slide-number="3">
-                                        <img src="http://placehold.it/770x300&text=four"></div>
-
-                                        <div class="item" data-slide-number="4">
-                                        <img src="http://placehold.it/770x300&text=five"></div>
-
-                                        <div class="item" data-slide-number="5">
-                                        <img src="http://placehold.it/770x300&text=six"></div>
-                                    </div>Carousel nav
-                                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                                        <span class="glyphicon glyphicon-chevron-left"></span>                                       
-                                    </a>
-                                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                                        <span class="glyphicon glyphicon-chevron-right"></span>                                       
-                                    </a>                                
-                                    </div>
-                            </div>
-
-                            <div class="col-sm-4" id="carousel-text"></div>
-
-                            <div id="slide-content" style="display: none;">
-                                <div id="slide-content-0">
-                                    <h2>Slider One</h2>
-                                    <p>Lorem Ipsum Dolor</p>
-                                    <p class="sub-text">October 24 2014 - <a href="#">Read more</a></p>
-                                </div>
-
-                                <div id="slide-content-1">
-                                    <h2>Slider Two</h2>
-                                    <p>Lorem Ipsum Dolor</p>
-                                    <p class="sub-text">October 24 2014 - <a href="#">Read more</a></p>
-                                </div>
-
-                                <div id="slide-content-2">
-                                    <h2>Slider Three</h2>
-                                    <p>Lorem Ipsum Dolor</p>
-                                    <p class="sub-text">October 24 2014 - <a href="#">Read more</a></p>
-                                </div>
-
-                                <div id="slide-content-3">
-                                    <h2>Slider Four</h2>
-                                    <p>Lorem Ipsum Dolor</p>
-                                    <p class="sub-text">October 24 2014 - <a href="#">Read more</a></p>
-                                </div>
-
-                                <div id="slide-content-4">
-                                    <h2>Slider Five</h2>
-                                    <p>Lorem Ipsum Dolor</p>
-                                    <p class="sub-text">October 24 2014 - <a href="#">Read more</a></p>
-                                </div>
-
-                                <div id="slide-content-5">
-                                    <h2>Slider Six</h2>
-                                    <p>Lorem Ipsum Dolor</p>
-                                    <p class="sub-text">October 24 2014 - <a href="#">Read more</a></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>/Slider
-
-                <div class="row hidden-xs" id="slider-thumbs">
-                        Bottom switcher of slider
-                        <ul class="hide-bullets">
-                            <li class="col-sm-2">
-                                <a class="thumbnail" id="carousel-selector-0"><img src="http://placehold.it/170x100&text=one"></a>
-                            </li>
-
-                            <li class="col-sm-2">
-                                <a class="thumbnail" id="carousel-selector-1"><img src="http://placehold.it/170x100&text=two"></a>
-                            </li>
-
-                            <li class="col-sm-2">
-                                <a class="thumbnail" id="carousel-selector-2"><img src="http://placehold.it/170x100&text=three"></a>
-                            </li>
-
-                            <li class="col-sm-2">
-                                <a class="thumbnail" id="carousel-selector-3"><img src="http://placehold.it/170x100&text=four"></a>
-                            </li>
-
-                            <li class="col-sm-2">
-                                <a class="thumbnail" id="carousel-selector-4"><img src="http://placehold.it/170x100&text=five"></a>
-                            </li>
-
-                            <li class="col-sm-2">
-                                <a class="thumbnail" id="carousel-selector-5"><img src="http://placehold.it/170x100&text=six"></a>
-                            </li>
-                        </ul>                 
-                </div>
-        </div>
-        
-</div> -->
-     
-  <div class="modal" id="_myModal" role="dialog" style="display: none">
+  <!-- Review Modal -->       
+  <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
     
-      Modal content
+      <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -894,70 +812,15 @@ $('.owl-carousel123').owlCarousel({
           
          %>
          </div>
-         <script type="text/javascript">
-         jQuery(document).ready(function($) {
-        	 
-             $('#myCarousel').carousel({
-                     interval: 5000
-             });
-      
-             $('#carousel-text').html($('#slide-content-0').html());
-      
-             //Handles the carousel thumbnails
-            $('[id^=carousel-selector-]').click( function(){
-                 var id = this.id.substr(this.id.lastIndexOf("-") + 1);
-                 var id = parseInt(id);
-                 $('#myCarousel').carousel(id);
-             });
-      
-      
-             // When the carousel slides, auto update the text
-             $('#myCarousel').on('slid.bs.carousel', function (e) {
-                      var id = $('.item.active').data('slide-number');
-                     $('#carousel-text').html($('#slide-content-'+id).html());
-             });
-     });
-         </script>
          
        
          
        <script type="text/javascript">
      	function reviewDetail(seq) {
-     		alert("seq:"+seq);
-			/* var data = JSON.stringify(seq);
-			var sendData = JSON.parse(data); */
+			alert("seq:"+seq);
+			$("#myModal").modal({backdrop:"static"});
 			
-
-			$.ajax({
-				url:"getReviewDetail.do",					
-				type:"POST",
-				data:"seq="+seq,
-				dataType:"json",
-				async:true,
-								
-				success:function(json){
-					alert("success");
-					console.log(json);
-					//alert(data.review.rs_content);
-					//$("#pause").html(data.review.rs_content);
-					for (var i = 0; i < json.length; i++) {
-						//$("#img").attr("src",json[i]);
-						console.log(json[i]);
-						//$("#test").append(json[i].key);
-					}					
-					//$("#test").html(json);
-				},
-				error:function(req, stu, err){
-					alert("error");
-					alert(stu + " " + err+""+req);					
-				}
-			});
-			//$("#modal_rv_seq").val(seq).submit();
-			
-			//location.href="getReviewDetail.do?seq="+seq
-			//$("#carouselModal").style.display = "block";
-			//modal.style.display = "block";
-			document.getElementById("reviewdetail").style.display = "block";
+			//location.href = "reviewDetail.do?seq="+seq;
 		}
        
        function show_morelist(index) {
@@ -977,37 +840,6 @@ $('.owl-carousel123').owlCarousel({
     	   	    	  
        }       
        </script>
-           <script type="text/javascript">
-          
-       // Get the modal
-          var modal = document.getElementById('_myModal');
-
-          // Get the button that opens the modal
-          var btn = document.getElementById("_myBtn");
-
-          // Get the <span> element that closes the modal
-          var span = document.getElementsByClassName("close")[0];
-
-          // When the user clicks on the button, open the modal 
-         /*  btn.onclick = function() {
-              modal.style.display = "block";
-          } */
-        
-
-          // When the user clicks on <span> (x), close the modal
-          span.onclick = function() {
-              modal.style.display = "none";
-          }
-
-          // When the user clicks anywhere outside of the modal, close it
-          window.onclick = function(event) {
-              if (event.target == modal) {
-                  modal.style.display = "none";
-              }
-          }
-          
-          
-          </script>
 		
        <br><br>
           <!-- review_main end -->
@@ -1015,6 +847,13 @@ $('.owl-carousel123').owlCarousel({
 
 
 $(document).ready(function(){
+	
+	$("#header_frame").width($(window).width());
+	$(window).resize(function(){
+		$("#header_frame").width($(this).width());
+	});
+	
+
 	 $("#sync2 div img").click(function(){
 		 
 		var img=$(this).attr('src');
@@ -1045,17 +884,19 @@ $(document).ready(function(){
 			async:true,
 			success:function(data){
 			//	alert("success");
-			//	alert(data.review.rs_content);
+			//	alert(data.review.rs_rating);
 				$("#pause").html(data.review.rs_content);
 				$("#p_id").html(data.review.id);
+				var rating =data.review.rs_rating;
+				
 				//$("#p_rating").attr('value',data.review.rs_rating);
-				/* if(data.review.rs_rating==1){
-					$("#p_ratingP").attr('src','./img/like/1-1.png');	
-				}else if(data.review.rs_rating==3){
-					$("#p_ratingP").attr('src','./img/like/3-1.png');
-				}else(("#p_rating").attr('value')==5){
-					$("#p_ratingP").attr('src','./img/like/5-1.png');
-				}  */
+				if(rating===1){
+					$("#p_ratingP").attr('src','./img/like/1-2.png');	
+				}else if(rating===3){
+					$("#p_ratingP").attr('src','./img/like/3-2.png');
+				} else if(rating===5){
+					$("#p_ratingP").attr('src','./img/like/5-2.png');
+				}     
 			},
 			error:function(req, stu, err){
 				alert("error");
@@ -1078,7 +919,7 @@ $(document).ready(function(){
 			};
 			
 			//var test=$("#rs_seq").attr("value");
-			
+			alert("success1");
 			 $.ajax({
 				url:"getRPdetail.do",
 				datatype:'json',
@@ -1087,9 +928,17 @@ $(document).ready(function(){
 				async:true,
 				success:function(data){
 					//alert("success");
-					//alert(data.review.rs_content);
+					alert(data.review.rs_content);
 					$("#pause").html(data.review.rs_content);
 					$("#p_id").html(data.review.id);
+					var rating =data.review.rs_rating;
+					if(rating===1){
+						$("#p_ratingP").attr('src','./img/like/1-2.png');	
+					}else if(rating===3){
+						$("#p_ratingP").attr('src','./img/like/3-2.png');
+					} else if(rating===5){
+						$("#p_ratingP").attr('src','./img/like/5-2.png');
+					}  
 				},
 				error:function(req, stu, err){
 					alert("error");
