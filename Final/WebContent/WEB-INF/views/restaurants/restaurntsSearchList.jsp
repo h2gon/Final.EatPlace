@@ -118,6 +118,9 @@ String keyword = (String)request.getAttribute("s_keyword");
 if(keyword == null) keyword = "";
 
 System.out.println("keyword = "+keyword);
+
+String s_keyword = keyword + category;
+
 %>
 <script>
 var str = '<%=category%>';
@@ -186,13 +189,13 @@ $(document).ready(function () {
 	<div style=" content:'';display: table;clear: both;    min-height: 300px;">
 	<div style="float: left; width: calc(100% - 400px);     min-width: 850px;">
 		<p style="margin-left: 58px; font-size: 24px; color: #ff7100">
-			<strong>전체 맛집 리스트</strong>
+			<strong><%=s_keyword %> 맛집 인기 검색순위</strong>
 		</p>
 		<div class="row" style="margin-left: 55px; margin-right: 10px">
 			<%
 				List<RegiDto> list = (List<RegiDto>) request.getAttribute("searchlist");
 				if(list.size()==0 || list ==null){
-				String s_keyword = (String)request.getAttribute("s_keyword");
+				
 				%>
 				
 				<p style="font-size: 25px;line-height: 25px;margin-bottom: 65px;">
@@ -247,7 +250,7 @@ $(document).ready(function () {
 	
 
 	<!-- 지도 -->
-	<div id="map" style="float: left;position: relative;right: 15px;">
+	<div id="map" style="position: relative;right: 15px;">
 		<div id="map" style="width: 400px; height: 500px;"></div>
 	</div>
 	
