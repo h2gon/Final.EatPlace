@@ -285,7 +285,7 @@ public class EatRestaurantsController {
 
 		}
 		else {
-			List<wannagoDto> wannagolist = eatRestaurantsService.getwannagolist("1");
+			List<wannagoDto> wannagolist = eatRestaurantsService.getwannagolist("없는거로아무거나불러오기");
 			model.addAttribute("wannagolist", wannagolist);
 		}
 		

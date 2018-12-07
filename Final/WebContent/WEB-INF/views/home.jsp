@@ -394,7 +394,18 @@ outline: 0;
  	<div>
   		<ul class="pagination w3-white w3-border-bottom" style="height:50px; width:100%; position:relative; list-style:none;">
   		<li style="position:relative; height:100%; width:50%; float:left; text-align: center;"><a href="#" class="tablink" onclick="openCity(event, 'London')" style="width: 100%; height: 100%; border-top: 7px;">최근 본 맛집</a></li>
+  		
+  		<c:choose>
+  		<c:when test="${empty wannagolist }">
   		<li style="position:relative; height:100%; width:50%; float:left; text-align: center;"><a href="#" class="tablink" onclick="openCity(event, 'Paris')" style="width: 100%; height: 100%; border-top: 7px;">가고싶다</a></li>
+  		
+  		</c:when>
+  		
+  		<c:otherwise>
+  		<li style="position:relative; height:100%; width:50%; float:left; text-align: center;"><a href="#" class="tablink" onclick="openCity(event, 'Paris')" style="width: 100%; height: 100%; border-top: 7px;">가고싶다</a></li>
+  		</c:otherwise>
+  		
+  		</c:choose>
   		</ul>
  	</div> 
 	<!-- 최근 본 맛집 -->
@@ -477,12 +488,16 @@ JSP주석 소스보기할때 보여지지 않음
 	<!-- 가고 싶다 -->
   <div id="Paris" class="w3-container city">
    
-				
+		
+<c:if test="${empty wannagolist }">
+		가고싶은 가게를 추가해주세요~
+</c:if>				
 					
 <%
 List<wannagoDto> wannagolist = (List<wannagoDto>)request.getAttribute("wannagolist");
 List<RegiDto> RankList2 = (List<RegiDto>)request.getAttribute("RankList");
 
+if(wannagolist.size()>1 && wannagolist!=null){
 for(int i=0; i<wannagolist.size(); i++){
 	String wannaname = "";
 	double wannaRating = 0;
@@ -507,6 +522,7 @@ for(int i=0; i<wannagolist.size(); i++){
 		%>	
 	<% }%>
 	
+
 
 <div style="width:350px; height:100px; background-color:; box-sizing: border-box; border: 1 solid; ">
 	<!-- 사진 -->
@@ -536,7 +552,7 @@ for(int i=0; i<wannagolist.size(); i++){
 </div>
 
 	        	
-					
+					<% }%>
 						        	<% }%>
   </div>
   
@@ -659,6 +675,11 @@ function openCity(evt, cityName) {
   document.getElementById(cityName).style.display = "block";
   evt.currentTarget.classList.add("w3-light-grey");
 }
+
+function alarm() {
+	alert('로그인 하시거나 즐겨찾기 추가해 주세요');
+}
+
 </script>
 
    <!-- Navigation -->
