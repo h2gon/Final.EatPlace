@@ -414,23 +414,12 @@ outline: 0;
  	<div>
   		<ul class="pagination w3-white w3-border-bottom" style="height:50px; width:100%; position:relative; list-style:none;">
   		<li style="position:relative; height:100%; width:50%; float:left; text-align: center;"><a href="#" class="tablink" onclick="openCity(event, 'London')" style="width: 100%; height: 100%; border-top: 7px;">최근 본 맛집</a></li>
-  		
-  		<c:choose>
-  		<c:when test="${empty wannagolist }">
   		<li style="position:relative; height:100%; width:50%; float:left; text-align: center;"><a href="#" class="tablink" onclick="openCity(event, 'Paris')" style="width: 100%; height: 100%; border-top: 7px;">가고싶다</a></li>
-  		
-  		</c:when>
-  		
-  		<c:otherwise>
-  		<li style="position:relative; height:100%; width:50%; float:left; text-align: center;"><a href="#" class="tablink" onclick="openCity(event, 'Paris')" style="width: 100%; height: 100%; border-top: 7px;">가고싶다</a></li>
-  		</c:otherwise>
-  		
-  		</c:choose>
   		</ul>
  	</div> 
 	<!-- 최근 본 맛집 -->
 
-  <div id="London" class="w3-container city">
+  <div id="London" class="w3-container city" style="overflow-y: scroll; height: 500px;">
   <form action="" name="frmForm5" id="_frmForm5"  method="post">
   	 <div style="display:inline-block; position:absolute; top:3.3em; right: 10px;">
   		<a href="#" id="clear" style="text-align: right;"><font style="color: #BDBDBD">x clear all</font></a>
@@ -467,29 +456,33 @@ for (int i=1;i<cookies.length;i++){
 %>
  
 
-<div style="width:350px; height:100px; background-color:; box-sizing: border-box; border: 1 solid; ">
-	<!-- 사진 -->
-	<div style="display:inline-block; position:absolute; width: 80px; height: 90px; margin-top:3px; margin-left:10px;">
-		<a><img alt="" src="<%=cookiePic%> " style="width: 80px; height: 90px;"></a>
-	</div>
+<div style="width:350px; height:100px; background-color:; box-sizing: border-box; border: 1 solid;">
+	
 	<div>
+
+		<!-- 사진 -->
+		<div style="display:inline-block; position:relative; width: 80px; height: 90px; margin-top:3px; margin-left:10px;">
+			<a><img alt="" src="<%=cookiePic%> " style="width: 80px; height: 90px;"></a>
+		</div>
+	
 		<!-- 이름 -->
-		<div style="display:inline-block; position:relative; width: 30%; height: 45%; top:10px; left:100px;">
+		<div style="display:inline-block; position:relative; width: 30%; height: 45%; top:-20px; left:20px;">
 			<a href="rsdetail.do?seq=<%=cookies[i].getValue()%>" style="text-align: center;"><b><font style="font-size: medium;text-align:center;"><%=cn%></font></b></a>
 		</div>
 		<!-- 주소 -->
-		<div style="display:inline-block; position:relative; width: 55%; height: 30%; top:50px; left:-5px;">
+		<div style="display:inline-block; position:relative; width: 55%; height: 30%; top:-55px; left:120px;">
 			<a><font style="font-size: x-small;"><%=cookieAdd %></font></a>
 		</div>
 
 		<!-- 평점 --> 
-		<div style="display:inline-block;  position:relative; width: 10%; height: 20%; top:10px; right:90px;">
+		<div style="display:inline-block;  position:relative; width: 10%; height: 20%; top:-88px; right:-20px;">
 			<a><font style="color:#c53211 "><%=cookieRating %></font></a>
 		</div>
 		<!-- 즐찾 -->
-		<div style="display:inline-block;  position:relative; width: 15%; height: 10%; top:-3px; left:295px;">
+		<div style="display:inline-block;  position:relative; width: 15%; height: 10%; top:-60px; right: -40px;">
 			<a href="wannago.do?rs_seq=<%=cookieLike %>&rs_name=<%=cookiename%>"><img id="like_btn" src="img/button/likeIcon.png" style="width: 45px; height: 45px;" ></a>
 		</div>
+
  	</div>
 </div>
 <%-- 
