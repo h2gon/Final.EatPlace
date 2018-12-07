@@ -30,7 +30,7 @@ System.out.println("현재 설정된 쿠키의 개수 : " + cookies.length);    
 
 
 
-for(int i = 0 ; i<cookies.length; i++){                            // 쿠키 배열을 반복문으로 돌린다.
+ for(int i = 0 ; i<cookies.length; i++){                            // 쿠키 배열을 반복문으로 돌린다.
 
 /* URLDecoder.decode(cookies[i].getName(), "utf-8") */
 
@@ -39,7 +39,7 @@ System.out.println(i + "번째 쿠키 이름 : " + URLDecoder.decode(cookies[i].
 System.out.println(i + "번째 쿠키에 설정된 값 : " + cookies[i].getValue());    // 쿠키의 값을 가져온다.
 
 
-}
+} 
 
 %>
 
@@ -86,14 +86,17 @@ System.out.println(i + "번째 쿠키에 설정된 값 : " + cookies[i].getValue
 <style>
    
     .in-line{
-      width:660px;	/* 350 */
-      height:60px;	/* 40 */
+      width:700px;	/* 350 */
+      height:50px;	/* 40 */
+      
     }
    
     input[type="text"]{
-      width:70%;
+      width:90%;
       height:100%;
-      border:none;
+      border:3px solid #ff7100;
+      z-index: 50;
+    border-radius: 23px;
       font-size:1.213rem;
       padding-left: 20px;
       font-style: oblique;
@@ -101,20 +104,28 @@ System.out.println(i + "번째 쿠키에 설정된 값 : " + cookies[i].getValue
       outline:none;
       box-sizing: border-box;
       color:black;
+      
 
     }
     input[type=button]{
-      width: 30%;
-      height:100%;
-      background-color: lightgray;
+
       border:none;
-      background-color: white;
       font-size:1.313rem;
-      color:#042AaC;
-      outline:none;
-      display:inline;
-      margin-left: -25px;
-      box-sizing: border-box;
+          outline: none;
+    display: inline;
+    margin-left: -25px;
+    box-sizing: border-box;
+     
+    border-radius: 23px;
+    background-color: darkorange;
+    color: white;
+    position: relative;
+    left: 226px;
+    right: 0px;
+        bottom: 50px;
+    width: 200px;
+    height: 50px;
+    
     }
  
   </style>
@@ -134,6 +145,173 @@ System.out.println(i + "번째 쿠키에 설정된 값 : " + cookies[i].getValue
   height: auto;
   min-height: 80%;
 }
+</style>
+
+<!-- 검색창 스타일   -->
+<style>
+
+
+@media only screen and (min-width: 769px){
+	.main-header {
+	    padding-top: 150px;
+	}
+}
+
+.main-header {
+    overflow: hidden;
+    position: relative;
+    padding-top: 52px;
+    text-align: center;
+    background-position: center;
+    background-size: cover;
+}
+
+@media only screen and (min-width: 769px){
+.main-search {
+    margin: 45px auto 0 auto;
+    height: 50px;
+    width: 738px;
+    
+}
+
+}
+
+.main-search {
+    position: relative;
+        margin-top: 0px;
+}
+
+.search-keywords-container .tab-keywords button {
+
+
+    position: relative;
+    font-size: 0.875rem;
+    color: #7f7f7f;
+    width: 32.5%;
+    height: 50px;
+    text-align: center;
+    text-decoration: none;
+    line-height: 1.2;
+    vertical-align: bottom;
+        cursor: pointer;
+    border: 0px;
+        border-radius: 0 0 3px 3px;
+    background-color: transparent;
+    outline: 0;
+    }
+    
+    .search-keywords-container .tab-keywords button.selected {
+    color: #ff7100;
+}
+.search-keywords-container .tab-keywords button.selected:before {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 3px;
+    background-color: #ff7100;
+}
+
+
+.search-keywords-container .tab-keywords:before {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 50px;
+    height: 1px;
+    background-color: #dbdbdb;
+}
+
+#Vsearch{
+
+   z-index: 1110;  
+   display: none;
+    position: absolute;
+    width: 450px;
+    height: 290px;
+    border-radius: 0px 0px 3px 3px;
+    background-color: rgb(255, 255, 255);
+    margin-left: auto;
+    margin-right: auto;
+    top: 370px; 
+    right: 150px;
+    left: 0px;
+    bottom: 0px;
+
+}
+.search-keywords-container .keywords .list-keywords-wrap .list-keywords>li {
+    position: relative;
+    border-bottom: 1px solid #dbdbdb;
+    overflow: hidden;
+}
+.search-keywords-container .keywords .list-keywords-wrap .list-keywords>li a {
+    display: block;
+    padding: 0 45px 0 36px;
+    font-size: 0.875rem;
+    color: #7f7f7f;
+    text-decoration: none;
+    margin: 20px 0;
+    line-height: 1.2rem;
+}
+.search-keywords-container .keywords .list-keywords-wrap .list-keywords>li a:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 7px;
+}
+.search-keywords-container .keywords .list-keywords>li a:before {
+    margin-top: -8.5px;
+    background-image: url(https://mp-seoul-image-develop-s3.mangoplate.com/web/resources/2018022864551sprites_desktop.png?fit=around|*:*&crop=*:*;*,*&output-format=png&output-quality=80);
+    background-position: -974px -752px;
+    width: 17px;
+    height: 17px;
+}
+
+.search-keywords-container .keywords .list-keywords-wrap .list-keywords>li.clear_all {
+    text-align: right;
+    padding: 10px 5px 20px 0;
+    border-bottom: 0;
+    font-size: 0.875rem;
+    color: #7f7f7f;
+     height: 50px;
+     text-decoration: none;
+    line-height: 1.2;
+    vertical-align: bottom;
+        cursor: pointer;
+   
+}
+
+.search-keywords-container {
+    display: none;
+    position: fixed;
+    z-index: 901;
+    background-color: #ffffff;
+    overflow-y: auto;
+}
+
+#clear {
+
+border: 0px; 
+border-radius: 0; 
+background-color: transparent;
+cursor: pointer;
+outline: 0;
+}
+#no_recent {
+    padding: 15px 0;
+    text-align: center;
+}
+
+
+
+
+
 </style>
 
   <head>
@@ -196,6 +374,18 @@ System.out.println(i + "번째 쿠키에 설정된 값 : " + cookies[i].getValue
 </style>
 
 <body>
+
+
+<!-- 블랙스크린 -->
+<div id="black_screen" onclick="displayVsearch()" class="black_screen" style="
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background: rgba(0,0,0,0.8);
+    display: none;">></div>
 
 <!-- 가고싶어 제발 -->
 <div  class="w3-container">
@@ -503,35 +693,93 @@ function openCity(evt, cityName) {
       </div>
     </nav>
 	
-    <header>
-      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-       
-	        <div class="carousel-inner" role="listbox">
-	         
-	           <div class="carousel-item active" style="text-align: center; padding-top: 150px; background-image: url('img/main_food.jpg');">
-	            
-	            <h1 style="color: white;"><strong>솔직한 리뷰, 믿을 수 있는 평점!</strong></h1>
+    <header class="main-header" style="background-image: url('img/main_food.jpg');height: 512px; margin-bottom: 50px;">
+
+      <h1 style="color: white; margin-top: 100px;"><strong>솔직한 리뷰, 믿을 수 있는 평점!</strong></h1>
 	              <h1 style="color: white;"><strong>EAT PLACE</strong></h1> 
-	             
-	 			<form action="" id="main-search" name="main-search" method="get"> 
-	 			 <div class="in-line" style="margin-left: 470px; ">
-			      <strong><input type="text" onkeypress="if(event.keyCode==13) {search();}"  id="main-keyword" name="s_keyword" value="" placeholder="지역, 식당 또는 음식" style="color: #575756; border-bottom-left-radius: 20px; border-top-left-radius: 20px"></strong>
-			      <strong><input type="button" onclick="search()"  value="검색" style="border-bottom-right-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-top-left-radius: 20px; background-color: darkorange; color: white;"></strong>
+
+      
+
+      <!-- 전체 검색 -->
+  <fieldset id="search" class="main-search ng-scope" ng-controller="mp20_main_search_suggest_controller" style="z-index: 110;border: 0;">
+      
+		<form action="" id="main-search" name="main-search" method="get" > 
+	 			 <div class="in-line" style="margin-left: auto; margin-right: auto; ">
+			      <strong><input type="text" onkeypress="if(event.keyCode==13) {search();}" onclick="displayVsearch()"  id="main-keyword" name="s_keyword" value="" placeholder="지역, 식당 또는 음식" autocomplete="off" style="color: #575756; border-bottom-left-radius: 20px; border-top-left-radius: 20px"></strong>
+			      <strong><input type="button" onclick="search()"  value="검색" style="background-color: darkorange; color: white;"></strong>
 			     </div>
-			     
-			     
 				<!-- controller로 넘겨주기 위한 값 -->
 				<input type="hidden" name="pageNumber" id="_pageNumber" value="${(empty pageNumber)?0:pageNumber }">
 				<input type="hidden" name="recordCountPerPage" id="_recordCountPerPage"
 					value="${(empty recordCountPerPage)?9:recordCountPerPage }">
 							     
-			   </form>
-			   
-	          </div> 
-	        </div>
-	      </div>
-	  
-   </header>
+		</form> 
+</fieldset>
+
+      
+      
+
+    </header>
+    
+     <!-- 추천 검색어 / 최근검색어 -->
+   <div>
+   <aside id="Vsearch" class="search-keywords-container ng-scope main" ng-controller="mp20_search_list_controller" style="">
+  <nav  class="tab-keywords">
+ 
+    <!-- <button class="searching_tap_recommend searching_tap selected" onclick="select_tab_by_recommend()"> -->
+     <button class="searching_tap_recommend searching_tap selected" value="re_btn1">
+      추천 검색어
+    </button>
+    <!-- <button class="searching_tap_trending searching_tap" onclick="select_tab_by_popular()"> -->
+     <button class="searching_tap_trending searching_tap" value="re_btn2" >
+      인기 검색어
+    </button>
+   <!--  <button class="searching_tap_recent searching_tap" onclick="select_tab_by_lately()"> -->
+     <button class="searching_tap_recent searching_tap" value="re_btn3">
+      최근 검색어
+    </button>
+    
+  </nav>
+<%-- <%
+String recomend = "추천검색어테스트";
+
+%>
+<c:set var="recomend" value="추천검색어1"></c:set> --%>
+  <!--  검색 자동완성 -->
+  <div class="keywords">
+	  <div class="list-keywords-wrap">
+	    <ol class="list-keywords" >
+	      <li class="list-keyword" >
+	        <a href="#" category="" onclick="search2(this)" class="ng-binding">존맛</a>
+	        <div class="search_result_delete ng-hide" onclick="search2()">
+          </div>
+	      </li>
+			<li class="list-keyword" >
+	        <a href="#" category="" onclick="search2(this)" class="ng-binding">국물</a>
+	        <div class="search_result_delete ng-hide" onclick="common_ga(get_now_page_code(), 'CLICK_SEARCH_RECENT_CANCEL')">
+          </div>
+	      </li>
+	      <li class="list-keyword" >
+	        <a href="#" category="" onclick="search2(this)" class="ng-binding">혼밥</a>
+	        <div class="search_result_delete ng-hide" onclick="common_ga(get_now_page_code(), 'CLICK_SEARCH_RECENT_CANCEL')">
+          </div>
+	      </li>
+	      <li class="list-keyword" >
+	        <a href="#" category="" onclick="search2(this)" class="ng-binding">맛집</a>
+	        <div class="search_result_delete ng-hide" onclick="common_ga(get_now_page_code(), 'CLICK_SEARCH_RECENT_CANCEL')">
+          </div>
+	      </li>
+	      <li class="list-keyword" >
+	        <a href="#" category="" onclick="search2(this)" class="ng-binding">신사동</a>
+	        <div class="search_result_delete ng-hide" onclick="common_ga(get_now_page_code(), 'CLICK_SEARCH_RECENT_CANCEL')">
+          </div>
+	      </li>
+
+	    </ol>
+	  </div>
+  </div>
+</aside>
+</div>
 
 
 	<br><br>
@@ -748,6 +996,91 @@ function openCity(evt, cityName) {
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
     <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
     <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    
+    
+
+ <script type="text/javascript">
+	      function displayVsearch() {
+	    	
+	    	  $("#Vsearch").toggle();
+	    	  $("#black_screen").toggle();
+	    	   
+	    	    if($("#search").css("z-index")=='110'){
+	    	    	$("#search").css("z-index","1100")
+	    	    }else{
+	    	    	
+	    	    	$("#search").css("z-index","110")
+	    	    } 
+	    	  
+	    	  
+		}
+	      </script>
+
+<script type="text/javascript">
+ $(document).ready(function(){
+	var tab = $('.tab-keywords');
+	tab.find('button').click(function(){ 
+		
+		 $("[class*=selected]").removeClass("selected"); 
+		 $(this).addClass("selected");
+		 var btn = $(this).val();
+		 if (btn == "re_btn1") { // 추천검색어
+			
+			$(".list-keywords *").remove();
+			 var re_str = ['존맛','국물','혼밥','맛집','신사동'];
+			for (var i = 0; i < re_str.length; i++) {
+				$(".list-keywords").append(
+					    $('<li>').attr('class','list-keyword').append(
+					            $('<a>').attr('href','#').attr('onclick','search2(this)').append(
+					            		re_str[i]
+					              )));  
+			} 
+			
+		}else if (btn == "re_btn2"){ // 인기검색어
+			
+			$(".list-keywords *").remove();
+			
+			 var re_str = ['삼성동','데이트','삼겹살','모임','이태원','강남','카페'];
+				for (var i = 0; i < re_str.length; i++) {
+					$(".list-keywords").append(
+						    $('<li>').attr('class','list-keyword').append(
+						            $('<a>').attr('href','#').attr('onclick','search2(this)').append(
+						            		re_str[i]
+						              )));  
+				}
+			
+		}else{ // 최근검색어
+			
+			$(".list-keywords *").remove();
+			
+			 var re_str = [];
+			 
+			 if (re_str.length == 0) {
+				 $(".list-keywords").append(
+						    $('<li>').attr('class','list-keyword').append(
+						            $('<p>').attr('id','no_recent').append(
+						            		"최근 검색어가 없습니다."
+						              ))); 
+			
+			}else{
+			 
+			 
+			 $(".list-keywords").append(
+					 $('<li>').attr('class','clear_all').append(
+							 $('<button>').attr('id','clear').append(
+									 "x clear all"
+							 )));
+			 
+			}
+		}
+		 
+
+	 })
+
+}) 
+
+
+</script>
 
 <script type="text/javascript">
 
@@ -768,6 +1101,13 @@ function search() {
 		
 		$("#main-search").attr({"target":"_self", "action":"search.do"}).submit();
 	}
+	
+}
+
+function search2(a) {
+	
+	$("#main-keyword").val(a.innerHTML);
+	$("#main-search").attr({"target":"_self", "action":"search.do"}).submit();
 	
 }
 
