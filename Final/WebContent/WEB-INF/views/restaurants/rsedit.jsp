@@ -99,7 +99,7 @@ EatMemberDto login = (EatMemberDto)request.getSession().getAttribute("login");
 <tr>
 	<td>rating</td>
 	<td>${rs.rs_rating }</td>
-	<td><input type="text" name="form1_rs_rating" value="${rs.rs_rating }"></td>
+	<td bgcolor="red">변경x</td>
 </tr>
 
 <tr>

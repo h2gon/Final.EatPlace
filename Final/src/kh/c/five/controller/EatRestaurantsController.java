@@ -595,12 +595,10 @@ public class EatRestaurantsController {
 				RegiDto rs2 = null;
 				rs2=eatRestaurantsService.getrs2(seq);
 			
-				rs.setRs_name(req.getParameter("form1_rs_name"));
 				rs.setRs_address1(req.getParameter("form1_rs_address1"));
 				rs.setRs_address2(req.getParameter("form1_rs_address2"));
 				rs.setRs_category(req.getParameter("form1_rs_category"));
 				rs.setRs_menu(req.getParameter("form1_rs_menu"));
-				rs.setRs_rating(Integer.parseInt(req.getParameter("form1_rs_rating")));
 				rs.setRs_readcount(Integer.parseInt(req.getParameter("form1_rs_readcount")));
 				rs.setRs_keyword(req.getParameter("form1_rs_keyword"));
 			

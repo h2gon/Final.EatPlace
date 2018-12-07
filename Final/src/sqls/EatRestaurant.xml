@@ -204,7 +204,7 @@ SELECT *
  <update id="editrs" parameterType="kh.c.five.model.RegiDto">
 
 	UPDATE EAT_RESTAURANT SET
-	RS_ADDRESS1=#{rs_address1}, RS_ADDRESS2=#{rs_address2}, RS_CATEGORY=#{rs_category}, RS_MENU=#{rs_menu}, RS_RATING=#{rs_rating}, RS_READCOUNT=#{rs_readcount}, RS_KEYWORD=#{rs_keyword}    
+	RS_ADDRESS1=#{rs_address1}, RS_ADDRESS2=#{rs_address2}, RS_CATEGORY=#{rs_category}, RS_MENU=#{rs_menu}, RS_READCOUNT=#{rs_readcount}, RS_KEYWORD=#{rs_keyword}    
 	WHERE SEQ=#{seq}
 	
 </update>
