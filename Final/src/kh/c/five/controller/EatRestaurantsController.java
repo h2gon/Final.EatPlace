@@ -284,6 +284,10 @@ public class EatRestaurantsController {
 			model.addAttribute("wannagolist", wannagolist);
 
 		}
+		else {
+			List<wannagoDto> wannagolist = eatRestaurantsService.getwannagolist("1");
+			model.addAttribute("wannagolist", wannagolist);
+		}
 		
 		
 		model.addAttribute("RankList", list);

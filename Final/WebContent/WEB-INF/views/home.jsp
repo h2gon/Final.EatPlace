@@ -1,3 +1,4 @@
+<%@page import="kh.c.five.model.wannagoDto"%>
 <%@page import="kh.c.five.dao.impl.EatRestaurantsDaoImpl"%>
 <%@page import="kh.c.five.dao.EatRestaurantsDao"%>
 <%@page import="java.net.URLDecoder"%>
@@ -285,36 +286,71 @@ JSP주석 소스보기할때 보여지지 않음
   </div>
 	<!-- 가고 싶다 -->
   <div id="Paris" class="w3-container city">
-   <h1>Paris</h1>
    
-    <table class="wannagolist" border="2">
-						        		<thead>
-						        			<tr>
-						        				<th>가게이름</th>
-						        			</tr>
-						        		</thead>
-						        		
-						        		<tbody>
-						        		
-						        	
-						        		<c:if test="${empty wannagolist }">
-						        			가고싶은 가게를 추가해주세요~
-						        		</c:if>
-						        		
-						        		<c:forEach items="${wannagolist }" var="wl" varStatus="vs">
-						        		
-						        		<tr>
-						        		<td><a href="rsdetail.do?seq=${wl.rs_seq }">${wl.rs_name }</a></td>
-						        		
-						        		</tr>
-						        		
-						        		</c:forEach>
-						        		
-						        		</tbody>
-						        		
-						        	</table>   
-   
+				
+					
+<%
+List<wannagoDto> wannagolist = (List<wannagoDto>)request.getAttribute("wannagolist");
+List<RegiDto> RankList2 = (List<RegiDto>)request.getAttribute("RankList");
+
+for(int i=0; i<wannagolist.size(); i++){
+	String wannaname = "";
+	double wannaRating = 0;
+	String wannaPic = "";
+	String wannacategory = "";
+	String wannaaddress = "";
+	int wannalike = 0;
+	
+	for(int j=0; j<RankList2.size(); j++){
+		if(RankList.get(j).getSeq() == wannagolist.get(i).getRs_seq()){
+			
+			wannaname = RankList2.get(j).getRs_name();
+			wannaRating = RankList2.get(j).getRs_rating();
+			wannaPic = RankList2.get(j).getRs_picture();
+			wannacategory = RankList2.get(j).getRs_category();
+			wannaaddress = RankList2.get(j).getRs_address1();
+			
+			wannalike = RankList2.get(j).getSeq();
+			
+			break;
+		}
+		%>	
+	<% }%>
+	
+
+<div style="width:350px; height:100px; background-color:; box-sizing: border-box; border: 1 solid; ">
+	<!-- 사진 -->
+	<div style="display:inline-block; position:absolute; width: 80px; height: 90px; margin-top:3px; margin-left:10px;">
+		<a><img alt="" src="<%=wannaPic%> " style="width: 80px; height: 90px;"></a>
+	</div>
+	<div>
+		<!-- 이름 -->
+		<div style="display:inline-block; position:relative; width: 30%; height: 45%; top:10px; left:100px;">
+			<a href="rsdetail.do?seq=<%=wannalike%>" style="text-align: center;"><b><font style="font-size: medium;text-align:center;"><%=wannaname%></font></b></a>
+		</div>
+		<!-- 주소 -->
+		<div style="display:inline-block; position:relative; width: 55%; height: 30%; top:50px; left:-5px;">
+			<a><font style="font-size: x-small;"><%=wannaaddress %></font></a>
+		</div>
+
+		<!-- 평점 --> 
+		<div style="display:inline-block;  position:relative; width: 10%; height: 20%; top:10px; right:90px;">
+			<a><font style="color:#c53211 "><%=wannaRating %></font></a>
+		</div>
+		<!-- 즐찾 -->
+		<div style="display:inline-block;  position:relative; width: 15%; height: 10%; top:-3px; left:295px;">
+			<a href="wannago.do?rs_seq=<%=wannalike %>&rs_name=<%=wannaname%>"><img id="like_btn" src="img/button/likeIcon.png" style="width: 45px; height: 45px;" ></a>
+		</div>
+			
+ 	</div>
+</div>
+
+	        	
+					
+						        	<% }%>
   </div>
+  
+  
   <div class="w3-container w3-light-grey w3-padding">
   <%if(user == null){%>
 		<!-- <a class=" openMask" href="#">로그인</a> -->
