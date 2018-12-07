@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="kh.c.five.model.wannagoDto"%>
 <%@page import="kh.c.five.dao.impl.EatRestaurantsDaoImpl"%>
 <%@page import="kh.c.five.dao.EatRestaurantsDao"%>
@@ -22,7 +23,13 @@ EatMemberDto user = (EatMemberDto)session.getAttribute("login");
  
 <%
 
-Cookie[] cookies = request.getCookies();            // 요청정보로부터 쿠키를 가져온다.
+
+List<Cookie> recentCookie = new ArrayList(); 
+
+
+Cookie[] cookies = request.getCookies();  // 요청정보로부터 쿠키를 가져온다
+
+
 
 
 
@@ -34,12 +41,22 @@ System.out.println("현재 설정된 쿠키의 개수 : " + cookies.length);    
 
 /* URLDecoder.decode(cookies[i].getName(), "utf-8") */
 
+String str = URLDecoder.decode(cookies[i].getName(), "utf-8");
+
+if(str.contains("rc")){
+	
+	recentCookie.add(cookies[i]);
+	
+}
+
 System.out.println(i + "번째 쿠키 이름 : " + URLDecoder.decode(cookies[i].getName(), "utf-8"));            // 쿠키의 이름을 가져온다.
+
 
 System.out.println(i + "번째 쿠키에 설정된 값 : " + cookies[i].getValue());    // 쿠키의 값을 가져온다.
 
 
 } 
+
 
 %>
 
@@ -422,25 +439,30 @@ outline: 0;
  %>
 <%
 for (int i=1;i<cookies.length;i++){ 
-String cn = URLDecoder.decode(cookies[i].getName(), "utf-8");
-String cookieAdd = "";
-double cookieRating = 0;
-String cookiePic = "";
-int cookieLike = 0;
-String cookiename = "";
-for(int j =0; j < RankList.size(); j++){
-	
-if( RankList.get(j).getSeq() == Integer.parseInt(cookies[i].getValue())){
-	System.out.println(RankList.get(j).getRs_address1());
-	cookieAdd = RankList.get(j).getRs_address1();
-	cookieRating = RankList.get(j).getRs_rating();
-	cookiePic = RankList.get(j).getRs_picture();
-	cookieLike = RankList.get(j).getSeq();
-	cookiename = RankList.get(j).getRs_name();
-	break;
-}
+	if(cookies[i].getName().contains("rc")){
+		
+	}else{
+		String cn = URLDecoder.decode(cookies[i].getName(), "utf-8");
+		String cookieAdd = "";
+		double cookieRating = 0;
+		String cookiePic = "";
+		int cookieLike = 0;
+		String cookiename = "";
+		for(int j =0; j < RankList.size(); j++){
+			
+		if( RankList.get(j).getSeq() == Integer.parseInt(cookies[i].getValue())){
+			System.out.println(RankList.get(j).getRs_address1());
+			cookieAdd = RankList.get(j).getRs_address1();
+			cookieRating = RankList.get(j).getRs_rating();
+			cookiePic = RankList.get(j).getRs_picture();
+			cookieLike = RankList.get(j).getSeq();
+			cookiename = RankList.get(j).getRs_name();
+			break;
+		}
+	}
+
 %>
- <%} %>
+ 
 
 <div style="width:350px; height:100px; background-color:; box-sizing: border-box; border: 1 solid; ">
 	<!-- 사진 -->
@@ -482,7 +504,7 @@ JSP주석 소스보기할때 보여지지 않음
 
 
 </table> --%>
-
+<%} %>
   <%} %>
   </div>
 	<!-- 가고 싶다 -->
