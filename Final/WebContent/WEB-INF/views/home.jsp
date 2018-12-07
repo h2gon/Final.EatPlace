@@ -1,3 +1,4 @@
+<%@page import="java.util.Collections"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="kh.c.five.model.wannagoDto"%>
 <%@page import="kh.c.five.dao.impl.EatRestaurantsDaoImpl"%>
@@ -49,6 +50,7 @@ if(str.contains("rc")){
 	
 }
 
+
 System.out.println(i + "번째 쿠키 이름 : " + URLDecoder.decode(cookies[i].getName(), "utf-8"));            // 쿠키의 이름을 가져온다.
 
 
@@ -57,6 +59,7 @@ System.out.println(i + "번째 쿠키에 설정된 값 : " + cookies[i].getValue
 
 } 
 
+ Collections.reverse(recentCookie);
 
 %>
 
@@ -312,7 +315,7 @@ System.out.println(i + "번째 쿠키에 설정된 값 : " + cookies[i].getValue
     overflow-y: auto;
 }
 
-#clear {
+#rc_clear {
 
 border: 0px; 
 border-radius: 0; 
@@ -1096,9 +1099,9 @@ String recomend = "추천검색어테스트";
 			
 			$(".list-keywords *").remove();
 			
-			 var re_str = [];
+			 var re_str = <%=recentCookie.size()%>
 			 
-			 if (re_str.length == 0) {
+			 if (re_str == 0) {
 				 $(".list-keywords").append(
 						    $('<li>').attr('class','list-keyword').append(
 						            $('<p>').attr('id','no_recent').append(
@@ -1106,14 +1109,23 @@ String recomend = "추천검색어테스트";
 						              ))); 
 			
 			}else{
-				for(int i=0;i< )
+				<%for(int i=0;i<recentCookie.size();i++){ %>
+				$(".list-keywords").append(
+					    $('<li>').attr('class','list-keyword').append(
+					            $('<a>').attr('href','#').attr('onclick','search2(this)').append(
+					            		"<%=URLDecoder.decode(recentCookie.get(i).getValue(), "utf-8") %>"
+					              ))); 	 
+					<%}%>
+					$(".list-keywords").append(
+							$('<li>').attr('class','clear_all').append(
+								 $('<button>').attr('id','rc_clear').attr('onclick','rc_clear()').append(
+										
+										 "x clear all"
+								 )));
+				
 			 
 			 
-			 $(".list-keywords").append(
-					 $('<li>').attr('class','clear_all').append(
-							 $('<button>').attr('id','clear').append(
-									 "x clear all"
-							 )));
+			 
 			 
 			}
 		}
@@ -1133,6 +1145,17 @@ $("#clear").click(function() {
 	 /* location.href = "clear.do"; */
 		$("#_frmForm5").attr("action", "clear.do").submit();
 });
+
+$("#rcr").click(function() {
+	 alert("삭제");
+	 /* location.href = "clear.do"; */
+		//$("#_frmForm5").attr("action", "rc_clear.do").submit();
+}); 
+
+function rc_clear() {
+	 alert("삭제");
+	 location.href="rc_clear.do"; 
+}
 
 function search() {
 	

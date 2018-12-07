@@ -272,6 +272,44 @@ public class EatRestaurantsController {
 		return "redirect:/home.do";
 	}
 	
+	@RequestMapping(value="rc_clear.do", method={RequestMethod.GET, RequestMethod.POST})
+	public String rccookie(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException{
+		logger.info("rccookie clear"+new Date());
+		Cookie[] cookies = request.getCookies();
+		
+		
+			for(int i=0; i< cookies.length; i++){
+
+				String str = URLDecoder.decode(cookies[i].getName(), "utf-8");
+				/*if(cookies != null){*/
+				if(str.contains("rc")){
+					
+				cookies[i].setMaxAge(0); // 유효시간을 0으로 설정
+				cookies[i].setPath("/");  
+				response.addCookie(cookies[i]); // 응답 헤더에 추가
+
+				
+				}
+			}
+		
+		Cookie[] getCookie = request.getCookies();
+
+		if(getCookie != null){
+
+		for(int i=0; i<getCookie.length; i++){
+
+		Cookie c = getCookie[i];
+
+		String name = c.getName(); // 쿠키 이름 가져오기
+
+		String value = c.getValue(); // 쿠키 값 가져오기
+		System.out.println(name + " " + value);
+		}
+
+		}
+		return "redirect:/home.do";
+	}
+	
 	@RequestMapping(value="home.do",  method={RequestMethod.GET, RequestMethod.POST})
 	public String getRankList(RegiDto dto, Model model, HttpServletRequest req) {
 		logger.info("EatRestaurantsController getRankList"+new Date());
@@ -341,11 +379,12 @@ public class EatRestaurantsController {
 			/*System.out.println(rparm.toString());
 			System.out.println("seq: "+searchlist.get(i).getSeq());*/
 			eatRestaurantsService.getRating(searchlist.get(i).getSeq());
-		}
+		}		
+	
 		
 		String rc = URLEncoder.encode("rc" + s_keyword, "utf-8");
 		
-		Cookie rcookie = new Cookie(rc, s_keyword);
+		Cookie rcookie = new Cookie(rc, URLEncoder.encode(s_keyword, "utf-8"));
 		rcookie.setMaxAge(60*60*24*365); // 기간을 1년으로 지정
 		rcookie.setPath("/"); //모든경로에서 접근 가능하게 만듬
 		response.addCookie(rcookie);
