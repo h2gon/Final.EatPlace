@@ -2,6 +2,7 @@ package kh.c.five.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
@@ -297,7 +298,7 @@ public class EatRestaurantsController {
 	}
 	
 	@RequestMapping(value="search.do",  method={RequestMethod.GET, RequestMethod.POST})
-	public String search(String s_keyword, EatParam param, Model model) {
+	public String search(String s_keyword, EatParam param, Model model, HttpServletResponse response ) throws Exception {
 		
 		System.out.println("검색어 : "+s_keyword);
 		System.out.println("param: "+param.toString());
@@ -338,6 +339,12 @@ public class EatRestaurantsController {
 			eatRestaurantsService.getRating(searchlist.get(i).getSeq());
 		}
 		
+		String rc = URLEncoder.encode("rc" + s_keyword, "utf-8");
+		
+		Cookie rcookie = new Cookie(rc, s_keyword);
+		rcookie.setMaxAge(60*60*24*365); // 기간을 1년으로 지정
+		rcookie.setPath("/"); //모든경로에서 접근 가능하게 만듬
+		response.addCookie(rcookie);
 		
 		
 		model.addAttribute("rplist", rplist);

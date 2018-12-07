@@ -54,6 +54,7 @@ p.test {
 
 </style>
 
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>EAT PLACE: Best Restaurants</title>
@@ -72,6 +73,7 @@ p.test {
 
 </head>
 <body>
+
 
 <!-- Navigation -->
 	<nav class="navbar fixed-top navbar-expand-lg navbar-dark fixed-top"
@@ -136,29 +138,27 @@ p.test {
 		
 			<%
 			for(int i = 0; i<5; i++){
+				if(bestlist.size() != 0){
 			%>
 			<tr>
 			<td>
 			<div>
 			<li style="text-align: center; margin-left: 430px">
 				<div>
-					<figure style="float: left;"> 
-						<img src="<%=bestlist.get(i).getRs_picture() %>" style="width: 238px; height: 238px;">
+					<figure style="float: left;">
+						<a href="rsdetail.do?seq=<%=bestlist.get(i).getSeq()%>"> 
+						 <img src="<%=bestlist.get(i).getRs_picture() %>" style="width: 238px; height: 238px;"> 
+						</a>
 					</figure>
 					
 					<figcation style="float:left; text-align: left;">
 						<div style="padding-top: 13px">
-							<span style="font-size: 1.8rem;"><%=i+1 %>. <%=bestlist.get(i).getRs_name() %></span>&nbsp;&nbsp;<strong style="font-size: 1.8rem;"><%=bestlist.get(i).getRs_rating() %></strong>
+						<a href="rsdetail.do?seq=<%=bestlist.get(i).getSeq()%>"><span style="font-size: 1.8rem;"><%=i+1 %>. <%=bestlist.get(i).getRs_name() %></span></a>&nbsp;&nbsp; <strong style="font-size: 1.8rem;"><%=bestlist.get(i).getRs_rating() %></strong>
 							<p style="font-size: 1.063rem; color: gray;"><%=bestlist.get(i).getRs_address1() %></p>
 						</div>
 						
-						<div>
-							<p class="test"><%if(reviewlist.get(i).getRs_content() == null){ %>
-								리뷰가 아직 없습니다
-								<%}else{ %>
-									<%=reviewlist.get(i).getRs_content() %>
-								<%} %>
-							 </p> 
+						<div>																							
+							<p class="test"><%=reviewlist.get(i).getRs_content() %></p>							
 						</div>						
 					</figcation>										
 				</div>
@@ -167,7 +167,9 @@ p.test {
 			 <img alt="" src="img/button/hr.png" style="width: 55%; margin-left: 460px">
 			</td>
 			</tr>			
-			<%} %>				
+			<%} 
+			}
+			%>				
 			</table>							
 		</ul>
 	</section>
