@@ -600,7 +600,7 @@ for(int i=0; i<wannagolist.size(); i++){
 </div>
 
 <!-- 로그인 모달 -->
-<div id="id02" class="w3-modal" style="">
+<div id="id02" class="w3-modal" style="z-index: 111;">
   <span onclick="document.getElementById('id02').style.display='none'" class="w3-closebtn w3-hover-red w3-container w3-padding-hor-8 w3-display-topright">&times;</span>
   <div class="w3-modal-content w3-card-9 w3-animate-zoom" style="right:-10px; max-width:600px; height: 400px;">
     <div class="w3-center"><br>
@@ -1146,11 +1146,7 @@ $("#clear").click(function() {
 		$("#_frmForm5").attr("action", "clear.do").submit();
 });
 
-$("#rcr").click(function() {
-	 alert("삭제");
-	 /* location.href = "clear.do"; */
-		//$("#_frmForm5").attr("action", "rc_clear.do").submit();
-}); 
+
 
 function rc_clear() {
 	 alert("삭제");
