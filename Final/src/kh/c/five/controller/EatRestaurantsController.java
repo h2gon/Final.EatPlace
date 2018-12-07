@@ -3,6 +3,7 @@ package kh.c.five.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
@@ -234,22 +235,25 @@ public class EatRestaurantsController {
 	}
 	
 	@RequestMapping(value="clear.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String testCookie(HttpServletRequest request, HttpServletResponse response){
+	public String testCookie(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException{
 		logger.info("testCookie clear"+new Date());
 		Cookie[] cookies = request.getCookies();
-	
-		/*if(cookies != null){*/
-
+		
+		
 			for(int i=0; i< cookies.length; i++){
 
+				String str = URLDecoder.decode(cookies[i].getName(), "utf-8");
+				/*if(cookies != null){*/
+				if(!str.contains("rc")){
+					
 				cookies[i].setMaxAge(0); // 유효시간을 0으로 설정
 				cookies[i].setPath("/");  
 				response.addCookie(cookies[i]); // 응답 헤더에 추가
 
 				
+				}
 			}
-
-		/*}*/
+		
 		Cookie[] getCookie = request.getCookies();
 
 		if(getCookie != null){
