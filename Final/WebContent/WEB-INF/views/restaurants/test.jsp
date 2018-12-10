@@ -279,7 +279,7 @@ footer a:hover {
 }
 
 #sync1 .item {
-  background: #0c83e7;
+
   margin: 5px;
   color: #FFF;
   border-radius: 3px;
@@ -321,6 +321,24 @@ footer a:hover {
     border: 0;
     -webkit-box-shadow: none;
     box-shadow: none;
+}
+
+
+
+#col-md-4 {
+
+	max-height: 20vw; 
+ 
+    display: inline-block; 
+}
+
+/* 영훈 */
+#mainImage {
+
+	max-height: 400px; 
+	width: auto;
+ 
+    display: inline-block; 
 }
 
 </style>
@@ -487,7 +505,7 @@ List<fileDto> imagelist = (List<fileDto>) request.getAttribute("imagelist");
    			<br>
    			<hr>
    			<br>
-   			<div>
+   			<div style="height: 400px;overflow-y: auto;">
    				<p id="pause" ></p>
    			</div>
    		</div>
@@ -510,12 +528,13 @@ List<fileDto> imagelist = (List<fileDto>) request.getAttribute("imagelist");
 	
 	
 	</div>
-        <div id="sync2" class="owl-carousel thumbnails-wrap"> <!-- 이게 아래에 있는 썸네일 -->
+       <div id="sync2" class="owl-carousel thumbnails-wrap" style=""> <!-- 이게 아래에 있는 썸네일 -->
         		<%
+        		String str = "?fit=around|148:152&crop=148:152;*,*&output-format=jpg&output-quality=80";
 		for (int i=0;i<imagelist.size();i++){
 			if(imagelist.get(i).getFile_name().contains("https://")){
 				%>
-				<div class="item"><img src="<%=imagelist.get(i).getFile_name()%>" class="img-responsive"></div>
+				<div class="item"><img src="<%=imagelist.get(i).getFile_name() + str%>" class="img-responsive"></div>
 				<%
 			}else{
 				%>
@@ -1067,15 +1086,16 @@ $(document).ready(function(){
 		var img=$(this).attr('src');
 		//var	filename=img.substring(7);
 		
-		 if(img.indexOf("https://") !=-1){
-			var	filename=img;
+		if(img.indexOf("https://") !=-1){
+			var filename=jQuery.trim(img.split( '?', 1 ));
+			
 		}else if(img.indexOf("https://")==-1){
 			var filename=img.substring(7);
 		} 
 		
 		
 		//alert(filename);
-		$('#mainImage').attr("src",img);
+		$('#mainImage').attr("src",img.split( '?', 1 ));
 		//alert($("#pause").val());
 		
 		var revData = {
@@ -1119,7 +1139,7 @@ $(document).ready(function(){
 	 $("#owlImages a img").click(function(){
 		 var img=$(this).attr('src');
 		//	alert(img);
-			$('#mainImage').attr("src",img);
+			$('#mainImage').attr("src",img.split( '?', 1 ));
 			
 			var revData = {
 					'filename':filename,
@@ -1179,9 +1199,9 @@ $(document).ready(function() {
 	  });
 	 
 	  sync2.owlCarousel({
-	    items : 6,
-	    itemsDesktop      : [1199,6],
-	    itemsDesktopSmall     : [979,6],
+	    items : 8,
+	    itemsDesktop      : [1199,8],
+	    itemsDesktopSmall     : [979,8],
 	    itemsTablet       : [768,4],
 	    itemsMobile       : [479,3],
 	    pagination:false,
