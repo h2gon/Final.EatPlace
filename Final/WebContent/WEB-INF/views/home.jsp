@@ -415,7 +415,7 @@ outline: 0;
  	</div> 
 	<!-- 최근 본 맛집 -->
 
-  <div id="London" class="w3-container city" style="overflow-y: scroll; height: 500px;">
+  <div id="London" class="w3-container city" style="overflow-y: scroll; height: 480px;">
   <form action="" name="frmForm5" id="_frmForm5"  method="post">
   	 <div style="display:inline-block; position:absolute; top:3.3em; right: 10px;">
   		<a href="#" id="clear" style="text-align: right;"><font style="color: #BDBDBD">x clear all</font></a>
@@ -424,6 +424,7 @@ outline: 0;
  <%
  	
     List<RegiDto> RankList = (List<RegiDto>)request.getAttribute("RankList");
+ 
  %>
 <%
 for (int i=1;i<cookies.length;i++){ 
@@ -500,7 +501,7 @@ JSP주석 소스보기할때 보여지지 않음
   <%} %>
   </div>
 	<!-- 가고 싶다 -->
-  <div id="Paris" class="w3-container city" style="overflow-y: scroll; height: 500px;">
+  <div id="Paris" class="w3-container city" style="overflow-y: scroll; height: 480px;">
    
 		
 <c:if test="${empty wannagolist }">
@@ -521,7 +522,7 @@ for(int i=0; i<wannagolist.size(); i++){
 	int wannalike = 0;
 	
 	for(int j=0; j<RankList2.size(); j++){
-		if(RankList.get(j).getSeq() == wannagolist.get(i).getRs_seq()){
+		if(RankList2.get(j).getSeq() == wannagolist.get(i).getRs_seq()){
 			
 			wannaname = RankList2.get(j).getRs_name();
 			wannaRating = RankList2.get(j).getRs_rating();
@@ -577,15 +578,15 @@ for(int i=0; i<wannagolist.size(); i++){
   <div class="w3-container w3-light-grey w3-padding">
   <%if(user == null){%>
 		<!-- <a class=" openMask" href="#">로그인</a> -->
-		<button onclick="document.getElementById('id02').style.display='block'"  class="w3-btn w3-green w3-large">Login</button>
+		<button onclick="document.getElementById('id02').style.display='block'"  class="w3-btn w3-round-large w3-white ">Login</button>
   <%} else{%>
 		<a class="" href="#" ><%=user.getId()%>님</a>
-		<button onclick="document.getElementById('id01').style.display='none'"  class="w3-btn w3-green w3-large">
+		<button onclick="document.getElementById('id01').style.display='none'"  class="w3-btn w3-round-large w3-white ">
 			<a id="_btnLogout" class="" href="logout.do" > 로그아웃 </a>
 		</button>
 		<!-- <a id="_btnLogout" class="" href="logout.do" > 로그아웃 </a> -->
   <%} %>
-    <button class="w3-btn w3-right w3-white w3-border" onclick="document.getElementById('id01').style.display='none'">Close</button>
+    <button class="w3-btn w3-right w3-round-large w3-white" onclick="document.getElementById('id01').style.display='none'">Close</button>
   </div>
  </div>
 </div>
@@ -594,24 +595,24 @@ for(int i=0; i<wannagolist.size(); i++){
 <!-- 로그인 모달 -->
 <div id="id02" class="w3-modal" style="z-index: 120;">
   <span onclick="document.getElementById('id02').style.display='none'" class="w3-closebtn w3-hover-red w3-container w3-padding-hor-8 w3-display-topright">&times;</span>
-  <div class="w3-modal-content w3-card-9 w3-animate-zoom" style="right:-10px; max-width:600px; height: 450px;">
+  <div class="w3-modal-content w3-card-9 w3-animate-zoom" style="right:-10px; max-width:600px; height: 400px;">
     <div class="w3-center"><br>
     	<h1>Login</h1>
     </div>
     <div class="w3-container">
       <div class="w3-section">
       	<form action="loginAf.do" name="frmForm" id="_frmForm"  method="post">
-	        <label><b>Username</b></label><br>
-	        <input class="w3-input w3-border w3-margin-bottom" id="_userid" name="_userid" required="required" type="text" placeholder="Username"><br>
+	        <label><b>Id</b></label><br>
+	        <input class="w3-input w3-border w3-margin-bottom" id="_userid" name="_userid" required="required" type="text" placeholder="Id" style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;border-top-left-radius: 10px;border-top-right-radius: 10px;"><br>
 	        <label><b>Password</b></label><br>
-	        <input class="w3-input w3-border w3-margin-bottom" type="password" id="_pwd" name="_pwd" required="required" placeholder="Password">
-	        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="w3-btn w3-btn-block w3-green" id="_btnLogin" style="width:70%; text-align: center;">로그인</button><br><br>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="document.getElementById('id03').style.display='block'" class="w3-btn w3-btn-block w3-green" style="width:70%; text-align: center;">회원가입</button>
+	        <input class="w3-input w3-border w3-margin-bottom" type="password" id="_pwd" name="_pwd" required="required" placeholder="Password" style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;border-top-left-radius: 10px;border-top-right-radius: 10px;">
+	        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="w3-btn w3-btn-round w3-white" id="_btnLogin" style="width:70%; text-align: center;">로그인</button><br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="document.getElementById('id03').style.display='block'" class="w3-btn w3-btn-round w3-white" style="width:70%; text-align: center;">회원가입</button>
        	</form>
       </div>
     </div>
     <div class="w3-container w3-border-top w3-padding-hor-16 w3-light-grey">
-      <button onclick="document.getElementById('id02').style.display='none'" type="button" class="w3-btn w3-red" style="float: right;">Cancel</button>
+      <button onclick="document.getElementById('id02').style.display='none'" type="button" class="w3-btn w3-round-large w3-white" style="float: right;">Cancel</button>
     </div>
   </div>
 </div>
@@ -620,7 +621,7 @@ for(int i=0; i<wannagolist.size(); i++){
 <!-- 회원가입 모달 -->
 <div id="id03" class="w3-modal" style="z-index: 130;">
   <span onclick="document.getElementById('id03').style.display='none'" class="w3-closebtn w3-hover-red w3-container w3-padding-hor-8 w3-display-topright">&times;</span>
-  <div class="w3-modal-content w3-card-9 w3-animate-zoom" style="right:-10px; width:600px; height: 700px;">
+  <div class="w3-modal-content w3-card-9 w3-animate-zoom" style="right:-10px; width:600px; height: 680px;">
   
     <div class="w3-center"><br>
     	<h1>회원가입</h1>
@@ -632,7 +633,7 @@ for(int i=0; i<wannagolist.size(); i++){
                 <label class="col-lg-2 control-label">아이디</label>
                 <div class="col-lg-10">
 					<input type="text" name="sid" id="_id2" class="form-control" size="40" placeholder="id"><br>
-					<a href="#none" id="_btnGetId" class="form-control" title="회원가입" style="height: 30px;">아이디체크</a>
+					<a href="#none" id="_btnGetId" class="form-control" title="회원가입" style="height: 30px; text-align: center;">아이디체크</a>
 					<div id="_rgetid"></div>
 					<input type="text" name="id" id="_userid2" class="form-control" size="40" data-msg="아이디를 " readonly="readonly">
                 </div>
@@ -659,19 +660,20 @@ for(int i=0; i<wannagolist.size(); i++){
                 <label class="col-lg-2 control-label">별명</label>
                 <div class="col-lg-10">
                 	<input type="text" name="snickname" id="_nickname" class="form-control" placeholder="nickname" size="40">
-                	<a href="#none" id="_btnGetNickName" class="form-control" title="회원가입" style="height: 30px;">닉네임체크</a>
+                	<a href="#none" id="_btnGetNickName" class="form-control" title="회원가입" style="height: 30px; text-align: center;">닉네임체크</a>
 					<div id="_rgetnickname"></div>
-					<input type="text" name="nickname" id="_usernickname" class="pinput" size="40" data-msg="별명을 " readonly="readonly"> 
+					<input type="text" name="nickname" id="_usernickname" class="form-control" size="40" data-msg="별명을 " readonly="readonly"> 
                 </div>
-                <div class="col-lg-10" style="">
+                <!-- <div class="col-lg-10" style="">
                 <a href="#none" id="_btnRegi" class="form-control" style="height: 30px; title="회원가입">회원가입</a>
-                </div>
+                </div> -->
             </div>
        	</form>
       </div>
     </div>
     <div class="w3-container w3-border-top w3-padding-hor-16 w3-light-grey">
-      <button style="float: right;" onclick="document.getElementById('id03').style.display='none'" type="button" class="w3-btn w3-red">Cancel</button>      
+      <button style="float: left;" id="_btnRegi" type="button" onclick="document.getElementById('id02').style.display='block'"  class="w3-btn w3-round-large w3-white ">회원가입</button>
+      <button style="float: right;" onclick="document.getElementById('id03').style.display='none'" type="button" class="w3-btn w3-round-large w3-white">Cancel</button>      
     </div>
   </div>
 </div>

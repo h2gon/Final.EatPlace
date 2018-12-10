@@ -159,7 +159,7 @@ public class EatRestaurantsController {
 
 	//디테일
 	@RequestMapping(value="rsdetail.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String details(int seq,Model model, HttpServletResponse response , HttpServletRequest req, wannagoDto dto) throws Exception {
+	public String details(int seq,Model model, HttpServletResponse response , HttpServletRequest req, RegiDto dto2, wannagoDto dto) throws Exception {
 		logger.info("EatRestaurantsController detail"+new Date());
 	//	logger.info("InsertRS InsertDto.toString:"+dto.toString());
 		
@@ -192,7 +192,8 @@ public class EatRestaurantsController {
 		List<String> imagelist = eatReviewService.getImageDT(seq);
 		model.addAttribute("imagelist",imagelist);
 
-		
+		List<RegiDto> list2 = eatRestaurantsService.getRankList(dto2);
+		model.addAttribute("RankList", list2);
 		EatMemberDto login = (EatMemberDto)req.getSession().getAttribute("login");
 		
 		if(login != null && !login.getId().equals("")){
@@ -209,7 +210,14 @@ public class EatRestaurantsController {
 			count = eatRestaurantsService.existwannago(dto);
 			
 			model.addAttribute("count",count);
+			List<wannagoDto> wannagolist = eatRestaurantsService.getwannagolist(login.getId());
+			model.addAttribute("wannagolist", wannagolist);
+
+			}else {
+				List<wannagoDto> wannagolist = eatRestaurantsService.getwannagolist("없는거로아무거나불러오기");
+				model.addAttribute("wannagolist", wannagolist);
 			}
+
 			
 	
 		//쿠키생성
