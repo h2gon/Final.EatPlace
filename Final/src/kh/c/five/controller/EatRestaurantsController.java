@@ -521,12 +521,16 @@ public class EatRestaurantsController {
 	@RequestMapping(value="KFBest.do",  method={RequestMethod.GET, RequestMethod.POST})
 	public String restaurantBest(Model model, RegiDto dto) {
 		logger.info("EatRestaurantsController restaurantBest"+new Date());
-		
+		System.out.println("KFDTO:" + dto);
 		List<RegiDto> bestlist = eatRestaurantsService.bestlist(dto);
+		System.out.println("KFBEST = " + bestlist);
 		List<ReviewDto> reviewlist = new ArrayList<>();
 		for (int i = 0; i < bestlist.size(); i++) {
+			
 			ReviewDto review = eatRestaurantsService.BestReview(bestlist.get(i).getSeq());
+			if(review !=null) {
 			System.out.println(review.toString());
+			}
 			reviewlist.add(review);
 						
 		}				
