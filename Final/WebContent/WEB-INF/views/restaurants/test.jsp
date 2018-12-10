@@ -842,7 +842,7 @@ $('.owl-carousel123').owlCarousel({
 				<tr>
 				<td style="width: 15%; padding-top: 1px; vertical-align: top;"></td>
 				<!-- img td -->
-				<td style="width: 70%; padding-top: 1px; float:left; vertical-align: top;">
+				<td id="review_image" style="width: 70%; padding-top: 1px; float:left; vertical-align: top;">
 				<%		
 		//List<fileDto> f_list = eatReviewDao.getRv_Image(list.get(i).getSeq());
 		//List<String> f_list = (List<String>) request.getAttribute("getImg");
@@ -858,11 +858,15 @@ $('.owl-carousel123').owlCarousel({
 					System.out.println("fileName has just 1:"+fileName[0]);
 					if(fileName[0].contains("https://")){
 						%>
-						<img alt="" src="<%=fileName[0] %>" style="float:left; width: 75px; height: 75px;" data-toggle="modal" data-target="#carouselModal11" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
+						<a href="#" data-toggle="modal" data-target="#carouselModal">
+						<img alt="" src="<%=fileName[0] %>" style="float:left; width: 75px; height: 75px;"<%--  onclick="reviewDetail(<%=list.get(i).getSeq()%>)" --%>>
+						</a>
 						<% 
 					}else{
 					%>
-					<img alt="" src="/image/<%=fileName[0] %>" style="float:left; width: 75px; height: 75px;" data-toggle="modal" data-target="#carouselModal11" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
+					<a href="#" data-toggle="modal" data-target="#carouselModal">
+					<img alt="" src="/image/<%=fileName[0] %>" style="float:left; width: 75px; height: 75px;" <%-- onclick="reviewDetail(<%=list.get(i).getSeq()%>)" --%>>
+					</a>
 					
 					<%} 
 				}
@@ -874,11 +878,15 @@ $('.owl-carousel123').owlCarousel({
 					System.out.println("fileName more than 1:"+fileName[a]);
 					if(fileName[a].contains("https://")){
 					%>
-					<img alt="" src="<%=fileName[a] %>" style="float:left; width: 75px; height: 75px;" data-toggle="modal" data-target="#carouselModal11" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
+					<a href="#" data-toggle="modal" data-target="#carouselModal">
+					<img alt="" src="<%=fileName[a] %>" style="float:left; width: 75px; height: 75px;"  <%-- onclick="reviewDetail(<%=list.get(i).getSeq()%>)" --%>>
+					</a>
 					<%
 					}else{
 					%>
-					<img alt="" src="/image/<%=fileName[a] %>" style="float:left; width: 75px; height: 75px;" data-toggle="modal" data-target="#carouselModal11" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
+					<a href="#" data-toggle="modal" data-target="#carouselModal">
+					<img alt="" src="/image/<%=fileName[a] %>" style="float:left; width: 75px; height: 75px;" <%-- onclick="reviewDetail(<%=list.get(i).getSeq()%>)" --%>>
+					</a>
 					<% }
 					}
 			}
@@ -918,7 +926,59 @@ $('.owl-carousel123').owlCarousel({
      
          
          <script type="text/javascript">
-       //영태씨 ajax 이걸 sync2에 끼워넣어야 한다... sync2? 아무튼 모달 거기... 그 모달을 그대로 두고 값만 바꿀 수 있는지
+       
+		 $("#review_image a img").click(function(){
+			 var img=$(this).attr('src');
+			 var rseq = $("#rs_seq").attr("value");
+
+
+				 if(img.indexOf("https://") !=-1){
+					var	filename=img;
+				}else if(img.indexOf("https://")==-1){
+					var filename=img.substring(7);
+				} 
+				// alert(img);
+				$('#mainImage').attr('src',img);
+				
+				var revData2 = {
+						'filename':filename,
+						'rseq': rseq
+				};
+				
+				
+				 $.ajax({
+					url:"getRPdetail.do",
+					datatype:'json',
+					data:revData2,
+					type:'post',
+					async:true,
+					success:function(data){
+						//alert("success");
+						//alert(data.review.rs_content);
+						$("#pause").html(data.review.rs_content);
+						$("#p_id").html(data.review.id);
+						var rating =data.review.rs_rating;
+						if(rating===1){
+							$("#p_ratingP").attr('src','./img/like/1-2.png');	
+						}else if(rating===3){
+							$("#p_ratingP").attr('src','./img/like/3-2.png');
+						} else if(rating===5){
+							$("#p_ratingP").attr('src','./img/like/5-2.png');
+						}
+						
+						 reviewDetail(data.review.seq); //reviewDetail에 리뷰 시퀀스 넣어줌
+						 
+						 
+					},
+					error:function(req, stu, err){
+						alert("error");
+						alert(stu + " " + err);
+					}
+				});
+				 
+				
+		 });
+         
  		function reviewDetail(seq) {
       		alert("seq:"+seq);
       		/* $('#mainImage').attr("src",img);
