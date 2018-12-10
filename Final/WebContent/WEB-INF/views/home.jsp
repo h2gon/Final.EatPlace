@@ -969,7 +969,7 @@ String recomend = "추천검색어테스트";
             </a>
           </div>
           <div class="col-lg-4 col-sm-6">
-            <a class="portfolio-box" href="category.do?s_category=뷔페">
+            <a class="portfolio-box" href="category.do?s_category=세계음식">
               <img class="img-fluid" src="img/portfolio/fullsize/v.jpg" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
