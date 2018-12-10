@@ -537,6 +537,7 @@ public class EatRestaurantsController {
 		
 		model.addAttribute("reviewlist", reviewlist);
 		model.addAttribute("bestlist", bestlist);
+		model.addAttribute("category", dto);
 		
 		return "restaurants/restaurantBest";
 	}
@@ -561,6 +562,7 @@ public class EatRestaurantsController {
 		
 		model.addAttribute("bestlist", GuBestlist);
 		model.addAttribute("reviewlist", reviewlist);
+		model.addAttribute("address", dto);
 		
 		return "restaurants/restaurantBest";
 	}
@@ -580,6 +582,7 @@ public class EatRestaurantsController {
 		
 		model.addAttribute("bestlist", keywordlist);
 		model.addAttribute("reviewlist", reviewlist);
+		model.addAttribute("keyword", dto);
 		
 		return "restaurants/restaurantBest";
 	}

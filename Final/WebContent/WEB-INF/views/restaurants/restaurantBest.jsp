@@ -54,6 +54,26 @@ p.test {
 
 </style>
 
+<%
+RegiDto best_category = (RegiDto)request.getAttribute("category");
+RegiDto best_address = (RegiDto)request.getAttribute("address");
+RegiDto best_keyword = (RegiDto)request.getAttribute("keyword");
+
+
+String best_title =null;
+
+
+if(best_category != null){
+	best_title = best_category.getRs_category();
+}
+if(best_address != null){
+	best_title = best_address.getRs_address1();
+}
+if(best_keyword != null){
+	best_title = best_keyword.getRs_keyword();
+}
+
+%>   
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -72,6 +92,7 @@ p.test {
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 </head>
+
 <body>
 
 
@@ -118,7 +139,7 @@ p.test {
 
 	<header>	          		         
          <div style="text-align: center; padding-top: 50px; background-color: white;">	           
-            <h1 style="color: black;"><strong>EAT PLACE 한식 BEST 5</strong></h1>
+            <h1 style="color: black;"><strong>EAT PLACE <%=best_title %> BEST 5</strong></h1>
             <h3 style="color: black;"><strong>"혼자 알기 아까운 곳!"</strong></h3>
             <br>   			   
         </div> 
@@ -211,5 +232,8 @@ p.test {
       <!-- /.container -->
       </div>
     </footer>
+
+
+    
 </body>
 </html>
