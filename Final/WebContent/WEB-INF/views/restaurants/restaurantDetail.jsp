@@ -342,17 +342,17 @@ input:focus {
 			
 					<div class="status branch_none">
 						 
-						<span class="cnt hit">
+						<span class="cnt hit" style="color: gray;">
 							<span class="hidden"><img src="img/button/readcount.png"></span>
 						<!-- 조회수 --> ${rs.rs_readcount } 
 						</span> 
-						<span class="cnt review">
+						<span class="cnt review" style="color: gray;">
 							<span class="hidden"><img src="img/button/review.png"></span>
 							<span>
 						<!-- 리뷰수 -->${reviewcount }
 							</span>
 						</span> 
-						<span class="cnt favorite">
+						<span class="cnt favorite" style="color: gray;">
 							<span class="hidden"><img src="img/button/fav.png"></span>
 						<!-- 즐겨찾기 수 -->${likescount }
 						</span>
@@ -438,7 +438,10 @@ input:focus {
 				</header>
 
 				</section>
+				
+					
 		<!-- 리뷰 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~REVIEW~~~~~~~~~~~~~~~~~~~~~~~~-->
+		<img src="img/button/hr.png">
 				 <%          
          // EatReviewService eatReviewService ;
 		  EatReviewDao eatReviewDao = EatReviewDaoImpl.getInstance();
@@ -503,8 +506,10 @@ input:focus {
             </div>   
            
           </section>
-          
-         
+        <br> 
+        <img alt="" src="img/button/hr.png" style="width: 100%; height: 1px">
+        <br> 
+		
 		<div class="review_main">
 		
 		<table>
@@ -587,7 +592,7 @@ input:focus {
 				System.out.println("fileName has just 1:"+fileName[0]);
 				if(fileName[0].contains("https://")){
 					%>
-					<img alt="" src="<%=fileName[0] %>" style="width: 75px; height: 75px;" onclick="reviewDetail(<%=rv_seq%>)">
+				<img alt="" src="<%=fileName[0] %>" style="width: 75px; height: 75px;" onclick="reviewDetail(<%=rv_seq%>)">
 					<% 
 				}else{
 				%>

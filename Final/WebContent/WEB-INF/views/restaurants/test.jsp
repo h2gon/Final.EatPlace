@@ -653,21 +653,21 @@ $('.owl-carousel123').owlCarousel({
 			
 					<div class="status branch_none">
 						 
-						<span class="cnt hit">
+						<span class="cnt hit" style="color: gray;">
 							<img src="img/button/readcount.png">
 						<!-- 조회수 --> ${rs.rs_readcount } 
 						</span> 
-						<span class="cnt review">
+						<span class="cnt review" style="color: gray;">
 							<img src="img/button/review.png">							<span>
 						<!-- 리뷰수 -->${reviewcount }
 							</span>
 						</span> 
-						<span class="cnt favorite">
+						<span class="cnt favorite" style="color: gray;">
 							<img src="img/button/fav.png">
 						<!-- 즐겨찾기 수 -->${likescount }
 						</span>
 						<br>
-						<img src="img/button/hr.png">
+						<img src="img/button/hr.png" style="margin-right: 400px; width: 900px;">
 						
 					</div>
 
@@ -733,8 +733,8 @@ $('.owl-carousel123').owlCarousel({
 				<div id="map" style="width: 400px; height: 450px;"></div>
 				
 				
+				<img src="img/button/hr.png" style="margin-right: 350px; width: 920px;">
 				</header>
-
 				</section>
 				
 		<!-- 리뷰 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~REVIEW~~~~~~~~~~~~~~~~~~~~~~~~-->
