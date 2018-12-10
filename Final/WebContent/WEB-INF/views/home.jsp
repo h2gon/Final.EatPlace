@@ -504,7 +504,7 @@ JSP주석 소스보기할때 보여지지 않음
   <%} %>
   </div>
 	<!-- 가고 싶다 -->
-  <div id="Paris" class="w3-container city">
+  <div id="Paris" class="w3-container city" style="overflow-y: scroll; height: 500px;">
    
 		
 <c:if test="${empty wannagolist }">
@@ -543,30 +543,32 @@ for(int i=0; i<wannagolist.size(); i++){
 
 
 <div style="width:350px; height:100px; background-color:; box-sizing: border-box; border: 1 solid; ">
-	<!-- 사진 -->
-	<div style="display:inline-block; position:absolute; width: 80px; height: 90px; margin-top:3px; margin-left:10px;">
-		<a><img alt="" src="<%=wannaPic%> " style="width: 80px; height: 90px;"></a>
-	</div>
 	<div>
+		<!-- 사진 -->
+		<div style="display:inline-block; position:relative; width: 80px; height: 90px; margin-top:3px; margin-left:10px;">
+			<a><img alt="" src="<%=wannaPic%> " style="width: 80px; height: 90px;"></a>
+		</div>
+	
 		<!-- 이름 -->
-		<div style="display:inline-block; position:relative; width: 30%; height: 45%; top:10px; left:100px;">
+		<div style="display:inline-block; position:relative; width: 30%; height: 45%; top:-20px; left:20px;">
 			<a href="rsdetail.do?seq=<%=wannalike%>" style="text-align: center;"><b><font style="font-size: medium;text-align:center;"><%=wannaname%></font></b></a>
 		</div>
 		<!-- 주소 -->
-		<div style="display:inline-block; position:relative; width: 55%; height: 30%; top:50px; left:-5px;">
+		<div style="display:inline-block; position:relative; width: 55%; height: 30%; top:-55px; left:120px;">
 			<a><font style="font-size: x-small;"><%=wannaaddress %></font></a>
 		</div>
 
 		<!-- 평점 --> 
-		<div style="display:inline-block;  position:relative; width: 10%; height: 20%; top:10px; right:90px;">
+		<div style="display:inline-block;  position:relative; width: 10%; height: 20%; top:-88px; right:-20px;">
 			<a><font style="color:#c53211 "><%=wannaRating %></font></a>
 		</div>
 		<!-- 즐찾 -->
-		<div style="display:inline-block;  position:relative; width: 15%; height: 10%; top:-3px; left:295px;">
+		<div style="display:inline-block;  position:relative; width: 15%; height: 10%; top:-60px; right: -40px;">
 			<a href="wannago.do?rs_seq=<%=wannalike %>&rs_name=<%=wannaname%>"><img id="like_btn" src="img/button/likeIcon.png" style="width: 45px; height: 45px;" ></a>
 		</div>
-			
+
  	</div>
+	
 </div>
 
 	        	
