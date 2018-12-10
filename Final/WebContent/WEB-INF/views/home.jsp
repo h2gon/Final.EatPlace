@@ -32,8 +32,6 @@ Cookie[] cookies = request.getCookies();  // 요청정보로부터 쿠키를 가
 
 
 
-
-
 System.out.println("현재 설정된 쿠키의 개수 : " + cookies.length);    // 쿠키가 저장된 배열의 길이를 가져온다.
 
 
@@ -93,9 +91,7 @@ System.out.println(i + "번째 쿠키에 설정된 값 : " + cookies[i].getValue
 <style>
  img.card-img-top{
  	max-width: 453px;
- 	
  	max-height: 300px;
- 	
  	display: block;
  	margin-left: auto;
  	margin-right: auto; 	
@@ -111,12 +107,12 @@ System.out.println(i + "번째 쿠키에 설정된 값 : " + cookies[i].getValue
       
     }
    
-    input[type="text"]{
+    .seaechAll /* input[type="text"] */{
       width:90%;
       height:100%;
       border:3px solid #ff7100;
       z-index: 50;
-    border-radius: 23px;
+      border-radius: 23px;
       font-size:1.213rem;
       padding-left: 20px;
       font-style: oblique;
@@ -142,7 +138,7 @@ System.out.println(i + "번째 쿠키에 설정된 값 : " + cookies[i].getValue
     position: relative;
     left: 226px;
     right: 0px;
-        bottom: 50px;
+    bottom: 50px;
     width: 200px;
     height: 50px;
     
@@ -408,7 +404,7 @@ outline: 0;
     display: none;">></div>
 
 <!-- 가고싶어 제발 -->
-<div  class="w3-container">
+<div class="w3-container ">
 <div id="id01" class="w3-modal">
  <div class="w3-modal-content w3-card-4 w3-animate-zoom">
  	<div>
@@ -596,9 +592,9 @@ for(int i=0; i<wannagolist.size(); i++){
 </div>
 
 <!-- 로그인 모달 -->
-<div id="id02" class="w3-modal" style="z-index: 111;">
+<div id="id02" class="w3-modal" style="z-index: 120;">
   <span onclick="document.getElementById('id02').style.display='none'" class="w3-closebtn w3-hover-red w3-container w3-padding-hor-8 w3-display-topright">&times;</span>
-  <div class="w3-modal-content w3-card-9 w3-animate-zoom" style="right:-10px; max-width:600px; height: 400px;">
+  <div class="w3-modal-content w3-card-9 w3-animate-zoom" style="right:-10px; max-width:600px; height: 450px;">
     <div class="w3-center"><br>
     	<h1>Login</h1>
     </div>
@@ -622,9 +618,9 @@ for(int i=0; i<wannagolist.size(); i++){
 
 
 <!-- 회원가입 모달 -->
-<div id="id03" class="w3-modal" style="">
+<div id="id03" class="w3-modal" style="z-index: 130;">
   <span onclick="document.getElementById('id03').style.display='none'" class="w3-closebtn w3-hover-red w3-container w3-padding-hor-8 w3-display-topright">&times;</span>
-  <div class="w3-modal-content w3-card-9 w3-animate-zoom" style="right:-10px; width:600px; height: 650px;">
+  <div class="w3-modal-content w3-card-9 w3-animate-zoom" style="right:-10px; width:600px; height: 700px;">
   
     <div class="w3-center"><br>
     	<h1>회원가입</h1>
@@ -747,7 +743,7 @@ function alarm() {
       
 		<form action="" id="main-search" name="main-search" method="get" > 
 	 			 <div class="in-line" style="margin-left: auto; margin-right: auto; ">
-			      <strong><input type="text" onkeypress="if(event.keyCode==13) {search();}" onclick="displayVsearch()"  id="main-keyword" name="s_keyword" value="" placeholder="지역, 식당 또는 음식" autocomplete="off" style="color: #575756; border-bottom-left-radius: 20px; border-top-left-radius: 20px"></strong>
+			      <strong><input type="text" class="seaechAll" onkeypress="if(event.keyCode==13) {search();}" onclick="displayVsearch()"  id="main-keyword" name="s_keyword" value="" placeholder="지역, 식당 또는 음식" autocomplete="off" style="color: #575756; border-bottom-left-radius: 20px; border-top-left-radius: 20px"></strong>
 			      <strong><input type="button" onclick="search()"  value="검색" style="background-color: darkorange; color: white;"></strong>
 			     </div>
 				<!-- controller로 넘겨주기 위한 값 -->
