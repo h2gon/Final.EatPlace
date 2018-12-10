@@ -841,7 +841,8 @@ $('.owl-carousel123').owlCarousel({
 				</tr>
 				<tr>
 				<td style="width: 15%; padding-top: 1px; vertical-align: top;"></td>
-				<td style="width: 70%; padding-top: 1px; vertical-align: top;">
+				<!-- img td -->
+				<td style="width: 70%; padding-top: 1px; float:left; vertical-align: top;">
 				<%		
 		//List<fileDto> f_list = eatReviewDao.getRv_Image(list.get(i).getSeq());
 		//List<String> f_list = (List<String>) request.getAttribute("getImg");
@@ -857,11 +858,11 @@ $('.owl-carousel123').owlCarousel({
 					System.out.println("fileName has just 1:"+fileName[0]);
 					if(fileName[0].contains("https://")){
 						%>
-						<img alt="" src="<%=fileName[0] %>" style="width: 75px; height: 75px;" data-toggle="modal" data-target="#carouselModal11" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
+						<img alt="" src="<%=fileName[0] %>" style="float:left; width: 75px; height: 75px;" data-toggle="modal" data-target="#carouselModal11" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
 						<% 
 					}else{
 					%>
-					<img alt="" src="/image/<%=fileName[0] %>" style="width: 75px; height: 75px;" data-toggle="modal" data-target="#carouselModal11" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
+					<img alt="" src="/image/<%=fileName[0] %>" style="float:left; width: 75px; height: 75px;" data-toggle="modal" data-target="#carouselModal11" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
 					
 					<%} 
 				}
@@ -873,11 +874,11 @@ $('.owl-carousel123').owlCarousel({
 					System.out.println("fileName more than 1:"+fileName[a]);
 					if(fileName[a].contains("https://")){
 					%>
-					<img alt="" src="<%=fileName[a] %>" style="width: 75px; height: 75px;" data-toggle="modal" data-target="#carouselModal11" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
+					<img alt="" src="<%=fileName[a] %>" style="float:left; width: 75px; height: 75px;" data-toggle="modal" data-target="#carouselModal11" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
 					<%
 					}else{
 					%>
-					<img alt="" src="/image/<%=fileName[a] %>" style="width: 75px; height: 75px;" data-toggle="modal" data-target="#carouselModal11" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
+					<img alt="" src="/image/<%=fileName[a] %>" style="float:left; width: 75px; height: 75px;" data-toggle="modal" data-target="#carouselModal11" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
 					<% }
 					}
 			}
