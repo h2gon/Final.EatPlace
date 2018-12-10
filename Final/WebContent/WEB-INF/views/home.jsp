@@ -558,6 +558,7 @@ for(int i=0; i<wannagolist.size(); i++){
 			<a><font style="font-size: x-small;"><%=wannaaddress %></font></a>
 		</div>
 
+
 		<!-- 평점 --> 
 		<div style="display:inline-block;  position:relative; width: 10%; height: 20%; top:-88px; right:-20px;">
 			<a><font style="color:#c53211 "><%=wannaRating %></font></a>
