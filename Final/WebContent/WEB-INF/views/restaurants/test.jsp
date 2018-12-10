@@ -651,7 +651,7 @@ $('.owl-carousel123').owlCarousel({
 						
 					</div>
 			
-					<div class="status branch_none">
+					<div class="status branch_none" style="text-align: left;">
 						 
 						<span class="cnt hit" style="color: gray;">
 							<img src="img/button/readcount.png">
