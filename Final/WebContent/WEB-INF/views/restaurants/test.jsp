@@ -634,7 +634,7 @@ $('.owl-carousel123').owlCarousel({
 					<div>
 					
 						<span class="title">
-					<div class="col-md-8">
+					<div class="col-md-8" style="text-align: left;">
 							<font size="26" color="#000000" id="rs_seq" value="${rs.seq }">${rs.rs_name }</font>
 					</div>		
 							<div class="col-md-4">  
@@ -717,9 +717,8 @@ $('.owl-carousel123').owlCarousel({
 									${rs2.rs_time }
 								</td>
 							</tr>
-				
-
-
+						
+						
 
 						</tbody>
 					</table>
