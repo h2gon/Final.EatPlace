@@ -154,6 +154,7 @@ $(document).ready(function () {
 		      <strong><input type="button" onclick="search()"  value="검색" style="border-bottom-right-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-top-left-radius: 20px; background-color: darkorange; color: white;"></strong>
 		     </div>
 		<!-- controller로 넘겨주기 위한 값 -->
+		<input type="hidden" name="s_category"  value="<%=category %>">
 		<input type="hidden" name="pageNumber" id="_pageNumber" value="${(empty pageNumber)?0:pageNumber }">
 		<input type="hidden" name="recordCountPerPage" id="_recordCountPerPage"
 			value="${(empty recordCountPerPage)?9:recordCountPerPage }">
@@ -406,7 +407,7 @@ function goPage(pageNumber) {
 		$("#main-search").attr({"target":"_self", "action":"search.do"}).submit();
 	}
 	else if (kstr == ""){
-		/* alert("검색어 없"); */
+		 /* alert("검색어 없");  */
 		$("#main-search").attr({"target":"_self", "action":"category.do"}).submit();
 	}else {
 		alert("?????");
