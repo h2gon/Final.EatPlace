@@ -721,7 +721,7 @@ input:focus {
 					System.out.println("fileName more than 1:"+fileName[a]);
 					if(fileName[a].contains("https://")){
 					%>
-					<img alt="" src="<%=fileName[a] %>" style="width: 75px; height: 75px;" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
+					<img alt="" src="<%=fileName[a] %>" style="width: 75px; height: 75px;" data-toggle="modal" data-target="#carouselModal" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
 					<%
 					}else{
 					%>
@@ -791,14 +791,7 @@ input:focus {
 				success:function(json){
 					alert("success");
 					console.log(json);
-					//alert(data.review.rs_content);
-					//$("#pause").html(data.review.rs_content);
-					/* for (var i = 0; i < json.length; i++) {
-						$("#img").attr("src",json[i]);
-						console.log(json[i]);
-						//$("#test").append(json[i].key);
-					}	 */				
-					//$("#test").html(json);
+					
 				},
 				error:function(req, stu, err){
 					alert("error");
@@ -808,7 +801,7 @@ input:focus {
 			//$("#modal_rv_seq").val(seq).submit();
 			
 			//location.href="getReviewDetail.do?seq="+seq
-			modal.style.display = "block";
+			//modal.style.display = "block";
 			//location.href = "reviewDetail.do?seq="+seq;
 		}
        

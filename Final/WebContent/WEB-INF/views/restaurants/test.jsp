@@ -166,16 +166,16 @@ a.btn:hover:before, a.btn:hover::after {
 	outline: none;
 	position: relative;
 	z-index: 2;
-	background-color: #333;
-	border: 2px solid #333;
+	background-color: #c53211;
+	border: 2px solid #c53211;
 	color: #fff;
 	line-height: 50px;
 	margin-bottom: 4rem;
 }
 .button:hover {
 	background-color: #fff;
-	border-color: #59b1eb;
-	color: #59b1eb;
+	border-color: #c53211;
+	color: #c53211;
 }
 .button::before,
 .button::after {
@@ -185,7 +185,7 @@ a.btn:hover:before, a.btn:hover::after {
 	content: '';top: 0;
 	width: 50%;
 	height: 100%;
-	background-color: #333;
+	background-color: #c53211;
 }
 .button,
 .button::before,
@@ -206,7 +206,7 @@ a.btn:hover:before, a.btn:hover::after {
 .button:hover::before,
 .button:hover::after {
 	width: 0;
-	background-color: #59b1eb;
+	background-color: #c53211;
 }
 
 
@@ -220,7 +220,7 @@ footer a {
 	font-weight: bold;
 }
 footer a:hover {
-	color: #59b1eb;
+	color: #c53211;
 	text-decoration: underline;
 }
 </style>
@@ -453,7 +453,10 @@ footer a:hover {
 <%
 List<ReviewDto> rvlist = (List<ReviewDto>)request.getAttribute("reviewlist");
 List<fileDto> imagelist = (List<fileDto>) request.getAttribute("imagelist");
-%>  
+%>
+
+
+<!--  -->
 
 <div class="modal fade" id="carouselModal" tabindex="-1" role="dialog" aria-labelledby="carouselModalLabel">
   <div class="modal-dialog" role="document">
@@ -854,11 +857,11 @@ $('.owl-carousel123').owlCarousel({
 					System.out.println("fileName has just 1:"+fileName[0]);
 					if(fileName[0].contains("https://")){
 						%>
-						<img alt="" src="<%=fileName[0] %>" style="width: 75px; height: 75px;" data-toggle="modal" data-target="#carouselModal" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
+						<img alt="" src="<%=fileName[0] %>" style="width: 75px; height: 75px;" data-toggle="modal" data-target="#carouselModal11" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
 						<% 
 					}else{
 					%>
-					<img alt="" src="/image/<%=fileName[0] %>" style="width: 75px; height: 75px;" data-toggle="modal" data-target="#carouselModal" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
+					<img alt="" src="/image/<%=fileName[0] %>" style="width: 75px; height: 75px;" data-toggle="modal" data-target="#carouselModal11" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
 					
 					<%} 
 				}
@@ -870,11 +873,11 @@ $('.owl-carousel123').owlCarousel({
 					System.out.println("fileName more than 1:"+fileName[a]);
 					if(fileName[a].contains("https://")){
 					%>
-					<img alt="" src="<%=fileName[a] %>" style="width: 75px; height: 75px;" data-toggle="modal" data-target="#carouselModal" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
+					<img alt="" src="<%=fileName[a] %>" style="width: 75px; height: 75px;" data-toggle="modal" data-target="#carouselModal11" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
 					<%
 					}else{
 					%>
-					<img alt="" src="/image/<%=fileName[a] %>" style="width: 75px; height: 75px;" data-toggle="modal" data-target="#carouselModal" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
+					<img alt="" src="/image/<%=fileName[a] %>" style="width: 75px; height: 75px;" data-toggle="modal" data-target="#carouselModal11" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
 					<% }
 					}
 			}
@@ -901,54 +904,90 @@ $('.owl-carousel123').owlCarousel({
 		}
 	%>   
     </ul>
-    <div id="js-btn-wrap" class="btn-wrap"> <a href="javascript:;" class="button">더보기</a> </div>
+   
+   
+    <div id="js-btn-wrap" class="btn-wrap" style="float: right;"><a href="javascript:;" class="button">더보기</a> </div>
   </div>
   </div>
-<!--   <p class="back"><a class="btn" href="https://nanati.me/more-btn-js-load/">← 블로그로 돌아가기</a></p> -->
-<!-- <div class="ad"> --> 
-   <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>  -->
-   <!--  demo-more-btn-js-load  -->
-   <!--  <ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-1534417142445600"
-     data-ad-slot="9710655373"
-     data-ad-format="auto"></ins>  -->
-    <!-- <script>
-(adsbygoogle = window.adsbygoogle || []).push({}); 
-</script> -->
 
-<!-- </div> -->
   
 </div>       
     
        <br><br>
      
          
-       <script type="text/javascript">
-     	function reviewDetail(seq) {
-			alert("seq:"+seq);
-			$("#myModal").modal({backdrop:"static"});
-			
-			//location.href = "reviewDetail.do?seq="+seq;
-		}
-       
-       function show_morelist(index) {
-    	  /*  var Rv_array = [];
-    	   var temp, item, a, i, id;
-    	      	   
-    	   console.log("review_item: "+review_item);
-    	   Rv_array = review_item.split("],");
-    	   console.log("Rv_array.length: "+Rv_array.length);
-    	   
-    	   var remain_array = new Array[Rv_array.length - 5];
-    	       	       	   
-    	    for(i = 0;i<Rv_array.length;i++){
-    	  	console.log("console array: "+Rv_array[i]);
-    	    } */
-    	  	
-    	   	    	  
-       }       
-       </script>
+         <script type="text/javascript">
+       //영태씨 ajax 이걸 sync2에 끼워넣어야 한다... sync2? 아무튼 모달 거기... 그 모달을 그대로 두고 값만 바꿀 수 있는지
+ 		function reviewDetail(seq) {
+      		alert("seq:"+seq);
+      		/* $('#mainImage').attr("src",img);
+      		$("#pause").html(data.review.rs_content);
+ 			$("#p_id").html(data.review.id); */
+      		
+ 			$.ajax({
+ 				url:"getReviewDetail.do",					
+ 				type:"POST",
+ 				data:"seq="+seq,
+ 				dataType:"json",
+ 				async:true,
+ 								
+ 				success:function(json){
+ 					alert("success");
+ 					console.log(json);
+ 					console.log(json.flist);
+ 					console.log(json.rdto);
+ 					console.log("json.flist.length"+json.flist.length);	
+ 					//alert(data.review.rs_content);
+ 					//$("#pause").html(data.review.rs_content);
+ 					
+ 					for (var i = 0; i < json.flist.length; i++) {
+ 						
+ 						/* 
+ 						<a target="_blank" href="img_forest.jpg">
+   						<img src="img_forest.jpg" alt="Forest">
+ 						</a>   class='img-responsive'
+ 						*/
+       					var createimg = "<a target='_blank' href='"+json.flist[i]+"'><img src="+json.flist[i]+"></a>";
+       					/* if(i=0){
+       					 createimg = "<div class=item active><img src="+json.flist[i]+" style='width:100%'></div>";
+       					/* $("#mainImage11").append(createimg);  */
+       					/* }
+       					else{
+ 						 createimg = "<div class=item><img src="+json.flist[i]+" style='width:100%'></div>";
+ 						 
+       					} */
+       					$("mainImage11").attr("src",json.flist[i]);	
+ 						//console.log("createimg: "+createimg);
+ 						//$("#mainImage11").append(createimg);
+ 						
+      					//$("#pause11").html(json.rdto.rs_content);
+ 						//$("#p_id11").html(json.rdto.id);
+ 						/* var newimg = document.createElement('img');
+ 						newimg.setAttribute("src",json.flist[i]); */
+ 						//newimg.setAttribute("width","100%");
+ 						
+ 						/* $("#img").attr("src",json.flist.get(i));						
+ 						$("#test").append(json[i].key); */
+ 						//$(".item").append(newimg);
+ 						
+ 					}		
+ 					//$("#test").html(json);
+ 				},
+ 				error:function(req, stu, err){
+ 					alert("error");
+ 					alert(stu + " " + err+""+req);					
+ 				}
+ 			});
+ 			//$("#modal_rv_seq").val(seq).submit();
+ 			
+ 			//location.href="getReviewDetail.do?seq="+seq
+ 			//$("#carouselModal").style.display = "block";
+ 			//modal.style.display = "block";
+ 			//document.getElementById("id01").style.display = "block";
+ 		}
+         
+         </script>
+     
 		
        <br><br>
           <!-- review_main end -->
