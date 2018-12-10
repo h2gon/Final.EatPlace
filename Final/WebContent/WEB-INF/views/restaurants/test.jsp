@@ -25,6 +25,10 @@
     List<RegiDto> RankList = (List<RegiDto>)request.getAttribute("RankList");
  %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- more -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+<meta name="format-detection" content="telephone=no">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
  
@@ -54,7 +58,172 @@
 <!-- font -->
 <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' rel='stylesheet' type='text/css'>
 <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css' rel='stylesheet' type='text/css'>
+<style type="text/css">
+@charset "UTF-8";
+/* CSS Document */
 
+header {
+	padding: 0.8em;
+	color: #FFF;
+	font-size: 150%;
+	text-align: center;
+	background: white;
+}
+header,
+.back {
+	margin-bottom: 6rem;
+}
+#contents {
+	max-width: 780px;
+	margin: 0 auto;
+	text-align: center;
+	padding-bottom: 50px;
+}
+
+.ad {
+	text-align: center;
+	border: 1px dotted #ccc;
+	max-width: 780px;
+	margin: 0 auto 6rem;
+}
+
+a.btn {
+	background: white;
+	color: #fff;
+	border: none;
+	position: relative;
+	height: 60px;
+	font-size: 108%;
+	padding: .6em 1em;
+	transition: 800ms ease all;
+	outline: none;
+}
+a.btn:hover {
+	background: #fff;
+	color: white;
+}
+a.btn:before, a.btn::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 2px;
+	width: 0;
+	background: white;
+	transition: 400ms ease all;
+}
+a.btn::after {
+	right: inherit;
+	top: inherit;
+	left: 0;
+	bottom: 0;
+}
+a.btn:hover:before, a.btn:hover::after {
+	width: 100%;
+	transition: 800ms ease all;
+}
+
+
+.js-load {
+	display: none;
+}
+.js-load.active {
+	display: block;
+}
+.is_comp.js-load:after {
+	display: none;
+}
+.btn-wrap, .lists, .main {
+	display: block;
+}
+.main {
+	max-width: 640px;
+	margin: 0 auto;
+}
+.lists {
+	margin-bottom: 4rem;
+}
+.lists__item {
+	padding: 20px;
+	background: white;
+	font-style: "color : black";
+}
+.lists__item:nth-child(2n) {
+	background: white;
+	color: black;
+	font-style: "color : black";
+}
+.btn-wrap {
+	text-align: center;
+}
+.button {
+	display: inline-block;
+	width: 200px;
+	height: 54px;
+	text-align: center;
+	text-decoration: none;
+	line-height: 54px;
+	outline: none;
+	position: relative;
+	z-index: 2;
+	background-color: #333;
+	border: 2px solid #333;
+	color: #fff;
+	line-height: 50px;
+	margin-bottom: 4rem;
+}
+.button:hover {
+	background-color: #fff;
+	border-color: #59b1eb;
+	color: #59b1eb;
+}
+.button::before,
+.button::after {
+	position: absolute;
+	z-index: -1;
+	display: block;
+	content: '';top: 0;
+	width: 50%;
+	height: 100%;
+	background-color: #333;
+}
+.button,
+.button::before,
+.button::after {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-transition: all .3s;
+	transition: all .3s;
+}
+
+.button::before {
+	right: 0;
+}
+.button::after {
+	left: 0;
+}
+.button:hover::before,
+.button:hover::after {
+	width: 0;
+	background-color: #59b1eb;
+}
+
+
+footer {
+	padding: 1rem;
+	font-size: 83%;
+	text-align: center;
+}
+footer a {
+	color: #666;
+	font-weight: bold;
+}
+footer a:hover {
+	color: #59b1eb;
+	text-decoration: underline;
+}
+</style>
 
 <style type="text/css">
 
@@ -566,259 +735,112 @@ $('.owl-carousel123').owlCarousel({
 				</section>
 				
 		<!-- 리뷰 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~REVIEW~~~~~~~~~~~~~~~~~~~~~~~~-->
-				 <%          
-         // EatReviewService eatReviewService ;
-		  EatReviewDao eatReviewDao = EatReviewDaoImpl.getInstance();
-                  
-          List<ReviewDto> list = (List<ReviewDto>)request.getAttribute("reviewlist");
-          
-          
-          final int LIST = 5;
-          int totalCnt = list.size();
-          int pagingCount = totalCnt / LIST;
-          int remainList = totalCnt % LIST; 
-          int Good=0;
-          int soso=0;
-          int notGood=0;
-          int totalCount = 0;
-          String nickName = "";
-          String fileName[] = new String[0];
-          
-          if(!list.isEmpty()){
-          
-          for(int i =0;i<list.size();i++){
-        	  
-        	  switch(list.get(i).getRs_rating()){
-        	  
-        	  case 1:
-        		  notGood = notGood+1; break;
-        	  case 3:
-        		  soso = soso+1; break; 
-        	  case 5:
-        		  Good = Good+1; break;
-        	  }
-        	  
-          }totalCount = Good+soso+notGood;
-          System.out.println("notGood Count:"+notGood+"soso Count:"+soso+"Good:"+Good);
-         
-                  
-                    
-          %>
+		 <script type="text/javascript">
+//JavaScript Document
+
+  $(window).on('load', function () {
+  	load('#js-load', '2');
+  	$("#js-btn-wrap .button").on("click", function () {
+  		load('#js-load', '2', '#js-btn-wrap');
+  	})
+  });
+
+  function load(id, cnt, btn) {
+  	var girls_list = id + " .js-load:not(.active)";
+  	var girls_length = $(girls_list).length;
+  	var girls_total_cnt;
+  	if (cnt < girls_length) {
+  		girls_total_cnt = cnt;
+  	} else {
+  		girls_total_cnt = girls_length;
+  		$('.button').hide()
+  	}
+  	$(girls_list + ":lt(" + girls_total_cnt + ")").addClass("active");
+  }
+  </script>
+  <!-- demo-more-btn-js-load --> 
+  <!-- <ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1534417142445600"
+     data-ad-slot="9710655373"
+     data-ad-format="auto"></ins>  -->
+ <!--  <script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>  -->
+<!-- </div> -->
+<div class="row">
+<div id="contents" class="col-md-8">
+  <div id="js-load" class="main">
+    <ul class="lists">
+    <%
+    EatReviewDao eatReviewDao = EatReviewDaoImpl.getInstance();
+    List<ReviewDto> list = (List<ReviewDto>)request.getAttribute("reviewlist");
+    int Good=0;
+    int soso=0;
+    int notGood=0;
+    int totalCount = 0;
+    String nickName = "";
+    String fileName[] = new String[0];
+    String id = "";
+    
+    for(int i =0;i<list.size();i++){
+  	  
+  	  switch(list.get(i).getRs_rating()){
+  	  
+  	  case 1:
+  		  notGood = notGood+1; break;
+  	  case 3:
+  		  soso = soso+1; break; 
+  	  case 5:
+  		  Good = Good+1; break;
+  	  }
+  	  
+    }totalCount = Good+soso+notGood;
+    
+		for(int i = 0; i < list.size(); i ++){
+	
+		nickName = eatReviewDao.getNickName(list.get(i).getId());
+		if(nickName != "" || !nickName.isEmpty()){
+			id = nickName;	
+		}else{
+		 id = list.get(i).getId();
+		 }
+		String content = list.get(i).getRs_content();
 		
-				
-		<hr>
-		<section class="module review-container">
-            <div class="title_fliter_wrap">
-              <h2 class="title only-mobile">${rs.rs_name }'s 리뷰</h2>
-              <h2 class="title only-desktop">리뷰 <span class="review-container-review-count">(<%=totalCount %>)</span></h2>
-                <ul class="review_fliter_list" style="text-align: right;">
-                 
-                    <button class="btn active" data-review_count="<%=totalCount %>" onclick="common_ga(get_now_page_code(), 'CLICK_TASTEALL')" ng-class="{selected: action_values === undefined, not_selected_btn: 36 == 0}" ng-click="get_review_list(undefined, $event)">전체
-                      (<%=totalCount %>)
-                    </button>
-                     <button class="btn" data-review_count="<%=Good %>" onclick="common_ga(get_now_page_code(), 'CLICK_TASTEGOOD')" ng-class="{selected: action_values === 3, not_selected_btn: 27 == 0}" ng-click="get_review_list(3, $event)">맛있다
-                      (<%=Good %>)
-                    </button>
-                    <button class="btn" data-review_count="<%=soso %>" onclick="common_ga(get_now_page_code(), 'CLICK_TASTESOSO')" ng-class="{selected: action_values === 2, not_selected_btn: 7 == 0}" ng-click="get_review_list(2, $event)">괜찮다
-                      (<%=soso %>)
-                    </button>
-                    <button class="btn" data-review_count="<%=notGood %>" onclick="common_ga(get_now_page_code(), 'CLICK_TASTEBAD')" ng-class="{selected: action_values === 1, not_selected_btn: 2 == 0}" ng-click="get_review_list(1, $event)">별로
-                      (<%=notGood %>)
-                    </button>
-                  
-                </ul>
-            </div>   
-           
-          </section>
-          
-         
-		<div class="review_main">
-		
-		<table>
-		<%if(list.size()<5){
-		
-			for(int i = 0 ; i< list.size();i++){	
 		%>
-		<tr style="border: none;">
-		
-		 <td style="text-align: center; width: 66; border: none;" >
-		
-		<%
-		 nickName = eatReviewDao.getNickName(list.get(i).getId());
-		 System.out.println("nickName:"+nickName+" id: "+list.get(i).getId());
-		%>
-		
-		<%if(nickName != "" || !nickName.isEmpty()){ %>		
-		<div style="size: 80px; position: relative;">
-		<span style="position: absolute; text-align: center; line-height: 60px; width: 63px; height: 100px;">
-		<%=nickName %>
-		</span>
-		<img alt="" src="./img/circular-shape-silhouette (1).png">
-		</div>
-		<%}else{ %>
-		<div style="size: 80px; position: relative;">
-		<span style="position: absolute; text-align: center; line-height: 60px; width: 63px; height: 100px;">
-		<%=list.get(i).getId() %>
-		</span>
-		<img alt="" src="./img/circular-shape-silhouette (1).png">
-		</div>
-		
-		<%} %>		
-						
-		</td>
-		
-		<!-- 내용  -->		
-		<td width="80" style="border: none">
-		<%-- <input type="text" style="width: 480px;" name="content" value="<%=list.get(i).getRs_content()%>"> --%>
-		<textarea rows="7" cols="70" style="border: 0;" readonly="readonly"><%=list.get(i).getRs_content()%></textarea>
-		</td>
-		
-		<!-- 좋아요,싫어요,별로 -->
-		<td width="30" style="border: none">
-		
-		<%switch(list.get(i).getRs_rating()){
-		case 1:
-		%>						
-		<img alt="" src="./img/like/1-1.png" style="width: 60px;" id="p1" msg="1" title="1점" >
-		<%break;
-		case 3: %>
-		<img alt="" src="./img/like/3-1.png" style="width: 60px;" id="p3" msg="3" title="3점" >
-		<%break;
-		case 5: %>
-		<img alt="" src="./img/like/5-2.png" style="width: 60px;" id="p5" msg="5" title="5점" >
-		<%break;
-		default: %>
-		<img alt="" src="./img/like/3-1.png" style="width: 60px;" id="p3" msg="3" title="3점" >
-		<%} %>
-		</td>
-		</tr>
-		<!--  -->
-		<tr>
-		<td width="66" style="border: none">
-		</td> 
-		<td width= "80" style="border: none" >
-		<%
-		int rv_seq = list.get(i).getSeq();
-		
-		System.out.println("rv_seq:"+rv_seq);
-		
-		List<fileDto> f_list = eatReviewDao.getRv_Image(rv_seq);
-		if(f_list != null){
-			System.out.println("not null");
-			for(int a = 0;a<f_list.size();a++){
-				
-			if(f_list.size()==1){
-				fileName = new String[1];			
-				fileName[0] = f_list.get(a).getFile_name();
-				System.out.println("f_list.size(): "+f_list.size());
-				System.out.println("fileName has just 1:"+fileName[0]);
-				if(fileName[0].contains("https://")){
-					%>
-					<img alt="" src="<%=fileName[0] %>" style="width: 75px; height: 75px;" onclick="reviewDetail(<%=rv_seq%>)">
-					<% 
-				}else{
-				%>
-				<img alt="" src="/image/<%=fileName[0] %>" style="width: 75px; height: 75px;" onclick="reviewDetail(<%=rv_seq%>)">
-				<%} 
-			}
-			else{
-				fileName = new String[f_list.size()];				
-				fileName[a] = f_list.get(a).getFile_name();
-				System.out.println("f_list.size(): "+f_list.size());
-				System.out.println("fileName more than 1:"+fileName[a]);
-				if(fileName[a].contains("https://")){
-					%>
-					<img alt="" src="<%=fileName[a] %>" style="width: 75px; height: 75px;" onclick="reviewDetail(<%=rv_seq%>)">
+		<li class="lists__item js-load">
+			<table style="width: 171%;">
+				<tr>
+					<td style="width: 15%; padding-top: 1px; vertical-align: top;"> <%=id %></td>
+					<td style="width: 70%; padding-top: 1px; vertical-align: top;"> <%=content %></td>
+					<!-- 좋아요 별로 -->
+					<!-- <td width="30" style="border: none"> -->
+					
+					<td style="width: 15%; padding-top: 1px; vertical-align: top;">
+					<%switch(list.get(i).getRs_rating()){
+					case 1:
+					%>						
+					<img alt="" src="./img/like/1-1.png" style="width: 60px;" id="p1" msg="1" title="1점" >
+					<%break;
+					case 3: %>
+					<img alt="" src="./img/like/3-1.png" style="width: 60px;" id="p3" msg="3" title="3점" >
+					<%break;
+					case 5: %>
+					<img alt="" src="./img/like/5-2.png" style="width: 60px;" id="p5" msg="5" title="5점" >
+					<%break;
+					default: %>
+					<img alt="" src="./img/like/3-1.png" style="width: 60px;" id="p3" msg="3" title="3점" >
+					<%} %>
+					</td>
 					<%
-				}else{
-				%>
-				<img alt="" src="/image/<%=fileName[a] %>" style="width: 75px; height: 75px;" onclick="reviewDetail(<%=rv_seq%>)">
-				<%
-				 }
-				}
-			}
-		}else if(f_list == null){
-			System.out.println("null");
-		}			
-		%>		
-		</td>
-		
-		<td style="border: none">
-		</td>
-					 			       
-        </tr>
-        
-        <tr style="border: none">
-		<td colspan="3" width="80" style="border-bottom: 1px solid #c8c8c8;"><!-- <img alt="-----------------------------------------------" src=""> --></td>
-		</tr>		 			       
-        	
-        
-		<%} %>	
-		
-		<%}else{ %>
-		
-		
-		<%
-		//reviewlist more than 5----------------------------------------------------------
-		for(int i =0 ; i<list.size() ; i++){ %> 
-		<%-- for(int i =0 ; i<5 ; i++){ %> --%>
-		<tr style="border: none" id="_tr<%=i %>" name="_tr<%=i %>">		
-		<td style="text-align: center; border: none;" width="66;">
-		<!-- <label> -->
-		
-		
-		<%
-		 nickName = eatReviewDao.getNickName(list.get(i).getId());
-		 System.out.println("nickName:"+nickName+" id: "+list.get(i).getId());
-		%>
-				
-		<%if(nickName != "" || !nickName.isEmpty()){ %>		
-		<div style="size: 80px; position: relative;">
-		<span style="position: absolute; text-align: center; line-height: 60px; width: 63px; height: 100px;">
-		<%=nickName %>
-		</span>
-		<img alt="" src="./img/circular-shape-silhouette (1).png">
-		</div>
-		<%}else{ %>
-		<div style="size: 80px; position: relative;">
-		<span style="position: absolute; text-align: center; line-height: 60px; width: 63px; height: 100px;">
-		<%=list.get(i).getId() %>
-		</span>
-		<img alt="" src="./img/circular-shape-silhouette (1).png">
-		</div>
-		
-		<%} %>
-		</td>		
-		<td style="border: none">
-		<textarea rows="7" cols="70" style="border: 0;" readonly="readonly"><%=list.get(i).getRs_content()%></textarea>
-		</td>
-		<!-- 좋아요 별로 -->
-		<td width="30" style="border: none">
-		<%switch(list.get(i).getRs_rating()){
-		case 1:
-		%>						
-		<img alt="" src="./img/like/1-1.png" style="width: 60px;" id="p1" msg="1" title="1점" >
-		<%break;
-		case 3: %>
-		<img alt="" src="./img/like/3-1.png" style="width: 60px;" id="p3" msg="3" title="3점" >
-		<%break;
-		case 5: %>
-		<img alt="" src="./img/like/5-2.png" style="width: 60px;" id="p5" msg="5" title="5점" >
-		<%break;
-		default: %>
-		<img alt="" src="./img/like/3-1.png" style="width: 60px;" id="p3" msg="3" title="3점" >
-		<%} %>
-		</td>		
-		</tr>
-		
-		
-		<!--  -->
-		<tr style="border: none" id="_tr<%=i %>" name="_tr<%=i %>">
-		<td width="66" style="border: none">
-		</td> 
-		<td style="border: none">
-		<%		
-		List<fileDto> f_list = eatReviewDao.getRv_Image(list.get(i).getSeq());
+					List<fileDto> f_list = eatReviewDao.getRv_Image(list.get(i).getSeq());
+					%>					
+				</tr>
+				<tr>
+				<td style="width: 15%; padding-top: 1px; vertical-align: top;"></td>
+				<td style="width: 70%; padding-top: 1px; vertical-align: top;">
+				<%		
+		//List<fileDto> f_list = eatReviewDao.getRv_Image(list.get(i).getSeq());
 		//List<String> f_list = (List<String>) request.getAttribute("getImg");
 		
 		if(f_list != null){
@@ -832,11 +854,11 @@ $('.owl-carousel123').owlCarousel({
 					System.out.println("fileName has just 1:"+fileName[0]);
 					if(fileName[0].contains("https://")){
 						%>
-						<img alt="" src="<%=fileName[0] %>" style="width: 75px; height: 75px;" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
+						<img alt="" src="<%=fileName[0] %>" style="width: 75px; height: 75px;" data-toggle="modal" data-target="#carouselModal" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
 						<% 
 					}else{
 					%>
-					<img alt="" src="/image/<%=fileName[0] %>" style="width: 75px; height: 75px;" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
+					<img alt="" src="/image/<%=fileName[0] %>" style="width: 75px; height: 75px;" data-toggle="modal" data-target="#carouselModal" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
 					
 					<%} 
 				}
@@ -848,11 +870,11 @@ $('.owl-carousel123').owlCarousel({
 					System.out.println("fileName more than 1:"+fileName[a]);
 					if(fileName[a].contains("https://")){
 					%>
-					<img alt="" src="<%=fileName[a] %>" style="width: 75px; height: 75px;" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
+					<img alt="" src="<%=fileName[a] %>" style="width: 75px; height: 75px;" data-toggle="modal" data-target="#carouselModal" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
 					<%
 					}else{
 					%>
-					<img alt="" src="/image/<%=fileName[a] %>" style="width: 75px; height: 75px;" data-toggle="modal" data-target="#myModal"<%-- onclick="reviewDetail(<%=list.get(i).getSeq()%>)" --%>>
+					<img alt="" src="/image/<%=fileName[a] %>" style="width: 75px; height: 75px;" data-toggle="modal" data-target="#carouselModal" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
 					<% }
 					}
 			}
@@ -862,55 +884,45 @@ $('.owl-carousel123').owlCarousel({
 		
 		
 		%>	
-		</td>
-		<td style="border: none">
-		</td>	
-		</tr>
+				</td>
+				<td style="width: 15%; padding-top: 1px; vertical-align: top;">
+				</td>
 				
-		
-		<tr style="border: none">
-		<td colspan="3" width="80" style="border-bottom: 1px solid #c8c8c8;"><!-- <img alt="-----------------------------------------------" src=""> --></td>
-		
-		</tr>
-		
-                               
-         <%}
-		 }
+				</tr>
+				
+				<tr style="border: none">
+				<td colspan="3" width="100" style="border-bottom: 1px solid #c8c8c8;"></td>
+				</tr>
+				
+			</table>
+			
+		</li>
+		<%
 		}
-         %>
-         </table>
-  <!-- Review Modal -->       
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal with Dark Overlay</h4>
-        </div>
-        <div class="modal-body">
-          <p>This modal has a dark overlay.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
-    </div>
+	%>   
+    </ul>
+    <div id="js-btn-wrap" class="btn-wrap"> <a href="javascript:;" class="button">더보기</a> </div>
   </div>
-         
-         <%if(list.size()>5){
-         %>
-         
-         <button onclick="show_morelist()">더보기</button> 
-         
-         <%}
-          
-         %>
-         </div>
-         
-       
+  </div>
+<!--   <p class="back"><a class="btn" href="https://nanati.me/more-btn-js-load/">← 블로그로 돌아가기</a></p> -->
+<!-- <div class="ad"> --> 
+   <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>  -->
+   <!--  demo-more-btn-js-load  -->
+   <!--  <ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1534417142445600"
+     data-ad-slot="9710655373"
+     data-ad-format="auto"></ins>  -->
+    <!-- <script>
+(adsbygoogle = window.adsbygoogle || []).push({}); 
+</script> -->
+
+<!-- </div> -->
+  
+</div>       
+    
+       <br><br>
+     
          
        <script type="text/javascript">
      	function reviewDetail(seq) {
