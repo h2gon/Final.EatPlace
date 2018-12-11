@@ -170,15 +170,27 @@ public class EatReviewController {
 		//model.addAttribute("review", review);
 		Map<String, Object> rmap = new HashMap<String, Object>();
 		rmap.put("review", review);
-		
-	//	ReviewDto review = eatReviewService.getReviewWPic(fdto);
-	//	String rcontent=review.getRs_content();
-	//	model.addAttribute("review",review);
-	//	System.out.println(rcontent);
+	
 		
 		return rmap;
 		
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="getRPdetail2.do", method={RequestMethod.GET, RequestMethod.POST})
+	public Map<String, Object> getRPdetail2(int rseq) {
+		logger.info("EatReviewController getReviewDetail222"+new Date());
+		
+		List<String> imagelist = eatReviewService.getImageDT(rseq);
+		
+		Map<String, Object> rmap = new HashMap<String, Object>();
+		rmap.put("imagelist", imagelist);
+	
+		
+		return rmap;
+		
+	}
+	
 	@ResponseBody	
 	@RequestMapping(value="getReviewDetail.do",method= {RequestMethod.GET, RequestMethod.POST})
 	public WildCard<ReviewDto,List<String>> getReviewDetail(HttpServletRequest req, Model model){
