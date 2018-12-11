@@ -541,8 +541,23 @@ public class EatRestaurantsController {
 			}
 			reviewlist.add(review);
 						
-		}				
+		}		
 		
+		List<ReviewParam> rplist = new ArrayList<>();
+		for (int i = 0; i < bestlist.size(); i++) {
+			ReviewParam rparm = new ReviewParam();
+			rparm.setSeq(bestlist.get(i).getSeq());
+			
+			int n = eatReviewService.getRvCount(rparm);
+			rparm.setReviewCount(n);
+			
+			int m = eatReviewService.getLikeCount(rparm);
+			rparm.setLike(m);
+			
+			rplist.add(rparm);
+		}
+		
+		model.addAttribute("rplist", rplist);
 		model.addAttribute("reviewlist", reviewlist);
 		model.addAttribute("bestlist", bestlist);
 		model.addAttribute("category", dto);
@@ -563,6 +578,21 @@ public class EatRestaurantsController {
 			System.out.println(GuBestlist.get(i).toString());
 		}
 		
+		List<ReviewParam> rplist = new ArrayList<>();
+		for (int i = 0; i < GuBestlist.size(); i++) {
+			ReviewParam rparm = new ReviewParam();
+			rparm.setSeq(GuBestlist.get(i).getSeq());
+			
+			int n = eatReviewService.getRvCount(rparm);
+			rparm.setReviewCount(n);
+			
+			int m = eatReviewService.getLikeCount(rparm);
+			rparm.setLike(m);
+			
+			rplist.add(rparm);
+		}
+		
+		model.addAttribute("rplist", rplist);
 		
 		/*for (int i = 0; i < reviewlist.size(); i++) {
 			System.out.println(reviewlist.get(i).toString());
@@ -587,6 +617,22 @@ public class EatRestaurantsController {
 			reviewlist.add(review);
 			System.out.println(keywordlist.get(i).toString());
 		}
+		
+		List<ReviewParam> rplist = new ArrayList<>();
+		for (int i = 0; i < keywordlist.size(); i++) {
+			ReviewParam rparm = new ReviewParam();
+			rparm.setSeq(keywordlist.get(i).getSeq());
+			
+			int n = eatReviewService.getRvCount(rparm);
+			rparm.setReviewCount(n);
+			
+			int m = eatReviewService.getLikeCount(rparm);
+			rparm.setLike(m);
+			
+			rplist.add(rparm);
+		}
+		
+		model.addAttribute("rplist", rplist);
 		
 		model.addAttribute("bestlist", keywordlist);
 		model.addAttribute("reviewlist", reviewlist);

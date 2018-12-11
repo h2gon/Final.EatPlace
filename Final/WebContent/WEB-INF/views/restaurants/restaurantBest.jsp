@@ -1,3 +1,4 @@
+<%@page import="kh.c.five.model.ReviewParam"%>
 <%@page import="kh.c.five.model.ReviewDto"%>
 <%@page import="kh.c.five.model.RegiDto"%>
 <%@page import="java.util.List"%>
@@ -8,6 +9,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <fmt:requestEncoding value="UTF-8" />
+      
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -75,6 +77,29 @@ if(best_keyword != null){
 
 %>   
 
+<%!
+public String dot3(String msg){
+	String s = "";
+	if(msg.length() >= 3){
+		s = msg.substring(0, 3);
+		s += "...";
+	}else{
+		s = msg.trim();
+	}
+	return s;
+}
+
+public String ss(String msg){
+	
+	String s[] = msg.split(" ");
+	String re = s[0] + " " + s[1];
+
+	return re;
+}
+
+
+%>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>EAT PLACE: Best Restaurants</title>
@@ -90,6 +115,10 @@ if(best_keyword != null){
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/vendor/magnific-popup/magnific-popup.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<!-- 지도API -->
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7b79e9996c3bab29b8e5285b04135813&libraries=services"></script>  
 
 </head>
 
@@ -190,11 +219,21 @@ if(best_keyword != null){
 			</tr>			
 			<%} 
 			}
-			%>				
+			%>
+			<tr>
+				<td>
+					<!-- 지도 -->
+					<div>
+					 <p style="margin-left: 58px; font-size: 24px; color: #ff7100; padding-left: 400px"><strong>리스트 지도</strong></p>					 
+						<div id="map" style="width: 700px; height: 425px; margin-left: 465px;"></div>
+					</div>
+				</td>
+			</tr>				
 			</table>							
-		</ul>
-	</section>
-
+		</ul>	
+	
+		<br>
+	
 	 <!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">
@@ -229,11 +268,91 @@ if(best_keyword != null){
 			© 2018 Eat Place Co., Ltd. All rights reserved.
 		</p>
 	  </div>
-      <!-- /.container -->
+      
       </div>
     </footer>
 
 
     
 </body>
+
+<%
+List<ReviewParam> rplist = (List<ReviewParam>)request.getAttribute("rplist");
+%>
+
+<script>
+
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+mapOption = {
+	center : new daum.maps.LatLng(37.56899, 126.97247), // 지도의 중심좌표
+	level : 9
+};  
+
+//지도를 생성합니다    
+var map = new daum.maps.Map(mapContainer, mapOption); 
+//주소-좌표 변환 객체를 생성합니다
+var geocoder = new Array();
+<%
+for(int j=0;j<5;j++){
+%> 
+geocoder[<%=j %>] = new daum.maps.services.Geocoder();
+
+//주소로 좌표를 검색합니다
+geocoder[<%=j %>].addressSearch('<%=bestlist.get(j).getRs_address1() %>', function(result, status) {
+
+    // 정상적으로 검색이 완료됐으면 
+     if (status === daum.maps.services.Status.OK) {
+
+        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new daum.maps.Marker({
+            map: map,
+            position: coords           
+        });
+        
+   		// 마커에 클릭 이벤트를 등록한다 (우클릭 : rightclick)
+		daum.maps.event.addListener(marker, 'click', function() {
+		    //alert('마커를 클릭했습니다!'); 
+			
+		    // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다			
+			var iwContent = '<figure style="margin-left: 10px; margin-right: 10px;"><div style="float: left;"><a href="rsdetail.do?seq=<%=bestlist.get(j).getSeq() %>"><img style="width: 110px; height: 125px; padding-bottom:15px;" src="<%=bestlist.get(j).getRs_picture() %>" alt=""></a></div> <figcaption><div style="margin-left: 120px; width: 140px;"><h4><a href="rsdetail.do?seq=<%=bestlist.get(j).getSeq() %>"><strong><%=dot3(bestlist.get(j).getRs_name()) %><strong>&nbsp;&nbsp;&nbsp;&nbsp;<strong><span style="color:#ff792a; font-size: 1.37rem;"><%=bestlist.get(j).getRs_rating() %></span></strong></a></h4><p style="width: 130px;"><%=ss(bestlist.get(j).getRs_address1()) %> - <%=bestlist.get(j).getRs_category() %></p><br><p style="color: gray;"><img src="img/map/pen.png">&nbsp;<%=rplist.get(j).getReviewCount() %>&nbsp;&nbsp;<img src="img/map/star.png">&nbsp;<%=rplist.get(j).getLike() %></p></div></figcaption></figure>',
+			iwPosition = new daum.maps.LatLng(33.450701, 126.570667); //인포윈도우 표시 위치입니다
+
+			// 인포윈도우를 생성합니다
+			var infowindow = new daum.maps.InfoWindow({
+			    position : iwPosition, 
+			    content : iwContent,
+			    
+			});
+			  
+			// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+			infowindow.open(map, marker); 
+			
+			daum.maps.event.addListener(map, 'click', function() {			
+				infowindow.close();
+			});
+			
+			
+			
+		});
+   		
+		
+   		
+        
+     	// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+     	
+     	
+     	
+    } 
+}); 
+<%}%>
+<%-- <%}%> --%>
+
+
+</script>
+
+
+
 </html>
