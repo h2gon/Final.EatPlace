@@ -1,3 +1,4 @@
+<%@page import="javax.jws.Oneway"%>
 <%@page import="java.net.URLDecoder"%>
 <%@page import="kh.c.five.model.EatMemberDto"%>
 <%@page import="kh.c.five.dao.impl.EatReviewDaoImpl"%>
@@ -471,6 +472,7 @@ footer a:hover {
 <%
 List<ReviewDto> rvlist = (List<ReviewDto>)request.getAttribute("reviewlist");
 List<fileDto> imagelist = (List<fileDto>) request.getAttribute("imagelist");
+boolean onereview = false;
 %>
 
 
@@ -517,21 +519,25 @@ List<fileDto> imagelist = (List<fileDto>) request.getAttribute("imagelist");
 	
 	</div>
        <div id="sync2" class="owl-carousel thumbnails-wrap" style=""> <!-- 이게 아래에 있는 썸네일 -->
-        		<%-- <%
+        		 <%
         		String str = "?fit=around|148:152&crop=148:152;*,*&output-format=jpg&output-quality=80";
-		for (int i=0;i<imagelist.size();i++){
-			if(imagelist.get(i).getFile_name().contains("https://")){
-				%>
-				<div class="item"><img src="<%=imagelist.get(i).getFile_name() + str%>" class="img-responsive"></div>
-				<%
-			}else{
-				%>
-		          <div class="item"><img src="\image\<%=imagelist.get(i).getFile_name()%>" class="img-responsive"></div>
-		          <%
-			}
+        		
+        			
+        			for (int i=0;i<imagelist.size();i++){
+        				if(imagelist.get(i).getFile_name().contains("https://")){
+        					%>
+        					<div class="item"><img src="<%=imagelist.get(i).getFile_name() + str%>" class="img-responsive"></div>
+        					<%
+        				}else{
+        					%>
+        			          <div class="item"><img src="\image\<%=imagelist.get(i).getFile_name()%>" class="img-responsive"></div>
+        			          <%
+        				}
+        			
+        			}
+        		
 		
-		}
-          %> --%>
+          %>  
           
         </div>     
       </div>
@@ -558,6 +564,7 @@ for(int i=0;i<imagelist.size();i++){
 	<div class="item" id="owlImages">
 	<a href="#" data-toggle="modal" data-target="#carouselModal">
 		<img src="<%=imagelist.get(i).getFile_name()%>" style="height: 300px; margin-right: 3px">
+		<%-- <img src="<%=imagelist.get(i).getFile_name()%>" style="height: 300px; margin-right: 3px" onclick="onefunc()"> --%>
 	</a>
 	</div>
 <%
@@ -588,6 +595,22 @@ $('.owl-carousel123').owlCarousel({
 	}
 })
 });
+
+function onefunc() {
+	
+	$(".owl-carousel123 *").remove();
+	
+	/*  var re_str = ['삼성동','데이트','삼겹살','모임','이태원','강남','카페'];
+		for (var i = 0; i < re_str.length; i++) {
+			$(".list-keywords").append(
+				    $('<li>').attr('class','list-keyword').append(
+				            $('<a>').attr('href','#').attr('onclick','search2(this)').append(
+				            		re_str[i]
+				              )));  
+		}
+	 */
+}
+
 </script>
 
 
@@ -900,8 +923,61 @@ $('.owl-carousel123').owlCarousel({
      
          
          <script type="text/javascript">
+         
+         $("#review_image a img").click(function(){
+        	 $("#sync2 .owl-wrapper *").remove();
+        		
+        	 var img=$(this).attr('src');
+        	 var rseq = $("#rs_seq").attr("value");
+        	 
+        	 if(img.indexOf("https://") !=-1){
+					var	filename=img;
+				}else if(img.indexOf("https://")==-1){
+					var filename=img.substring(7);
+				} 
+        	 
+        	 $('#mainImage').attr('src',img);
+        	 
+        	 var revData2 = {
+						'filename':filename,
+						'rseq': rseq
+				};
+        	 $.ajax({
+					url:"getRPdetail.do",
+					datatype:'json',
+					data:revData2,
+					type:'post',
+					async:true,
+					success:function(data){
+						//alert("success");
+						//alert(data.review.rs_content);
+						$("#pause").html(data.review.rs_content);
+						$("#p_id").html(data.review.id);
+						var rating =data.review.rs_rating;
+						if(rating===1){
+							$("#p_ratingP").attr('src','./img/like/1-2.png');	
+						}else if(rating===3){
+							$("#p_ratingP").attr('src','./img/like/3-2.png');
+						} else if(rating===5){
+							$("#p_ratingP").attr('src','./img/like/5-2.png');
+						}
+						
+						reviewDetail(data.review.seq); //reviewDetail에 리뷰 시퀀스 넣어줌
+						
+						 
+						 
+					},
+					error:function(req, stu, err){
+						alert("error");
+						alert(stu + " " + err);
+					}
+				});
+        	 
+        	 
+				
+		 });
        
-		 $("#review_image a img").click(function(){
+		/*  $("#review_image a img").click(function(){
 			 var img=$(this).attr('src');
 			 var rseq = $("#rs_seq").attr("value");
 
@@ -951,7 +1027,7 @@ $('.owl-carousel123').owlCarousel({
 				});
 				 
 				
-		 });
+		 }); */
          
  		function reviewDetail(seq) {
 //      		alert("seq:"+seq);
@@ -1022,7 +1098,17 @@ $('.owl-carousel123').owlCarousel({
 			alert(images.length);
 			alert(images[0]); */
 			
-			for (var i = 0; i < images.length; i++) {
+			
+				for (var i = 0; i < images.length; i++) {
+					$("#sync2 .owl-wrapper").append(
+							$('<div>').attr('class','owl-item').attr("style","width: 119px;").append(
+						    $('<div>').attr('class','item').append(
+						            $('<img>').attr('src',images[i]).attr('class','img-responsive').append(
+						            		
+						              ))));  
+				} 
+			
+		/* 	for (var i = 0; i < images.length; i++) {
 			
 				// N번째 이미지 정보를 구하기
 
@@ -1037,7 +1123,7 @@ $('.owl-carousel123').owlCarousel({
 		
 			$("#sync2").html(strDOM);
 
-			alert(strDOM);
+			alert(strDOM); */
 
 			}		
  		
@@ -1180,6 +1266,7 @@ $(document).ready(function() {
 	 
 	  var sync1 = $("#sync1");
 	  var sync2 = $("#sync2");
+	  
 	 
 	  sync1.owlCarousel({
 	    singleItem : true,
