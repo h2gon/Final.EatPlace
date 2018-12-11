@@ -472,7 +472,7 @@ footer a:hover {
 <%
 List<ReviewDto> rvlist = (List<ReviewDto>)request.getAttribute("reviewlist");
 List<fileDto> imagelist = (List<fileDto>) request.getAttribute("imagelist");
-boolean onereview = false;
+
 %>
 
 
@@ -563,8 +563,9 @@ for(int i=0;i<imagelist.size();i++){
 %>
 	<div class="item" id="owlImages">
 	<a href="#" data-toggle="modal" data-target="#carouselModal">
-		<img src="<%=imagelist.get(i).getFile_name()%>" style="height: 300px; margin-right: 3px">
-		<%-- <img src="<%=imagelist.get(i).getFile_name()%>" style="height: 300px; margin-right: 3px" onclick="onefunc()"> --%>
+	<img src="<%=imagelist.get(i).getFile_name()%>" style="height: 300px; margin-right: 3px" onclick="onefunc()">
+		<%-- <img src="<%=imagelist.get(i).getFile_name()%>" style="height: 300px; margin-right: 3px"> --%>
+		
 	</a>
 	</div>
 <%
@@ -597,18 +598,55 @@ $('.owl-carousel123').owlCarousel({
 });
 
 function onefunc() {
+	$("#sync2 .owl-wrapper *").remove();
+	 <%
+	for (int i=0;i<imagelist.size();i++){
+		if(imagelist.get(i).getFile_name().contains("https://")){
+			%>
+			
+			$("#sync2 .owl-wrapper").append(
+					$('<div>').attr('class','owl-item').attr("style","width: 119px;").append(
+					    $('<div>').attr('class','item').append(
+					            $('<img>').attr('src','<%=imagelist.get(i).getFile_name() + str%>').attr('class','img-responsive').append(
+					            		
+				              ))));
+			<%
+		}else{
+			%>
+			$("#sync2 .owl-wrapper").append(
+					$('<div>').attr('class','owl-item').attr("style","width: 119px;").append(
+					    $('<div>').attr('class','item').append(
+					            $('<img>').attr('src','<%=imagelist.get(i).getFile_name()%>').attr('class','img-responsive').append(
+					            		
+				              ))));
+	          <%
+		}
 	
-	$(".owl-carousel123 *").remove();
+	}
+		
+
+ 	%>  
 	
-	/*  var re_str = ['삼성동','데이트','삼겹살','모임','이태원','강남','카페'];
+	/* 
+	var str = "?fit=around|148:152&crop=148:152;*,*&output-format=jpg&output-quality=80";
+	for (var i = 0; i < images.length; i++) {
+		$("#sync2 .owl-wrapper").append(
+				$('<div>').attr('class','owl-item').attr("style","width: 119px;").append(
+				    $('<div>').attr('class','item').append(
+				            $('<img>').attr('src',images[i]+str).attr('class','img-responsive').append(
+				            		
+			              ))));  
+	} 
+	
+	  var re_str = ['삼성동','데이트','삼겹살','모임','이태원','강남','카페'];
 		for (var i = 0; i < re_str.length; i++) {
 			$(".list-keywords").append(
 				    $('<li>').attr('class','list-keyword').append(
 				            $('<a>').attr('href','#').attr('onclick','search2(this)').append(
 				            		re_str[i]
 				              )));  
-		}
-	 */
+		} */ 
+	 
 }
 
 </script>
@@ -1098,12 +1136,12 @@ function onefunc() {
 			alert(images.length);
 			alert(images[0]); */
 			
-			
+			var str = "?fit=around|148:152&crop=148:152;*,*&output-format=jpg&output-quality=80";
 				for (var i = 0; i < images.length; i++) {
 					$("#sync2 .owl-wrapper").append(
 							$('<div>').attr('class','owl-item').attr("style","width: 119px;").append(
 						    $('<div>').attr('class','item').append(
-						            $('<img>').attr('src',images[i]).attr('class','img-responsive').append(
+						            $('<img>').attr('src',images[i]+str).attr('class','img-responsive').append(
 						            		
 						              ))));  
 				} 
