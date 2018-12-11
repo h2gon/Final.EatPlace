@@ -876,7 +876,7 @@ String recomend = "추천검색어테스트";
 	<input type="radio" name="pos" id="pos2">
 		
 	 <ul>
-		<li style="text-align: center;"><a href="KFBest.do?rs_category=한식"><img alt="" src="img/main/한식_수정.jpg" style="width: 450px; height: 300px" title></a> <a href="GuBest.do?rs_address1=강남"><img alt="" src="img/main/강남맛집_수정.jpg" style="width: 450px; height: 300px; margin-left: 40px; margin-right: 40px"></a> <a href="keyword.do?rs_keyword=삼겹살"><img alt="" src="img/main/삼겹살_수정.jpg" style="width: 450px; height: 300px"></a></li>
+		<li style="text-align: center;"><a href="KFBest.do?rs_category=한식"><img alt="" src="img/main/한식_수정.jpg" style="width: 450px; height: 300px" title></a> <a href="GuBest.do?rs_address1=강남"><img alt="" src="img/main/강남맛집_수정.jpg" style="width: 450px; height: 300px; margin-left: 40px; margin-right: 40px"></a> <a href="keyword.do?rs_keyword=고깃집"><img alt="" src="img/main/삼겹살_수정.jpg" style="width: 450px; height: 300px"></a></li>
 		<li style="text-align: center;"><a href="keyword.do?rs_keyword=디저트"><img alt="" src="img/main/디저트_수정.jpg" style="width: 450px; height: 300px"></a> <a href="keyword.do?rs_keyword=술집"><img alt="" src="img/main/술집_수정.jpg" style="width: 450px; height: 300px; margin-left: 40px; margin-right: 40px"></a> <a href="keyword.do?rs_keyword=데이트코스"><img alt="" src="img/main/데이트코스_수정.jpg" style="width: 450px; height: 300px"></a></li>
 	     
 	</ul>
