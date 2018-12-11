@@ -548,6 +548,7 @@ List<fileDto> imagelist = (List<fileDto>) request.getAttribute("imagelist");
 
 
 <%
+String mstr = "?fit=around|254:300&crop=254:300;*,*&output-format=jpg&output-quality=80";
 if(imagelist==null||imagelist.size()<3){
 	%>
 	이미지가 등록된 리뷰가 없다..고 띄워야 함.
@@ -557,13 +558,13 @@ if(imagelist==null||imagelist.size()<3){
 	<br>
 	<br>
 	<br>
-	<div class="owl-carousel123 owl-theme" style="margin-top: 50px" >
+	<div class="owl-carousel123 owl-theme" style="margin-top: 50px; margin-left: 5px" >
 <%
 for(int i=0;i<imagelist.size();i++){
 %>
-	<div class="item" id="owlImages">
+	<div class="item" id="owlImages" style="margin-right: 5px">
 	<a href="#" data-toggle="modal" data-target="#carouselModal">
-	<img src="<%=imagelist.get(i).getFile_name()%>" style="height: 300px; margin-right: 3px" onclick="onefunc()">
+	<img src="<%=imagelist.get(i).getFile_name()+mstr%>" style="height: 300px; margin-right: 3px" onclick="onefunc()">
 		<%-- <img src="<%=imagelist.get(i).getFile_name()%>" style="height: 300px; margin-right: 3px"> --%>
 		
 	</a>
@@ -581,7 +582,7 @@ for(int i=0;i<imagelist.size();i++){
 //plugin call
 $(document).ready(function(){
 $('.owl-carousel123').owlCarousel({
-	margin : 10,
+	
     autoWidth:true,
 	responsive : {
 		0 : {
@@ -606,7 +607,7 @@ function onefunc() {
 			
 			$("#sync2 .owl-wrapper").append(
 					$('<div>').attr('class','owl-item').attr("style","width: 119px;").append(
-					    $('<div>').attr('class','item').append(
+					    $('<div>').attr('class','item synced').append(
 					            $('<img>').attr('src','<%=imagelist.get(i).getFile_name() + str%>').attr('class','img-responsive').append(
 					            		
 				              ))));
@@ -714,7 +715,7 @@ function onefunc() {
 						<tbody style="text-align: left">
 							<tr style="text-align: left; color:#4f4f4f ">
 								<th style="width: 30%">주소</th>
-								<td>${rs.rs_address1 } ${rs.rs_address2 }</td>
+								<td>${rs.rs_address1 }<%--  ${rs.rs_address2 } --%></td>
 							</tr>
 
 							<tr class="only-desktop" style="text-align: left; color:#4f4f4f">
@@ -894,13 +895,13 @@ function onefunc() {
 					if(fileName[0].contains("https://")){
 						%>
 						<a href="#" data-toggle="modal" data-target="#carouselModal">
-						<img alt="" src="<%=fileName[0] %>" style="float:left; width: 75px; height: 75px;"<%--  onclick="reviewDetail(<%=list.get(i).getSeq()%>)" --%>>
+						<img alt="" src="<%=fileName[0]+str %>" style="float:left; width: 120px; height:120px; margin-left: 10px;"<%--  onclick="reviewDetail(<%=list.get(i).getSeq()%>)" --%>>
 						</a>
 						<% 
 					}else{
 					%>
 					<a href="#" data-toggle="modal" data-target="#carouselModal">
-					<img alt="" src="/image/<%=fileName[0] %>" style="float:left; width: 75px; height: 75px;" <%-- onclick="reviewDetail(<%=list.get(i).getSeq()%>)" --%>>
+					<img alt="" src="/image/<%=fileName[0] %>" style="float:left; width: 120px; height:120px; margin-left: 10px;" <%-- onclick="reviewDetail(<%=list.get(i).getSeq()%>)" --%>>
 					</a>
 					
 					<%} 
@@ -914,13 +915,13 @@ function onefunc() {
 					if(fileName[a].contains("https://")){
 					%>
 					<a href="#" data-toggle="modal" data-target="#carouselModal">
-					<img alt="" src="<%=fileName[a] %>" style="float:left; width: 75px; height: 75px;"  <%-- onclick="reviewDetail(<%=list.get(i).getSeq()%>)" --%>>
+					<img alt="" src="<%=fileName[a] %>" style="float:left; width: 120px; height:120px; margin-left: 10px;"  <%-- onclick="reviewDetail(<%=list.get(i).getSeq()%>)" --%>>
 					</a>
 					<%
 					}else{
 					%>
 					<a href="#" data-toggle="modal" data-target="#carouselModal">
-					<img alt="" src="/image/<%=fileName[a] %>" style="float:left; width: 75px; height: 75px;" <%-- onclick="reviewDetail(<%=list.get(i).getSeq()%>)" --%>>
+					<img alt="" src="/image/<%=fileName[a] %>" style="float:left; width: 120px; height:120px; margin-left: 10px;" <%-- onclick="reviewDetail(<%=list.get(i).getSeq()%>)" --%>>
 					</a>
 					<% }
 					}
@@ -938,7 +939,7 @@ function onefunc() {
 				</tr>
 				 
 				<tr style="border: none">
-				<td colspan="3" width="100" style="border-bottom: 1px solid #c8c8c8;"></td>
+				<td colspan="3" width="100" style="border-bottom: 1px solid #c8c8c8; padding-top: 5px;"></td>
 				</tr>
 				
 			</table>
