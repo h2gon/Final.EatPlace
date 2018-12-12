@@ -44,16 +44,18 @@ public class EatMembercontroller {
 	
 	@RequestMapping(value="regiAf.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String regiAf(EatMemberDto mem) throws Exception {
-		logger.info("EatMembercontroller regiAf " + new Date());
-		
+		logger.info("EatMembercontroller regiAf " + new Date());		
 		logger.info(mem.toString());
-				
+		String result = "";
 		boolean b = eatmemberservice.addmember(mem);
 		if(b) {
-			return "home";
+			System.out.println("회원가입성공!!");
+			result ="redirect:/home.do";
 		}else {
-			return "regi";
+			System.out.println("회원가입실패!!");
+			result ="redirect:/regi.do";
 		}
+		return result.trim();
 	}
 	
 	@ResponseBody

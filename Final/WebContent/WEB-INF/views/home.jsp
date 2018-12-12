@@ -448,8 +448,8 @@ for (int i=1;i<cookies.length;i++){
 			cookiename = RankList.get(j).getRs_name();
 			break;
 		}
-	}
-
+	 }
+	
 %>
  
 
@@ -498,7 +498,9 @@ JSP주석 소스보기할때 보여지지 않음
 
 </table> --%>
 <%} %>
-  <%} %>
+  <%} 
+
+  %>
   </div>
 	<!-- 가고 싶다 -->
   <div id="Paris" class="w3-container city" style="overflow-y: scroll; height: 480px;">

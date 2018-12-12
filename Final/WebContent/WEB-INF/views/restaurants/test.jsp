@@ -1158,6 +1158,11 @@ function onefunc() {
  			});
  			
  		}
+		
+		function test(a) {
+			alert("테스트입니다."+a);
+			$('#mainImage').attr('src',a);
+		}
          
 		function createImages(objImageInfo) { 
 			var images = objImageInfo; 
@@ -1171,7 +1176,8 @@ function onefunc() {
 					$("#sync2 .owl-wrapper").append(
 							$('<div>').attr('class','owl-item').attr("style","width: 119px;").append(
 						    $('<div>').attr('class','item').append(
-						            $('<img>').attr('src',images[i]+str).attr('class','img-responsive').append(
+						    		
+						            $('<img>').attr('onclick','test("'+images[i]+'")').attr('src',images[i]+str).attr('class','img-responsive').append(
 						            		
 						              ))));  
 				} 
@@ -1227,6 +1233,7 @@ $(document).ready(function(){
 		
 		//alert(filename);
 		$('#mainImage').attr("src",img.split( '?', 1 ));
+		//$('#mainImage').attr('src',this);
 		//alert($("#pause").val());
 		
 		var revData = {
