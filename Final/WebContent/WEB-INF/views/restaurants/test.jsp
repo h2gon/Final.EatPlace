@@ -675,12 +675,16 @@ function onefunc() {
 							<font size="26" color="#000000" id="rs_seq" value="${rs.seq }">${rs.rs_name }</font>
 					</div>		
 							<div class="col-md-4">  
-								<img id="review_btn" class="review_writing_button" onclick="WriteReview('${rs.seq}');" src="img/button/reviewIcon.png">
+								<img id="review_btn" class="review_writing_button" onclick="WriteReview('${rs.seq}','${login.id }');" src="img/button/reviewIcon.png">
+								<c:if test="${!empty login.id}">
 								<c:if test="${isLike ne true }">
 								<a href="insertLike.do?rs_seq=${rs.seq }&rs_name=${rs.rs_name}&id=${login.id}"><img id="like_btn" src="img/button/likeIcon.png" ></a>
 								</c:if>
+								</c:if>
+								<c:if test="${!empty login.id}">
 								<c:if test="${isLike eq true }">
 								<a href="#none"><img id="like_btn_delete" src="img/button/likeIconR.png" ></a>
+								</c:if>
 								</c:if>
 							</div>
 						</span>
@@ -905,7 +909,7 @@ function onefunc() {
 					<img alt="" src="/image/<%=fileName[a] %>" style="float:left; width: 120px; height:120px; margin-left: 10px;" <%-- onclick="reviewDetail(<%=list.get(i).getSeq()%>)" --%>>
 					</a>
 					
-					<%} 
+					<%}
 				 }
 				}
 				else{ //f_list.size()>4 일때 더보기가 추가하여 붙음.
@@ -918,12 +922,12 @@ function onefunc() {
 					if(fileName[a].contains("https://")){
 						if(a==3){//마지막 부분에 이미지 위 글자 새김.
 					%>
-					<div style="position: relative;">
+					<!-- <div style="position: relative;"> -->
 					<a href="#" data-toggle="modal" data-target="#carouselModal">
 					<img alt="" src="<%=fileName[a] %>" style="float:left; width: 120px; height:120px; margin-left: 10px;">
 					</a>
-					<span style="position: static; top: 30px; left: 30px; color: orange;">+<%=remain_picture_count %></span>
-					</div>
+					<span style="position: static; top: auto; left: auto; color: orange;"><h1>+<%=remain_picture_count %></h1></span>
+					<!-- </div> -->
 					<%
 					}else{//마지막 이전의 그림들이 출력되는 곳..
 					%>
@@ -934,12 +938,12 @@ function onefunc() {
 					}
 						else{//fileName이 http://가 포함되지 않은 경우..
 						if(a==3){%>
-							<div style="position: relative;">
+							<!-- <div style="position: relative;"> -->
 							<a href="#" data-toggle="modal" data-target="#carouselModal">
 							<img alt="" src="/image/<%=fileName[a] %>" style="float:left; width: 120px; height:120px; margin-left: 10px;">
 							</a>
-							<span style="position: static; top: 30px; left: 30px; color: orange;">+<%=remain_picture_count %></span>
-							</div>
+							<span style="position: static; top: auto; left: auto; color: orange;"><h1>+<%=remain_picture_count %></h1></span>
+							<!-- </div> -->
 							
 						<%}else{%>
 						<a href="#" data-toggle="modal" data-target="#carouselModal">
@@ -1425,8 +1429,14 @@ $(function(){
 	});
  });
  
-function WriteReview(seq) {
+function WriteReview(seq,id) {
+	console.log(seq,id);
+	if(id != null && id!=''){
 	location.href='WriteReview.do?seq='+seq;
+	}else{
+		alert("로그인하여 주십시요.");
+	}
+	
 }	
 </script>
 <script>

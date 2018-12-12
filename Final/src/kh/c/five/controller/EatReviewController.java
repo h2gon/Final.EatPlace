@@ -73,7 +73,7 @@ public class EatReviewController {
 		
 		EatMemberDto login = (EatMemberDto)req.getSession().getAttribute("login");
 		int reviewcount =  eatReviewService.getreviewcount(login.getId());
-		
+	
 		System.out.println("리뷰카운트 : " + reviewcount);
 		
 		try {
