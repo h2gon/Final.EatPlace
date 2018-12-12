@@ -410,6 +410,7 @@ $(document).ready(function () {
 			      
 			     </div>
 				<!-- controller로 넘겨주기 위한 값 -->
+				<input type="hidden" id="_s_category" name="s_category" value="">
 				<input type="hidden" name="pageNumber" id="_pageNumber" value="${(empty pageNumber)?0:pageNumber }">
 				<input type="hidden" name="recordCountPerPage" id="_recordCountPerPage"
 					value="${(empty recordCountPerPage)?9:recordCountPerPage }">
