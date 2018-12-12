@@ -165,11 +165,11 @@ public class EatReviewController {
 		
 		
 		fileDto fdto = new fileDto(0,null,filename, 0,rseq);
-		ReviewDto review= eatReviewService.getReviewWPic(fdto);
+		ReviewDto reviews= eatReviewService.getReviewWPic(fdto);
 		
 		//model.addAttribute("review", review);
 		Map<String, Object> rmap = new HashMap<String, Object>();
-		rmap.put("review", review);
+		rmap.put("review", reviews);
 	
 		
 		return rmap;
@@ -181,10 +181,10 @@ public class EatReviewController {
 	public Map<String, Object> getRPdetail2(int rseq) {
 		logger.info("EatReviewController getReviewDetail222"+new Date());
 		
-		List<String> imagelist = eatReviewService.getImageDT(rseq);
+		List<String> imagelists = eatReviewService.getImageDT(rseq);
 		
 		Map<String, Object> rmap = new HashMap<String, Object>();
-		rmap.put("imagelist", imagelist);
+		rmap.put("imagelist", imagelists);
 	
 		
 		return rmap;

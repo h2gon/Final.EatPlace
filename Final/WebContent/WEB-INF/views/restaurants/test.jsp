@@ -570,7 +570,7 @@ for(int i=0;i<imagelist.size();i++){
 %>
 	<div class="item" id="owlImages" style="margin-right: 5px">
 	<a href="#" data-toggle="modal" data-target="#carouselModal">
-	<img src="<%=imagelist.get(i).getFile_name()+mstr%>" style="height: 300px; margin-right: 3px" onclick="onefunc()">
+	<img src="<%=imagelist.get(i).getFile_name()+mstr%>" style="height: 300px; margin-right: 3px" onclick="createImages(<%=imagelist%>)">
 		<%-- <img src="<%=imagelist.get(i).getFile_name()%>" style="height: 300px; margin-right: 3px"> --%>
 		
 	</a>
@@ -1313,28 +1313,35 @@ $(document).ready(function(){
 	 }); 
 	 
 	 $("#owlImages a img").click(function(){
-		 var img=$(this).attr('src');
-		var rseq= $("#rs_seq").attr("value");
-			alert(img);
+			var img=$(this).attr('src');
+			//var	filename=img.substring(7);
+			
+			if(img.indexOf("https://") !=-1){
+				var filename=jQuery.trim(img.split( '?', 1 ));
+				
+			}else if(img.indexOf("https://")==-1){
+				var filename=img.substring(7);
+			} 
+			
 			$('#mainImage').attr("src",img.split( '?', 1 ));
 			
 			var revData = {
 					'filename':filename,
-					'rseq':rseq
+					'rseq':$("#rs_seq").attr("value")
 			};
 			
 			//var test=$("#rs_seq").attr("value");
-			alert("success1");
-/* 			 $.ajax({
+			//alert("success1");
+ 			 $.ajax({
 				url:"getRPdetail.do",
 				datatype:'json',
 				data:revData,
 				type:'post',
 				async:true,
 				success:function(data){
-					//alert("success");
-					//createImages(data.)
-					alert(data.review.rs_content);
+			//		alert("success");
+
+			//		alert(data.review.rs_content);
 					$("#pause").html(data.review.rs_content);
 					$("#p_id").html(data.review.id);
 					var rating =data.review.rs_rating;
@@ -1351,23 +1358,7 @@ $(document).ready(function(){
 					alert(stu + " " + err);
 				}
 			});
-			 
-			 $.ajax({
-					url:"getRPdetail2.do",
-					datatype:'json',
-					data:'rseq='+rseq,
-					type:'post',
-					async:true,
-					success:function(data){
-						alert("create success");
-						createImages(data.imagelist);
-						
-					},
-					error:function(req, stu, err){
-						alert("error");
-						alert(stu + " " + err);
-					}
-				}); */
+			  
 			 
 			 
 	 });
