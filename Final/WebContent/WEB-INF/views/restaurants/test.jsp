@@ -711,12 +711,12 @@ function onefunc() {
 						
 						function like() {
 							
-							var isS = <%=user.getId()%>;
+							var isS = '<%=user.getId()%>';
 							 if (isS == null) {
 								alert("로그인 해주십시오.");
 							}else{
 								//location.href = "insertLike.do?rs_seq=${rs.seq }&rs_name=${rs.rs_name}&id=${login.id}";
-								location.href = "insertLike.do?rs_seq="+${rs.seq }+"&rs_name="+'${rs.rs_name}'+"&id="+${login.id}
+								location.href = "insertLike.do?rs_seq="+${rs.seq }+"&rs_name="+'${rs.rs_name}'+"&id="+'${login.id}';
 							} 
 						}
 						
