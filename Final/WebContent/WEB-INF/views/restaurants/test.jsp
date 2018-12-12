@@ -1,3 +1,4 @@
+<%@page import="kh.c.five.model.wannagoDto"%>
 <%@page import="javax.jws.Oneway"%>
 <%@page import="java.net.URLDecoder"%>
 <%@page import="kh.c.five.model.EatMemberDto"%>
@@ -24,6 +25,7 @@
  	EatMemberDto user = (EatMemberDto)session.getAttribute("login");
  	Cookie[] cookies = request.getCookies(); 
     List<RegiDto> RankList = (List<RegiDto>)request.getAttribute("RankList");
+    List<wannagoDto> wannagolist = (List<wannagoDto>)request.getAttribute("wannagolist");
  %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- more -->
@@ -655,6 +657,21 @@ function onefunc() {
 
  <br>
  <br>
+ <%
+ /* wannagolist 확인 작업 */
+ boolean wannago = false;
+
+ int rsseq = rvlist.get(0).getRs_seq();
+
+ for(int i =0; i<wannagolist.size();i++){
+	
+	 if(rsseq == wannagolist.get(i).getRs_seq()){
+		 wannago = true;
+		 break;
+	 }
+ }
+ 
+ %>
 <div class="column-wrapper">
 		<div class="column-contents">
 			<div class="inner">
@@ -676,22 +693,36 @@ function onefunc() {
 					</div>		
 							<div class="col-md-4">  
 								<img id="review_btn" class="review_writing_button" onclick="WriteReview('${rs.seq}','${login.id }');" src="img/button/reviewIcon.png">
-								<c:if test="${!empty login.id}">
-								<c:if test="${isLike ne true }">
-								<a href="insertLike.do?rs_seq=${rs.seq }&rs_name=${rs.rs_name}&id=${login.id}"><img id="like_btn" src="img/button/likeIcon.png" ></a>
-								</c:if>
-								</c:if>
-								<c:if test="${!empty login.id}">
-								<c:if test="${isLike eq true }">
-								<a href="#none"><img id="like_btn_delete" src="img/button/likeIconR.png" ></a>
-								</c:if>
-								</c:if>
+								<%if(wannago){%>
+									<a href="wannago.do?rs_seq=${rs.seq}&rs_name=${rs.rs_name}"><img id="like_btn_delete" src="img/button/likeIconR.png" ></a>
+								<%}else{%>
+									<img id="like_btn" onclick="like()" src="img/button/likeIcon.png" >
+								<%}
+								
+								%>
 							</div>
 						</span>
 						
 					
 						
 					</div>
+					<script type="text/javascript">
+						/* 가고싶다 스크립트  */
+						
+						function like() {
+							
+							var isS = <%=user.getId()%>;
+							 if (isS == null) {
+								alert("로그인 해주십시오.");
+							}else{
+								//location.href = "insertLike.do?rs_seq=${rs.seq }&rs_name=${rs.rs_name}&id=${login.id}";
+								location.href = "insertLike.do?rs_seq="+${rs.seq }+"&rs_name="+'${rs.rs_name}'+"&id="+${login.id}
+							} 
+						}
+						
+						
+						
+					</script>
 			
 					<div class="status branch_none" style="text-align: left;">
 						 
