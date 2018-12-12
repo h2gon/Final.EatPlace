@@ -878,59 +878,83 @@ function onefunc() {
 				<tr>
 				<td style="width: 15%; padding-top: 1px; vertical-align: top;"></td>
 				<!-- img td -->
-				<td id="review_image" style="width: 70%; padding-top: 1px; float:left; vertical-align: top;">
+				<td id="review_image" style="width: 100%; padding-top: 1px; float:left; vertical-align: top;">
 				<%		
 		//List<fileDto> f_list = eatReviewDao.getRv_Image(list.get(i).getSeq());
 		//List<String> f_list = (List<String>) request.getAttribute("getImg");
 		
 		if(f_list != null){
 			System.out.println("not null");
-			for(int a = 0;a<f_list.size();a++){
-				if(f_list.size()==1){
-					fileName = new String[1];			
-					fileName[0] = f_list.get(a).getFile_name();
+			
+				if(f_list.size()<4){ //더보기 안붙음.
+					fileName = new String[f_list.size()];
+					for(int a=0 ; a<f_list.size();a++){
+					fileName[a] = f_list.get(a).getFile_name();
 					//fileName[0] = f_list.get(a);
-					System.out.println("f_list.size(): "+f_list.size());
-					System.out.println("fileName has just 1:"+fileName[0]);
-					if(fileName[0].contains("https://")){
+					System.out.println("less than 4 f_list.size(): "+f_list.size());
+					//System.out.println("fileName has just 1:"+fileName[0]);
+					if(fileName[a].contains("https://")){
 						%>
 						<a href="#" data-toggle="modal" data-target="#carouselModal">
-						<img alt="" src="<%=fileName[0]+str %>" style="float:left; width: 120px; height:120px; margin-left: 10px;"<%--  onclick="reviewDetail(<%=list.get(i).getSeq()%>)" --%>>
+						<img alt="" src="<%=fileName[a]%>" style="float:left; width: 120px; height:120px; margin-left: 10px;"<%--  onclick="reviewDetail(<%=list.get(i).getSeq()%>)" --%>>
 						</a>
 						<% 
-					}else{
-					%>
-					<a href="#" data-toggle="modal" data-target="#carouselModal">
-					<img alt="" src="/image/<%=fileName[0] %>" style="float:left; width: 120px; height:120px; margin-left: 10px;" <%-- onclick="reviewDetail(<%=list.get(i).getSeq()%>)" --%>>
-					</a>
-					
-					<%} 
-				}
-				else{
-					fileName = new String[f_list.size()];				
-					fileName[a] = f_list.get(a).getFile_name();
-					//fileName[a] = f_list.get(a);
-					System.out.println("f_list.size(): "+f_list.size());
-					System.out.println("fileName more than 1:"+fileName[a]);
-					if(fileName[a].contains("https://")){
-					%>
-					<a href="#" data-toggle="modal" data-target="#carouselModal">
-					<img alt="" src="<%=fileName[a] %>" style="float:left; width: 120px; height:120px; margin-left: 10px;"  <%-- onclick="reviewDetail(<%=list.get(i).getSeq()%>)" --%>>
-					</a>
-					<%
-					}else{
+					}else{//does not contain 'https://'
 					%>
 					<a href="#" data-toggle="modal" data-target="#carouselModal">
 					<img alt="" src="/image/<%=fileName[a] %>" style="float:left; width: 120px; height:120px; margin-left: 10px;" <%-- onclick="reviewDetail(<%=list.get(i).getSeq()%>)" --%>>
 					</a>
+					
+					<%} 
+				 }
+				}
+				else{ //f_list.size()>4 일때 더보기가 추가하여 붙음.
+					fileName = new String[4];
+					int remain_picture_count = f_list.size() - 4; 
+					for(int a = 0 ; a<4 ; a++){
+					fileName[a] = f_list.get(a).getFile_name();					
+					System.out.println("more than 4 f_list.size(): "+f_list.size());
+					
+					if(fileName[a].contains("https://")){
+						if(a==3){//마지막 부분에 이미지 위 글자 새김.
+					%>
+					<div style="position: relative;">
+					<a href="#" data-toggle="modal" data-target="#carouselModal">
+					<img alt="" src="<%=fileName[a] %>" style="float:left; width: 120px; height:120px; margin-left: 10px;">
+					</a>
+					<span style="position: static; top: 30px; left: 30px; color: orange;">+<%=remain_picture_count %></span>
+					</div>
+					<%
+					}else{//마지막 이전의 그림들이 출력되는 곳..
+					%>
+					<a href="#" data-toggle="modal" data-target="#carouselModal">
+					<img alt="" src="<%=fileName[a] %>" style="float:left; width: 120px; height:120px; margin-left: 10px;">
+					</a>
 					<% }
 					}
+						else{//fileName이 http://가 포함되지 않은 경우..
+						if(a==3){%>
+							<div style="position: relative;">
+							<a href="#" data-toggle="modal" data-target="#carouselModal">
+							<img alt="" src="/image/<%=fileName[a] %>" style="float:left; width: 120px; height:120px; margin-left: 10px;">
+							</a>
+							<span style="position: static; top: 30px; left: 30px; color: orange;">+<%=remain_picture_count %></span>
+							</div>
+							
+						<%}else{%>
+						<a href="#" data-toggle="modal" data-target="#carouselModal">
+						<img alt="" src="/image/<%=fileName[a] %>" style="float:left; width: 120px; height:120px; margin-left: 10px;">
+						</a>
+						
+					 <%
+					}
+				}
 			}
+		}
+	
 		}else if(f_list == null){
 			System.out.println("null");
-		}	
-		
-		
+		}		
 		%>	
 				</td>
 				<td style="width: 15%; padding-top: 1px; vertical-align: top;">
