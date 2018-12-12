@@ -23,6 +23,10 @@
 <head>
 <%
  	EatMemberDto user = (EatMemberDto)session.getAttribute("login");
+boolean loginok = false;
+	if(user != null){
+		loginok = true;
+	}
  	Cookie[] cookies = request.getCookies(); 
     List<RegiDto> RankList = (List<RegiDto>)request.getAttribute("RankList");
     List<wannagoDto> wannagolist = (List<wannagoDto>)request.getAttribute("wannagolist");
@@ -711,13 +715,16 @@ function onefunc() {
 						
 						function like() {
 							
-							var isS = '<%=user.getId()%>';
-							 if (isS == null) {
-								alert("로그인 해주십시오.");
-							}else{
+							<%-- var isS = '<%=user%>'; --%>
+							 if (<%=loginok%>) {
+								
 								//location.href = "insertLike.do?rs_seq=${rs.seq }&rs_name=${rs.rs_name}&id=${login.id}";
 								location.href = "insertLike.do?rs_seq="+${rs.seq }+"&rs_name="+'${rs.rs_name}'+"&id="+'${login.id}';
-							} 
+							
+							}else{
+								alert("로그인 해주십시오.");
+							}
+							
 						}
 						
 						

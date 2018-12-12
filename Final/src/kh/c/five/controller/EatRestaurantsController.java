@@ -417,7 +417,7 @@ public class EatRestaurantsController {
 	}
 	
 	@RequestMapping(value="category.do",  method={RequestMethod.GET, RequestMethod.POST})
-	public String category(String s_category, EatParam param, Model model) {
+	public String category(String s_category,String s_keyword, EatParam param, Model model) {
 		
 		System.out.println("category : "+s_category);
 		param.setS_category(s_category);
