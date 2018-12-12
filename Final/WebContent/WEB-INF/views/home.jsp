@@ -405,7 +405,7 @@ outline: 0;
 
 <!-- 가고싶어 제발 -->
 <div class="w3-container ">
-<div id="id01" class="w3-modal">
+<div id="id01" class="w3-modal" style="z-index: 111;">
  <div class="w3-modal-content w3-card-4 w3-animate-zoom">
  	<div>
   		<ul class="pagination w3-white w3-border-bottom" style="height:50px; width:100%; position:relative; list-style:none;">
