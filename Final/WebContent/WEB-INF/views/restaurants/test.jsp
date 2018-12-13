@@ -1,4 +1,5 @@
 <%@page import="kh.c.five.model.wannagoDto"%>
+<%@page import="javax.jws.Oneway"%>
 <%@page import="java.net.URLDecoder"%>
 <%@page import="kh.c.five.model.EatMemberDto"%>
 <%@page import="kh.c.five.dao.impl.EatReviewDaoImpl"%>
@@ -22,16 +23,20 @@
 <head>
 <%
  	EatMemberDto user = (EatMemberDto)session.getAttribute("login");
+boolean loginok = false;
+	if(user != null){
+		loginok = true;
+	}
  	Cookie[] cookies = request.getCookies(); 
-   /*  List<RegiDto> RankList = (List<RegiDto>)request.getAttribute("RankList"); */
-   
+    List<RegiDto> RankList = (List<RegiDto>)request.getAttribute("RankList");
+    List<wannagoDto> wannagolist = (List<wannagoDto>)request.getAttribute("wannagolist");
  %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- more -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1, user-scalable=no" />
 <meta name="format-detection" content="telephone=no">
-<title>Insert title here</title>
+<title>EAT PLACE</title>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
  
     <!--  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
@@ -168,16 +173,16 @@ a.btn:hover:before, a.btn:hover::after {
 	outline: none;
 	position: relative;
 	z-index: 2;
-	background-color: #333;
-	border: 2px solid #333;
+	background-color: #c53211;
+	border: 2px solid #c53211;
 	color: #fff;
 	line-height: 50px;
 	margin-bottom: 4rem;
 }
 .button:hover {
 	background-color: #fff;
-	border-color:  #c53211;
-	color:  #c53211;
+	border-color: #c53211;
+	color: #c53211;
 }
 .button::before,
 .button::after {
@@ -187,7 +192,7 @@ a.btn:hover:before, a.btn:hover::after {
 	content: '';top: 0;
 	width: 50%;
 	height: 100%;
-	background-color: #333;
+	background-color: #c53211;
 }
 .button,
 .button::before,
@@ -208,9 +213,9 @@ a.btn:hover:before, a.btn:hover::after {
 .button:hover::before,
 .button:hover::after {
 	width: 0;
-	background-color:  #c53211;
+	background-color: #c53211;
 }
-/* #c53211 */
+
 
 footer {
 	padding: 1rem;
@@ -220,10 +225,10 @@ footer {
 footer a {
 	color: #666;
 	font-weight: bold;
-} 
+}
 footer a:hover {
-	/* color:  #c53211;
-	text-decoration: underline; */
+	color: #c53211;
+	text-decoration: underline;
 }
 </style>
 
@@ -281,7 +286,7 @@ footer a:hover {
 }
 
 #sync1 .item {
-  background: #0c83e7;
+
   margin: 5px;
   color: #FFF;
   border-radius: 3px;
@@ -325,7 +330,24 @@ footer a:hover {
     box-shadow: none;
 }
 
-</style>
+
+
+#col-md-4 {
+
+	max-height: 20vw; 
+ 
+    display: inline-block; 
+}
+
+/* 영훈 */
+#mainImage {
+
+	max-height: 400px; 
+	width: auto;
+ 
+    display: inline-block; 
+}
+
 <!-- 최근 & 가고싶다 모달 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="/lib/w3.css">
@@ -381,7 +403,7 @@ footer a:hover {
  </form>
 <%
  	
-    List<RegiDto> RankList = (List<RegiDto>)request.getAttribute("RankList");
+ /*    List<RegiDto> RankList = (List<RegiDto>)request.getAttribute("RankList"); */
 	System.out.println("testRankList = " + RankList);
 
 %>
@@ -468,7 +490,7 @@ JSP주석 소스보기할때 보여지지 않음
 </c:if>				
 					
 <%
-List<wannagoDto> wannagolist = (List<wannagoDto>)request.getAttribute("wannagolist");
+/* List<wannagoDto> wannagolist = (List<wannagoDto>)request.getAttribute("wannagolist"); */
 List<RegiDto> RankList2 = (List<RegiDto>)request.getAttribute("RankList");
 
 if(wannagolist.size()>1 && wannagolist!=null){
@@ -699,7 +721,11 @@ function alarm() {
 <%
 List<ReviewDto> rvlist = (List<ReviewDto>)request.getAttribute("reviewlist");
 List<fileDto> imagelist = (List<fileDto>) request.getAttribute("imagelist");
-%>  
+
+%>
+
+
+<!--  -->
 
 <div class="modal fade" id="carouselModal" tabindex="-1" role="dialog" aria-labelledby="carouselModalLabel">
   <div class="modal-dialog" role="document">
@@ -730,7 +756,7 @@ List<fileDto> imagelist = (List<fileDto>) request.getAttribute("imagelist");
    			<br>
    			<hr>
    			<br>
-   			<div>
+   			<div style="height: 400px;overflow-y: auto;">
    				<p id="pause" ></p>
    			</div>
    		</div>
@@ -738,36 +764,29 @@ List<fileDto> imagelist = (List<fileDto>) request.getAttribute("imagelist");
 	<div>  
 	
 	
-		
-		<%-- <c:choose>
-		<c:when test="${review.rs_rating eq 1 }">
-		<img alt="" src="./img/like/1-1.png" style="width: 60px;" msg="1" title="1점" >
-		</c:when>
-		<c:when test="${review.rs_rating eq 3 }">
-		<img alt="" src="./img/like/3-1.png" style="width: 60px;" msg="3" title="3점" >
-		</c:when>
-		<c:when test="${review.rs_rating eq 5 }">
-		<img alt="" src="./img/like/5-1.png" style="width: 60px;" msg="5" title="5점" >
-		</c:when>
-		</c:choose> --%>
 	
 	
 	</div>
-        <div id="sync2" class="owl-carousel thumbnails-wrap"> <!-- 이게 아래에 있는 썸네일 -->
-        		<%
-		for (int i=0;i<imagelist.size();i++){
-			if(imagelist.get(i).getFile_name().contains("https://")){
-				%>
-				<div class="item"><img src="<%=imagelist.get(i).getFile_name()%>" class="img-responsive"></div>
-				<%
-			}else{
-				%>
-		          <div class="item"><img src="\image\<%=imagelist.get(i).getFile_name()%>" class="img-responsive"></div>
-		          <%
-			}
+       <div id="sync2" class="owl-carousel thumbnails-wrap" style=""> <!-- 이게 아래에 있는 썸네일 -->
+        		 <%
+        		String str = "?fit=around|148:152&crop=148:152;*,*&output-format=jpg&output-quality=80";
+        		
+        			
+        			for (int i=0;i<imagelist.size();i++){
+        				if(imagelist.get(i).getFile_name().contains("https://")){
+        					%>
+        					<div class="item"><img src="<%=imagelist.get(i).getFile_name() + str%>" class="img-responsive"></div>
+        					<%
+        				}else{
+        					%>
+        			          <div class="item"><img src="\image\<%=imagelist.get(i).getFile_name()%>" class="img-responsive"></div>
+        			          <%
+        				}
+        			
+        			}
+        		
 		
-		}
-          %>
+          %>  
           
         </div>     
       </div>
@@ -776,40 +795,9 @@ List<fileDto> imagelist = (List<fileDto>) request.getAttribute("imagelist");
   </div>
 </div>
 
-<!-- Navigation
-	<nav class="navbar fixed-top navbar-expand-lg navbar-dark fixed-top"
-		style="background-color: #c53211; padding-bottom: 10px">
-		<div class="container">
-			<a class="navbar-brand" href="home.do">EAT PLACE</a>
-			<button class="navbar-toggler navbar-toggler-right" type="button"
-				data-toggle="collapse" data-target="#navbarResponsive"
-				aria-controls="navbarResponsive" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-		</div>
-
-		<div class="container">
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" href="about.html"><strong
-							style="color: white; margin-left: 20px">About</strong></a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="restaurntsList.do"><strong
-							style="color: white; margin-left: 20px">맛집 리스트</strong></a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="restaurantsInsert.do"><strong
-							style="color: white; margin-left: 20px">맛집 추가</strong></a></li>
-					<li class="nav-item" style="margin-left: 20px"><a
-						class="nav-link openMask" href="#"> <img alt=""
-							src="img/main/man-user.png">
-					</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav> -->
 
 <%
+String mstr = "?fit=around|254:300&crop=254:300;*,*&output-format=jpg&output-quality=80";
 if(imagelist==null||imagelist.size()<3){
 	%>
 	이미지가 등록된 리뷰가 없다..고 띄워야 함.
@@ -819,13 +807,15 @@ if(imagelist==null||imagelist.size()<3){
 	<br>
 	<br>
 	<br>
-	<div class="owl-carousel123 owl-theme" style="margin-top: 50px" >
+	<div class="owl-carousel123 owl-theme" style="margin-top: 50px; margin-left: 5px" >
 <%
 for(int i=0;i<imagelist.size();i++){
 %>
-	<div class="item" id="owlImages">
+	<div class="item" id="owlImages" style="margin-right: 5px">
 	<a href="#" data-toggle="modal" data-target="#carouselModal">
-		<img src="<%=imagelist.get(i).getFile_name()%>" style="height: 300px; margin-right: 3px">
+	<img src="<%=imagelist.get(i).getFile_name()+mstr%>" style="height: 300px; margin-right: 3px" onclick="createImages(<%=imagelist%>)">
+		<%-- <img src="<%=imagelist.get(i).getFile_name()%>" style="height: 300px; margin-right: 3px"> --%>
+		
 	</a>
 	</div>
 <%
@@ -841,7 +831,7 @@ for(int i=0;i<imagelist.size();i++){
 //plugin call
 $(document).ready(function(){
 $('.owl-carousel123').owlCarousel({
-	margin : 10,
+	
     autoWidth:true,
 	responsive : {
 		0 : {
@@ -856,11 +846,79 @@ $('.owl-carousel123').owlCarousel({
 	}
 })
 });
+
+function onefunc() {
+	$("#sync2 .owl-wrapper *").remove();
+	 <%
+	for (int i=0;i<imagelist.size();i++){
+		if(imagelist.get(i).getFile_name().contains("https://")){
+			%>
+			
+			$("#sync2 .owl-wrapper").append(
+					$('<div>').attr('class','owl-item').attr("style","width: 119px;").append(
+					    $('<div>').attr('class','item synced').append(
+					            $('<img>').attr('src','<%=imagelist.get(i).getFile_name() + str%>').attr('class','img-responsive').append(
+					            		
+				              ))));
+			<%
+		}else{
+			%>
+			$("#sync2 .owl-wrapper").append(
+					$('<div>').attr('class','owl-item').attr("style","width: 119px;").append(
+					    $('<div>').attr('class','item').append(
+					            $('<img>').attr('src','<%=imagelist.get(i).getFile_name()%>').attr('class','img-responsive').append(
+					            		
+				              ))));
+	          <%
+		}
+	
+	}
+		
+
+ 	%>  
+	
+	/* 
+	var str = "?fit=around|148:152&crop=148:152;*,*&output-format=jpg&output-quality=80";
+	for (var i = 0; i < images.length; i++) {
+		$("#sync2 .owl-wrapper").append(
+				$('<div>').attr('class','owl-item').attr("style","width: 119px;").append(
+				    $('<div>').attr('class','item').append(
+				            $('<img>').attr('src',images[i]+str).attr('class','img-responsive').append(
+				            		
+			              ))));  
+	} 
+	
+	  var re_str = ['삼성동','데이트','삼겹살','모임','이태원','강남','카페'];
+		for (var i = 0; i < re_str.length; i++) {
+			$(".list-keywords").append(
+				    $('<li>').attr('class','list-keyword').append(
+				            $('<a>').attr('href','#').attr('onclick','search2(this)').append(
+				            		re_str[i]
+				              )));  
+		} */ 
+	 
+}
+
 </script>
 
 
  <br>
  <br>
+ <%
+ /* wannagolist 확인 작업 */
+ boolean wannago = false;
+
+ int rsseq = rvlist.get(0).getRs_seq();
+
+ for(int i =0; i<wannagolist.size();i++){
+	
+	 if(rsseq == wannagolist.get(i).getRs_seq()){
+		 wannago = true;
+		 break;
+	 }
+ }
+ 
+ %>
 <div class="column-wrapper">
 		<div class="column-contents">
 			<div class="inner">
@@ -877,40 +935,62 @@ $('.owl-carousel123').owlCarousel({
 					<div>
 					
 						<span class="title">
-					<div class="col-md-8">
+					<div class="col-md-8" style="text-align: left; padding-left: 0px">
 							<font size="26" color="#000000" id="rs_seq" value="${rs.seq }">${rs.rs_name }</font>
 					</div>		
 							<div class="col-md-4">  
-								<img id="review_btn" class="review_writing_button" onclick="WriteReview('${rs.seq}');" src="img/button/reviewIcon.png">
-								<c:if test="${isLike ne true }">
-								<a href="insertLike.do?rs_seq=${rs.seq }&rs_name=${rs.rs_name}&id=${login.id}"><img id="like_btn" src="img/button/likeIcon.png" ></a>
-								</c:if>
-								<c:if test="${isLike eq true }">
-								<a href="#none"><img id="like_btn_delete" src="img/button/likeIconR.png" ></a>
-								</c:if>
+								<img id="review_btn" class="review_writing_button" onclick="WriteReview('${rs.seq}','${login.id }');" src="img/button/reviewIcon.png">
+								<%if(wannago){%>
+									<a href="wannago.do?rs_seq=${rs.seq}&rs_name=${rs.rs_name}"><img id="like_btn_delete" src="img/button/likeIconR.png" ></a>
+								<%}else{%>
+									<img id="like_btn" onclick="like()" src="img/button/likeIcon.png" >
+								<%}
+								
+								%>
 							</div>
 						</span>
+						
 					
 						
 					</div>
+					<script type="text/javascript">
+						/* 가고싶다 스크립트  */
+						
+						function like() {
+							
+							<%-- var isS = '<%=user%>'; --%>
+							 if (<%=loginok%>) {
+								
+								//location.href = "insertLike.do?rs_seq=${rs.seq }&rs_name=${rs.rs_name}&id=${login.id}";
+								location.href = "insertLike.do?rs_seq="+${rs.seq }+"&rs_name="+'${rs.rs_name}'+"&id="+'${login.id}';
+							
+							}else{
+								alert("로그인 해주십시오.");
+							}
+							
+						}
+						
+						
+						
+					</script>
 			
-					<div class="status branch_none">
+					<div class="status branch_none" style="text-align: left;">
 						 
-						<span class="cnt hit">
+						<span class="cnt hit" style="color: gray;">
 							<img src="img/button/readcount.png">
 						<!-- 조회수 --> ${rs.rs_readcount } 
 						</span> 
-						<span class="cnt review">
+						<span class="cnt review" style="color: gray;">
 							<img src="img/button/review.png">							<span>
 						<!-- 리뷰수 -->${reviewcount }
 							</span>
 						</span> 
-						<span class="cnt favorite">
+						<span class="cnt favorite" style="color: gray;">
 							<img src="img/button/fav.png">
 						<!-- 즐겨찾기 수 -->${likescount }
 						</span>
 						<br>
-						<img src="img/button/hr.png">
+						<img src="img/button/hr.png" style="margin-right: 400px; width: 900px;">
 						
 					</div>
 
@@ -921,7 +1001,7 @@ $('.owl-carousel123').owlCarousel({
 						<tbody style="text-align: left">
 							<tr style="text-align: left; color:#4f4f4f ">
 								<th style="width: 30%">주소</th>
-								<td>${rs.rs_address1 } ${rs.rs_address2 }</td>
+								<td>${rs.rs_address1 }<%--  ${rs.rs_address2 } --%></td>
 							</tr>
 
 							<tr class="only-desktop" style="text-align: left; color:#4f4f4f">
@@ -960,9 +1040,8 @@ $('.owl-carousel123').owlCarousel({
 									${rs2.rs_time }
 								</td>
 							</tr>
-				
-
-
+						
+						
 
 						</tbody>
 					</table>
@@ -976,8 +1055,8 @@ $('.owl-carousel123').owlCarousel({
 				<div id="map" style="width: 400px; height: 450px;"></div>
 				
 				
+				<img src="img/button/hr.png" style="margin-right: 350px; width: 920px;">
 				</header>
-
 				</section>
 				
 		<!-- 리뷰 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~REVIEW~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -1084,60 +1163,93 @@ $('.owl-carousel123').owlCarousel({
 				</tr>
 				<tr>
 				<td style="width: 15%; padding-top: 1px; vertical-align: top;"></td>
-				<td style="width: 70%; padding-top: 1px; vertical-align: top;">
+				<!-- img td -->
+				<td id="review_image" style="width: 100%; padding-top: 1px; float:left; vertical-align: top;">
 				<%		
 		//List<fileDto> f_list = eatReviewDao.getRv_Image(list.get(i).getSeq());
 		//List<String> f_list = (List<String>) request.getAttribute("getImg");
 		
 		if(f_list != null){
 			System.out.println("not null");
-			for(int a = 0;a<f_list.size();a++){
-				if(f_list.size()==1){
-					fileName = new String[1];			
-					fileName[0] = f_list.get(a).getFile_name();
-					//fileName[0] = f_list.get(a);
-					System.out.println("f_list.size(): "+f_list.size());
-					System.out.println("fileName has just 1:"+fileName[0]);
-					if(fileName[0].contains("https://")){
-						%>
-						<img alt="" src="<%=fileName[0] %>" style="width: 75px; height: 75px;" data-toggle="modal" data-target="#carouselModal" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
-						<% 
-					}else{
-					%>
-					<img alt="" src="/image/<%=fileName[0] %>" style="width: 75px; height: 75px;" data-toggle="modal" data-target="#carouselModal" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
-					
-					<%} 
-				}
-				else{
-					fileName = new String[f_list.size()];				
+			
+				if(f_list.size()<4){ //더보기 안붙음.
+					fileName = new String[f_list.size()];
+					for(int a=0 ; a<f_list.size();a++){
 					fileName[a] = f_list.get(a).getFile_name();
-					//fileName[a] = f_list.get(a);
-					System.out.println("f_list.size(): "+f_list.size());
-					System.out.println("fileName more than 1:"+fileName[a]);
+					//fileName[0] = f_list.get(a);
+					System.out.println("less than 4 f_list.size(): "+f_list.size());
+					//System.out.println("fileName has just 1:"+fileName[0]);
 					if(fileName[a].contains("https://")){
+						%>
+						<a href="#" data-toggle="modal" data-target="#carouselModal">
+						<img alt="" src="<%=fileName[a]%>" style="float:left; width: 120px; height:120px; margin-left: 10px;"<%--  onclick="reviewDetail(<%=list.get(i).getSeq()%>)" --%>>
+						</a>
+						<% 
+					}else{//does not contain 'https://'
 					%>
-					<img alt="" src="<%=fileName[a] %>" style="width: 75px; height: 75px;" data-toggle="modal" data-target="#carouselModal" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
+					<a href="#" data-toggle="modal" data-target="#carouselModal">
+					<img alt="" src="/image/<%=fileName[a] %>" style="float:left; width: 120px; height:120px; margin-left: 10px;" <%-- onclick="reviewDetail(<%=list.get(i).getSeq()%>)" --%>>
+					</a>
+					
+					<%}
+				 }
+				}
+				else{ //f_list.size()>4 일때 더보기가 추가하여 붙음.
+					fileName = new String[4];
+					int remain_picture_count = f_list.size() - 4; 
+					for(int a = 0 ; a<4 ; a++){
+					fileName[a] = f_list.get(a).getFile_name();					
+					System.out.println("more than 4 f_list.size(): "+f_list.size());
+					
+					if(fileName[a].contains("https://")){
+						if(a==3){//마지막 부분에 이미지 위 글자 새김.
+					%>
+					<!-- <div style="position: relative;"> -->
+					<a href="#" data-toggle="modal" data-target="#carouselModal">
+					<img alt="" src="<%=fileName[a] %>" style="float:left; width: 120px; height:120px; margin-left: 10px;">
+					</a>
+					<span style="position: static; top: auto; left: auto; color: orange;"><h1>+<%=remain_picture_count %></h1></span>
+					<!-- </div> -->
 					<%
-					}else{
+					}else{//마지막 이전의 그림들이 출력되는 곳..
 					%>
-					<img alt="" src="/image/<%=fileName[a] %>" style="width: 75px; height: 75px;" data-toggle="modal" data-target="#carouselModal" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
+					<a href="#" data-toggle="modal" data-target="#carouselModal">
+					<img alt="" src="<%=fileName[a] %>" style="float:left; width: 120px; height:120px; margin-left: 10px;">
+					</a>
 					<% }
 					}
+						else{//fileName이 http://가 포함되지 않은 경우..
+						if(a==3){%>
+							<!-- <div style="position: relative;"> -->
+							<a href="#" data-toggle="modal" data-target="#carouselModal">
+							<img alt="" src="/image/<%=fileName[a] %>" style="float:left; width: 120px; height:120px; margin-left: 10px;">
+							</a>
+							<span style="position: static; top: auto; left: auto; color: orange;"><h1>+<%=remain_picture_count %></h1></span>
+							<!-- </div> -->
+							
+						<%}else{%>
+						<a href="#" data-toggle="modal" data-target="#carouselModal">
+						<img alt="" src="/image/<%=fileName[a] %>" style="float:left; width: 120px; height:120px; margin-left: 10px;">
+						</a>
+						
+					 <%
+					}
+				}
 			}
+		}
+	
 		}else if(f_list == null){
 			System.out.println("null");
-		}	
-		
-		
+		}		
 		%>	
 				</td>
 				<td style="width: 15%; padding-top: 1px; vertical-align: top;">
 				</td>
 				
 				</tr>
-				
+				 
 				<tr style="border: none">
-				<td colspan="3" width="100" style="border-bottom: 1px solid #c8c8c8;"></td>
+				<td colspan="3" width="100" style="border-bottom: 1px solid #c8c8c8; padding-top: 5px;"></td>
 				</tr>
 				
 			</table>
@@ -1147,54 +1259,232 @@ $('.owl-carousel123').owlCarousel({
 		}
 	%>   
     </ul>
-    <div id="js-btn-wrap" class="btn-wrap" style="float: right;"> <a href="javascript:;" class="button">더보기</a> </div>
+   
+   
+    <div id="js-btn-wrap" class="btn-wrap" style="float: right;"><a href="javascript:;" class="button">더보기</a> </div>
   </div>
   </div>
-<!--   <p class="back"><a class="btn" href="https://nanati.me/more-btn-js-load/">← 블로그로 돌아가기</a></p> -->
-<!-- <div class="ad"> --> 
-   <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>  -->
-   <!--  demo-more-btn-js-load  -->
-   <!--  <ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-1534417142445600"
-     data-ad-slot="9710655373"
-     data-ad-format="auto"></ins>  -->
-    <!-- <script>
-(adsbygoogle = window.adsbygoogle || []).push({}); 
-</script> -->
 
-<!-- </div> -->
   
 </div>       
     
        <br><br>
      
          
-       <script type="text/javascript">
-     	function reviewDetail(seq) {
-			alert("seq:"+seq);
-			$("#myModal").modal({backdrop:"static"});
-			
-			//location.href = "reviewDetail.do?seq="+seq;
-		}
+         <script type="text/javascript">
+         
+         $("#review_image a img").click(function(){
+        	 $("#sync2 .owl-wrapper *").remove();
+        		
+        	 var img=$(this).attr('src');
+        	 var rseq = $("#rs_seq").attr("value");
+        	 
+        	 if(img.indexOf("https://") !=-1){
+					var	filename=img;
+				}else if(img.indexOf("https://")==-1){
+					var filename=img.substring(7);
+				} 
+        	 
+        	 $('#mainImage').attr('src',img);
+        	 
+        	 var revData2 = {
+						'filename':filename,
+						'rseq': rseq
+				};
+        	 $.ajax({
+					url:"getRPdetail.do",
+					datatype:'json',
+					data:revData2,
+					type:'post',
+					async:true,
+					success:function(data){
+						//alert("success");
+						//alert(data.review.rs_content);
+						$("#pause").html(data.review.rs_content);
+						$("#p_id").html(data.review.id);
+						var rating =data.review.rs_rating;
+						if(rating===1){
+							$("#p_ratingP").attr('src','./img/like/1-2.png');	
+						}else if(rating===3){
+							$("#p_ratingP").attr('src','./img/like/3-2.png');
+						} else if(rating===5){
+							$("#p_ratingP").attr('src','./img/like/5-2.png');
+						}
+						
+						reviewDetail(data.review.seq); //reviewDetail에 리뷰 시퀀스 넣어줌
+						
+						 
+						 
+					},
+					error:function(req, stu, err){
+						alert("error");
+						alert(stu + " " + err);
+					}
+				});
+        	 
+        	 
+				
+		 });
        
-       function show_morelist(index) {
-    	  /*  var Rv_array = [];
-    	   var temp, item, a, i, id;
-    	      	   
-    	   console.log("review_item: "+review_item);
-    	   Rv_array = review_item.split("],");
-    	   console.log("Rv_array.length: "+Rv_array.length);
-    	   
-    	   var remain_array = new Array[Rv_array.length - 5];
-    	       	       	   
-    	    for(i = 0;i<Rv_array.length;i++){
-    	  	console.log("console array: "+Rv_array[i]);
-    	    } */
-    	  	
-    	   	    	  
-       }       
-       </script>
+		/*  $("#review_image a img").click(function(){
+			 var img=$(this).attr('src');
+			 var rseq = $("#rs_seq").attr("value");
+
+
+				 if(img.indexOf("https://") !=-1){
+					var	filename=img;
+				}else if(img.indexOf("https://")==-1){
+					var filename=img.substring(7);
+				} 
+				// alert(img);
+				$('#mainImage').attr('src',img);
+				
+				var revData2 = {
+						'filename':filename,
+						'rseq': rseq
+				};
+				
+				
+				 $.ajax({
+					url:"getRPdetail.do",
+					datatype:'json',
+					data:revData2,
+					type:'post',
+					async:true,
+					success:function(data){
+						//alert("success");
+						//alert(data.review.rs_content);
+						$("#pause").html(data.review.rs_content);
+						$("#p_id").html(data.review.id);
+						var rating =data.review.rs_rating;
+						if(rating===1){
+							$("#p_ratingP").attr('src','./img/like/1-2.png');	
+						}else if(rating===3){
+							$("#p_ratingP").attr('src','./img/like/3-2.png');
+						} else if(rating===5){
+							$("#p_ratingP").attr('src','./img/like/5-2.png');
+						}
+						
+						 reviewDetail(data.review.seq); //reviewDetail에 리뷰 시퀀스 넣어줌
+						 
+						 
+					},
+					error:function(req, stu, err){
+						alert("error");
+						alert(stu + " " + err);
+					}
+				});
+				 
+				
+		 }); */
+         
+ 		function reviewDetail(seq) {
+//      		alert("seq:"+seq);
+      		
+ 			$.ajax({
+ 				url:"getReviewDetail.do",					
+ 				type:"POST",
+ 				data:"seq="+seq,
+ 				dataType:"json",
+ 				async:true,
+ 								
+ 				success:function(json){
+ 					//alert("getReviewDetail.do success");
+					createImages(json.flist); //받아온 WildCard(rdto, flist)
+ 					/*alert("success");
+ 					console.log(json);
+ 					console.log(json.flist);
+ 					console.log(json.rdto);
+ 					console.log("json.flist.length"+json.flist.length);	
+ 					//alert(data.review.rs_content);
+ 					//$("#pause").html(data.review.rs_content);
+ 					
+ 				 	for (var i = 0; i < json.flist.length; i++) {
+ 						
+ 						
+ 						<a target="_blank" href="img_forest.jpg">
+   						<img src="img_forest.jpg" alt="Forest">
+ 						</a>   class='img-responsive'
+ 						
+       				//	var createimg = "<a target='_blank' href='"+json.flist[i]+"'><img src="+json.flist[i]+"></a>";
+       					/* if(i=0){
+       					 createimg = "<div class=item active><img src="+json.flist[i]+" style='width:100%'></div>";
+       					/* $("#mainImage11").append(createimg);  */
+       					/* }
+       					else{
+ 						 createimg = "<div class=item><img src="+json.flist[i]+" style='width:100%'></div>";
+ 						 
+       					} */
+       					//$("mainImage11").attr("src",json.flist[i]);	
+ 						//console.log("createimg: "+createimg);
+ 						//$("#mainImage11").append(createimg);
+ 						
+      					//$("#pause11").html(json.rdto.rs_content);
+ 						//$("#p_id11").html(json.rdto.id);
+ 						/* var newimg = document.createElement('img');
+ 						newimg.setAttribute("src",json.flist[i]); */
+ 						//newimg.setAttribute("width","100%");
+ 						
+ 						/* $("#img").attr("src",json.flist.get(i));						
+ 						$("#test").append(json[i].key); */
+ 						//$(".item").append(newimg);
+ 						
+ 					//}		
+ 					//$("#test").html(json);
+ 				},
+ 				error:function(req, stu, err){
+ 					alert("error");
+ 					alert(stu + " " + err+""+req);					
+ 				}
+ 			});
+ 			
+ 		}
+		
+		function test(a) {
+			alert("테스트입니다."+a);
+			$('#mainImage').attr('src',a);
+		}
+         
+		function createImages(objImageInfo) { 
+			var images = objImageInfo; 
+			var strDOM = ''; 
+			/* alert('createImages');
+			alert(images.length);
+			alert(images[0]); */
+			
+			var str = "?fit=around|148:152&crop=148:152;*,*&output-format=jpg&output-quality=80";
+				for (var i = 0; i < images.length; i++) {
+					$("#sync2 .owl-wrapper").append(
+							$('<div>').attr('class','owl-item').attr("style","width: 119px;").append(
+						    $('<div>').attr('class','item').append(
+						    		
+						            $('<img>').attr('onclick','test("'+images[i]+'")').attr('src',images[i]+str).attr('class','img-responsive').append(
+						            		
+						              ))));  
+				} 
+			
+		/* 	for (var i = 0; i < images.length; i++) {
+			
+				// N번째 이미지 정보를 구하기
+
+				// N번째 이미지 패널을 생성 
+				//strDOM += ''; 
+				strDOM += '<div class="item">';
+				strDOM += '<img src="' + images[i] + '"  class="img-responsive">'; 
+				strDOM += '</div>'; 
+				} 
+			
+			// 이미지 컨테이너에 생성한 이미지 패널들을 추가하기 
+		
+			$("#sync2").html(strDOM);
+
+			alert(strDOM); */
+
+			}		
+ 		
+ 		
+         </script>
+     
 		
        <br><br>
           <!-- review_main end -->
@@ -1214,15 +1504,17 @@ $(document).ready(function(){
 		var img=$(this).attr('src');
 		//var	filename=img.substring(7);
 		
-		 if(img.indexOf("https://") !=-1){
-			var	filename=img;
+		if(img.indexOf("https://") !=-1){
+			var filename=jQuery.trim(img.split( '?', 1 ));
+			
 		}else if(img.indexOf("https://")==-1){
 			var filename=img.substring(7);
 		} 
 		
 		
 		//alert(filename);
-		$('#mainImage').attr("src",img);
+		$('#mainImage').attr("src",img.split( '?', 1 ));
+		//$('#mainImage').attr('src',this);
 		//alert($("#pause").val());
 		
 		var revData = {
@@ -1259,14 +1551,22 @@ $(document).ready(function(){
 			}
 		});  
 		
-		
+		 
 		
 	 }); 
 	 
 	 $("#owlImages a img").click(function(){
-		 var img=$(this).attr('src');
-		//	alert(img);
-			$('#mainImage').attr("src",img);
+			var img=$(this).attr('src');
+			//var	filename=img.substring(7);
+			
+			if(img.indexOf("https://") !=-1){
+				var filename=jQuery.trim(img.split( '?', 1 ));
+				
+			}else if(img.indexOf("https://")==-1){
+				var filename=img.substring(7);
+			} 
+			
+			$('#mainImage').attr("src",img.split( '?', 1 ));
 			
 			var revData = {
 					'filename':filename,
@@ -1274,16 +1574,17 @@ $(document).ready(function(){
 			};
 			
 			//var test=$("#rs_seq").attr("value");
-			alert("success1");
-			 $.ajax({
+			//alert("success1");
+ 			 $.ajax({
 				url:"getRPdetail.do",
 				datatype:'json',
 				data:revData,
 				type:'post',
 				async:true,
 				success:function(data){
-					//alert("success");
-					alert(data.review.rs_content);
+			//		alert("success");
+
+			//		alert(data.review.rs_content);
 					$("#pause").html(data.review.rs_content);
 					$("#p_id").html(data.review.id);
 					var rating =data.review.rs_rating;
@@ -1299,7 +1600,10 @@ $(document).ready(function(){
 					alert("error");
 					alert(stu + " " + err);
 				}
-			});  
+			});
+			  
+			 
+			 
 	 });
 
 });
@@ -1309,6 +1613,7 @@ $(document).ready(function() {
 	 
 	  var sync1 = $("#sync1");
 	  var sync2 = $("#sync2");
+	  
 	 
 	  sync1.owlCarousel({
 	    singleItem : true,
@@ -1326,9 +1631,9 @@ $(document).ready(function() {
 	  });
 	 
 	  sync2.owlCarousel({
-	    items : 6,
-	    itemsDesktop      : [1199,6],
-	    itemsDesktopSmall     : [979,6],
+	    items : 8,
+	    itemsDesktop      : [1199,8],
+	    itemsDesktopSmall     : [979,8],
 	    itemsTablet       : [768,4],
 	    itemsMobile       : [479,3],
 	    pagination:false,
@@ -1404,8 +1709,14 @@ $(function(){
 	});
  });
  
-function WriteReview(seq) {
+function WriteReview(seq,id) {
+	console.log(seq,id);
+	if(id != null && id!=''){
 	location.href='WriteReview.do?seq='+seq;
+	}else{
+		alert("로그인하여 주십시요.");
+	}
+	
 }	
 </script>
 <script>
