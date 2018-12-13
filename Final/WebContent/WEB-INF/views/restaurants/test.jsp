@@ -736,7 +736,7 @@ List<fileDto> imagelist = (List<fileDto>) request.getAttribute("imagelist");
       </div>
       <div class="modal-body">
 <div class="customNavigation">
-  <a class="prev"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+  <a class="prev" style="z-index: 110;"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
   <a class="next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
 </div>
 	<div class="row">
@@ -1623,13 +1623,84 @@ $(document).ready(function() {
 	    responsiveRefreshRate : 200,
 	  });
 	  
-	    $(".next").click(function(){
-	    sync1.trigger('owl.next');
-	  });
+	   $(".next").click(function(){
+		   customNav("next");
+	    //sync1.trigger('owl.next');
+	    /* sync2.trigger('next.sync1.carousel'); */
+	    	
+	  }); 
 	  $(".prev").click(function(){
-	    sync1.trigger('owl.prev');
-	  });
-	 
+		  customNav("prev");
+		 // sync1.trigger('owl.prev');
+	  });  
+	 /*  $(".next").on("click", ".owl-item", function(e){
+		    e.preventDefault();
+		    var number = $(this).data("owlItem");
+		    sync1.trigger("owl.goTo",number);
+		  }); */
+	  
+	  
+	  function customNav(go) {
+			  
+		var mainnum = $('#mainImage').attr("src");
+		var imglist = new Array();
+		var check = 0;
+		<%
+		int chk = 0;
+		for(int i =0;i<imagelist.size(); i++){
+			%> imglist.push('<%=imagelist.get(i).getFile_name() %>');
+			<%
+		}
+		%>
+		for (var i = 0; i < imglist.length; i++) {
+			
+			if (mainnum == imglist[i]) {
+				
+				
+				
+				 if (go == "prev") {
+					 check = i-1;
+					 if (check <0) {
+						return;
+					}else{
+						 //alert("prev 클릭");
+						 $('#mainImage').attr("src",imglist[check]);
+					}
+					 
+					  
+					  
+				}else{
+					check = i+1;
+					if (check >=imglist.length) {
+						return;
+					}else{
+						//alert("next클릭");
+						 $('#mainImage').attr("src",imglist[check]);
+					}
+					
+				}
+				
+			}
+			
+		}
+		
+		
+		
+		 
+		  
+	}
+	  
+	  /*sync1.owlCarousel({
+		  nav: true,
+		  navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"]
+		});
+ 	  $(".owl-carousel").owlCarousel({
+		    items: 1,
+		    autoplay: true,
+		    navigation: true,
+		    navigationText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"]
+		});
+	  */
 	  sync2.owlCarousel({
 	    items : 8,
 	    itemsDesktop      : [1199,8],
