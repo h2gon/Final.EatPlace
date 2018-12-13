@@ -358,8 +358,8 @@ outline: 0;
   
 <!-- 최근 & 가고싶다 모달 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="/lib/w3.css">
-	<style>
+<link rel="stylesheet" href="/lib/w3.css">
+<style>
 	.city {display:none}
 	.pagination {
     display: inline-block;

@@ -1,5 +1,4 @@
 <%@page import="kh.c.five.model.wannagoDto"%>
-<%@page import="javax.jws.Oneway"%>
 <%@page import="java.net.URLDecoder"%>
 <%@page import="kh.c.five.model.EatMemberDto"%>
 <%@page import="kh.c.five.dao.impl.EatReviewDaoImpl"%>
@@ -23,20 +22,16 @@
 <head>
 <%
  	EatMemberDto user = (EatMemberDto)session.getAttribute("login");
-boolean loginok = false;
-	if(user != null){
-		loginok = true;
-	}
  	Cookie[] cookies = request.getCookies(); 
-    List<RegiDto> RankList = (List<RegiDto>)request.getAttribute("RankList");
-    List<wannagoDto> wannagolist = (List<wannagoDto>)request.getAttribute("wannagolist");
+   /*  List<RegiDto> RankList = (List<RegiDto>)request.getAttribute("RankList"); */
+   
  %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- more -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1, user-scalable=no" />
 <meta name="format-detection" content="telephone=no">
-<title>EAT PLACE</title>
+<title>Insert title here</title>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
  
     <!--  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
@@ -173,16 +168,16 @@ a.btn:hover:before, a.btn:hover::after {
 	outline: none;
 	position: relative;
 	z-index: 2;
-	background-color: #c53211;
-	border: 2px solid #c53211;
+	background-color: #333;
+	border: 2px solid #333;
 	color: #fff;
 	line-height: 50px;
 	margin-bottom: 4rem;
 }
 .button:hover {
 	background-color: #fff;
-	border-color: #c53211;
-	color: #c53211;
+	border-color:  #c53211;
+	color:  #c53211;
 }
 .button::before,
 .button::after {
@@ -192,7 +187,7 @@ a.btn:hover:before, a.btn:hover::after {
 	content: '';top: 0;
 	width: 50%;
 	height: 100%;
-	background-color: #c53211;
+	background-color: #333;
 }
 .button,
 .button::before,
@@ -213,9 +208,9 @@ a.btn:hover:before, a.btn:hover::after {
 .button:hover::before,
 .button:hover::after {
 	width: 0;
-	background-color: #c53211;
+	background-color:  #c53211;
 }
-
+/* #c53211 */
 
 footer {
 	padding: 1rem;
@@ -225,10 +220,10 @@ footer {
 footer a {
 	color: #666;
 	font-weight: bold;
-}
+} 
 footer a:hover {
-	color: #c53211;
-	text-decoration: underline;
+	/* color:  #c53211;
+	text-decoration: underline; */
 }
 </style>
 
@@ -286,7 +281,7 @@ footer a:hover {
 }
 
 #sync1 .item {
-
+  background: #0c83e7;
   margin: 5px;
   color: #FFF;
   border-radius: 3px;
@@ -330,58 +325,261 @@ footer a:hover {
     box-shadow: none;
 }
 
-
-
-#col-md-4 {
-
-	max-height: 20vw; 
- 
-    display: inline-block; 
+</style>
+<!-- 최근 & 가고싶다 모달 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/lib/w3.css">
+	<style>
+	.city {display:none}
+	.pagination {
+    display: inline-block;
 }
 
-/* 영훈 */
-#mainImage {
-
-	max-height: 400px; 
-	width: auto;
- 
-    display: inline-block; 
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
 }
+
+.w3-animate-zoom{
+	position: relative;
+	top: -45px;
+	right: -600px;
+	width: 380px;
+	height: 500px;
+}
+ .w3-padding{
+ position: absolute;
+ top:500px;
+ width: 380px;
+ 
+ 
+ }
 
 </style>
 </head>
 <body>
 
+<!-- 가고싶어 제발 -->
+<div class="w3-container ">
+<div id="id01" class="w3-modal">
+ <div class="w3-modal-content w3-card-4 w3-animate-zoom">
+ 	<div>
+  		<ul class="pagination w3-white w3-border-bottom" style="margin-top:0px; padding-top:0px; border-top:0px; height:60px; width:100%; position:relative; list-style:none;">
+  		<li style="position:relative; height:100%; width:50%; float:left; text-align: center;"><a href="#" class="tablink" onclick="openCity(event, 'London')" style="width: 100%; height: 100%; padding-top:15px; color: black;">최근 본 맛집</a></li>
+  		<li style="position:relative; height:100%; width:50%; float:left; text-align: center;"><a href="#" class="tablink" onclick="openCity(event, 'Paris')" style="width: 100%; height: 100%; padding-top:15px; color: black;">가고싶다</a></li>
+  		</ul>
+ 	</div> 
+	<!-- 최근 본 맛집 -->
+
+  <div id="London" class="w3-container city" style="overflow-y: scroll; height: 440px;">
+  <form action="" name="frmForm5" id="_frmForm5"  method="post">
+  	 <div style="display:inline-block; position:absolute; top:4em; right: 10px;">
+  		<a href="#" id="clear" style="text-align: right;"><font style="color: #BDBDBD">x clear all</font></a>
+  	</div> 
+ </form>
+<%
+ 	
+    List<RegiDto> RankList = (List<RegiDto>)request.getAttribute("RankList");
+	System.out.println("testRankList = " + RankList);
+
+%>
+<%
+for (int i=1;i<cookies.length;i++){ 
+	if(cookies[i].getName().contains("rc")){
+		
+	}else{
+		String cn = URLDecoder.decode(cookies[i].getName(), "utf-8");
+		String cookieAdd = "";
+		double cookieRating = 0;
+		String cookiePic = "";
+		int cookieLike = 0;
+		String cookiename = "";
+		for(int j =0; j < RankList.size(); j++){
+	
+			if( RankList.get(j).getSeq() == Integer.parseInt(cookies[i].getValue())){
+				System.out.println(RankList.get(j).getRs_address1());
+				cookieAdd = RankList.get(j).getRs_address1();
+				cookieRating = RankList.get(j).getRs_rating();
+				cookiePic = RankList.get(j).getRs_picture();
+				cookieLike = RankList.get(j).getSeq();
+				cookiename = RankList.get(j).getRs_name();
+				break;
+			}
+	}
+
+%>
+ 
+
+<div style="width:350px; height:100px; background-color:; box-sizing: border-box; border: 1 solid;">
+	
+	<div>
+
+		<!-- 사진 -->
+		<div style="display:inline-block; position:relative; width: 80px; height: 90px; margin-top:3px; margin-left:10px;">
+			<a><img alt="" src="<%=cookiePic%> " style="width: 80px; height: 90px;"></a>
+		</div>
+	
+		<!-- 이름 -->
+		<div style="display:inline-block; position:relative; width: 30%; height: 45%; top:-20px; left:20px;">
+			<a href="rsdetail.do?seq=<%=cookies[i].getValue()%>" style="text-align: center; color: black;"><b><font style="font-size: medium;text-align:center;"><%=cn%></font></b></a>
+		</div>
+		<!-- 주소 -->
+		<div style="display:inline-block; position:relative; width: 55%; height: 30%; top:-55px; left:120px;">
+			<a><font style="font-size: x-small; color: black; text-decoration: none;"><%=cookieAdd %></font></a>
+		</div>
+
+		<!-- 평점 --> 
+		<div style="display:inline-block;  position:relative; width: 10%; height: 20%; top:-88px; right:-20px;">
+			<a><font style="color:#c53211 "><%=cookieRating %></font></a>
+		</div>
+		<!-- 즐찾 -->
+		<div style="display:inline-block;  position:relative; width: 15%; height: 10%; top:-60px; right: -40px;">
+			<a href="wannago.do?rs_seq=<%=cookieLike %>&rs_name=<%=cookiename%>"><img id="like_btn" src="img/button/likeIcon.png" style="width: 45px; height: 45px;" ></a>
+		</div>
+
+ 	</div>
+</div>
+<%-- 
+<table border="1" width="250">
+
+<tr>
+
+<!-- 표현식 : 변수의 값 출력, 메소드의 결과값 출력, 연산 -->
+
+JSP주석 소스보기할때 보여지지 않음
+
+<td><%=i%></td>
+<td><a href="rsdetail.do?seq=<%=cookies[i].getValue()%>"><%=cn%></a></td>
+
+
+
+</table> --%>
+<%} %>
+  <%} %>
+  </div>
+	<!-- 가고 싶다 -->
+  <div id="Paris" class="w3-container city" style="overflow-y: scroll; height: 460px;">
+   
+		
+<c:if test="${empty wannagolist }">
+		가고싶은 가게를 추가해주세요~
+</c:if>				
+					
+<%
+List<wannagoDto> wannagolist = (List<wannagoDto>)request.getAttribute("wannagolist");
+List<RegiDto> RankList2 = (List<RegiDto>)request.getAttribute("RankList");
+
+if(wannagolist.size()>1 && wannagolist!=null){
+for(int i=0; i<wannagolist.size(); i++){
+	String wannaname = "";
+	double wannaRating = 0;
+	String wannaPic = "";
+	String wannacategory = "";
+	String wannaaddress = "";
+	int wannalike = 0;
+	
+	for(int j=0; j<RankList2.size(); j++){
+		if(RankList.get(j).getSeq() == wannagolist.get(i).getRs_seq()){
+			
+			wannaname = RankList2.get(j).getRs_name();
+			wannaRating = RankList2.get(j).getRs_rating();
+			wannaPic = RankList2.get(j).getRs_picture();
+			wannacategory = RankList2.get(j).getRs_category();
+			wannaaddress = RankList2.get(j).getRs_address1();
+			
+			wannalike = RankList2.get(j).getSeq();
+			
+			break;
+		}
+		%>	
+	<% }%>
+	
+
+
+<div style="width:350px; height:100px; background-color:; box-sizing: border-box; border: 1 solid; ">
+	<div>
+		<!-- 사진 -->
+		<div style="display:inline-block; position:relative; width: 80px; height: 90px; margin-top:3px; margin-left:10px;">
+			<a><img alt="" src="<%=wannaPic%> " style="width: 80px; height: 90px;"></a>
+		</div>
+	
+		<!-- 이름 -->
+		<div style="display:inline-block; position:relative; width: 30%; height: 45%; top:-20px; left:20px;">
+			<a href="rsdetail.do?seq=<%=wannalike%>" style="text-align: center;"><b><font style="font-size: medium;text-align:center;"><%=wannaname%></font></b></a>
+		</div>
+		<!-- 주소 -->
+		<div style="display:inline-block; position:relative; width: 55%; height: 30%; top:-55px; left:120px;">
+			<a><font style="font-size: x-small;"><%=wannaaddress %></font></a>
+		</div>
+
+
+		<!-- 평점 --> 
+		<div style="display:inline-block;  position:relative; width: 10%; height: 20%; top:-88px; right:-20px;">
+			<a><font style="color:#c53211 "><%=wannaRating %></font></a>
+		</div>
+		<!-- 즐찾 -->
+		<div style="display:inline-block;  position:relative; width: 15%; height: 10%; top:-60px; right: -40px;">
+			<a href="wannago.do?rs_seq=<%=wannalike %>&rs_name=<%=wannaname%>"><img id="like_btn" src="img/button/likeIcon.png" style="width: 45px; height: 45px;" ></a>
+		</div>
+
+ 	</div>
+	
+</div>
+
+	        	
+					<% }%>
+						        	<% }%>
+  </div>
+  
+  
+  <div class="w3-container w3-light-grey w3-padding">
+  <%if(user == null){%>
+		<!-- <a class=" openMask" href="#">로그인</a> -->
+		<button onclick="document.getElementById('id02').style.display='block'"  class="w3-btn w3-round-large w3-white ">Login</button>
+  <%} else{%>
+		<a class="" href="#" ><%=user.getId()%>님</a>
+		<button onclick="document.getElementById('id01').style.display='none'"  class="w3-btn w3-round-large w3-white ">
+			<a id="_btnLogout" class="" href="logout.do" > 로그아웃 </a>
+		</button>
+		<!-- <a id="_btnLogout" class="" href="logout.do" > 로그아웃 </a> -->
+  <%} %>
+    <button class="w3-btn w3-right w3-round-large w3-white" onclick="document.getElementById('id01').style.display='none'">Close</button>
+  </div>
+ </div>
+</div>
+</div>
 <!-- 로그인 모달 -->
-<div id="id02" class="w3-modal" style="">
+<div id="id02" class="w3-modal" style="z-index: 120;">
   <span onclick="document.getElementById('id02').style.display='none'" class="w3-closebtn w3-hover-red w3-container w3-padding-hor-8 w3-display-topright">&times;</span>
-  <div class="w3-modal-content w3-card-9 w3-animate-zoom" style="right:-10px; max-width:400px; height: 400px;">
+  <div class="w3-modal-content w3-card-9 w3-animate-zoom" style="right:-10px; width:400px; height: 400px;">
     <div class="w3-center"><br>
     	<h1>Login</h1>
     </div>
     <div class="w3-container">
       <div class="w3-section">
       	<form action="loginAf.do" name="frmForm" id="_frmForm"  method="post">
-	        <label><b>Username</b></label><br>
-	        <input class="w3-input w3-border w3-margin-bottom" id="_userid" name="_userid" required="required" type="text" placeholder="Username"><br>
+	        <label><b>Id</b></label><br>
+	        <input class="w3-input w3-border w3-margin-bottom" id="_userid" name="_userid" required="required" type="text" placeholder="Id"><br>
 	        <label><b>Password</b></label><br>
 	        <input class="w3-input w3-border w3-margin-bottom" type="password" id="_pwd" name="_pwd" required="required" placeholder="Password">
-	        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="w3-btn w3-btn-block w3-green" id="_btnLogin" style="width:70%; text-align: center;">로그인</button><br><br>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="document.getElementById('id03').style.display='block'" class="w3-btn w3-btn-block w3-green" style="width:70%; text-align: center;">회원가입</button>
+	        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="w3-btn w3-btn-round w3-white" id="_btnLogin" style="width:70%; text-align: center;">로그인</button><br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="document.getElementById('id03').style.display='block'" class="w3-btn w3-btn-round w3-white" style="width:70%; text-align: center;">회원가입</button>
        	</form>
       </div>
     </div>
     <div class="w3-container w3-border-top w3-padding-hor-16 w3-light-grey">
-      <button onclick="document.getElementById('id02').style.display='none'" type="button" class="w3-btn w3-red" style="float: right;">Cancel</button>
+      <button onclick="document.getElementById('id02').style.display='none'" type="button" class="w3-btn w3-round-large w3-white" style="float: right;">Cancel</button>
     </div>
   </div>
 </div>
 
 
 <!-- 회원가입 모달 -->
-<div id="id03" class="w3-modal" style="">
+<div id="id03" class="w3-modal" style="z-index: 130;">
   <span onclick="document.getElementById('id03').style.display='none'" class="w3-closebtn w3-hover-red w3-container w3-padding-hor-8 w3-display-topright">&times;</span>
-  <div class="w3-modal-content w3-card-9 w3-animate-zoom" style="right:-10px; top:-50px; width:600px; height: 700px;">
+  <div class="w3-modal-content w3-card-9 w3-animate-zoom" style="right:-10px; width:600px; height: 680px;">
   
     <div class="w3-center"><br>
     	<h1>회원가입</h1>
@@ -393,50 +591,73 @@ footer a:hover {
                 <label class="col-lg-2 control-label">아이디</label>
                 <div class="col-lg-10">
 					<input type="text" name="sid" id="_id2" class="form-control" size="40" placeholder="id"><br>
-					<a href="#none" id="_btnGetId" class="form-control" title="회원가입" style="height: 30px;">아이디체크</a><br>
-					<div id="_rgetid"></div><br>
-					<input type="text" name="id" id="_userid2" class="form-control" size="40" data-msg="아이디를 " readonly="readonly"><br>
+					<a href="#none" id="_btnGetId" class="form-control" title="회원가입" style="height: 30px; text-align: center;">아이디체크</a>
+					<div id="_rgetid"></div>
+					<input type="text" name="id" id="_userid2" class="form-control" size="40" data-msg="아이디를 " readonly="readonly">
                 </div>
             </div>
             <div class="form-group">
-            	<label class="col-lg-2 control-label">패스워드</label><br>
-                <div class="col-lg-10"><br>
-              	  	<input type="password" name="pwd" id="_pwd2" class="form-control" size="40" placeholder="password" data-msg="패스워드를 "><br>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-lg-2 control-label">이름</label><br>
+            	<label class="col-lg-2 control-label">패스워드</label>
                 <div class="col-lg-10">
-               		<input type="text" name="name" id="_name" class="form-control onlyHangul" size="40" placeholder="name" data-msg="성함을 "><br>
+              	  	<input type="password" name="pwd" id="_pwd2" class="form-control" size="40" placeholder="password" data-msg="패스워드를 ">
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-lg-2 control-label">이메일</label><br>
+                <label class="col-lg-2 control-label">이름</label>
                 <div class="col-lg-10">
-                	<input type="text" name="email" id="_email" size="40" class="form-control" placeholder="e-mail" data-msg="이메일을 "><br>
+               		<input type="text" name="name" id="_name" class="form-control onlyHangul" size="40" placeholder="name" data-msg="성함을 ">
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-lg-2 control-label">별명</label><br>
+                <label class="col-lg-2 control-label">이메일</label>
                 <div class="col-lg-10">
-                	<input type="text" name="snickname" id="_nickname" class="form-control" placeholder="nickname" size="40"><br>
-                	<a href="#none" id="_btnGetNickName" class="form-control" title="회원가입" style="height: 30px;">닉네임체크</a><br>
-					<div id="_rgetnickname"></div><br>
-					<input type="text" name="nickname" id="_usernickname" class="pinput" size="40" data-msg="별명을 " readonly="readonly"><br>
-					<a href="#none" id="_btnRegi" class="form-control" style="height: 30px; title="회원가입">회원가입</a> 
+                	<input type="text" name="email" id="_email" size="40" class="form-control" placeholder="e-mail" data-msg="이메일을 ">
                 </div>
-                <div class="col-lg-10" style="">
-              <!--   <a href="#none" id="_btnRegi" class="form-control" style="height: 30px; title="회원가입">회원가입</a> -->
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">별명</label>
+                <div class="col-lg-10">
+                	<input type="text" name="snickname" id="_nickname" class="form-control" placeholder="nickname" size="40">
+                	<a href="#none" id="_btnGetNickName" class="form-control" title="회원가입" style="height: 30px; text-align: center;">닉네임체크</a>
+					<div id="_rgetnickname"></div>
+					<input type="text" name="nickname" id="_usernickname" class="form-control" size="40" data-msg="별명을 " readonly="readonly"> 
                 </div>
+                <!-- <div class="col-lg-10" style="">
+                <a href="#none" id="_btnRegi" class="form-control" style="height: 30px; title="회원가입">회원가입</a>
+                </div> -->
             </div>
        	</form>
       </div>
     </div>
     <div class="w3-container w3-border-top w3-padding-hor-16 w3-light-grey">
-      <button style="float: right;" onclick="document.getElementById('id03').style.display='none'" type="button" class="w3-btn w3-red">Cancel</button>      
+      <button style="float: left;" id="_btnRegi" type="button" onclick="document.getElementById('id02').style.display='block'"  class="w3-btn w3-round-large w3-white ">회원가입</button>
+      <button style="float: right;" onclick="document.getElementById('id03').style.display='none'" type="button" class="w3-btn w3-round-large w3-white">Cancel</button>      
     </div>
   </div>
 </div>
+
+<script>
+document.getElementsByClassName("tablink")[0].click();
+
+function openCity(evt, cityName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("city");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+    tablinks[i].classList.remove("w3-light-grey");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.classList.add("w3-light-grey");
+}
+
+function alarm() {
+	alert('로그인 하시거나 즐겨찾기 추가해 주세요');
+}
+
+</script>
 
 <nav class="navbar navbar-default navbar-fixed-top" style="background-color: #c53211;  padding-bottom: 10px;">
   <div class="container-fluid">
@@ -465,7 +686,7 @@ footer a:hover {
         	</a>
         </li>
 		<li class="nav-item" style="margin-left: 20px">
-						<a onclick="document.getElementById('id02').style.display='block'" class="w3-btn">
+						<a onclick="document.getElementById('id01').style.display='block'" class="w3-btn">
 						<img alt=""	src="img/main/man-user.png">
 						</a>
 					</li>
@@ -478,11 +699,7 @@ footer a:hover {
 <%
 List<ReviewDto> rvlist = (List<ReviewDto>)request.getAttribute("reviewlist");
 List<fileDto> imagelist = (List<fileDto>) request.getAttribute("imagelist");
-
-%>
-
-
-<!--  -->
+%>  
 
 <div class="modal fade" id="carouselModal" tabindex="-1" role="dialog" aria-labelledby="carouselModalLabel">
   <div class="modal-dialog" role="document">
@@ -513,7 +730,7 @@ List<fileDto> imagelist = (List<fileDto>) request.getAttribute("imagelist");
    			<br>
    			<hr>
    			<br>
-   			<div style="height: 400px;overflow-y: auto;">
+   			<div>
    				<p id="pause" ></p>
    			</div>
    		</div>
@@ -521,29 +738,36 @@ List<fileDto> imagelist = (List<fileDto>) request.getAttribute("imagelist");
 	<div>  
 	
 	
+		
+		<%-- <c:choose>
+		<c:when test="${review.rs_rating eq 1 }">
+		<img alt="" src="./img/like/1-1.png" style="width: 60px;" msg="1" title="1점" >
+		</c:when>
+		<c:when test="${review.rs_rating eq 3 }">
+		<img alt="" src="./img/like/3-1.png" style="width: 60px;" msg="3" title="3점" >
+		</c:when>
+		<c:when test="${review.rs_rating eq 5 }">
+		<img alt="" src="./img/like/5-1.png" style="width: 60px;" msg="5" title="5점" >
+		</c:when>
+		</c:choose> --%>
 	
 	
 	</div>
-       <div id="sync2" class="owl-carousel thumbnails-wrap" style=""> <!-- 이게 아래에 있는 썸네일 -->
-        		 <%
-        		String str = "?fit=around|148:152&crop=148:152;*,*&output-format=jpg&output-quality=80";
-        		
-        			
-        			for (int i=0;i<imagelist.size();i++){
-        				if(imagelist.get(i).getFile_name().contains("https://")){
-        					%>
-        					<div class="item"><img src="<%=imagelist.get(i).getFile_name() + str%>" class="img-responsive"></div>
-        					<%
-        				}else{
-        					%>
-        			          <div class="item"><img src="\image\<%=imagelist.get(i).getFile_name()%>" class="img-responsive"></div>
-        			          <%
-        				}
-        			
-        			}
-        		
+        <div id="sync2" class="owl-carousel thumbnails-wrap"> <!-- 이게 아래에 있는 썸네일 -->
+        		<%
+		for (int i=0;i<imagelist.size();i++){
+			if(imagelist.get(i).getFile_name().contains("https://")){
+				%>
+				<div class="item"><img src="<%=imagelist.get(i).getFile_name()%>" class="img-responsive"></div>
+				<%
+			}else{
+				%>
+		          <div class="item"><img src="\image\<%=imagelist.get(i).getFile_name()%>" class="img-responsive"></div>
+		          <%
+			}
 		
-          %>  
+		}
+          %>
           
         </div>     
       </div>
@@ -552,9 +776,40 @@ List<fileDto> imagelist = (List<fileDto>) request.getAttribute("imagelist");
   </div>
 </div>
 
+<!-- Navigation
+	<nav class="navbar fixed-top navbar-expand-lg navbar-dark fixed-top"
+		style="background-color: #c53211; padding-bottom: 10px">
+		<div class="container">
+			<a class="navbar-brand" href="home.do">EAT PLACE</a>
+			<button class="navbar-toggler navbar-toggler-right" type="button"
+				data-toggle="collapse" data-target="#navbarResponsive"
+				aria-controls="navbarResponsive" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		</div>
+
+		<div class="container">
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item"><a class="nav-link" href="about.html"><strong
+							style="color: white; margin-left: 20px">About</strong></a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="restaurntsList.do"><strong
+							style="color: white; margin-left: 20px">맛집 리스트</strong></a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="restaurantsInsert.do"><strong
+							style="color: white; margin-left: 20px">맛집 추가</strong></a></li>
+					<li class="nav-item" style="margin-left: 20px"><a
+						class="nav-link openMask" href="#"> <img alt=""
+							src="img/main/man-user.png">
+					</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav> -->
 
 <%
-String mstr = "?fit=around|254:300&crop=254:300;*,*&output-format=jpg&output-quality=80";
 if(imagelist==null||imagelist.size()<3){
 	%>
 	이미지가 등록된 리뷰가 없다..고 띄워야 함.
@@ -564,15 +819,13 @@ if(imagelist==null||imagelist.size()<3){
 	<br>
 	<br>
 	<br>
-	<div class="owl-carousel123 owl-theme" style="margin-top: 50px; margin-left: 5px" >
+	<div class="owl-carousel123 owl-theme" style="margin-top: 50px" >
 <%
 for(int i=0;i<imagelist.size();i++){
 %>
-	<div class="item" id="owlImages" style="margin-right: 5px">
+	<div class="item" id="owlImages">
 	<a href="#" data-toggle="modal" data-target="#carouselModal">
-	<img src="<%=imagelist.get(i).getFile_name()+mstr%>" style="height: 300px; margin-right: 3px" onclick="createImages(<%=imagelist%>)">
-		<%-- <img src="<%=imagelist.get(i).getFile_name()%>" style="height: 300px; margin-right: 3px"> --%>
-		
+		<img src="<%=imagelist.get(i).getFile_name()%>" style="height: 300px; margin-right: 3px">
 	</a>
 	</div>
 <%
@@ -588,7 +841,7 @@ for(int i=0;i<imagelist.size();i++){
 //plugin call
 $(document).ready(function(){
 $('.owl-carousel123').owlCarousel({
-	
+	margin : 10,
     autoWidth:true,
 	responsive : {
 		0 : {
@@ -603,79 +856,11 @@ $('.owl-carousel123').owlCarousel({
 	}
 })
 });
-
-function onefunc() {
-	$("#sync2 .owl-wrapper *").remove();
-	 <%
-	for (int i=0;i<imagelist.size();i++){
-		if(imagelist.get(i).getFile_name().contains("https://")){
-			%>
-			
-			$("#sync2 .owl-wrapper").append(
-					$('<div>').attr('class','owl-item').attr("style","width: 119px;").append(
-					    $('<div>').attr('class','item synced').append(
-					            $('<img>').attr('src','<%=imagelist.get(i).getFile_name() + str%>').attr('class','img-responsive').append(
-					            		
-				              ))));
-			<%
-		}else{
-			%>
-			$("#sync2 .owl-wrapper").append(
-					$('<div>').attr('class','owl-item').attr("style","width: 119px;").append(
-					    $('<div>').attr('class','item').append(
-					            $('<img>').attr('src','<%=imagelist.get(i).getFile_name()%>').attr('class','img-responsive').append(
-					            		
-				              ))));
-	          <%
-		}
-	
-	}
-		
-
- 	%>  
-	
-	/* 
-	var str = "?fit=around|148:152&crop=148:152;*,*&output-format=jpg&output-quality=80";
-	for (var i = 0; i < images.length; i++) {
-		$("#sync2 .owl-wrapper").append(
-				$('<div>').attr('class','owl-item').attr("style","width: 119px;").append(
-				    $('<div>').attr('class','item').append(
-				            $('<img>').attr('src',images[i]+str).attr('class','img-responsive').append(
-				            		
-			              ))));  
-	} 
-	
-	  var re_str = ['삼성동','데이트','삼겹살','모임','이태원','강남','카페'];
-		for (var i = 0; i < re_str.length; i++) {
-			$(".list-keywords").append(
-				    $('<li>').attr('class','list-keyword').append(
-				            $('<a>').attr('href','#').attr('onclick','search2(this)').append(
-				            		re_str[i]
-				              )));  
-		} */ 
-	 
-}
-
 </script>
 
 
  <br>
  <br>
- <%
- /* wannagolist 확인 작업 */
- boolean wannago = false;
-
- int rsseq = rvlist.get(0).getRs_seq();
-
- for(int i =0; i<wannagolist.size();i++){
-	
-	 if(rsseq == wannagolist.get(i).getRs_seq()){
-		 wannago = true;
-		 break;
-	 }
- }
- 
- %>
 <div class="column-wrapper">
 		<div class="column-contents">
 			<div class="inner">
@@ -692,62 +877,40 @@ function onefunc() {
 					<div>
 					
 						<span class="title">
-					<div class="col-md-8" style="text-align: left; padding-left: 0px">
+					<div class="col-md-8">
 							<font size="26" color="#000000" id="rs_seq" value="${rs.seq }">${rs.rs_name }</font>
 					</div>		
 							<div class="col-md-4">  
-								<img id="review_btn" class="review_writing_button" onclick="WriteReview('${rs.seq}','${login.id }');" src="img/button/reviewIcon.png">
-								<%if(wannago){%>
-									<a href="wannago.do?rs_seq=${rs.seq}&rs_name=${rs.rs_name}"><img id="like_btn_delete" src="img/button/likeIconR.png" ></a>
-								<%}else{%>
-									<img id="like_btn" onclick="like()" src="img/button/likeIcon.png" >
-								<%}
-								
-								%>
+								<img id="review_btn" class="review_writing_button" onclick="WriteReview('${rs.seq}');" src="img/button/reviewIcon.png">
+								<c:if test="${isLike ne true }">
+								<a href="insertLike.do?rs_seq=${rs.seq }&rs_name=${rs.rs_name}&id=${login.id}"><img id="like_btn" src="img/button/likeIcon.png" ></a>
+								</c:if>
+								<c:if test="${isLike eq true }">
+								<a href="#none"><img id="like_btn_delete" src="img/button/likeIconR.png" ></a>
+								</c:if>
 							</div>
 						</span>
-						
 					
 						
 					</div>
-					<script type="text/javascript">
-						/* 가고싶다 스크립트  */
-						
-						function like() {
-							
-							<%-- var isS = '<%=user%>'; --%>
-							 if (<%=loginok%>) {
-								
-								//location.href = "insertLike.do?rs_seq=${rs.seq }&rs_name=${rs.rs_name}&id=${login.id}";
-								location.href = "insertLike.do?rs_seq="+${rs.seq }+"&rs_name="+'${rs.rs_name}'+"&id="+'${login.id}';
-							
-							}else{
-								alert("로그인 해주십시오.");
-							}
-							
-						}
-						
-						
-						
-					</script>
 			
-					<div class="status branch_none" style="text-align: left;">
+					<div class="status branch_none">
 						 
-						<span class="cnt hit" style="color: gray;">
+						<span class="cnt hit">
 							<img src="img/button/readcount.png">
 						<!-- 조회수 --> ${rs.rs_readcount } 
 						</span> 
-						<span class="cnt review" style="color: gray;">
+						<span class="cnt review">
 							<img src="img/button/review.png">							<span>
 						<!-- 리뷰수 -->${reviewcount }
 							</span>
 						</span> 
-						<span class="cnt favorite" style="color: gray;">
+						<span class="cnt favorite">
 							<img src="img/button/fav.png">
 						<!-- 즐겨찾기 수 -->${likescount }
 						</span>
 						<br>
-						<img src="img/button/hr.png" style="margin-right: 400px; width: 900px;">
+						<img src="img/button/hr.png">
 						
 					</div>
 
@@ -758,7 +921,7 @@ function onefunc() {
 						<tbody style="text-align: left">
 							<tr style="text-align: left; color:#4f4f4f ">
 								<th style="width: 30%">주소</th>
-								<td>${rs.rs_address1 }<%--  ${rs.rs_address2 } --%></td>
+								<td>${rs.rs_address1 } ${rs.rs_address2 }</td>
 							</tr>
 
 							<tr class="only-desktop" style="text-align: left; color:#4f4f4f">
@@ -797,8 +960,9 @@ function onefunc() {
 									${rs2.rs_time }
 								</td>
 							</tr>
-						
-						
+				
+
+
 
 						</tbody>
 					</table>
@@ -812,8 +976,8 @@ function onefunc() {
 				<div id="map" style="width: 400px; height: 450px;"></div>
 				
 				
-				<img src="img/button/hr.png" style="margin-right: 350px; width: 920px;">
 				</header>
+
 				</section>
 				
 		<!-- 리뷰 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~REVIEW~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -920,93 +1084,60 @@ function onefunc() {
 				</tr>
 				<tr>
 				<td style="width: 15%; padding-top: 1px; vertical-align: top;"></td>
-				<!-- img td -->
-				<td id="review_image" style="width: 100%; padding-top: 1px; float:left; vertical-align: top;">
+				<td style="width: 70%; padding-top: 1px; vertical-align: top;">
 				<%		
 		//List<fileDto> f_list = eatReviewDao.getRv_Image(list.get(i).getSeq());
 		//List<String> f_list = (List<String>) request.getAttribute("getImg");
 		
 		if(f_list != null){
 			System.out.println("not null");
-			
-				if(f_list.size()<4){ //더보기 안붙음.
-					fileName = new String[f_list.size()];
-					for(int a=0 ; a<f_list.size();a++){
-					fileName[a] = f_list.get(a).getFile_name();
+			for(int a = 0;a<f_list.size();a++){
+				if(f_list.size()==1){
+					fileName = new String[1];			
+					fileName[0] = f_list.get(a).getFile_name();
 					//fileName[0] = f_list.get(a);
-					System.out.println("less than 4 f_list.size(): "+f_list.size());
-					//System.out.println("fileName has just 1:"+fileName[0]);
-					if(fileName[a].contains("https://")){
+					System.out.println("f_list.size(): "+f_list.size());
+					System.out.println("fileName has just 1:"+fileName[0]);
+					if(fileName[0].contains("https://")){
 						%>
-						<a href="#" data-toggle="modal" data-target="#carouselModal">
-						<img alt="" src="<%=fileName[a]%>" style="float:left; width: 120px; height:120px; margin-left: 10px;"<%--  onclick="reviewDetail(<%=list.get(i).getSeq()%>)" --%>>
-						</a>
+						<img alt="" src="<%=fileName[0] %>" style="width: 75px; height: 75px;" data-toggle="modal" data-target="#carouselModal" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
 						<% 
-					}else{//does not contain 'https://'
+					}else{
 					%>
-					<a href="#" data-toggle="modal" data-target="#carouselModal">
-					<img alt="" src="/image/<%=fileName[a] %>" style="float:left; width: 120px; height:120px; margin-left: 10px;" <%-- onclick="reviewDetail(<%=list.get(i).getSeq()%>)" --%>>
-					</a>
+					<img alt="" src="/image/<%=fileName[0] %>" style="width: 75px; height: 75px;" data-toggle="modal" data-target="#carouselModal" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
 					
-					<%}
-				 }
+					<%} 
 				}
-				else{ //f_list.size()>4 일때 더보기가 추가하여 붙음.
-					fileName = new String[4];
-					int remain_picture_count = f_list.size() - 4; 
-					for(int a = 0 ; a<4 ; a++){
-					fileName[a] = f_list.get(a).getFile_name();					
-					System.out.println("more than 4 f_list.size(): "+f_list.size());
-					
+				else{
+					fileName = new String[f_list.size()];				
+					fileName[a] = f_list.get(a).getFile_name();
+					//fileName[a] = f_list.get(a);
+					System.out.println("f_list.size(): "+f_list.size());
+					System.out.println("fileName more than 1:"+fileName[a]);
 					if(fileName[a].contains("https://")){
-						if(a==3){//마지막 부분에 이미지 위 글자 새김.
 					%>
-					<!-- <div style="position: relative;"> -->
-					<a href="#" data-toggle="modal" data-target="#carouselModal">
-					<img alt="" src="<%=fileName[a] %>" style="float:left; width: 120px; height:120px; margin-left: 10px;">
-					</a>
-					<span style="position: static; top: auto; left: auto; color: orange;"><h1>+<%=remain_picture_count %></h1></span>
-					<!-- </div> -->
+					<img alt="" src="<%=fileName[a] %>" style="width: 75px; height: 75px;" data-toggle="modal" data-target="#carouselModal" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
 					<%
-					}else{//마지막 이전의 그림들이 출력되는 곳..
+					}else{
 					%>
-					<a href="#" data-toggle="modal" data-target="#carouselModal">
-					<img alt="" src="<%=fileName[a] %>" style="float:left; width: 120px; height:120px; margin-left: 10px;">
-					</a>
+					<img alt="" src="/image/<%=fileName[a] %>" style="width: 75px; height: 75px;" data-toggle="modal" data-target="#carouselModal" onclick="reviewDetail(<%=list.get(i).getSeq()%>)">
 					<% }
 					}
-						else{//fileName이 http://가 포함되지 않은 경우..
-						if(a==3){%>
-							<!-- <div style="position: relative;"> -->
-							<a href="#" data-toggle="modal" data-target="#carouselModal">
-							<img alt="" src="/image/<%=fileName[a] %>" style="float:left; width: 120px; height:120px; margin-left: 10px;">
-							</a>
-							<span style="position: static; top: auto; left: auto; color: orange;"><h1>+<%=remain_picture_count %></h1></span>
-							<!-- </div> -->
-							
-						<%}else{%>
-						<a href="#" data-toggle="modal" data-target="#carouselModal">
-						<img alt="" src="/image/<%=fileName[a] %>" style="float:left; width: 120px; height:120px; margin-left: 10px;">
-						</a>
-						
-					 <%
-					}
-				}
 			}
-		}
-	
 		}else if(f_list == null){
 			System.out.println("null");
-		}		
+		}	
+		
+		
 		%>	
 				</td>
 				<td style="width: 15%; padding-top: 1px; vertical-align: top;">
 				</td>
 				
 				</tr>
-				 
+				
 				<tr style="border: none">
-				<td colspan="3" width="100" style="border-bottom: 1px solid #c8c8c8; padding-top: 5px;"></td>
+				<td colspan="3" width="100" style="border-bottom: 1px solid #c8c8c8;"></td>
 				</tr>
 				
 			</table>
@@ -1016,232 +1147,54 @@ function onefunc() {
 		}
 	%>   
     </ul>
-   
-   
-    <div id="js-btn-wrap" class="btn-wrap" style="float: right;"><a href="javascript:;" class="button">더보기</a> </div>
+    <div id="js-btn-wrap" class="btn-wrap" style="float: right;"> <a href="javascript:;" class="button">더보기</a> </div>
   </div>
   </div>
+<!--   <p class="back"><a class="btn" href="https://nanati.me/more-btn-js-load/">← 블로그로 돌아가기</a></p> -->
+<!-- <div class="ad"> --> 
+   <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>  -->
+   <!--  demo-more-btn-js-load  -->
+   <!--  <ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1534417142445600"
+     data-ad-slot="9710655373"
+     data-ad-format="auto"></ins>  -->
+    <!-- <script>
+(adsbygoogle = window.adsbygoogle || []).push({}); 
+</script> -->
 
+<!-- </div> -->
   
 </div>       
     
        <br><br>
      
          
-         <script type="text/javascript">
-         
-         $("#review_image a img").click(function(){
-        	 $("#sync2 .owl-wrapper *").remove();
-        		
-        	 var img=$(this).attr('src');
-        	 var rseq = $("#rs_seq").attr("value");
-        	 
-        	 if(img.indexOf("https://") !=-1){
-					var	filename=img;
-				}else if(img.indexOf("https://")==-1){
-					var filename=img.substring(7);
-				} 
-        	 
-        	 $('#mainImage').attr('src',img);
-        	 
-        	 var revData2 = {
-						'filename':filename,
-						'rseq': rseq
-				};
-        	 $.ajax({
-					url:"getRPdetail.do",
-					datatype:'json',
-					data:revData2,
-					type:'post',
-					async:true,
-					success:function(data){
-						//alert("success");
-						//alert(data.review.rs_content);
-						$("#pause").html(data.review.rs_content);
-						$("#p_id").html(data.review.id);
-						var rating =data.review.rs_rating;
-						if(rating===1){
-							$("#p_ratingP").attr('src','./img/like/1-2.png');	
-						}else if(rating===3){
-							$("#p_ratingP").attr('src','./img/like/3-2.png');
-						} else if(rating===5){
-							$("#p_ratingP").attr('src','./img/like/5-2.png');
-						}
-						
-						reviewDetail(data.review.seq); //reviewDetail에 리뷰 시퀀스 넣어줌
-						
-						 
-						 
-					},
-					error:function(req, stu, err){
-						alert("error");
-						alert(stu + " " + err);
-					}
-				});
-        	 
-        	 
-				
-		 });
-       
-		/*  $("#review_image a img").click(function(){
-			 var img=$(this).attr('src');
-			 var rseq = $("#rs_seq").attr("value");
-
-
-				 if(img.indexOf("https://") !=-1){
-					var	filename=img;
-				}else if(img.indexOf("https://")==-1){
-					var filename=img.substring(7);
-				} 
-				// alert(img);
-				$('#mainImage').attr('src',img);
-				
-				var revData2 = {
-						'filename':filename,
-						'rseq': rseq
-				};
-				
-				
-				 $.ajax({
-					url:"getRPdetail.do",
-					datatype:'json',
-					data:revData2,
-					type:'post',
-					async:true,
-					success:function(data){
-						//alert("success");
-						//alert(data.review.rs_content);
-						$("#pause").html(data.review.rs_content);
-						$("#p_id").html(data.review.id);
-						var rating =data.review.rs_rating;
-						if(rating===1){
-							$("#p_ratingP").attr('src','./img/like/1-2.png');	
-						}else if(rating===3){
-							$("#p_ratingP").attr('src','./img/like/3-2.png');
-						} else if(rating===5){
-							$("#p_ratingP").attr('src','./img/like/5-2.png');
-						}
-						
-						 reviewDetail(data.review.seq); //reviewDetail에 리뷰 시퀀스 넣어줌
-						 
-						 
-					},
-					error:function(req, stu, err){
-						alert("error");
-						alert(stu + " " + err);
-					}
-				});
-				 
-				
-		 }); */
-         
- 		function reviewDetail(seq) {
-//      		alert("seq:"+seq);
-      		
- 			$.ajax({
- 				url:"getReviewDetail.do",					
- 				type:"POST",
- 				data:"seq="+seq,
- 				dataType:"json",
- 				async:true,
- 								
- 				success:function(json){
- 					//alert("getReviewDetail.do success");
-					createImages(json.flist); //받아온 WildCard(rdto, flist)
- 					/*alert("success");
- 					console.log(json);
- 					console.log(json.flist);
- 					console.log(json.rdto);
- 					console.log("json.flist.length"+json.flist.length);	
- 					//alert(data.review.rs_content);
- 					//$("#pause").html(data.review.rs_content);
- 					
- 				 	for (var i = 0; i < json.flist.length; i++) {
- 						
- 						
- 						<a target="_blank" href="img_forest.jpg">
-   						<img src="img_forest.jpg" alt="Forest">
- 						</a>   class='img-responsive'
- 						
-       				//	var createimg = "<a target='_blank' href='"+json.flist[i]+"'><img src="+json.flist[i]+"></a>";
-       					/* if(i=0){
-       					 createimg = "<div class=item active><img src="+json.flist[i]+" style='width:100%'></div>";
-       					/* $("#mainImage11").append(createimg);  */
-       					/* }
-       					else{
- 						 createimg = "<div class=item><img src="+json.flist[i]+" style='width:100%'></div>";
- 						 
-       					} */
-       					//$("mainImage11").attr("src",json.flist[i]);	
- 						//console.log("createimg: "+createimg);
- 						//$("#mainImage11").append(createimg);
- 						
-      					//$("#pause11").html(json.rdto.rs_content);
- 						//$("#p_id11").html(json.rdto.id);
- 						/* var newimg = document.createElement('img');
- 						newimg.setAttribute("src",json.flist[i]); */
- 						//newimg.setAttribute("width","100%");
- 						
- 						/* $("#img").attr("src",json.flist.get(i));						
- 						$("#test").append(json[i].key); */
- 						//$(".item").append(newimg);
- 						
- 					//}		
- 					//$("#test").html(json);
- 				},
- 				error:function(req, stu, err){
- 					alert("error");
- 					alert(stu + " " + err+""+req);					
- 				}
- 			});
- 			
- 		}
-		
-		function test(a) {
-			alert("테스트입니다."+a);
-			$('#mainImage').attr('src',a);
+       <script type="text/javascript">
+     	function reviewDetail(seq) {
+			alert("seq:"+seq);
+			$("#myModal").modal({backdrop:"static"});
+			
+			//location.href = "reviewDetail.do?seq="+seq;
 		}
-         
-		function createImages(objImageInfo) { 
-			var images = objImageInfo; 
-			var strDOM = ''; 
-			/* alert('createImages');
-			alert(images.length);
-			alert(images[0]); */
-			
-			var str = "?fit=around|148:152&crop=148:152;*,*&output-format=jpg&output-quality=80";
-				for (var i = 0; i < images.length; i++) {
-					$("#sync2 .owl-wrapper").append(
-							$('<div>').attr('class','owl-item').attr("style","width: 119px;").append(
-						    $('<div>').attr('class','item').append(
-						    		
-						            $('<img>').attr('onclick','test("'+images[i]+'")').attr('src',images[i]+str).attr('class','img-responsive').append(
-						            		
-						              ))));  
-				} 
-			
-		/* 	for (var i = 0; i < images.length; i++) {
-			
-				// N번째 이미지 정보를 구하기
-
-				// N번째 이미지 패널을 생성 
-				//strDOM += ''; 
-				strDOM += '<div class="item">';
-				strDOM += '<img src="' + images[i] + '"  class="img-responsive">'; 
-				strDOM += '</div>'; 
-				} 
-			
-			// 이미지 컨테이너에 생성한 이미지 패널들을 추가하기 
-		
-			$("#sync2").html(strDOM);
-
-			alert(strDOM); */
-
-			}		
- 		
- 		
-         </script>
-     
+       
+       function show_morelist(index) {
+    	  /*  var Rv_array = [];
+    	   var temp, item, a, i, id;
+    	      	   
+    	   console.log("review_item: "+review_item);
+    	   Rv_array = review_item.split("],");
+    	   console.log("Rv_array.length: "+Rv_array.length);
+    	   
+    	   var remain_array = new Array[Rv_array.length - 5];
+    	       	       	   
+    	    for(i = 0;i<Rv_array.length;i++){
+    	  	console.log("console array: "+Rv_array[i]);
+    	    } */
+    	  	
+    	   	    	  
+       }       
+       </script>
 		
        <br><br>
           <!-- review_main end -->
@@ -1261,17 +1214,15 @@ $(document).ready(function(){
 		var img=$(this).attr('src');
 		//var	filename=img.substring(7);
 		
-		if(img.indexOf("https://") !=-1){
-			var filename=jQuery.trim(img.split( '?', 1 ));
-			
+		 if(img.indexOf("https://") !=-1){
+			var	filename=img;
 		}else if(img.indexOf("https://")==-1){
 			var filename=img.substring(7);
 		} 
 		
 		
 		//alert(filename);
-		$('#mainImage').attr("src",img.split( '?', 1 ));
-		//$('#mainImage').attr('src',this);
+		$('#mainImage').attr("src",img);
 		//alert($("#pause").val());
 		
 		var revData = {
@@ -1308,22 +1259,14 @@ $(document).ready(function(){
 			}
 		});  
 		
-		 
+		
 		
 	 }); 
 	 
 	 $("#owlImages a img").click(function(){
-			var img=$(this).attr('src');
-			//var	filename=img.substring(7);
-			
-			if(img.indexOf("https://") !=-1){
-				var filename=jQuery.trim(img.split( '?', 1 ));
-				
-			}else if(img.indexOf("https://")==-1){
-				var filename=img.substring(7);
-			} 
-			
-			$('#mainImage').attr("src",img.split( '?', 1 ));
+		 var img=$(this).attr('src');
+		//	alert(img);
+			$('#mainImage').attr("src",img);
 			
 			var revData = {
 					'filename':filename,
@@ -1331,17 +1274,16 @@ $(document).ready(function(){
 			};
 			
 			//var test=$("#rs_seq").attr("value");
-			//alert("success1");
- 			 $.ajax({
+			alert("success1");
+			 $.ajax({
 				url:"getRPdetail.do",
 				datatype:'json',
 				data:revData,
 				type:'post',
 				async:true,
 				success:function(data){
-			//		alert("success");
-
-			//		alert(data.review.rs_content);
+					//alert("success");
+					alert(data.review.rs_content);
 					$("#pause").html(data.review.rs_content);
 					$("#p_id").html(data.review.id);
 					var rating =data.review.rs_rating;
@@ -1357,10 +1299,7 @@ $(document).ready(function(){
 					alert("error");
 					alert(stu + " " + err);
 				}
-			});
-			  
-			 
-			 
+			});  
 	 });
 
 });
@@ -1370,7 +1309,6 @@ $(document).ready(function() {
 	 
 	  var sync1 = $("#sync1");
 	  var sync2 = $("#sync2");
-	  
 	 
 	  sync1.owlCarousel({
 	    singleItem : true,
@@ -1388,9 +1326,9 @@ $(document).ready(function() {
 	  });
 	 
 	  sync2.owlCarousel({
-	    items : 8,
-	    itemsDesktop      : [1199,8],
-	    itemsDesktopSmall     : [979,8],
+	    items : 6,
+	    itemsDesktop      : [1199,6],
+	    itemsDesktopSmall     : [979,6],
 	    itemsTablet       : [768,4],
 	    itemsMobile       : [479,3],
 	    pagination:false,
@@ -1466,14 +1404,8 @@ $(function(){
 	});
  });
  
-function WriteReview(seq,id) {
-	console.log(seq,id);
-	if(id != null && id!=''){
+function WriteReview(seq) {
 	location.href='WriteReview.do?seq='+seq;
-	}else{
-		alert("로그인하여 주십시요.");
-	}
-	
 }	
 </script>
 <script>
