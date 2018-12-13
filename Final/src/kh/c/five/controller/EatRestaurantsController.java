@@ -119,9 +119,12 @@ public class EatRestaurantsController {
 	}
 
 	@RequestMapping(value="restaurntsList.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String restaurntsList(Model model) {
+	public String restaurntsList(Model model, RegiDto dto2) {
 		
 		logger.info("EatRestaurantsController restaurntsList"+new Date());
+		
+		List<RegiDto> list2 = eatRestaurantsService.getRankList(dto2);
+		model.addAttribute("RankList", list2);
 		
 		List<RegiDto> rslist = eatRestaurantsService.getRs_List();
 		List<ReviewParam> rplist = new ArrayList<>();
@@ -348,11 +351,12 @@ public class EatRestaurantsController {
 	}
 	
 	@RequestMapping(value="search.do",  method={RequestMethod.GET, RequestMethod.POST})
-	public String search(String s_keyword, EatParam param, Model model, HttpServletResponse response ) throws Exception {
+	public String search(String s_keyword, EatParam param, Model model, HttpServletResponse response, RegiDto dto2 ) throws Exception {
 		
 		System.out.println("검색어 : "+s_keyword);
 		System.out.println("param: "+param.toString());
-		
+		List<RegiDto> list2 = eatRestaurantsService.getRankList(dto2);
+		model.addAttribute("RankList", list2);
 		// paging 처리
 		int sn = param.getPageNumber();
 		int start = (sn) * param.getRecordCountPerPage() + 1;
@@ -527,9 +531,13 @@ public class EatRestaurantsController {
 	}
 
 	@RequestMapping(value="KFBest.do",  method={RequestMethod.GET, RequestMethod.POST})
-	public String restaurantBest(Model model, RegiDto dto) {
+	public String restaurantBest(Model model, RegiDto dto, RegiDto dto2) {
 		logger.info("EatRestaurantsController restaurantBest"+new Date());
 		System.out.println("KFDTO:" + dto);
+		
+		List<RegiDto> list2 = eatRestaurantsService.getRankList(dto2);
+		model.addAttribute("RankList", list2);
+		
 		List<RegiDto> bestlist = eatRestaurantsService.bestlist(dto);
 		System.out.println("KFBEST = " + bestlist);
 		List<ReviewDto> reviewlist = new ArrayList<>();
@@ -542,6 +550,8 @@ public class EatRestaurantsController {
 			reviewlist.add(review);
 						
 		}		
+
+		
 		
 		List<ReviewParam> rplist = new ArrayList<>();
 		for (int i = 0; i < bestlist.size(); i++) {
@@ -566,9 +576,11 @@ public class EatRestaurantsController {
 	}
 	
 	@RequestMapping(value="GuBest.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String GuBest(Model model, RegiDto dto) {
+	public String GuBest(Model model, RegiDto dto, RegiDto dto2) {
 		logger.info("EatRestaurantsController GuBest "+ new Date());
 		System.out.println(dto.toString());
+		List<RegiDto> list2 = eatRestaurantsService.getRankList(dto2);
+		model.addAttribute("RankList", list2);
 		List<RegiDto> GuBestlist = eatRestaurantsService.Gubestlist(dto);
 		List<ReviewDto> reviewlist = new ArrayList<>();
 		for (int i = 0; i < GuBestlist.size(); i++) {
@@ -606,9 +618,11 @@ public class EatRestaurantsController {
 	}
 	
 	@RequestMapping(value="keyword.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String keyword(Model model, RegiDto dto) {
+	public String keyword(Model model, RegiDto dto, RegiDto dto2) {
 		logger.info("EatRestaurantsController GuBest "+ new Date());
 		System.out.println(dto.toString());
+		List<RegiDto> list2 = eatRestaurantsService.getRankList(dto2);
+		model.addAttribute("RankList", list2);
 		List<RegiDto> keywordlist = eatRestaurantsService.keywordbestlist(dto);
 		List<ReviewDto> reviewlist = new ArrayList<>();
 		for (int i = 0; i < keywordlist.size(); i++) {

@@ -1,3 +1,5 @@
+<%@page import="kh.c.five.model.EatMemberDto"%>
+<%@page import="kh.c.five.model.wannagoDto"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Collections"%>
 <%@page import="java.net.URLDecoder"%>
@@ -55,7 +57,7 @@
  
   </style>
   <%
-
+  EatMemberDto user = (EatMemberDto)session.getAttribute("login");
 
 List<Cookie> recentCookie = new ArrayList(); 
 
@@ -311,6 +313,41 @@ outline: 0;
 
 <body>
 
+<!-- 최근 & 가고싶다 모달 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/lib/w3.css">
+<style>
+	.city {display:none}
+	.pagination {
+    display: inline-block;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.w3-animate-zoom{
+	position: relative;
+	top: -45px;
+	right: -600px;
+	width: 380px;
+	height: 500px;
+}
+ .w3-padding{
+ position: absolute;
+ top:500px;
+ width: 380px;
+ 
+ 
+ }
+
+</style>
+
+<body>
+
 
 <!-- 블랙스크린 -->
 <div id="black_screen" onclick="displayVsearch()" class="black_screen" style="
@@ -323,6 +360,305 @@ outline: 0;
     background: rgba(0,0,0,0.8);
     display: none;">></div>
 
+<!-- 가고싶어 제발 -->
+<div class="w3-container ">
+<div id="id01" class="w3-modal" style="z-index: 111;">
+ <div class="w3-modal-content w3-card-4 w3-animate-zoom">
+ 	<div>
+  		<ul class="pagination w3-white w3-border-bottom" style="height:50px; width:100%; position:relative; list-style:none;">
+  		<li style="position:relative; height:100%; width:50%; float:left; text-align: center;"><a href="#" class="tablink" onclick="openCity(event, 'London')" style="width: 100%; height: 100%; border-top: 7px;">최근 본 맛집</a></li>
+  		<li style="position:relative; height:100%; width:50%; float:left; text-align: center;"><a href="#" class="tablink" onclick="openCity(event, 'Paris')" style="width: 100%; height: 100%; border-top: 7px;">가고싶다</a></li>
+  		</ul>
+ 	</div> 
+	<!-- 최근 본 맛집 -->
+
+  <div id="London" class="w3-container city" style="overflow-y: scroll; height: 480px;">
+  <form action="" name="frmForm5" id="_frmForm5"  method="post">
+  	 <div style="display:inline-block; position:absolute; top:3.3em; right: 10px;">
+  		<a href="#" id="clear" style="text-align: right;"><font style="color: #BDBDBD">x clear all</font></a>
+  	</div> 
+ </form>
+ <%
+ 	
+    List<RegiDto> RankList = (List<RegiDto>)request.getAttribute("RankList");
+ 
+ %>
+<%
+for (int i=1;i<cookies.length;i++){ 
+	if(cookies[i].getName().contains("rc")){
+		
+	}else{
+		String cn = URLDecoder.decode(cookies[i].getName(), "utf-8");
+		String cookieAdd = "";
+		double cookieRating = 0;
+		String cookiePic = "";
+		int cookieLike = 0;
+		String cookiename = "";
+		for(int j =0; j < RankList.size(); j++){
+			
+		if( RankList.get(j).getSeq() == Integer.parseInt(cookies[i].getValue())){
+			System.out.println(RankList.get(j).getRs_address1());
+			cookieAdd = RankList.get(j).getRs_address1();
+			cookieRating = RankList.get(j).getRs_rating();
+			cookiePic = RankList.get(j).getRs_picture();
+			cookieLike = RankList.get(j).getSeq();
+			cookiename = RankList.get(j).getRs_name();
+			break;
+		}
+	 }
+	
+%>
+ 
+
+<div style="width:350px; height:100px; background-color:; box-sizing: border-box; border: 1 solid;">
+	
+	<div>
+
+		<!-- 사진 -->
+		<div style="display:inline-block; position:relative; width: 80px; height: 90px; margin-top:3px; margin-left:10px;">
+			<a><img alt="" src="<%=cookiePic%> " style="width: 80px; height: 90px;"></a>
+		</div>
+	
+		<!-- 이름 -->
+		<div style="display:inline-block; position:relative; width: 30%; height: 45%; top:-20px; left:20px;">
+			<a href="rsdetail.do?seq=<%=cookies[i].getValue()%>" style="text-align: center;"><b><font style="font-size: medium;text-align:center;"><%=cn%></font></b></a>
+		</div>
+		<!-- 주소 -->
+		<div style="display:inline-block; position:relative; width: 55%; height: 30%; top:-55px; left:120px;">
+			<a><font style="font-size: x-small;"><%=cookieAdd %></font></a>
+		</div>
+
+		<!-- 평점 --> 
+		<div style="display:inline-block;  position:relative; width: 10%; height: 20%; top:-88px; right:-20px;">
+			<a><font style="color:#c53211 "><%=cookieRating %></font></a>
+		</div>
+		<!-- 즐찾 -->
+		<div style="display:inline-block;  position:relative; width: 15%; height: 10%; top:-60px; right: -40px;">
+			<a href="wannago.do?rs_seq=<%=cookieLike %>&rs_name=<%=cookiename%>"><img id="like_btn" src="img/button/likeIcon.png" style="width: 45px; height: 45px;" ></a>
+		</div>
+
+ 	</div>
+</div>
+<%-- 
+<table border="1" width="250">
+
+<tr>
+
+<!-- 표현식 : 변수의 값 출력, 메소드의 결과값 출력, 연산 -->
+
+JSP주석 소스보기할때 보여지지 않음
+
+<td><%=i%></td>
+<td><a href="rsdetail.do?seq=<%=cookies[i].getValue()%>"><%=cn%></a></td>
+
+
+
+</table> --%>
+<%} %>
+  <%} 
+
+  %>
+  </div>
+<%-- 	<!-- 가고 싶다 -->
+  <div id="Paris" class="w3-container city" style="overflow-y: scroll; height: 480px;">
+   
+		
+<c:if test="${empty wannagolist }">
+		가고싶은 가게를 추가해주세요~
+</c:if>				
+					
+<%
+List<wannagoDto> wannagolist = (List<wannagoDto>)request.getAttribute("wannagolist");
+List<RegiDto> RankList2 = (List<RegiDto>)request.getAttribute("RankList");
+
+if(wannagolist.size()>1 && wannagolist!=null){
+for(int i=0; i<wannagolist.size(); i++){
+	String wannaname = "";
+	double wannaRating = 0;
+	String wannaPic = "";
+	String wannacategory = "";
+	String wannaaddress = "";
+	int wannalike = 0;
+	
+	for(int j=0; j<RankList2.size(); j++){
+		if(RankList2.get(j).getSeq() == wannagolist.get(i).getRs_seq()){
+			
+			wannaname = RankList2.get(j).getRs_name();
+			wannaRating = RankList2.get(j).getRs_rating();
+			wannaPic = RankList2.get(j).getRs_picture();
+			wannacategory = RankList2.get(j).getRs_category();
+			wannaaddress = RankList2.get(j).getRs_address1();
+			
+			wannalike = RankList2.get(j).getSeq();
+			
+			break;
+		}
+		%>	
+	<% }%>
+	
+
+
+<div style="width:350px; height:100px; background-color:; box-sizing: border-box; border: 1 solid; ">
+	<div>
+		<!-- 사진 -->
+		<div style="display:inline-block; position:relative; width: 80px; height: 90px; margin-top:3px; margin-left:10px;">
+			<a><img alt="" src="<%=wannaPic%> " style="width: 80px; height: 90px;"></a>
+		</div>
+	
+		<!-- 이름 -->
+		<div style="display:inline-block; position:relative; width: 30%; height: 45%; top:-20px; left:20px;">
+			<a href="rsdetail.do?seq=<%=wannalike%>" style="text-align: center;"><b><font style="font-size: medium;text-align:center;"><%=wannaname%></font></b></a>
+		</div>
+		<!-- 주소 -->
+		<div style="display:inline-block; position:relative; width: 55%; height: 30%; top:-55px; left:120px;">
+			<a><font style="font-size: x-small;"><%=wannaaddress %></font></a>
+		</div>
+
+
+		<!-- 평점 --> 
+		<div style="display:inline-block;  position:relative; width: 10%; height: 20%; top:-88px; right:-20px;">
+			<a><font style="color:#c53211 "><%=wannaRating %></font></a>
+		</div>
+		<!-- 즐찾 -->
+		<div style="display:inline-block;  position:relative; width: 15%; height: 10%; top:-60px; right: -40px;">
+			<a href="wannago.do?rs_seq=<%=wannalike %>&rs_name=<%=wannaname%>"><img id="like_btn" src="img/button/likeIcon.png" style="width: 45px; height: 45px;" ></a>
+		</div>
+
+ 	</div>
+	
+</div>
+
+	        	
+					<% }%>
+						        	<% }%>
+  </div>
+  
+   --%>
+  <div class="w3-container w3-light-grey w3-padding">
+  <%if(user == null){%>
+		<!-- <a class=" openMask" href="#">로그인</a> -->
+		<button onclick="document.getElementById('id02').style.display='block'"  class="w3-btn w3-round-large w3-white ">Login</button>
+  <%} else{%>
+		<a class="" href="#" ><%=user.getId()%>님</a>
+		<button onclick="document.getElementById('id01').style.display='none'"  class="w3-btn w3-round-large w3-white ">
+			<a id="_btnLogout" class="" href="logout.do" > 로그아웃 </a>
+		</button>
+		<!-- <a id="_btnLogout" class="" href="logout.do" > 로그아웃 </a> -->
+  <%} %>
+    <button class="w3-btn w3-right w3-round-large w3-white" onclick="document.getElementById('id01').style.display='none'">Close</button>
+  </div>
+ </div>
+</div>
+</div>
+
+<!-- 로그인 모달 -->
+<div id="id02" class="w3-modal" style="z-index: 120;">
+  <span onclick="document.getElementById('id02').style.display='none'" class="w3-closebtn w3-hover-red w3-container w3-padding-hor-8 w3-display-topright">&times;</span>
+  <div class="w3-modal-content w3-card-9 w3-animate-zoom" style="right:-10px; max-width:600px; height: 400px;">
+    <div class="w3-center"><br>
+    	<h1>Login</h1>
+    </div>
+    <div class="w3-container">
+      <div class="w3-section">
+      	<form action="loginAf.do" name="frmForm" id="_frmForm"  method="post">
+	        <label><b>Id</b></label><br>
+	        <input class="w3-input w3-border w3-margin-bottom" id="_userid" name="_userid" required="required" type="text" placeholder="Id" style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;border-top-left-radius: 10px;border-top-right-radius: 10px;"><br>
+	        <label><b>Password</b></label><br>
+	        <input class="w3-input w3-border w3-margin-bottom" type="password" id="_pwd" name="_pwd" required="required" placeholder="Password" style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;border-top-left-radius: 10px;border-top-right-radius: 10px;">
+	        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="w3-btn w3-btn-round w3-white" id="_btnLogin" style="width:70%; text-align: center;">로그인</button><br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="document.getElementById('id03').style.display='block'" class="w3-btn w3-btn-round w3-white" style="width:70%; text-align: center;">회원가입</button>
+       	</form>
+      </div>
+    </div>
+    <div class="w3-container w3-border-top w3-padding-hor-16 w3-light-grey">
+      <button onclick="document.getElementById('id02').style.display='none'" type="button" class="w3-btn w3-round-large w3-white" style="float: right;">Cancel</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- 회원가입 모달 -->
+<div id="id03" class="w3-modal" style="z-index: 130;">
+  <span onclick="document.getElementById('id03').style.display='none'" class="w3-closebtn w3-hover-red w3-container w3-padding-hor-8 w3-display-topright">&times;</span>
+  <div class="w3-modal-content w3-card-9 w3-animate-zoom" style="right:-10px; width:600px; height: 680px;">
+  
+    <div class="w3-center"><br>
+    	<h1>회원가입</h1>
+    </div>
+    <div class="w3-container">
+      <div class="w3-section">
+      	<form action="" method="post" id="_frmForm2" name="frmForm2">
+      		<div class="form-group">
+                <label class="col-lg-2 control-label">아이디</label>
+                <div class="col-lg-10">
+					<input type="text" name="sid" id="_id2" class="form-control" size="40" placeholder="id"><br>
+					<a href="#none" id="_btnGetId" class="form-control" title="회원가입" style="height: 30px; text-align: center;">아이디체크</a>
+					<div id="_rgetid"></div>
+					<input type="text" name="id" id="_userid2" class="form-control" size="40" data-msg="아이디를 " readonly="readonly">
+                </div>
+            </div>
+            <div class="form-group">
+            	<label class="col-lg-2 control-label">패스워드</label>
+                <div class="col-lg-10">
+              	  	<input type="password" name="pwd" id="_pwd2" class="form-control" size="40" placeholder="password" data-msg="패스워드를 ">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">이름</label>
+                <div class="col-lg-10">
+               		<input type="text" name="name" id="_name" class="form-control onlyHangul" size="40" placeholder="name" data-msg="성함을 ">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">이메일</label>
+                <div class="col-lg-10">
+                	<input type="text" name="email" id="_email" size="40" class="form-control" placeholder="e-mail" data-msg="이메일을 ">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">별명</label>
+                <div class="col-lg-10">
+                	<input type="text" name="snickname" id="_nickname" class="form-control" placeholder="nickname" size="40">
+                	<a href="#none" id="_btnGetNickName" class="form-control" title="회원가입" style="height: 30px; text-align: center;">닉네임체크</a>
+					<div id="_rgetnickname"></div>
+					<input type="text" name="nickname" id="_usernickname" class="form-control" size="40" data-msg="별명을 " readonly="readonly"> 
+                </div>
+                <!-- <div class="col-lg-10" style="">
+                <a href="#none" id="_btnRegi" class="form-control" style="height: 30px; title="회원가입">회원가입</a>
+                </div> -->
+            </div>
+       	</form>
+      </div>
+    </div>
+    <div class="w3-container w3-border-top w3-padding-hor-16 w3-light-grey">
+      <button style="float: left;" id="_btnRegi" type="button" onclick="document.getElementById('id02').style.display='block'"  class="w3-btn w3-round-large w3-white ">회원가입</button>
+      <button style="float: right;" onclick="document.getElementById('id03').style.display='none'" type="button" class="w3-btn w3-round-large w3-white">Cancel</button>      
+    </div>
+  </div>
+</div>
+
+<script>
+document.getElementsByClassName("tablink")[0].click();
+
+function openCity(evt, cityName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("city");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+    tablinks[i].classList.remove("w3-light-grey");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.classList.add("w3-light-grey");
+}
+
+function alarm() {
+	alert('로그인 하시거나 즐겨찾기 추가해 주세요');
+}
+
+</script>
 
 <%!
 public String dot3(String msg){
@@ -489,10 +825,11 @@ String recomend = "추천검색어테스트";
 					<li class="nav-item"><a class="nav-link"
 						href="restaurantsInsert.do"><strong
 							style="color: white; margin-left: 20px">맛집 추가</strong></a></li>
-					<li class="nav-item" style="margin-left: 20px"><a
-						class="nav-link openMask" href="#"> <img alt=""
-							src="img/main/man-user.png">
-					</a></li>
+					<li class="nav-item" style="margin-left: 20px">
+						<a onclick="document.getElementById('id01').style.display='block'" class="w3-btn">
+						<img alt=""	src="img/main/man-user.png">
+						</a>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -857,6 +1194,110 @@ function search2(a) {
 }
 
 </script>
+<script type="text/javascript">
 
+
+$("#_btnLogin").click(function () { 
+ 	 "login.do"; 
+});
+
+$("#_btnLogout").click(function () {
+ 	"logout.do";
+});
+
+
+$("#_btnRegi").click(function() {
+	if($("#_userid2").val() == ""){
+		alert($("#_userid").attr("data-msg") + " 입력해 주십시오" );
+		$("#id").focus();
+	} 
+	else if($("#_pwd2").val() == ""){
+		alert($("#_pwd").attr("data-msg") + " 입력해 주십시오" );
+		$("#pwd").focus();
+	} 
+	else if($("#_name").val() == ""){
+		alert($("#_name").attr("data-msg") + " 입력해 주십시오" );
+		$("#_name").focus();
+	} 
+	else if($("#_nickname").val() == ""){
+		alert($("#_nickname").attr("data-msg") + " 입력해 주십시오" );
+		$("#_nickname").focus();
+	} 
+	else if($("#_email").val() == ""){
+		alert($("#_email").attr("data-msg") + " 입력해 주십시오" );
+		$("#_email").focus();
+	}
+	else{
+		$("#_frmForm2").attr("action", "regiAf.do").submit();
+	}
+});
+
+/* 아이디체크 */
+
+$("#_btnGetId").click(function () {
+	var id = $("#_id2").val();
+	if(id == ""){
+		alert("아이디를 입력해 주십시오");
+	}else{
+		idCheckFunc(id);
+	}	
+});
+
+ function idCheckFunc(id) {
+	
+	$.ajax({
+		type:"post",
+		url:"getID.do",
+		data:"id=" + id,
+		async:true,
+		success:function(msg){			
+			if(msg.message == 'YES'){
+				$("#_rgetid").html("사용할 수 없는 아이디입니다");
+				$("#_rgetid").css("background-color", "#ff0000");
+			}	
+			else{
+				$("#_rgetid").html("사용하실 수 있습니다");
+				$("#_rgetid").css("background-color", "#0000ff");
+				$("#_userid2").val( $("#_id2").val() );
+			}
+		}		
+	});
+	
+}
+
+/* 닉네임 체크 */
+$("#_btnGetNickName").click(function () {
+	var nickname = $("#_nickname").val();
+	if(_nickname == ""){
+		alert("닉네임을 입력해 주십시오");
+	}else{
+		nicknameCheckFunc(nickname);
+	}	
+});
+
+ function nicknameCheckFunc(nickname) {
+	
+	$.ajax({
+		type:"post",
+		url:"getNickName.do",
+		data:"nickname=" + nickname,
+		async:true,
+		success:function(msg){			
+			if(msg.message == 'YES'){
+				$("#_rgetnickname").html("사용할 수 없는 닉네임입니다");
+				$("#_rgetnickname").css("background-color", "#ff0000");
+			}	
+			else{
+				$("#_rgetnickname").html("사용하실 수 있습니다");
+				$("#_rgetnickname").css("background-color", "#0000ff");
+				$("#_usernickname").val( $("#_nickname").val() );
+			}
+		}		
+	});
+	
+}
+ 
+
+</script>
 
 </html>
