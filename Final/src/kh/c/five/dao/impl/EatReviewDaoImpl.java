@@ -66,12 +66,6 @@ public class EatReviewDaoImpl implements EatReviewDao {
 		sqlSession.insert(namespace+"addFile", fdto);
 	}
 
-
-	@Override
-	public int getreviewcount(String id) {
-		int n = sqlSession.selectOne(namespace+"getreviewcount", id);
-		return n;
-	}
 	
 	@Override
 	public int getRvCount(ReviewParam param) {		
@@ -196,6 +190,18 @@ System.out.println("DB getNickName id:"+id);
 	public ReviewDto getReviewDetail(int rv_seq) {
 		
 		return sqlSession.selectOne(namespace+"getReviewDetail", rv_seq);
+	}
+
+	@Override
+	public int getreviewcount(String id) {
+		
+		return sqlSession.selectOne(namespace+"getreviewcount", id);
+	}
+
+	@Override
+	public int getLikeCountPid(String id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+"getLikeCountPid", id);
 	}
 
 

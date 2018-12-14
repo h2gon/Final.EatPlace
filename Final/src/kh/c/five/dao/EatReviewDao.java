@@ -18,6 +18,7 @@ public interface EatReviewDao {
 	
 
 	int getreviewcount(String id);
+	int getLikeCountPid(String id);
 	
 	public int getRvCount(ReviewParam param);
 	

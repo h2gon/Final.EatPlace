@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import kh.c.five.model.EatMemberDto;
+import kh.c.five.model.LikeDto;
 import kh.c.five.model.RegiDto;
 import kh.c.five.model.ReviewDetail;
 import kh.c.five.model.ReviewDto;
@@ -185,6 +186,25 @@ public class EatReviewController {
 		
 		Map<String, Object> rmap = new HashMap<String, Object>();
 		rmap.put("imagelist", imagelists);
+	
+		
+		return rmap;
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="getRPdetail3.do", method={RequestMethod.GET, RequestMethod.POST})
+	public Map<String, Object> getRPdetail3(String id) {
+		logger.info("EatReviewController getReviewDetail333"+new Date());
+	// dto 하나 더 만들기 귀찮아서 likeDto 썼어요
+		
+		
+		int likecountPid = eatReviewService.getLikeCountPid(id);
+		int rvcountPid = eatReviewService.getreviewcount(id);
+		LikeDto ldto = new LikeDto(likecountPid, null, rvcountPid, null);
+		
+		Map<String, Object> rmap = new HashMap<String, Object>();
+		rmap.put("likes", ldto);
 	
 		
 		return rmap;

@@ -14,7 +14,9 @@ public interface EatReviewService {
 	
 	public Integer addReview(ReviewDto rdto);
 	public void addFile(fileDto fdto);
+	
 	public int getreviewcount(String id);
+	public int getLikeCountPid(String id);
 	
 	public int getRvCount(ReviewParam param);
 	public int getLikeCount(ReviewParam param);

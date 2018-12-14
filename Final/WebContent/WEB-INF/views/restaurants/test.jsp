@@ -746,20 +746,36 @@ List<fileDto> imagelist = (List<fileDto>) request.getAttribute("imagelist");
         </div>
      </div>   
    		<div class="col-md-4">
-   			<div class="col-xs-8">
-	   			<p id="p_id">${review.id }</p>
-	   			<img src="img/button/review.png">review count<img alt="" src="img/button/fav.png">
-	   		</div>
-   			<div class="col-xs-4" style="align-content: right">
-   				<img id = "p_ratingP" alt="" src="./img/like/3-1.png" style="width: 45px; height: auto" msg="3" title="3점" >
+   		<div class="row">
+   			 <div class="col-md-8"> 
+   				<p id="p_id">${review.id }</p>	
+   		 		<div class="row">
+   					<div class="col-md-1">
+   						<img src="img/button/review.png">
+   					</div>
+   					<div class="col-md-1">
+   						<p id="p_rc"></p>
+   					</div> 
+   					<div class="col-md-1">
+   						<img alt="" src="img/button/fav.png">
+   					</div>
+    				<div class="col-md-1">
+   						<p id="p_lk"></p>
+   					</div> 
+
+   				</div>
+   		 	</div> 
+   		 	<div class="col-md-4">
+   					<img id = "p_ratingP" alt="" src="./img/like/3-1.png" style="width: 45px; height: auto" msg="3" title="3점" >
    			</div>
-   			<br>
-   			<hr>
-   			<br>
-   			<div style="height: 400px;overflow-y: auto;">
+  	 	</div>
+   	<div style="height: 400px;overflow-y: auto;">
    				<p id="pause" ></p>
    			</div>
-   		</div>
+   	<!-- 
+   	   				 -->
+   	
+   </div>
    </div>
 	<div>  
 	
@@ -1321,7 +1337,22 @@ function onefunc() {
 						alert(stu + " " + err);
 					}
 				});
-        	 
+          	 $.ajax({
+         		url: "getRPdetail3.do",
+         	//	datatype:'json',
+         		data: 'id='+$("#review_id").attr('value'),
+         		type:'post',
+         		async:true,
+         		success:function(data){
+         			alert("???");
+         			$("#p_rc").html(data.likes.seq);
+         			$("#p_lk").html(data.likes.rs_seq);
+         		},
+         		error:function(req, s,e){
+         			alert(s+""+e);
+         			
+         		}
+         	 }); 
         	 
 				
 		 });

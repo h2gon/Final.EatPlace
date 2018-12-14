@@ -72,6 +72,12 @@ public class EatReviewServiceImpl implements EatReviewService {
 		return eatreviewdao.getReviewWPic(fdto);
 	}
 
+	@Override
+	public int getLikeCountPid(String id) {
+		
+		return eatreviewdao.getLikeCountPid(id);
+	}
+
 
 	
 }
