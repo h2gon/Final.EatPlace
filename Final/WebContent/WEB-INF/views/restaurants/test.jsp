@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="kh.c.five.model.wannagoDto"%>
 <%@page import="javax.jws.Oneway"%>
 <%@page import="java.net.URLDecoder"%>
@@ -736,8 +737,9 @@ List<fileDto> imagelist = (List<fileDto>) request.getAttribute("imagelist");
       </div>
       <div class="modal-body">
 <div class="customNavigation">
-  <a class="prev" style="z-index: 110;"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
-  <a class="next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+  <input type="hidden" name="trigger" id="trigger">
+  <a class="prev" id="_prev" style="z-index: 110;"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+  <a class="next" id="_next" ><i class="fa fa-angle-right" aria-hidden="true"></i></a>
 </div>
 	<div class="row">
 	<div class=" col-md-8">
@@ -1422,20 +1424,16 @@ function onefunc() {
  				success:function(json){
  					//alert("getReviewDetail.do success");
 					createImages(json.flist); //받아온 WildCard(rdto, flist)
+					customNavTest(json.flist);
  					/*alert("success");
  					console.log(json);
  					console.log(json.flist);
- 					console.log(json.rdto);
- 					console.log("json.flist.length"+json.flist.length);	
+ 					console.log(json.rdto);*/
+ 					//console.log("json.flist.length"+json.flist.length);	
  					//alert(data.review.rs_content);
  					//$("#pause").html(data.review.rs_content);
  					
- 				 	for (var i = 0; i < json.flist.length; i++) {
- 						
- 						
- 						<a target="_blank" href="img_forest.jpg">
-   						<img src="img_forest.jpg" alt="Forest">
- 						</a>   class='img-responsive'
+ 				
  						
        				//	var createimg = "<a target='_blank' href='"+json.flist[i]+"'><img src="+json.flist[i]+"></a>";
        					/* if(i=0){
@@ -1511,7 +1509,15 @@ function onefunc() {
 
 			alert(strDOM); */
 
-			}		
+			}	
+		
+		 function customNavTest(flist) {
+				var imglistTest = flist;
+				//for(i = 0 ; i<imglistTest.length ; i++){
+				//console.log("imglistTest: "+imglistTest[i]);}
+				$('#trigger').data('target',imglistTest);
+				//return imglistTest;
+			} 
  		
  		
          </script>
@@ -1654,35 +1660,75 @@ $(document).ready(function() {
 	    responsiveRefreshRate : 200,
 	  });
 	  
+	/*   function NextimglistTest(imglistTest) {
+		  if(imglistTest == null || imglistTest ==""){
+			   customNav("next","");
+			   }
+			   else if(imglistTest != null || imglistTest != ""){
+				   customNav("next",imglistTest);
+			   }
+	   }
+	  function PrevimglistTest(imglistTest) {
+		  if(imglistTest == null || imglistTest ==""){
+			   customNav("prev","");
+			   }
+			   else if(imglistTest != null || imglistTest != ""){
+				   customNav("prev",imglistTest);
+			   } 
+	 } */
+	  
 	   $(".next").click(function(){
+		  
 		   customNav("next");
-	    //sync1.trigger('owl.next');
-	    /* sync2.trigger('next.sync1.carousel'); */
+		  
+	   
 	    	
 	  }); 
 	  $(".prev").click(function(){
+		 
 		  customNav("prev");
-		 // sync1.trigger('owl.prev');
-	  });  
+	  });
 	 /*  $(".next").on("click", ".owl-item", function(e){
 		    e.preventDefault();
 		    var number = $(this).data("owlItem");
 		    sync1.trigger("owl.goTo",number);
 		  }); */
-	  
+	 /*  function customNavTest(flist) {
+		var imglistTest = new Array();
+		imglistTest = flist;
+		console.log("imglistTest: "+imglistTest);
+		$('#trigger').data('target',imglistTest);
+		//return imglistTest;
+	}  */
 	  
 	  function customNav(go) {
 			  
 		var mainnum = $('#mainImage').attr("src");
 		var imglist = new Array();
 		var check = 0;
-		<%
+		
+		var imagelist = new Array();
+		//$('#trigger').data('target',imglistTest);
+		imagelist = $("#trigger").data('target');
+		for(var i =0; i<imagelist.length;i++){
+		console.log("imagelist data target[] "+imagelist[i]);
+			imglist.push(imagelist[i]);
+		}
+		//console.log('data(target): '+$("#trigger").data('target'));
+		//레스토랑상단 이미지썸네일 next, prev
+		
+		<%--  <%
 		int chk = 0;
 		for(int i =0;i<imagelist.size(); i++){
 			%> imglist.push('<%=imagelist.get(i).getFile_name() %>');
 			<%
 		}
-		%>
+		%>  --%>
+		/* for(int i = 0 ; i<imagelist.size();i++){
+			imglist.push(imagelist[i]);
+		}
+				 */
+		
 		for (var i = 0; i < imglist.length; i++) {
 			
 			if (mainnum == imglist[i]) {
@@ -1700,7 +1746,7 @@ $(document).ready(function() {
 					 
 					  
 					  
-				}else{
+				}else if(go=="next"){
 					check = i+1;
 					if (check >=imglist.length) {
 						return;
