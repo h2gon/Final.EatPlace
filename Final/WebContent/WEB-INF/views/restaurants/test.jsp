@@ -1723,7 +1723,7 @@ $(document).ready(function() {
 			%> imglist.push('<%=imagelist.get(i).getFile_name() %>');
 			<%
 		}
-		%>  --%>
+		%>  --%> 
 		/* for(int i = 0 ; i<imagelist.size();i++){
 			imglist.push(imagelist[i]);
 		}
