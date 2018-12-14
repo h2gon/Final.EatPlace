@@ -427,7 +427,11 @@ public class EatRestaurantsController {
 	}
 	
 	@RequestMapping(value="category.do",  method={RequestMethod.GET, RequestMethod.POST})
-	public String category(String s_category,String s_keyword, EatParam param, Model model, HttpServletRequest req) {
+	public String category(String s_category,String s_keyword, EatParam param, Model model, HttpServletRequest req, 
+			RegiDto dto2) {
+		
+		List<RegiDto> list2 = eatRestaurantsService.getRankList(dto2);
+		model.addAttribute("RankList", list2);
 		
 		System.out.println("category : "+s_category);
 		param.setS_category(s_category);
