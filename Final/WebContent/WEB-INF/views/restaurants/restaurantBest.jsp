@@ -504,11 +504,12 @@ JSP주석 소스보기할때 보여지지 않음
 		가고싶은 가게를 추가해주세요~
 </c:if>				
 					
+					
 <%
 List<wannagoDto> wannagolist = (List<wannagoDto>)request.getAttribute("wannagolist");
 List<RegiDto> RankList2 = (List<RegiDto>)request.getAttribute("RankList");
 
-if(wannagolist.size()>1 && wannagolist!=null){
+if(wannagolist!=null){
 for(int i=0; i<wannagolist.size(); i++){
 	String wannaname = "";
 	double wannaRating = 0;
@@ -532,7 +533,6 @@ for(int i=0; i<wannagolist.size(); i++){
 		}
 		%>	
 	<% }%>
-	
 
 
 <div style="width:350px; height:100px; background-color:; box-sizing: border-box; border: 1 solid; ">
