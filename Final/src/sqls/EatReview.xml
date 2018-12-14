@@ -20,7 +20,7 @@
 	FROM RS_FILE 
 	WHERE RV_SEQ=#{seq}
   </select>
-    <select id="getImageDT" parameterType="java.lang.Integer" resultType="kh.c.five.model.fileDto">
+    <select id="getImageDT" parameterType="java.lang.Integer" resultType="java.lang.String">
   SELECT FILE_NAME
 	FROM RS_FILE 
 	WHERE RS_SEQ=#{seq} ORDER BY RV_SEQ

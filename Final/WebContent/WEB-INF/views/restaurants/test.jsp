@@ -645,9 +645,7 @@ for(int i=0; i<wannagolist.size(); i++){
 					<div id="_rgetnickname"></div>
 					<input type="text" name="nickname" id="_usernickname" class="form-control" size="40" data-msg="별명을 " readonly="readonly"> 
                 </div>
-                <!-- <div class="col-lg-10" style="">
-                <a href="#none" id="_btnRegi" class="form-control" style="height: 30px; title="회원가입">회원가입</a>
-                </div> -->
+
             </div>
        	</form>
       </div>
@@ -721,7 +719,7 @@ function alarm() {
 
 <%
 List<ReviewDto> rvlist = (List<ReviewDto>)request.getAttribute("reviewlist");
-List<fileDto> imagelist = (List<fileDto>) request.getAttribute("imagelist");
+List<String> imagelist = (List<String>) request.getAttribute("imagelist");
 
 %>
 
@@ -791,13 +789,13 @@ List<fileDto> imagelist = (List<fileDto>) request.getAttribute("imagelist");
         		
         			
         			for (int i=0;i<imagelist.size();i++){
-        				if(imagelist.get(i).getFile_name().contains("https://")){
+        				if(imagelist.get(i).contains("https://")){
         					%>
-        					<div class="item"><img src="<%=imagelist.get(i).getFile_name() + str%>" class="img-responsive"></div>
+        					<div class="item"><img src="<%=imagelist.get(i) + str%>" class="img-responsive"></div>
         					<%
         				}else{
         					%>
-        			          <div class="item"><img src="\image\<%=imagelist.get(i).getFile_name()%>" class="img-responsive"></div>
+        			          <div class="item"><img src="\image\<%=imagelist.get(i)%>" class="img-responsive"></div>
         			          <%
         				}
         			
@@ -831,7 +829,7 @@ for(int i=0;i<imagelist.size();i++){
 %>
 	<div class="item" id="owlImages" style="margin-right: 5px">
 	<a href="#" data-toggle="modal" data-target="#carouselModal">
-	<img src="<%=imagelist.get(i).getFile_name()+mstr%>" style="height: 300px; margin-right: 3px" onclick="createImages(<%=imagelist%>)">
+	<img src="<%=imagelist.get(i)+mstr%>" style="height: 300px; margin-right: 3px"onclick="createImages(<%=imagelist%>);" >
 		<%-- <img src="<%=imagelist.get(i).getFile_name()%>" style="height: 300px; margin-right: 3px"> --%>
 		
 	</a>
@@ -869,13 +867,13 @@ function onefunc() {
 	$("#sync2 .owl-wrapper *").remove();
 	 <%
 	for (int i=0;i<imagelist.size();i++){
-		if(imagelist.get(i).getFile_name().contains("https://")){
+		if(imagelist.get(i).contains("https://")){
 			%>
 			
 			$("#sync2 .owl-wrapper").append(
 					$('<div>').attr('class','owl-item').attr("style","width: 119px;").append(
 					    $('<div>').attr('class','item synced').append(
-					            $('<img>').attr('src','<%=imagelist.get(i).getFile_name() + str%>').attr('class','img-responsive').append(
+					            $('<img>').attr('src','<%=imagelist.get(i) + str%>').attr('class','img-responsive').append(
 					            		
 				              ))));
 			<%
@@ -884,7 +882,7 @@ function onefunc() {
 			$("#sync2 .owl-wrapper").append(
 					$('<div>').attr('class','owl-item').attr("style","width: 119px;").append(
 					    $('<div>').attr('class','item').append(
-					            $('<img>').attr('src','<%=imagelist.get(i).getFile_name()%>').attr('class','img-responsive').append(
+					            $('<img>').attr('src','<%=imagelist.get(i)%>').attr('class','img-responsive').append(
 					            		
 				              ))));
 	          <%
@@ -1346,7 +1344,7 @@ function onefunc() {
          		type:'post',
          		async:true,
          		success:function(data){
-         			alert("???");
+         		//	alert("???");
          			$("#p_rc").html(data.likes.seq);
          			$("#p_lk").html(data.likes.rs_seq);
          		},
@@ -1359,57 +1357,7 @@ function onefunc() {
 				
 		 });
        
-		/*  $("#review_image a img").click(function(){
-			 var img=$(this).attr('src');
-			 var rseq = $("#rs_seq").attr("value");
-
-
-				 if(img.indexOf("https://") !=-1){
-					var	filename=img;
-				}else if(img.indexOf("https://")==-1){
-					var filename=img.substring(7);
-				} 
-				// alert(img);
-				$('#mainImage').attr('src',img);
-				
-				var revData2 = {
-						'filename':filename,
-						'rseq': rseq
-				};
-				
-				
-				 $.ajax({
-					url:"getRPdetail.do",
-					datatype:'json',
-					data:revData2,
-					type:'post',
-					async:true,
-					success:function(data){
-						//alert("success");
-						//alert(data.review.rs_content);
-						$("#pause").html(data.review.rs_content);
-						$("#p_id").html(data.review.id);
-						var rating =data.review.rs_rating;
-						if(rating===1){
-							$("#p_ratingP").attr('src','./img/like/1-2.png');	
-						}else if(rating===3){
-							$("#p_ratingP").attr('src','./img/like/3-2.png');
-						} else if(rating===5){
-							$("#p_ratingP").attr('src','./img/like/5-2.png');
-						}
-						
-						 reviewDetail(data.review.seq); //reviewDetail에 리뷰 시퀀스 넣어줌
-						 
-						 
-					},
-					error:function(req, stu, err){
-						alert("error");
-						alert(stu + " " + err);
-					}
-				});
-				 
-				
-		 }); */
+		
          
  		function reviewDetail(seq) {
 //      		alert("seq:"+seq);
@@ -1424,42 +1372,8 @@ function onefunc() {
  				success:function(json){
  					//alert("getReviewDetail.do success");
 					createImages(json.flist); //받아온 WildCard(rdto, flist)
-					customNavTest(json.flist);
- 					/*alert("success");
- 					console.log(json);
- 					console.log(json.flist);
- 					console.log(json.rdto);*/
- 					//console.log("json.flist.length"+json.flist.length);	
- 					//alert(data.review.rs_content);
- 					//$("#pause").html(data.review.rs_content);
+					//customNavTest(json.flist);
  					
- 				
- 						
-       				//	var createimg = "<a target='_blank' href='"+json.flist[i]+"'><img src="+json.flist[i]+"></a>";
-       					/* if(i=0){
-       					 createimg = "<div class=item active><img src="+json.flist[i]+" style='width:100%'></div>";
-       					/* $("#mainImage11").append(createimg);  */
-       					/* }
-       					else{
- 						 createimg = "<div class=item><img src="+json.flist[i]+" style='width:100%'></div>";
- 						 
-       					} */
-       					//$("mainImage11").attr("src",json.flist[i]);	
- 						//console.log("createimg: "+createimg);
- 						//$("#mainImage11").append(createimg);
- 						
-      					//$("#pause11").html(json.rdto.rs_content);
- 						//$("#p_id11").html(json.rdto.id);
- 						/* var newimg = document.createElement('img');
- 						newimg.setAttribute("src",json.flist[i]); */
- 						//newimg.setAttribute("width","100%");
- 						
- 						/* $("#img").attr("src",json.flist.get(i));						
- 						$("#test").append(json[i].key); */
- 						//$(".item").append(newimg);
- 						
- 					//}		
- 					//$("#test").html(json);
  				},
  				error:function(req, stu, err){
  					alert("error");
@@ -1470,7 +1384,7 @@ function onefunc() {
  		}
 		
 		function test(a) {
-			alert("테스트입니다."+a);
+			//alert("테스트입니다."+a);
 			$('#mainImage').attr('src',a);
 		}
          
@@ -1490,29 +1404,15 @@ function onefunc() {
 						            $('<img>').attr('onclick','test("'+images[i]+'")').attr('src',images[i]+str).attr('class','img-responsive').append(
 						            		
 						              ))));  
-				} 
-			
-		/* 	for (var i = 0; i < images.length; i++) {
-			
-				// N번째 이미지 정보를 구하기
+				}
+				alert(images.length);
+				customNavTest(images);
 
-				// N번째 이미지 패널을 생성 
-				//strDOM += ''; 
-				strDOM += '<div class="item">';
-				strDOM += '<img src="' + images[i] + '"  class="img-responsive">'; 
-				strDOM += '</div>'; 
-				} 
-			
-			// 이미지 컨테이너에 생성한 이미지 패널들을 추가하기 
-		
-			$("#sync2").html(strDOM);
-
-			alert(strDOM); */
 
 			}	
 		
-		 function customNavTest(flist) {
-				var imglistTest = flist;
+		 function customNavTest(images) {
+				var imglistTest = images;
 				//for(i = 0 ; i<imglistTest.length ; i++){
 				//console.log("imglistTest: "+imglistTest[i]);}
 				$('#trigger').data('target',imglistTest);
@@ -1594,6 +1494,7 @@ $(document).ready(function(){
 	 
 	 $("#owlImages a img").click(function(){
 			var img=$(this).attr('src');
+			//alert(img);
 			//var	filename=img.substring(7);
 			
 			if(img.indexOf("https://") !=-1){
@@ -1631,7 +1532,8 @@ $(document).ready(function(){
 						$("#p_ratingP").attr('src','./img/like/3-2.png');
 					} else if(rating===5){
 						$("#p_ratingP").attr('src','./img/like/5-2.png');
-					}  
+					}
+					<%-- createImages(<%=imagelist%>); --%>
 				},
 				error:function(req, stu, err){
 					alert("error");

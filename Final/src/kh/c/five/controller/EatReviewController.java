@@ -179,14 +179,14 @@ public class EatReviewController {
 	
 	@ResponseBody
 	@RequestMapping(value="getRPdetail2.do", method={RequestMethod.GET, RequestMethod.POST})
-	public Map<String, Object> getRPdetail2(int rseq) {
+	public Map<String, Object> getRPdetail2(int rseq, Model model) {
 		logger.info("EatReviewController getReviewDetail222"+new Date());
 		
 		List<String> imagelists = eatReviewService.getImageDT(rseq);
 		
 		Map<String, Object> rmap = new HashMap<String, Object>();
 		rmap.put("imagelist", imagelists);
-	
+	//	model.addAttribute("resImgLists", resImgLists);
 		
 		return rmap;
 		
@@ -234,6 +234,8 @@ public class EatReviewController {
 			flist.add(file_name_list.get(i).getFile_name());		
 		 }
 		}
+	//	model.addAttribute("revImgLists", flist);
+		
 		System.out.println(rdto.toString());
 		System.out.println("flist.size: "+flist.size());
 		WildCard<ReviewDto,List<String>> wildCard = new WildCard<>(rdto, flist);
@@ -243,4 +245,73 @@ public class EatReviewController {
 		}		
 		return wildCard;		
 	}
+	
+/*	@ResponseBody	
+	@RequestMapping(value="getResDetail.do",method= {RequestMethod.GET, RequestMethod.POST})
+	public List<String> getResDetail(int seq){
+		
+		logger.info("EatReviewController getReviewDetail"+new Date());
+		//seq = rv_seq
+		int seq = Integer.parseInt(req.getParameter("seq"));
+		System.out.println("getReviewDetail seq:"+seq);
+				
+		List<fileDto> file_name_list = new ArrayList<fileDto>();	
+		List<String> flist = new ArrayList<String>();
+				
+		ReviewDto rdto = eatReviewService.getReviewDetail(seq);
+		file_name_list = eatReviewService.getImage(seq);
+		
+		if(flist != null) {
+		for(int i = 0; i<file_name_list.size();i++) {
+			System.out.println("flist=>"+file_name_list.get(i));
+			flist.add(file_name_list.get(i).getFile_name());		
+		 }
+		}
+		model.addAttribute("revImgLists", flist);
+		
+		System.out.println(rdto.toString());
+		System.out.println("flist.size: "+flist.size());
+		WildCard<ReviewDto,List<String>> wildCard = new WildCard<>(rdto, flist);
+		//model.addAttribute("wildCard", wildCard);
+		for(int i =0;i<flist.size();i++) {
+		System.out.println("wildCard: list: "+wildCard.getFlist().get(i)+" //rdto content: "+wildCard.getRdto().getRs_content());	
+		}		
+		return wildCard;		*/
+		
+		/*logger.info("EatReviewController getResDetail"+new Date());
+		
+		String result = sseq.substring(sseq.length()-1, sseq.length());
+		int seq = 0;
+		
+		if(result.equals("r")) { //레스토랑 전체 이미지
+			seq=Integer.parseInt(result.substring(0,result.length()-1));
+			List<String> resImagelist = eatReviewService.getImageDT(seq);
+			//ReviewDto reviews= eatReviewService.getReviewWPic(fdto);
+		}else if(result.equals("v")) { //리뷰 이미지
+			
+		}
+		List<fileDto> file_name_list = new ArrayList<fileDto>();	
+		List<String> flist = new ArrayList<String>(); //리뷰 이미지
+		List<String> rflist = new ArrayList<String>(); //레스토랑 리뷰 전체 이미지
+		
+				
+		ReviewDto rdto = eatReviewService.getReviewDetail(seq);
+		int rseq = rdto.getRs_seq();
+		file_name_list = eatReviewService.getImage(seq);
+		
+		if(flist != null) {
+		for(int i = 0; i<file_name_list.size();i++) {
+			System.out.println("flist=>"+file_name_list.get(i));
+			flist.add(file_name_list.get(i).getFile_name());		
+		 }
+		}
+		System.out.println(rdto.toString());
+		System.out.println("flist.size: "+flist.size());
+		WildCard<ReviewDto,List<String>> wildCard = new WildCard<>(rdto, flist);
+		//model.addAttribute("wildCard", wildCard);
+		for(int i =0;i<flist.size();i++) {
+		System.out.println("wildCard: list: "+wildCard.getFlist().get(i)+" //rdto content: "+wildCard.getRdto().getRs_content());	
+		}		
+		return wildCard;		
+	}*/
 }
