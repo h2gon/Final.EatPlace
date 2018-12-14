@@ -23,7 +23,7 @@
     <select id="getImageDT" parameterType="java.lang.Integer" resultType="kh.c.five.model.fileDto">
   SELECT FILE_NAME
 	FROM RS_FILE 
-	WHERE RS_SEQ=#{seq}
+	WHERE RS_SEQ=#{seq} ORDER BY RV_SEQ
   </select>
   
   
@@ -44,15 +44,25 @@
   
   </insert>
   
- <select resultType="java.lang.Integer" id="getreviewcount"> SELECT COUNT(*) FROM RESTAURANT_REVIEW WHERE ID = #{id} </select>
+ <select id="getreviewcount" resultType="java.lang.Integer" parameterType="java.lang.String" > SELECT COUNT(*) FROM RESTAURANT_REVIEW WHERE ID = #{id} </select>
   
+  <!-- 레스토랑에 있는 리뷰 수-->
  <select id="getRvCount" parameterType="kh.c.five.model.ReviewParam" resultType="java.lang.Integer">
 
   SELECT COUNT(*)
 	FROM RESTAURANT_REVIEW 
 	WHERE RS_SEQ=#{seq}
   </select> 
+
   
+  <!-- id별 눌러둔 좋아요 수 -->
+  <select id="getLikeCountPid" parameterType="java.lang.String" resultType="java.lang.Integer">
+  	SELECT COUNT(*)
+  	FROM RESTAURANT_LIKES
+  	WHERE ID=#{id}
+  </select>
+  
+  <!-- 레스토랑에 찍힌 좋아요 수 -->
   <select id="getLikeCount" parameterType="kh.c.five.model.ReviewParam" resultType="java.lang.Integer">
   	SELECT COUNT(*)
   		FROM RESTAURANT_LIKES
@@ -68,7 +78,7 @@
 									WHERE FILE_NAME=#{file_name})
 
   </select>
-  <select resultType="kh.c.five.model.ReviewDto" id="getReviewDetail" parameterType="java.lang.Integer">
+  <select  id="getReviewDetail" resultType="kh.c.five.model.ReviewDto" parameterType="java.lang.Integer">
   SELECT * FROM RESTAURANT_REVIEW WHERE SEQ=#{seq}
   </select>
   
