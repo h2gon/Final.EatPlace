@@ -119,7 +119,7 @@ public class EatRestaurantsController {
 	}
 
 	@RequestMapping(value="restaurntsList.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String restaurntsList(Model model, RegiDto dto2) {
+	public String restaurntsList(Model model, RegiDto dto2, HttpServletRequest req) {
 		
 		logger.info("EatRestaurantsController restaurntsList"+new Date());
 		
@@ -151,7 +151,10 @@ public class EatRestaurantsController {
 		model.addAttribute("rslist", rslist);
 		
 	
+		EatMemberDto login = (EatMemberDto)req.getSession().getAttribute("login");
 		
+		List<wannagoDto> wannagolist = eatRestaurantsService.getwannagolist(login.getId());
+					model.addAttribute("wannagolist", wannagolist);
 		
 		
 		
@@ -351,7 +354,7 @@ public class EatRestaurantsController {
 	}
 	
 	@RequestMapping(value="search.do",  method={RequestMethod.GET, RequestMethod.POST})
-	public String search(String s_keyword, EatParam param, Model model, HttpServletResponse response, RegiDto dto2 ) throws Exception {
+	public String search(String s_keyword, EatParam param, Model model, HttpServletResponse response, RegiDto dto2, HttpServletRequest req) throws Exception {
 		
 		System.out.println("검색어 : "+s_keyword);
 		System.out.println("param: "+param.toString());
@@ -414,14 +417,17 @@ public class EatRestaurantsController {
 		
 		model.addAttribute("s_keyword",param.getS_keyword());
 				
+		EatMemberDto login = (EatMemberDto)req.getSession().getAttribute("login");
 		
+		List<wannagoDto> wannagolist = eatRestaurantsService.getwannagolist(login.getId());
+					model.addAttribute("wannagolist", wannagolist);
 		
 		//return "redirect:/home.do";
 		return "restaurants/restaurntsSearchList";
 	}
 	
 	@RequestMapping(value="category.do",  method={RequestMethod.GET, RequestMethod.POST})
-	public String category(String s_category,String s_keyword, EatParam param, Model model) {
+	public String category(String s_category,String s_keyword, EatParam param, Model model, HttpServletRequest req) {
 		
 		System.out.println("category : "+s_category);
 		param.setS_category(s_category);
@@ -479,6 +485,11 @@ public class EatRestaurantsController {
 		model.addAttribute("s_category",param.getS_category());
 		
 		
+		EatMemberDto login = (EatMemberDto)req.getSession().getAttribute("login");
+		
+		List<wannagoDto> wannagolist = eatRestaurantsService.getwannagolist(login.getId());
+					model.addAttribute("wannagolist", wannagolist);
+		
 		return "restaurants/restaurntsSearchList";
 	}
 	
@@ -531,7 +542,7 @@ public class EatRestaurantsController {
 	}
 
 	@RequestMapping(value="KFBest.do",  method={RequestMethod.GET, RequestMethod.POST})
-	public String restaurantBest(Model model, RegiDto dto, RegiDto dto2) {
+	public String restaurantBest(Model model, RegiDto dto, RegiDto dto2, HttpServletRequest req) {
 		logger.info("EatRestaurantsController restaurantBest"+new Date());
 		System.out.println("KFDTO:" + dto);
 		
@@ -572,11 +583,17 @@ public class EatRestaurantsController {
 		model.addAttribute("bestlist", bestlist);
 		model.addAttribute("category", dto);
 		
+		
+		EatMemberDto login = (EatMemberDto)req.getSession().getAttribute("login");
+		
+		List<wannagoDto> wannagolist = eatRestaurantsService.getwannagolist(login.getId());
+					model.addAttribute("wannagolist", wannagolist);
+		
 		return "restaurants/restaurantBest";
 	}
 	
 	@RequestMapping(value="GuBest.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String GuBest(Model model, RegiDto dto, RegiDto dto2) {
+	public String GuBest(Model model, RegiDto dto, RegiDto dto2, HttpServletRequest req) {
 		logger.info("EatRestaurantsController GuBest "+ new Date());
 		System.out.println(dto.toString());
 		List<RegiDto> list2 = eatRestaurantsService.getRankList(dto2);
@@ -613,6 +630,12 @@ public class EatRestaurantsController {
 		model.addAttribute("bestlist", GuBestlist);
 		model.addAttribute("reviewlist", reviewlist);
 		model.addAttribute("address", dto);
+		
+		
+		EatMemberDto login = (EatMemberDto)req.getSession().getAttribute("login");
+		
+		List<wannagoDto> wannagolist = eatRestaurantsService.getwannagolist(login.getId());
+					model.addAttribute("wannagolist", wannagolist);
 		
 		return "restaurants/restaurantBest";
 	}

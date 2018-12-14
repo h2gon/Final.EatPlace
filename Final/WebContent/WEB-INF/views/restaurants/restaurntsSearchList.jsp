@@ -459,7 +459,7 @@ JSP주석 소스보기할때 보여지지 않음
 
   %>
   </div>
-<%-- 	<!-- 가고 싶다 -->
+<!-- 가고 싶다 -->
   <div id="Paris" class="w3-container city" style="overflow-y: scroll; height: 480px;">
    
 		
@@ -533,7 +533,7 @@ for(int i=0; i<wannagolist.size(); i++){
 						        	<% }%>
   </div>
   
-   --%>
+  
   <div class="w3-container w3-light-grey w3-padding">
   <%if(user == null){%>
 		<!-- <a class=" openMask" href="#">로그인</a> -->
