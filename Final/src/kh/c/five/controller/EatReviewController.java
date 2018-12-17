@@ -230,8 +230,12 @@ public class EatReviewController {
 		
 		if(flist != null) {
 		for(int i = 0; i<file_name_list.size();i++) {
-			System.out.println("flist=>"+file_name_list.get(i));
-			flist.add(file_name_list.get(i).getFile_name());		
+			//System.out.println("flist=>"+file_name_list.get(i));
+			if(file_name_list.get(i).getFile_name().contains("http")) {
+			flist.add(file_name_list.get(i).getFile_name());	}
+			else {
+				flist.add("http://localhost:8090/image/"+file_name_list.get(i).getFile_name());
+			}
 		 }
 		}
 	//	model.addAttribute("revImgLists", flist);

@@ -1194,7 +1194,7 @@ List<String> imagelist = (List<String>) request.getAttribute("imagelist");
         					<%
         				}else{
         					%>
-        			          <div class="item"><img src="\image\<%=imagelist.get(i)%>" class="img-responsive"></div>
+        			          <div class="item"><img src="/image/<%=imagelist.get(i)%>" class="img-responsive"></div>
         			          <%
         				}
         			
@@ -1229,7 +1229,7 @@ for(int i=0;i<imagelist.size();i++){
 %>
 	<div class="item" id="owlImages" style="margin-right: 5px;">
 	<a href="#" data-toggle="modal" data-target="#carouselModal">
-	<img src="<%=imagelist.get(i)+mstr%>" style="height: 300px; margin-right: 3px" onclick="createImages(<%=imagelist %>)" >
+	<img src="<%=imagelist.get(i)+mstr%>" style="height: 300px; margin-right: 3px" onclick="onefunc()" >
 	</a>
 	</div>
 <%
@@ -1237,7 +1237,7 @@ for(int i=0;i<imagelist.size();i++){
 		%>
 	 <div class="item" id="owlImages" style="margin-right: 5px">
 	 <a href="#" data-toggle="modal" data-target="#carouselModal">
-	 <img src="\image\<%=imagelist.get(i)+mstr%>" style="height: 300px; margin-right: 3px" onclick="createImages(<%=imagelist %>)">
+	 <img src="\image\<%=imagelist.get(i)%>" style="height: 300px; margin-right: 3px" onclick="onefunc()">
 	 </a>
 	 </div>
 		<%
@@ -1289,8 +1289,8 @@ function onefunc() {
 			$("#sync2 .owl-wrapper").append(
 					$('<div>').attr('class','owl-item').attr("style","width: 119px;").append(
 					    $('<div>').attr('class','item').append(
-					            $('<img>').attr('src','<%=imagelist.get(i)%>').attr('class','img-responsive').append(
-					            		
+					            $('<img>').attr('src','/image/<%=imagelist.get(i) %>').attr('class','img-responsive').append(
+					            	
 				              ))));
 	          <%
 		}
@@ -1789,7 +1789,7 @@ function onefunc() {
 							$('<div>').attr('class','owl-item').attr("style","width: 119px;").append(
 						    $('<div>').attr('class','item').append(
 						    		
-						            $('<img>').attr('onclick','test("'+images[i]+'")').attr('src',images[i]+str).attr('class','img-responsive').append(
+						            $('<img>').attr('onclick','test("'+images[i]+'")').attr('src',images[i]).attr('class','img-responsive').append(
 						            		
 						              ))));  
 				}
