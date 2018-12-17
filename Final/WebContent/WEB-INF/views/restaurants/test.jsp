@@ -999,39 +999,54 @@ $(document).ready(function () {
 </script>
 
 <!-- Navigation -->
-	<nav class="navbar fixed-top navbar-expand-lg navbar-dark fixed-top"
+<nav class="navbar navbar-default navbar-fixed-top" style="background-color: #c53211;  padding-bottom: 10px;">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+		<div class="col-md-2">
+	      <a class="navbar-brand" href="home.do" style="color: white; margin-left: 10px">EAT PLACE</a>
+	    </div>
+	</div>
+	
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="col-md-4">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> 
+      <ul class="nav navbar-nav navbar-right">
+        <li class="nav-item">
+        	<a class="nav-link"	href="restaurntsList.do">
+        		<strong	style="color: white; margin-left: 20px">맛집 리스트</strong>
+        	</a>
+        </li>
+		<li class="nav-item" style="margin-left: 20px">
+						<a onclick="document.getElementById('id02').style.display='block'" class="w3-btn">
+						<img alt=""	src="img/main/man-user.png">
+						</a>
+					</li>
+      </ul>
+    </div>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<%-- 	<nav class="navbar fixed-top navbar-expand-lg navbar-dark"
 		style="background-color: #c53211; padding-bottom: 10px">
-		<div class="container" style="float: left; width: 20%">
+		<div class="container col-sm-3">
 			<a class="navbar-brand" href="home.do">EAT PLACE</a>
-			<button class="navbar-toggler navbar-toggler-right" type="button"
+<!-- 			<button class="navbar-toggler navbar-toggler-right" type="button"
 				data-toggle="collapse" data-target="#navbarResponsive"
 				aria-controls="navbarResponsive" aria-expanded="false"
 				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
-			</button>
+			</button> -->
 		</div>
 		
-		<div style="float: left; width: 60%">
-		<%-- <form action="" id="main-search" name="main-search" method="get"> 
- 			 <div class="in-line">
-		      <strong><input type="text" onkeypress="if(event.keyCode==13) {search();}"  id="main-keyword" name="s_keyword" value="" placeholder="지역, 식당 또는 음식" style="color: #575756; border-bottom-left-radius: 20px; border-top-left-radius: 20px"></strong>
-		      <strong><input type="button" onclick="search()"  value="검색" style="border-bottom-right-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-top-left-radius: 20px; background-color: darkorange; color: white;"></strong>
-		     </div>
-		<!-- controller로 넘겨주기 위한 값 -->
-		<input type="hidden" name="s_category"  value="<%=category %>">
-		<input type="hidden" name="pageNumber" id="_pageNumber" value="${(empty pageNumber)?0:pageNumber }">
-		<input type="hidden" name="recordCountPerPage" id="_recordCountPerPage"
-			value="${(empty recordCountPerPage)?9:recordCountPerPage }">
-				
-		
-		</form> --%>
+		<div class="col-sm-6">
 		<!-- 전체 검색 -->
-  <fieldset id="search" class="main-search ng-scope" ng-controller="mp20_main_search_suggest_controller" style="z-index: 110;border: 0;">
+  		<fieldset id="search" class="main-search ng-scope" ng-controller="mp20_main_search_suggest_controller" style="z-index: 110;border: 0;">
       
 		<form action="" id="main-search" name="main-search" method="get" > 
 	 			 <div class="in-line" style="margin-left: auto; margin-right: auto; ">
 	 			 <span>검색 :</span>
-			      <strong><input type="text" class="seaechAll" onkeypress="if(event.keyCode==13) {search();}" onclick="displayVsearch()"  id="main-keyword" name="s_keyword" value="" placeholder="지역, 식당 또는 음식" autocomplete="off" style="color: #ffffff; margin-left: 40px;"></strong>
+			      <strong><input type="text" class="seaechAll" onkeypress="if(event.keyCode==13) {search();}" onclick="displayVsearch()"  id="main-keyword" name="s_keyword" value="" placeholder="지역, 식당 또는 음식" autocomplete="off" style="color: #ffffff; margin-left: 40px; vertical-align: center"></strong>
 			      
 			     </div>
 				<!-- controller로 넘겨주기 위한 값 -->
@@ -1041,7 +1056,7 @@ $(document).ready(function () {
 					value="${(empty recordCountPerPage)?9:recordCountPerPage }">
 							     
 		</form> 
-</fieldset>
+		</fieldset>
 		</div>
 		
 		<!-- 추천 검색어 / 최근검색어 -->
@@ -1063,11 +1078,7 @@ $(document).ready(function () {
     </button>
     
   </nav>
-<%-- <%
-String recomend = "추천검색어테스트";
 
-%>
-<c:set var="recomend" value="추천검색어1"></c:set> --%>
   <!--  검색 자동완성 -->
   <div class="keywords">
 	  <div class="list-keywords-wrap">
@@ -1104,16 +1115,13 @@ String recomend = "추천검색어테스트";
 </aside>
 </div>
 		
-		<div class="container" style="float: left; width: 20%">
+		<div class="container col-sm-3">
 			<div class="collapse navbar-collapse" id="navbarResponsive">				
 				<ul class="navbar-nav ml-auto">
 					
 					<li class="nav-item"><a class="nav-link"
 						href="restaurntsList.do"><strong
 							style="color: white; margin-left: 20px">맛집 리스트</strong></a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="restaurantsInsert.do"><strong
-							style="color: white; margin-left: 20px">맛집 추가</strong></a></li>
 					<li class="nav-item" style="margin-left: 20px">
 						<a onclick="document.getElementById('id01').style.display='block'" class="w3-btn">
 						<img alt=""	src="img/main/man-user.png">
@@ -1124,7 +1132,7 @@ String recomend = "추천검색어테스트";
 		</div>
 	</nav>
 
-
+ --%>
 <%
 List<ReviewDto> rvlist = (List<ReviewDto>)request.getAttribute("reviewlist");
 List<String> imagelist = (List<String>) request.getAttribute("imagelist");
@@ -1237,8 +1245,8 @@ for(int i=0;i<imagelist.size();i++){
 %>
 	<div class="item" id="owlImages" style="margin-right: 5px">
 	<a href="#" data-toggle="modal" data-target="#carouselModal">
-	<img src="<%=imagelist.get(i)+mstr%>" style="height: 300px; margin-right: 3px"<%-- onclick="createImages(<%=imagelist%>);" --%> >
-		<%-- <img src="<%=imagelist.get(i).getFile_name()%>" style="height: 300px; margin-right: 3px"> --%>
+	<img src="<%=imagelist.get(i)+mstr%>" style="height: 300px; margin-right: 3px" onclick="onefunc();createImages(<%=imagelist %>)" >
+	
 		
 	</a>
 	</div>
