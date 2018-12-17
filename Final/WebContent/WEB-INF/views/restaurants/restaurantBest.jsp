@@ -700,7 +700,7 @@ function alarm() {
 <!-- Navigation -->
 	<nav class="navbar fixed-top navbar-expand-lg navbar-dark fixed-top"
 		style="background-color: #c53211; padding-bottom: 10px">
-		<div class="container" style="float: left; width: 20%">
+		<div class="container" style="float: left; width: 15%">
 			<a class="navbar-brand" href="home.do">EAT PLACE</a>
 			<button class="navbar-toggler navbar-toggler-right" type="button"
 				data-toggle="collapse" data-target="#navbarResponsive"
@@ -795,16 +795,16 @@ String recomend = "추천검색어테스트";
   </div>
 </aside>
 </div>
-		<div class="container" style="float: left; width: 20%">
+		<div class="container" style="float: left; width: 25%">
 			<div class="collapse navbar-collapse" id="navbarResponsive">				
 				<ul class="navbar-nav ml-auto">
 					
 					<li class="nav-item"><a class="nav-link"
 						href="restaurntsList.do"><strong
 							style="color: white; margin-left: 20px">맛집 리스트</strong></a></li>
-					<li class="nav-item"><a class="nav-link"
+					<!-- <li class="nav-item"><a class="nav-link"
 						href="restaurantsInsert.do"><strong
-							style="color: white; margin-left: 20px">맛집 추가</strong></a></li>
+							style="color: white; margin-left: 20px">맛집 추가</strong></a></li> -->
 					<li class="nav-item" style="margin-left: 20px">
 						<a onclick="document.getElementById('id01').style.display='block'" class="w3-btn">
 						<img alt=""	src="img/main/man-user.png">

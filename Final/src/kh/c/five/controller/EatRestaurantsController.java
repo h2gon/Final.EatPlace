@@ -648,7 +648,7 @@ public class EatRestaurantsController {
 	
 	@RequestMapping(value="keyword.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String keyword(Model model, RegiDto dto, RegiDto dto2) {
-		logger.info("EatRestaurantsController GuBest "+ new Date());
+		logger.info("EatRestaurantsController keyword "+ new Date());
 		System.out.println(dto.toString());
 		List<RegiDto> list2 = eatRestaurantsService.getRankList(dto2);
 		model.addAttribute("RankList", list2);
