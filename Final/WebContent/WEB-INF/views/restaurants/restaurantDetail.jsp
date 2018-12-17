@@ -243,6 +243,20 @@ input:focus {
 </head>
 <body>
 
+<%!
+public String dot3(String msg){
+	String s = "";
+	if(msg.length() >= 7){
+		s = msg.substring(0, 7);
+		s += "...";
+	}else{
+		s = msg.trim();
+	}
+	return s;
+}
+%>
+
+
     <!-- Navigation -->
 	<nav class="navbar fixed-top navbar-expand-lg navbar-dark fixed-top"
 		style="background-color: #c53211; padding-bottom: 10px">

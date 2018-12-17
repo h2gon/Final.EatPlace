@@ -647,7 +647,7 @@ public class EatRestaurantsController {
 	}
 	
 	@RequestMapping(value="keyword.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String keyword(Model model, RegiDto dto, RegiDto dto2) {
+	public String keyword(Model model, RegiDto dto, RegiDto dto2, HttpServletRequest req) {
 		logger.info("EatRestaurantsController keyword "+ new Date());
 		System.out.println(dto.toString());
 		
@@ -684,6 +684,12 @@ public class EatRestaurantsController {
 		model.addAttribute("bestlist", keywordlist);
 		model.addAttribute("reviewlist", reviewlist);
 		model.addAttribute("keyword", dto);
+		
+		EatMemberDto login = (EatMemberDto)req.getSession().getAttribute("login");
+		if(login != null && !login.getId().equals("")){
+		List<wannagoDto> wannagolist = eatRestaurantsService.getwannagolist(login.getId());
+					model.addAttribute("wannagolist", wannagolist);
+		}
 		
 		return "restaurants/restaurantBest";
 	}
