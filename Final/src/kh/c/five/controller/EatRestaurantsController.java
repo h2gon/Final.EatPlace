@@ -152,11 +152,11 @@ public class EatRestaurantsController {
 		
 	
 		EatMemberDto login = (EatMemberDto)req.getSession().getAttribute("login");
-		
+		if(login != null && !login.getId().equals("")){
 		List<wannagoDto> wannagolist = eatRestaurantsService.getwannagolist(login.getId());
 					model.addAttribute("wannagolist", wannagolist);
 		
-		
+		}
 		
 		return "restaurants/restaurntsList";
 	}
@@ -419,9 +419,11 @@ public class EatRestaurantsController {
 				
 		EatMemberDto login = (EatMemberDto)req.getSession().getAttribute("login");
 		
+		if(login != null && !login.getId().equals("")){
+		
 		List<wannagoDto> wannagolist = eatRestaurantsService.getwannagolist(login.getId());
 					model.addAttribute("wannagolist", wannagolist);
-		
+		}
 		//return "redirect:/home.do";
 		return "restaurants/restaurntsSearchList";
 	}
@@ -490,10 +492,10 @@ public class EatRestaurantsController {
 		
 		
 		EatMemberDto login = (EatMemberDto)req.getSession().getAttribute("login");
-		
+		if(login != null && !login.getId().equals("")){
 		List<wannagoDto> wannagolist = eatRestaurantsService.getwannagolist(login.getId());
 					model.addAttribute("wannagolist", wannagolist);
-		
+		}
 		return "restaurants/restaurntsSearchList";
 	}
 	

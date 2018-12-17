@@ -494,7 +494,7 @@ JSP주석 소스보기할때 보여지지 않음
 /* List<wannagoDto> wannagolist = (List<wannagoDto>)request.getAttribute("wannagolist"); */
 List<RegiDto> RankList2 = (List<RegiDto>)request.getAttribute("RankList");
 
-if(wannagolist.size()>1 && wannagolist!=null){
+if(wannagolist!=null){
 for(int i=0; i<wannagolist.size(); i++){
 	String wannaname = "";
 	double wannaRating = 0;
