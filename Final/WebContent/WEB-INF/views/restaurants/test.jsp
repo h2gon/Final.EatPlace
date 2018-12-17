@@ -1,3 +1,4 @@
+<%@page import="java.util.Collection"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="kh.c.five.model.wannagoDto"%>
 <%@page import="javax.jws.Oneway"%>
@@ -13,6 +14,7 @@
 <%@page import="java.util.List"%>
 <%@page import="kh.c.five.model.RegiDto"%>
 <%@page import="java.io.File"%>
+<%@page import="java.util.Collections"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -23,14 +25,14 @@
 <html>
 <head>
 <%
- 	EatMemberDto user = (EatMemberDto)session.getAttribute("login");
-boolean loginok = false;
+ 	//EatMemberDto user = (EatMemberDto)session.getAttribute("login");
+/* boolean loginok = false;
 	if(user != null){
 		loginok = true;
-	}
- 	Cookie[] cookies = request.getCookies(); 
-    List<RegiDto> RankList = (List<RegiDto>)request.getAttribute("RankList");
-    List<wannagoDto> wannagolist = (List<wannagoDto>)request.getAttribute("wannagolist");
+	} */
+ 	//Cookie[] cookies = request.getCookies(); 
+   // List<RegiDto> RankList = (List<RegiDto>)request.getAttribute("RankList");
+    //List<wannagoDto> wannagolist = (List<wannagoDto>)request.getAttribute("wannagolist");
  %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- more -->
@@ -38,9 +40,21 @@ boolean loginok = false;
 <meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1, user-scalable=no" />
 <meta name="format-detection" content="telephone=no">
 <title>EAT PLACE</title>
+
+<!-- Bootstrap core CSS 
+<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom styles for this template 
+<link href="css/modern-business.css" rel="stylesheet">-->
+<link href="${pageContext.request.contextPath}/css/creative.min.css"
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/vendor/magnific-popup/magnific-popup.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
  
-    <!--  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="owlcarousel/owl.carousel.min.js"></script>
 
@@ -50,12 +64,10 @@ boolean loginok = false;
 
 <!-- owl carousel css -->
 <link rel="stylesheet" href="owlcarousel/owl.carousel.min.css">
-
 <link rel="stylesheet" href="owlcarousel/owl.theme.default.min.css">
 
 <!-- owl carousel with modal -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
@@ -379,6 +391,266 @@ footer a:hover {
  
  
  }
+ <!--SEARCH-->
+.in-line{
+      width:900px;	
+      height:42px; 
+    }
+   
+    input[type="text"]{
+      width:70%;
+      height:100%;
+      border:none;
+      font-size:1.213rem;
+      
+      font-style: inherit;
+      display:inline;
+      outline:none;
+      box-sizing: border-box;
+      background-color: #c53211;
+      color:black;
+
+    }
+    input[type=button]{
+      width: 30%;
+      height:100%;
+      background-color: lightgray;
+      border:none;
+      background-color: white;
+      font-size:1.313rem;
+      color:#042AaC;
+      outline:none;
+      display:inline;
+      margin-left: -25px;
+      box-sizing: border-box;
+    }
+ 
+</style>
+  <%
+  EatMemberDto user = (EatMemberDto)session.getAttribute("login");
+  
+  boolean loginok = false;
+	if(user != null){
+		loginok = true;
+	}
+	
+List<Cookie> recentCookie = new ArrayList(); 
+
+
+Cookie[] cookies = request.getCookies();  // 요청정보로부터 쿠키를 가져온다
+
+
+
+System.out.println("현재 설정된 쿠키의 개수 : " + cookies.length);    // 쿠키가 저장된 배열의 길이를 가져온다.
+
+
+
+ for(int i = 0 ; i<cookies.length; i++){                            // 쿠키 배열을 반복문으로 돌린다.
+
+/* URLDecoder.decode(cookies[i].getName(), "utf-8") */
+
+String str = URLDecoder.decode(cookies[i].getName(), "utf-8");
+
+if(str.contains("rc")){
+	
+	recentCookie.add(cookies[i]);
+	
+}
+
+
+System.out.println(i + "번째 쿠키 이름 : " + URLDecoder.decode(cookies[i].getName(), "utf-8"));            // 쿠키의 이름을 가져온다.
+
+
+System.out.println(i + "번째 쿠키에 설정된 값 : " + cookies[i].getValue());    // 쿠키의 값을 가져온다.
+
+
+} 
+
+ Collections.reverse(recentCookie);
+
+%>
+<!-- 검색창 스타일 -->
+<!-- 검색창 스타일   -->
+<style>
+
+
+@media only screen and (min-width: 769px){
+	.main-header {
+	    padding-top: 150px;
+	}
+}
+
+.main-header {
+    overflow: hidden;
+    position: relative;
+    padding-top: 52px;
+    text-align: center;
+    background-position: center;
+    background-size: cover;
+}
+
+@media only screen and (min-width: 769px){
+.main-search {
+   /*  margin: 45px auto 0 auto; */
+    height: 50px;
+    width: 738px;
+    
+}
+
+}
+
+.main-search {
+    position: relative;
+        margin-top: 0px;
+}
+
+.search-keywords-container .tab-keywords button {
+
+
+    position: relative;
+    font-size: 0.875rem;
+    color: #7f7f7f;
+    width: 32.5%;
+    height: 50px;
+    text-align: center;
+    text-decoration: none;
+    line-height: 1.2;
+    vertical-align: bottom;
+        cursor: pointer;
+    border: 0px;
+        border-radius: 0 0 3px 3px;
+    background-color: transparent;
+    outline: 0;
+    }
+    
+    .search-keywords-container .tab-keywords button.selected {
+    color: #ff7100;
+}
+.search-keywords-container .tab-keywords button.selected:before {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 3px;
+    background-color: #ff7100;
+}
+
+
+.search-keywords-container .tab-keywords:before {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 50px;
+    height: 1px;
+    background-color: #dbdbdb;
+}
+
+#Vsearch{
+
+   z-index: 1110;  
+   display: none;
+    position: absolute;
+    width: 450px;
+    height: 290px;
+    border-radius: 0px 0px 3px 3px;
+    background-color: rgb(255, 255, 255);
+    margin-left: auto;
+    margin-right: auto;
+    top: 70px; 
+    right: 390px;
+    left: 0px;
+    bottom: 0px;
+
+}
+.search-keywords-container .keywords .list-keywords-wrap .list-keywords>li {
+    position: relative;
+    border-bottom: 1px solid #dbdbdb;
+    overflow: hidden;
+}
+.search-keywords-container .keywords .list-keywords-wrap .list-keywords>li a {
+    display: block;
+    padding: 0 45px 0 36px;
+    font-size: 0.875rem;
+    color: #7f7f7f;
+    text-decoration: none;
+    margin: 20px 0;
+    line-height: 1.2rem;
+}
+.search-keywords-container .keywords .list-keywords-wrap .list-keywords>li a:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 7px;
+}
+.search-keywords-container .keywords .list-keywords>li a:before {
+    margin-top: -8.5px;
+    background-image: url(https://mp-seoul-image-develop-s3.mangoplate.com/web/resources/2018022864551sprites_desktop.png?fit=around|*:*&crop=*:*;*,*&output-format=png&output-quality=80);
+    background-position: -974px -752px;
+    width: 17px;
+    height: 17px;
+}
+@media only screen and (min-width: 769px){
+#main-search .in-line>span {
+    left: 27px;
+    margin-top: -12.5px;
+    background-image: url(https://mp-seoul-image-develop-s3.mangoplate.com/web/resources/2018022864551sprites_desktop.png?fit=around|*:*&crop=*:*;*,*&output-format=png&output-quality=80);
+    
+    background-position: -974px -159px;
+    width: 24px;
+    height: 25px;
+}}
+#main-search .in-line>span {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    text-indent: -9999px;
+}
+
+.search-keywords-container .keywords .list-keywords-wrap .list-keywords>li.clear_all {
+    text-align: right;
+    padding: 10px 5px 20px 0;
+    border-bottom: 0;
+    font-size: 0.875rem;
+    color: #7f7f7f;
+     height: 50px;
+     text-decoration: none;
+    line-height: 1.2;
+    vertical-align: bottom;
+        cursor: pointer;
+   
+}
+
+.search-keywords-container {
+    display: none;
+    position: fixed;
+    z-index: 901;
+    background-color: #ffffff;
+    overflow-y: auto;
+}
+
+#rc_clear {
+
+border: 0px; 
+border-radius: 0; 
+background-color: transparent;
+cursor: pointer;
+outline: 0;
+}
+#no_recent {
+    padding: 15px 0;
+    text-align: center;
+}
+
+
+
+
 
 </style>
 </head>
@@ -404,7 +676,7 @@ footer a:hover {
  </form>
 <%
  	
- /*    List<RegiDto> RankList = (List<RegiDto>)request.getAttribute("RankList"); */
+     List<RegiDto> RankList = (List<RegiDto>)request.getAttribute("RankList");
 	System.out.println("testRankList = " + RankList);
 
 %>
@@ -491,7 +763,7 @@ JSP주석 소스보기할때 보여지지 않음
 </c:if>				
 					
 <%
-/* List<wannagoDto> wannagolist = (List<wannagoDto>)request.getAttribute("wannagolist"); */
+List<wannagoDto> wannagolist = (List<wannagoDto>)request.getAttribute("wannagolist");
 List<RegiDto> RankList2 = (List<RegiDto>)request.getAttribute("RankList");
 
 if(wannagolist!=null){
@@ -504,7 +776,7 @@ for(int i=0; i<wannagolist.size(); i++){
 	int wannalike = 0;
 	
 	for(int j=0; j<RankList2.size(); j++){
-		if(RankList.get(j).getSeq() == wannagolist.get(i).getRs_seq()){
+		if(RankList2.get(j).getSeq() == wannagolist.get(i).getRs_seq()){
 			
 			wannaname = RankList2.get(j).getRs_name();
 			wannaRating = RankList2.get(j).getRs_rating();
@@ -679,42 +951,178 @@ function alarm() {
 }
 
 </script>
+<%!
+public String dot3(String msg){
+	String s = "";
+	if(msg.length() >= 3){
+		s = msg.substring(0, 3);
+		s += "...";
+	}else{
+		s = msg.trim();
+	}
+	return s;
+}
 
-<nav class="navbar navbar-default navbar-fixed-top" style="background-color: #c53211;  padding-bottom: 10px;">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="home.do" style="color: white; margin-left: 10px">EAT PLACE</a>
-    </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> 
-      <ul class="nav navbar-nav navbar-right">
-        <li class="nav-item">
-        	<a class="nav-link"	href="restaurntsList.do">
-        		<strong	style="color: white; margin-left: 20px">맛집 리스트</strong>
-        	</a>
-        </li>
-        <li class="nav-item">
-        	<a class="nav-link"	href="restaurantsInsert.do">
-        		<strong	style="color: white; margin-left: 20px">맛집 추가</strong>
-        	</a>
-        </li>
-		<li class="nav-item" style="margin-left: 20px">
+public String ss(String msg){
+	
+	String s[] = msg.split(" ");
+	String re = s[0] + " " + s[1];
+
+	return re;
+}
+
+%>
+
+<%
+String category = (String)request.getAttribute("s_category");
+if(category == null) category = "";
+
+System.out.println("category = "+category);
+
+String keyword = (String)request.getAttribute("s_keyword");
+if(keyword == null) keyword = "";
+
+System.out.println("keyword = "+keyword);
+
+String s_keyword = keyword + category;
+
+%>
+<script>
+var str = '<%=category%>';
+var kstr = '<%=keyword%>';
+$(document).ready(function () {
+	
+	$("#_s_category").val(str);
+	$("#main-keyword").val(kstr);
+})
+</script>
+
+<!-- Navigation -->
+	<nav class="navbar fixed-top navbar-expand-lg navbar-dark fixed-top"
+		style="background-color: #c53211; padding-bottom: 10px">
+		<div class="container" style="float: left; width: 20%">
+			<a class="navbar-brand" href="home.do">EAT PLACE</a>
+			<button class="navbar-toggler navbar-toggler-right" type="button"
+				data-toggle="collapse" data-target="#navbarResponsive"
+				aria-controls="navbarResponsive" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		</div>
+		
+		<div style="float: left; width: 60%">
+		<%-- <form action="" id="main-search" name="main-search" method="get"> 
+ 			 <div class="in-line">
+		      <strong><input type="text" onkeypress="if(event.keyCode==13) {search();}"  id="main-keyword" name="s_keyword" value="" placeholder="지역, 식당 또는 음식" style="color: #575756; border-bottom-left-radius: 20px; border-top-left-radius: 20px"></strong>
+		      <strong><input type="button" onclick="search()"  value="검색" style="border-bottom-right-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-top-left-radius: 20px; background-color: darkorange; color: white;"></strong>
+		     </div>
+		<!-- controller로 넘겨주기 위한 값 -->
+		<input type="hidden" name="s_category"  value="<%=category %>">
+		<input type="hidden" name="pageNumber" id="_pageNumber" value="${(empty pageNumber)?0:pageNumber }">
+		<input type="hidden" name="recordCountPerPage" id="_recordCountPerPage"
+			value="${(empty recordCountPerPage)?9:recordCountPerPage }">
+				
+		
+		</form> --%>
+		<!-- 전체 검색 -->
+  <fieldset id="search" class="main-search ng-scope" ng-controller="mp20_main_search_suggest_controller" style="z-index: 110;border: 0;">
+      
+		<form action="" id="main-search" name="main-search" method="get" > 
+	 			 <div class="in-line" style="margin-left: auto; margin-right: auto; ">
+	 			 <span>검색 :</span>
+			      <strong><input type="text" class="seaechAll" onkeypress="if(event.keyCode==13) {search();}" onclick="displayVsearch()"  id="main-keyword" name="s_keyword" value="" placeholder="지역, 식당 또는 음식" autocomplete="off" style="color: #ffffff; margin-left: 40px;"></strong>
+			      
+			     </div>
+				<!-- controller로 넘겨주기 위한 값 -->
+				<input type="hidden" id="_s_category" name="s_category" value="">
+				<input type="hidden" name="pageNumber" id="_pageNumber" value="${(empty pageNumber)?0:pageNumber }">
+				<input type="hidden" name="recordCountPerPage" id="_recordCountPerPage"
+					value="${(empty recordCountPerPage)?9:recordCountPerPage }">
+							     
+		</form> 
+</fieldset>
+		</div>
+		
+		<!-- 추천 검색어 / 최근검색어 -->
+   <div>
+   <aside id="Vsearch" class="search-keywords-container ng-scope main" ng-controller="mp20_search_list_controller" style="">
+  <nav  class="tab-keywords">
+ 
+    <!-- <button class="searching_tap_recommend searching_tap selected" onclick="select_tab_by_recommend()"> -->
+     <button class="searching_tap_recommend searching_tap selected" value="re_btn1">
+      추천 검색어
+    </button>
+    <!-- <button class="searching_tap_trending searching_tap" onclick="select_tab_by_popular()"> -->
+     <button class="searching_tap_trending searching_tap" value="re_btn2" >
+      인기 검색어
+    </button>
+   <!--  <button class="searching_tap_recent searching_tap" onclick="select_tab_by_lately()"> -->
+     <button class="searching_tap_recent searching_tap" value="re_btn3">
+      최근 검색어
+    </button>
+    
+  </nav>
+<%-- <%
+String recomend = "추천검색어테스트";
+
+%>
+<c:set var="recomend" value="추천검색어1"></c:set> --%>
+  <!--  검색 자동완성 -->
+  <div class="keywords">
+	  <div class="list-keywords-wrap">
+	    <ol class="list-keywords" >
+	      <li class="list-keyword" >
+	        <a href="#" category="" onclick="search2(this)" class="ng-binding">존맛</a>
+	        <div class="search_result_delete ng-hide" onclick="search2()">
+          </div>
+	      </li>
+			<li class="list-keyword" >
+	        <a href="#" category="" onclick="search2(this)" class="ng-binding">국물</a>
+	        <div class="search_result_delete ng-hide" onclick="common_ga(get_now_page_code(), 'CLICK_SEARCH_RECENT_CANCEL')">
+          </div>
+	      </li>
+	      <li class="list-keyword" >
+	        <a href="#" category="" onclick="search2(this)" class="ng-binding">혼밥</a>
+	        <div class="search_result_delete ng-hide" onclick="common_ga(get_now_page_code(), 'CLICK_SEARCH_RECENT_CANCEL')">
+          </div>
+	      </li>
+	      <li class="list-keyword" >
+	        <a href="#" category="" onclick="search2(this)" class="ng-binding">맛집</a>
+	        <div class="search_result_delete ng-hide" onclick="common_ga(get_now_page_code(), 'CLICK_SEARCH_RECENT_CANCEL')">
+          </div>
+	      </li>
+	      <li class="list-keyword" >
+	        <a href="#" category="" onclick="search2(this)" class="ng-binding">신사동</a>
+	        <div class="search_result_delete ng-hide" onclick="common_ga(get_now_page_code(), 'CLICK_SEARCH_RECENT_CANCEL')">
+          </div>
+	      </li>
+
+	    </ol>
+	  </div>
+  </div>
+</aside>
+</div>
+		
+		<div class="container" style="float: left; width: 20%">
+			<div class="collapse navbar-collapse" id="navbarResponsive">				
+				<ul class="navbar-nav ml-auto">
+					
+					<li class="nav-item"><a class="nav-link"
+						href="restaurntsList.do"><strong
+							style="color: white; margin-left: 20px">맛집 리스트</strong></a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="restaurantsInsert.do"><strong
+							style="color: white; margin-left: 20px">맛집 추가</strong></a></li>
+					<li class="nav-item" style="margin-left: 20px">
 						<a onclick="document.getElementById('id01').style.display='block'" class="w3-btn">
 						<img alt=""	src="img/main/man-user.png">
 						</a>
 					</li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+				</ul>
+			</div>
+		</div>
+	</nav>
 
 
 <%
@@ -754,13 +1162,13 @@ List<String> imagelist = (List<String>) request.getAttribute("imagelist");
    						<img src="img/button/review.png">
    					</div>
    					<div class="col-md-1">
-   						<p id="p_rc"></p>
+   						<p id="p_rc">0</p>
    					</div> 
    					<div class="col-md-1">
    						<img alt="" src="img/button/fav.png">
    					</div>
     				<div class="col-md-1">
-   						<p id="p_lk"></p>
+   						<p id="p_lk">0</p>
    					</div> 
 
    				</div>
@@ -823,13 +1231,13 @@ if(imagelist==null||imagelist.size()<3){
 	<br>
 	<br>
 	<br>
-	<div class="owl-carousel123 owl-theme" style="margin-top: 50px; margin-left: 5px" >
+	<div class="owl-carousel123 owl-theme" >
 <%
 for(int i=0;i<imagelist.size();i++){
 %>
 	<div class="item" id="owlImages" style="margin-right: 5px">
 	<a href="#" data-toggle="modal" data-target="#carouselModal">
-	<img src="<%=imagelist.get(i)+mstr%>" style="height: 300px; margin-right: 3px"onclick="createImages(<%=imagelist%>);" >
+	<img src="<%=imagelist.get(i)+mstr%>" style="height: 300px; margin-right: 3px"<%-- onclick="createImages(<%=imagelist%>);" --%> >
 		<%-- <img src="<%=imagelist.get(i).getFile_name()%>" style="height: 300px; margin-right: 3px"> --%>
 		
 	</a>
@@ -893,26 +1301,7 @@ function onefunc() {
 
  	%>  
 	
-	/* 
-	var str = "?fit=around|148:152&crop=148:152;*,*&output-format=jpg&output-quality=80";
-	for (var i = 0; i < images.length; i++) {
-		$("#sync2 .owl-wrapper").append(
-				$('<div>').attr('class','owl-item').attr("style","width: 119px;").append(
-				    $('<div>').attr('class','item').append(
-				            $('<img>').attr('src',images[i]+str).attr('class','img-responsive').append(
-				            		
-			              ))));  
-	} 
 	
-	  var re_str = ['삼성동','데이트','삼겹살','모임','이태원','강남','카페'];
-		for (var i = 0; i < re_str.length; i++) {
-			$(".list-keywords").append(
-				    $('<li>').attr('class','list-keyword').append(
-				            $('<a>').attr('href','#').attr('onclick','search2(this)').append(
-				            		re_str[i]
-				              )));  
-		} */ 
-	 
 }
 
 </script>
@@ -1394,7 +1783,7 @@ function onefunc() {
 			/* alert('createImages');
 			alert(images.length);
 			alert(images[0]); */
-			
+			customNavTest(images);
 			var str = "?fit=around|148:152&crop=148:152;*,*&output-format=jpg&output-quality=80";
 				for (var i = 0; i < images.length; i++) {
 					$("#sync2 .owl-wrapper").append(
@@ -1405,8 +1794,8 @@ function onefunc() {
 						            		
 						              ))));  
 				}
-				alert(images.length);
-				customNavTest(images);
+				//alert(images.length);
+				
 
 
 			}	
@@ -1541,7 +1930,21 @@ $(document).ready(function(){
 				}
 			});
 			  
-			 
+ 			 $.ajax({
+ 				url:"getRPdetail2.do",
+ 				datatype:'json',
+ 				data:'rseq='+$("#rs_seq").attr("value"),
+ 				type:'post',
+ 				async:true,
+ 				success:function(data){
+ 		
+ 					 createImages(data.imagelist);
+ 				},
+ 				error:function(req, stu, err){
+ 					alert("error");
+ 					alert(stu + " " + err);
+ 				}
+ 			});
 			 
 	 });
 
@@ -1643,7 +2046,44 @@ $(document).ready(function() {
 						return;
 					}else{
 						 //alert("prev 클릭");
+						 
 						 $('#mainImage').attr("src",imglist[check]);
+						 
+						 var filename=imglist[check];
+						 var rseq=$("#rs_seq").attr("value");
+			        	 
+						 var revData = {
+									'filename':filename,
+									'rseq': rseq
+							};
+						 
+			 			 $.ajax({
+			 				url:"getRPdetail.do",
+			 				datatype:'json',
+			 				data:revData,
+			 				type:'post',
+			 				async:true,
+			 				success:function(data){
+			 			//		alert("success");
+
+			 			//		alert(data.review.rs_content);
+			 					$("#pause").html(data.review.rs_content);
+			 					$("#p_id").html(data.review.id);
+			 					var rating =data.review.rs_rating;
+			 					if(rating===1){
+			 						$("#p_ratingP").attr('src','./img/like/1-2.png');	
+			 					}else if(rating===3){
+			 						$("#p_ratingP").attr('src','./img/like/3-2.png');
+			 					} else if(rating===5){
+			 						$("#p_ratingP").attr('src','./img/like/5-2.png');
+			 					}
+			 				
+			 				},
+			 				error:function(req, stu, err){
+			 					alert("error");
+			 					alert(stu + " " + err);
+			 				}
+			 			});
 					}
 					 
 					  
@@ -1655,6 +2095,41 @@ $(document).ready(function() {
 					}else{
 						//alert("next클릭");
 						 $('#mainImage').attr("src",imglist[check]);
+						 var filename=imglist[check];
+						 var rseq=$("#rs_seq").attr("value");
+			        	 
+						 var revData = {
+									'filename':filename,
+									'rseq': rseq
+							};
+						 
+			 			 $.ajax({
+			 				url:"getRPdetail.do",
+			 				datatype:'json',
+			 				data:revData,
+			 				type:'post',
+			 				async:true,
+			 				success:function(data){
+			 			//		alert("success");
+
+			 			//		alert(data.review.rs_content);
+			 					$("#pause").html(data.review.rs_content);
+			 					$("#p_id").html(data.review.id);
+			 					var rating =data.review.rs_rating;
+			 					if(rating===1){
+			 						$("#p_ratingP").attr('src','./img/like/1-2.png');	
+			 					}else if(rating===3){
+			 						$("#p_ratingP").attr('src','./img/like/3-2.png');
+			 					} else if(rating===5){
+			 						$("#p_ratingP").attr('src','./img/like/5-2.png');
+			 					}
+			 				
+			 				},
+			 				error:function(req, stu, err){
+			 					alert("error");
+			 					alert(stu + " " + err);
+			 				}
+			 			});
 					}
 					
 				}
