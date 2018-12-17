@@ -639,10 +639,10 @@ public class EatRestaurantsController {
 		
 		
 		EatMemberDto login = (EatMemberDto)req.getSession().getAttribute("login");
-		
+		if(login != null && !login.getId().equals("")){
 		List<wannagoDto> wannagolist = eatRestaurantsService.getwannagolist(login.getId());
 					model.addAttribute("wannagolist", wannagolist);
-		
+		}
 		return "restaurants/restaurantBest";
 	}
 	
@@ -650,8 +650,12 @@ public class EatRestaurantsController {
 	public String keyword(Model model, RegiDto dto, RegiDto dto2) {
 		logger.info("EatRestaurantsController GuBest "+ new Date());
 		System.out.println(dto.toString());
+		
+		
 		List<RegiDto> list2 = eatRestaurantsService.getRankList(dto2);
 		model.addAttribute("RankList", list2);
+		
+		
 		List<RegiDto> keywordlist = eatRestaurantsService.keywordbestlist(dto);
 		List<ReviewDto> reviewlist = new ArrayList<>();
 		for (int i = 0; i < keywordlist.size(); i++) {
