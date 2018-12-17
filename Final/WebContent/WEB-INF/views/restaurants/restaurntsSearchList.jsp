@@ -188,7 +188,7 @@ System.out.println(i + "번째 쿠키에 설정된 값 : " + cookies[i].getValue
     margin-left: auto;
     margin-right: auto;
     top: 70px; 
-    right: 390px;
+    right: 535px;
     left: 0px;
     bottom: 0px;
 
@@ -933,7 +933,7 @@ String recomend = "추천검색어테스트";
 	      	 <br><br>	       	 	
 	      	<img alt="" src="img/button/hr.png" style="width: 100%; height: 1px">
 	     </span>
-      </div>
+      </div> 
       
       <div>      
         <p style="color: gray;">㈜ 잇플레이스

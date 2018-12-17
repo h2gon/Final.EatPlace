@@ -188,7 +188,7 @@ System.out.println(i + "번째 쿠키에 설정된 값 : " + cookies[i].getValue
     margin-left: auto;
     margin-right: auto;
     top: 70px; 
-    right: 390px;
+    right: 535px;
     left: 0px;
     bottom: 0px;
 
@@ -1034,8 +1034,7 @@ geocoder[<%=j %>].addressSearch('<%=bestlist.get(j).getRs_address1() %>', functi
 	    	    	$("#search").css("z-index","110")
 	    	    } 
 	      }
-	      }
-		}
+	     
 	      </script>
 
 <script type="text/javascript">
