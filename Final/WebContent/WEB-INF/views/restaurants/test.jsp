@@ -41,11 +41,11 @@
 <meta name="format-detection" content="telephone=no">
 <title>EAT PLACE</title>
 
-<!-- Bootstrap core CSS 
+<!-- Bootstrap core CSS -->
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Custom styles for this template 
-<link href="css/modern-business.css" rel="stylesheet">-->
+<!-- Custom styles for this template -->
+<link href="css/modern-business.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/creative.min.css"
 	rel="stylesheet">
 <link rel="stylesheet" type="text/css"
@@ -91,20 +91,20 @@ header {
 }
 header,
 .back {
-	margin-bottom: 6rem;
+	/* margin-bottom: 6rem; */
 }
 #contents {
 	max-width: 780px;
 	margin: 0 auto;
 	text-align: center;
-	padding-bottom: 50px;
+	/* padding-bottom: 50px; */
 }
 
 .ad {
 	text-align: center;
 	border: 1px dotted #ccc;
 	max-width: 780px;
-	margin: 0 auto 6rem;
+	margin: 0 auto/*  6rem */;
 }
 
 a.btn {
@@ -470,7 +470,6 @@ System.out.println(i + "번째 쿠키에 설정된 값 : " + cookies[i].getValue
 
 %>
 <!-- 검색창 스타일 -->
-<!-- 검색창 스타일   -->
 <style>
 
 
@@ -718,7 +717,7 @@ for (int i=1;i<cookies.length;i++){
 	
 		<!-- 이름 -->
 		<div style="display:inline-block; position:relative; width: 30%; height: 45%; top:-20px; left:20px;">
-			<a href="rsdetail.do?seq=<%=cookies[i].getValue()%>" style="text-align: center; color: black;"><b><font style="font-size: medium;text-align:center;"><%=dot3(cn)%></font></b></a>
+			<a href="rsdetail.do?seq=<%=cookies[i].getValue()%>" style="text-align: center; color: black;"><b><font style="font-size: medium;text-align:center;"><%=cn%></font></b></a>
 		</div>
 		<!-- 주소 -->
 		<div style="display:inline-block; position:relative; width: 55%; height: 30%; top:-55px; left:120px;">
@@ -802,7 +801,7 @@ for(int i=0; i<wannagolist.size(); i++){
 	
 		<!-- 이름 -->
 		<div style="display:inline-block; position:relative; width: 30%; height: 45%; top:-20px; left:20px;">
-			<a href="rsdetail.do?seq=<%=wannalike%>" style="text-align: center;"><b><font style="font-size: medium;text-align:center;"><%=dot3(wannaname)%></font></b></a>
+			<a href="rsdetail.do?seq=<%=wannalike%>" style="text-align: center;"><b><font style="font-size: medium;text-align:center;"><%=wannaname%></font></b></a>
 		</div>
 		<!-- 주소 -->
 		<div style="display:inline-block; position:relative; width: 55%; height: 30%; top:-55px; left:120px;">
@@ -998,65 +997,37 @@ $(document).ready(function () {
 })
 </script>
 
-<!-- Navigation -->
-<nav class="navbar navbar-default navbar-fixed-top" style="background-color: #c53211;  padding-bottom: 10px;">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-		<div class="col-md-2">
-	      <a class="navbar-brand" href="home.do" style="color: white; margin-left: 10px">EAT PLACE</a>
-	    </div>
-	</div>
-	
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="col-md-4">
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> 
-      <ul class="nav navbar-nav navbar-right">
-        <li class="nav-item">
-        	<a class="nav-link"	href="restaurntsList.do">
-        		<strong	style="color: white; margin-left: 20px">맛집 리스트</strong>
-        	</a>
-        </li>
-		<li class="nav-item" style="margin-left: 20px">
-						<a onclick="document.getElementById('id02').style.display='block'" class="w3-btn">
-						<img alt=""	src="img/main/man-user.png">
-						</a>
-					</li>
-      </ul>
-    </div>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-<%-- 	<nav class="navbar fixed-top navbar-expand-lg navbar-dark"
-		style="background-color: #c53211; padding-bottom: 10px">
-		<div class="container col-sm-3">
+	<!-- Navigation -->
+	<nav class="navbar fixed-top navbar-expand-lg navbar-dark fixed-top"
+		style="background-color: #c53211; padding-bottom: 10px; margin-top:-58px">
+		<div class="container" style="float: left; width: 15%">
 			<a class="navbar-brand" href="home.do">EAT PLACE</a>
-<!-- 			<button class="navbar-toggler navbar-toggler-right" type="button"
+			<button class="navbar-toggler navbar-toggler-right" type="button"
 				data-toggle="collapse" data-target="#navbarResponsive"
 				aria-controls="navbarResponsive" aria-expanded="false"
 				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
-			</button> -->
+			</button>
 		</div>
 		
-		<div class="col-sm-6">
-		<!-- 전체 검색 -->
-  		<fieldset id="search" class="main-search ng-scope" ng-controller="mp20_main_search_suggest_controller" style="z-index: 110;border: 0;">
+		<div style="float: left; width: 60%">
+		  <!-- 전체 검색 -->
+  <fieldset id="search" class="main-search ng-scope" ng-controller="mp20_main_search_suggest_controller" style="z-index: 110;border: 0;">
       
 		<form action="" id="main-search" name="main-search" method="get" > 
 	 			 <div class="in-line" style="margin-left: auto; margin-right: auto; ">
 	 			 <span>검색 :</span>
-			      <strong><input type="text" class="seaechAll" onkeypress="if(event.keyCode==13) {search();}" onclick="displayVsearch()"  id="main-keyword" name="s_keyword" value="" placeholder="지역, 식당 또는 음식" autocomplete="off" style="color: #ffffff; margin-left: 40px; vertical-align: center"></strong>
-			      
+			     <strong>
+			     <input type="text" class="seaechAll" onkeypress="if(event.keyCode==13) {search();}" onclick="displayVsearch()"  id="main-keyword" name="s_keyword" value="" placeholder="지역, 식당 또는 음식" autocomplete="off" style="color: #ffffff; margin-left: 40px;">
+			     </strong>
 			     </div>
 				<!-- controller로 넘겨주기 위한 값 -->
-				<input type="hidden" id="_s_category" name="s_category" value="">
 				<input type="hidden" name="pageNumber" id="_pageNumber" value="${(empty pageNumber)?0:pageNumber }">
 				<input type="hidden" name="recordCountPerPage" id="_recordCountPerPage"
 					value="${(empty recordCountPerPage)?9:recordCountPerPage }">
 							     
 		</form> 
-		</fieldset>
+</fieldset>
 		</div>
 		
 		<!-- 추천 검색어 / 최근검색어 -->
@@ -1078,7 +1049,11 @@ $(document).ready(function () {
     </button>
     
   </nav>
+<%-- <%
+String recomend = "추천검색어테스트";
 
+%>
+<c:set var="recomend" value="추천검색어1"></c:set> --%>
   <!--  검색 자동완성 -->
   <div class="keywords">
 	  <div class="list-keywords-wrap">
@@ -1115,13 +1090,16 @@ $(document).ready(function () {
 </aside>
 </div>
 		
-		<div class="container col-sm-3">
+		<div class="container" style="float: left; width: 25%; margin-right:-80px">
 			<div class="collapse navbar-collapse" id="navbarResponsive">				
 				<ul class="navbar-nav ml-auto">
 					
 					<li class="nav-item"><a class="nav-link"
 						href="restaurntsList.do"><strong
 							style="color: white; margin-left: 20px">맛집 리스트</strong></a></li>
+					<!-- <li class="nav-item"><a class="nav-link"
+						href="restaurantsInsert.do"><strong
+							style="color: white; margin-left: 20px">맛집 추가</strong></a></li> -->
 					<li class="nav-item" style="margin-left: 20px">
 						<a onclick="document.getElementById('id01').style.display='block'" class="w3-btn">
 						<img alt=""	src="img/main/man-user.png">
@@ -1132,7 +1110,7 @@ $(document).ready(function () {
 		</div>
 	</nav>
 
- --%>
+
 <%
 List<ReviewDto> rvlist = (List<ReviewDto>)request.getAttribute("reviewlist");
 List<String> imagelist = (List<String>) request.getAttribute("imagelist");
@@ -1143,11 +1121,16 @@ List<String> imagelist = (List<String>) request.getAttribute("imagelist");
 <!--  -->
 
 <div class="modal fade" id="carouselModal" tabindex="-1" role="dialog" aria-labelledby="carouselModalLabel">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="row">
+        	<div class="col-md-1">
+
         <h4 class="modal-title" id="carouselModalLabel">${rs.rs_name }</h4>
+        	</div>
+        </div>
       </div>
       <div class="modal-body">
 <div class="customNavigation">
@@ -1239,18 +1222,26 @@ if(imagelist==null||imagelist.size()<3){
 	<br>
 	<br>
 	<br>
-	<div class="owl-carousel123 owl-theme" >
+	<div class="owl-carousel123 owl-theme" style="margin-top: -80px" >
 <%
 for(int i=0;i<imagelist.size();i++){
+	if(imagelist.get(i).contains("https://")){
 %>
-	<div class="item" id="owlImages" style="margin-right: 5px">
+	<div class="item" id="owlImages" style="margin-right: 5px;">
 	<a href="#" data-toggle="modal" data-target="#carouselModal">
-	<img src="<%=imagelist.get(i)+mstr%>" style="height: 300px; margin-right: 3px" onclick="onefunc();createImages(<%=imagelist %>)" >
-	
-		
+	<img src="<%=imagelist.get(i)+mstr%>" style="height: 300px; margin-right: 3px" onclick="createImages(<%=imagelist %>)" >
 	</a>
 	</div>
 <%
+	}else{
+		%>
+	 <div class="item" id="owlImages" style="margin-right: 5px">
+	 <a href="#" data-toggle="modal" data-target="#carouselModal">
+	 <img src="\image\<%=imagelist.get(i)+mstr%>" style="height: 300px; margin-right: 3px" onclick="createImages(<%=imagelist %>)">
+	 </a>
+	 </div>
+		<%
+	}
 }
 %>
 </div>
@@ -1890,6 +1881,7 @@ $(document).ready(function(){
 	 }); 
 	 
 	 $("#owlImages a img").click(function(){
+		 	$("#sync2 .owl-wrapper *").remove();
 			var img=$(this).attr('src');
 			//alert(img);
 			//var	filename=img.substring(7);
@@ -1973,23 +1965,6 @@ $(document).ready(function() {
 	    responsiveRefreshRate : 200,
 	  });
 	  
-	/*   function NextimglistTest(imglistTest) {
-		  if(imglistTest == null || imglistTest ==""){
-			   customNav("next","");
-			   }
-			   else if(imglistTest != null || imglistTest != ""){
-				   customNav("next",imglistTest);
-			   }
-	   }
-	  function PrevimglistTest(imglistTest) {
-		  if(imglistTest == null || imglistTest ==""){
-			   customNav("prev","");
-			   }
-			   else if(imglistTest != null || imglistTest != ""){
-				   customNav("prev",imglistTest);
-			   } 
-	 } */
-	  
 	   $(".next").click(function(){
 		  
 		   customNav("next");
@@ -2029,18 +2004,6 @@ $(document).ready(function() {
 		}
 		//console.log('data(target): '+$("#trigger").data('target'));
 		//레스토랑상단 이미지썸네일 next, prev
-		
-		<%--  <%
-		int chk = 0;
-		for(int i =0;i<imagelist.size(); i++){
-			%> imglist.push('<%=imagelist.get(i).getFile_name() %>');
-			<%
-		}
-		%>  --%> 
-		/* for(int i = 0 ; i<imagelist.size();i++){
-			imglist.push(imagelist[i]);
-		}
-				 */
 		
 		for (var i = 0; i < imglist.length; i++) {
 			
