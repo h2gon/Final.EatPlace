@@ -391,6 +391,18 @@ outline: 0;
 
 <body>
 
+<%!
+public String dot3(String msg){
+	String s = "";
+	if(msg.length() >= 7){
+		s = msg.substring(0, 7);
+		s += "...";
+	}else{
+		s = msg.trim();
+	}
+	return s;
+}
+%>
 
 <!-- 블랙스크린 -->
 <div id="black_screen" onclick="displayVsearch()" class="black_screen" style="
@@ -464,7 +476,7 @@ for (int i=1;i<cookies.length;i++){
 	
 		<!-- 이름 -->
 		<div style="display:inline-block; position:relative; width: 30%; height: 45%; top:-20px; left:20px;">
-			<a href="rsdetail.do?seq=<%=cookies[i].getValue()%>" style="text-align: center;"><b><font style="font-size: medium;text-align:center;"><%=cn%></font></b></a>
+			<a href="rsdetail.do?seq=<%=cookies[i].getValue() %>" style="text-align: center;"><b><font style="font-size: medium;text-align:center;"><%=dot3(cn)%></font></b></a>
 		</div>
 		<!-- 주소 -->
 		<div style="display:inline-block; position:relative; width: 55%; height: 30%; top:-55px; left:120px;">
@@ -550,7 +562,7 @@ for(int i=0; i<wannagolist.size(); i++){
 	
 		<!-- 이름 -->
 		<div style="display:inline-block; position:relative; width: 30%; height: 45%; top:-20px; left:20px;">
-			<a href="rsdetail.do?seq=<%=wannalike%>" style="text-align: center;"><b><font style="font-size: medium;text-align:center;"><%=wannaname%></font></b></a>
+			<a href="rsdetail.do?seq=<%=wannalike%>" style="text-align: center;"><b><font style="font-size: medium;text-align:center;"><%=dot3(wannaname) %></font></b></a>
 		</div>
 		<!-- 주소 -->
 		<div style="display:inline-block; position:relative; width: 55%; height: 30%; top:-55px; left:120px;">
