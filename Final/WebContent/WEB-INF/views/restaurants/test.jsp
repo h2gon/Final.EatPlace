@@ -1267,7 +1267,7 @@ for(int i=0;i<imagelist.size();i++){
 	<img src="<%=imagelist.get(i)+mstr%>" style="height: 300px; margin-right: 3px" onclick="createImages(<%=imagelist %>)" >
 	</a>
 	</div>
-<%
+<% 
 	}else{
 		%>
 	 <div class="item" id="owlImages" style="margin-right: 5px">
