@@ -1825,33 +1825,29 @@ function onefunc() {
 			alert(images[0]); */
 			customNavTest(images);
 			var str = "?fit=around|148:152&crop=148:152;*,*&output-format=jpg&output-quality=80";
-			<%
-			for (int i=0;i<imagelist.size();i++){
-				if(imagelist.get(i).contains("https://")){
-					%>
+			for (var i=0;i<images.length;i++){
+				if(images[i].indexOf("https://")!=-1){
 					
+					//alert("왜 안 됨 뭐문2");
 					$("#sync2 .owl-wrapper").append(
 							$('<div>').attr('class','owl-item').attr("style","width: 119px;").append(
 							    $('<div>').attr('class','item synced').append(
-							            $('<img>').attr('onclick','test("'+images[i]+'")').attr('src','<%=imagelist.get(i) + str%>').attr('class','img-responsive').append(
+							            $('<img>').attr('onclick','test("'+images[i]+'")').attr('src',images[i] + str).attr('class','img-responsive').append(
 							            		
 						              ))));
-					<%
+					
 				}else{
-					%>
+					//alert("왜 안 됨 뭐문3");
 					$("#sync2 .owl-wrapper").append(
 							$('<div>').attr('class','owl-item').attr("style","width: 119px;").append(
 							    $('<div>').attr('class','item').append(
-							            $('<img>').attr('onclick','test("'+images[i]+'")').attr('src','localhost:8090/image/<%=imagelist.get(i)%>').attr('class','img-responsive').append(
+							            $('<img>').attr('onclick','test("'+images[i]+'")').attr('src',images[i]).attr('class','img-responsive').append(
 							            		
 						              ))));
-			          <%
+			          
 				}
 			
 			}
-				
-
-		 	%>  
 	
 				
 
@@ -1940,7 +1936,7 @@ $(document).ready(function(){
 	 }); 
 	 
 	 $("#owlImages a img").click(function(){
-			// 	$("#sync2 .owl-wrapper *").remove();
+			 	$("#sync2 .owl-wrapper *").remove();
 				var img=$(this).attr('src');
 				//alert(img);
 				//var	filename=img.substring(7);
