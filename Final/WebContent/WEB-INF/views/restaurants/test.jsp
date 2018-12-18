@@ -56,6 +56,7 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
  
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="vendor/jquery/jquery.min.js"></script>
 <script src="owlcarousel/owl.carousel.min.js"></script>
 
 <!-- script for owl with modal -->
@@ -391,8 +392,10 @@ footer a:hover {
  
  
  }
- <!--SEARCH-->
-.in-line{
+    <!-- SEARCH -->
+<style>
+   
+    .in-line{
       width:900px;	
       height:42px; 
     }
@@ -425,7 +428,7 @@ footer a:hover {
       box-sizing: border-box;
     }
  
-</style>
+  </style>
   <%
   EatMemberDto user = (EatMemberDto)session.getAttribute("login");
   
@@ -469,7 +472,7 @@ System.out.println(i + "번째 쿠키에 설정된 값 : " + cookies[i].getValue
  Collections.reverse(recentCookie);
 
 %>
-<!-- 검색창 스타일 -->
+<!-- 검색창 스타일   -->
 <style>
 
 
@@ -561,7 +564,7 @@ System.out.println(i + "번째 쿠키에 설정된 값 : " + cookies[i].getValue
     margin-left: auto;
     margin-right: auto;
     top: 70px; 
-    right: 390px;
+    right: 535px;
     left: 0px;
     bottom: 0px;
 
@@ -647,19 +650,32 @@ outline: 0;
     text-align: center;
 }
 
-
-
-
+ 
+p.test {
+    width: 400px;   
+    word-wrap: break-word;
+}
 
 </style>
 </head>
-<body>
+<body style="padding-top: 0px;">
+
+<!-- 블랙스크린 -->
+<div id="black_screen" onclick="displayVsearch()" class="black_screen" style="
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background: rgba(0,0,0,0.8);
+    display: none;">></div>
 
 <!-- 가고싶어 제발 -->
 <div class="w3-container ">
 <div id="id01" class="w3-modal">
  <div class="w3-modal-content w3-card-4 w3-animate-zoom">
- 	<div>
+ 	<div style="margin-top: 16px">
   		<ul class="pagination w3-white w3-border-bottom" style="margin-top:0px; padding-top:0px; border-top:0px; height:60px; width:100%; position:relative; list-style:none;">
   		<li style="position:relative; height:100%; width:50%; float:left; text-align: center;"><a href="#" class="tablink" onclick="openCity(event, 'London')" style="width: 100%; height: 100%; padding-top:15px; color: black;">최근 본 맛집</a></li>
   		<li style="position:relative; height:100%; width:50%; float:left; text-align: center;"><a href="#" class="tablink" onclick="openCity(event, 'Paris')" style="width: 100%; height: 100%; padding-top:15px; color: black;">가고싶다</a></li>
@@ -1003,7 +1019,7 @@ $(document).ready(function () {
 
 	<!-- Navigation -->
 	<nav class="navbar fixed-top navbar-expand-lg navbar-dark fixed-top"
-		style="background-color: #c53211; padding-bottom: 10px; margin-top:-58px">
+		style="background-color: #c53211; padding-bottom: 10px">
 		<div class="container" style="float: left; width: 15%">
 			<a class="navbar-brand" href="home.do">EAT PLACE</a>
 			<button class="navbar-toggler navbar-toggler-right" type="button"
@@ -1015,17 +1031,30 @@ $(document).ready(function () {
 		</div>
 		
 		<div style="float: left; width: 60%">
-		  <!-- 전체 검색 -->
+		<%-- <form action="" id="main-search" name="main-search" method="get"> 
+ 			 <div class="in-line">
+		      <strong><input type="text" onkeypress="if(event.keyCode==13) {search();}"  id="main-keyword" name="s_keyword" value="" placeholder="지역, 식당 또는 음식" style="color: #575756; border-bottom-left-radius: 20px; border-top-left-radius: 20px"></strong>
+		      <strong><input type="button" onclick="search()"  value="검색" style="border-bottom-right-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-top-left-radius: 20px; background-color: darkorange; color: white;"></strong>
+		     </div>
+		<!-- controller로 넘겨주기 위한 값 -->
+		<input type="hidden" name="s_category"  value="<%=category %>">
+		<input type="hidden" name="pageNumber" id="_pageNumber" value="${(empty pageNumber)?0:pageNumber }">
+		<input type="hidden" name="recordCountPerPage" id="_recordCountPerPage"
+			value="${(empty recordCountPerPage)?9:recordCountPerPage }">
+				
+		
+		</form> --%>
+		<!-- 전체 검색 -->
   <fieldset id="search" class="main-search ng-scope" ng-controller="mp20_main_search_suggest_controller" style="z-index: 110;border: 0;">
       
 		<form action="" id="main-search" name="main-search" method="get" > 
 	 			 <div class="in-line" style="margin-left: auto; margin-right: auto; ">
 	 			 <span>검색 :</span>
-			     <strong>
-			     <input type="text" class="seaechAll" onkeypress="if(event.keyCode==13) {search();}" onclick="displayVsearch()"  id="main-keyword" name="s_keyword" value="" placeholder="지역, 식당 또는 음식" autocomplete="off" style="color: #ffffff; margin-left: 40px;">
-			     </strong>
+			      <strong><input type="text" class="seaechAll" onkeypress="if(event.keyCode==13) {search();}" onclick="displayVsearch()"  id="main-keyword" name="s_keyword" value="" placeholder="지역, 식당 또는 음식" autocomplete="off" style="color: #ffffff; margin-left: 40px; padding-top: 15px; padding-left: 10px; font-size: 15px"></strong>
+			      
 			     </div>
 				<!-- controller로 넘겨주기 위한 값 -->
+				<input type="hidden" id="_s_category" name="s_category" value="">
 				<input type="hidden" name="pageNumber" id="_pageNumber" value="${(empty pageNumber)?0:pageNumber }">
 				<input type="hidden" name="recordCountPerPage" id="_recordCountPerPage"
 					value="${(empty recordCountPerPage)?9:recordCountPerPage }">
@@ -1094,13 +1123,13 @@ String recomend = "추천검색어테스트";
 </aside>
 </div>
 		
-		<div class="container" style="float: left; width: 25%; margin-right:-80px">
-			<div class="collapse navbar-collapse" id="navbarResponsive">				
+		<div class="container" style="float: left; width: 25%">
+			<div class="collapse navbar-collapse" id="navbarResponsive" style="margin-left: 150px">				
 				<ul class="navbar-nav ml-auto">
 					
 					<li class="nav-item"><a class="nav-link"
 						href="restaurntsList.do"><strong
-							style="color: white; margin-left: 20px">맛집 리스트</strong></a></li>
+							style="color: white; margin-left: 25px">맛집 리스트</strong></a></li>
 					<!-- <li class="nav-item"><a class="nav-link"
 						href="restaurantsInsert.do"><strong
 							style="color: white; margin-left: 20px">맛집 추가</strong></a></li> -->
@@ -2358,5 +2387,111 @@ $("#_btnGetNickName").click(function () {
 	
 }
 </script>
+
+</script>
+<!-- <script src="vendor/jquery/jquery.min.js"></script> -->
+
+ <script type="text/javascript">
+	      function displayVsearch() {
+	    	
+	    	  $("#Vsearch").toggle();
+	    	  $("#black_screen").toggle();
+	    	   
+	    	    if($("#search").css("z-index")=='110'){
+	    	    	$("#search").css("z-index","1100")
+	    	    }else{
+	    	    	
+	    	    	$("#search").css("z-index","110")
+	    	    } 
+	      }
+	     
+	      </script>
+
+<script type="text/javascript">
+ $(document).ready(function(){
+	var tab = $('.tab-keywords');
+	tab.find('button').click(function(){ 
+		
+		 $("[class*=selected]").removeClass("selected"); 
+		 $(this).addClass("selected");
+		 var btn = $(this).val();
+		 if (btn == "re_btn1") { // 추천검색어
+			
+			$(".list-keywords *").remove();
+			 var re_str = ['존맛','국물','혼밥','맛집','신사동'];
+			for (var i = 0; i < re_str.length; i++) {
+				$(".list-keywords").append(
+					    $('<li>').attr('class','list-keyword').append(
+					            $('<a>').attr('href','#').attr('onclick','search2(this)').append(
+					            		re_str[i]
+					              )));  
+			} 
+			
+		}else if (btn == "re_btn2"){ // 인기검색어
+			
+			$(".list-keywords *").remove();
+			
+			 var re_str = ['삼성동','데이트','삼겹살','모임','이태원','강남','카페'];
+				for (var i = 0; i < re_str.length; i++) {
+					$(".list-keywords").append(
+						    $('<li>').attr('class','list-keyword').append(
+						            $('<a>').attr('href','#').attr('onclick','search2(this)').append(
+						            		re_str[i]
+						              )));  
+				}
+			
+		}else{ // 최근검색어
+			
+			$(".list-keywords *").remove();
+			
+			 var re_str = <%=recentCookie.size()%>
+			 
+			 if (re_str == 0) {
+				 $(".list-keywords").append(
+						    $('<li>').attr('class','list-keyword').append(
+						            $('<p>').attr('id','no_recent').append(
+						            		"최근 검색어가 없습니다."
+						              ))); 
+			
+			}else{
+				<%for(int i=0;i<recentCookie.size();i++){ %>
+				$(".list-keywords").append(
+					    $('<li>').attr('class','list-keyword').append(
+					            $('<a>').attr('href','#').attr('onclick','search2(this)').append(
+					            		"<%=URLDecoder.decode(recentCookie.get(i).getValue(), "utf-8") %>"
+					              ))); 	 
+					<%}%>
+					$(".list-keywords").append(
+							$('<li>').attr('class','clear_all').append(
+								 $('<button>').attr('id','rc_clear').attr('onclick','rc_clear()').append(
+										
+										 "x clear all"
+								 )));
+				
+			 
+			 
+			 
+			 
+			}
+		}
+		 
+
+	 })
+
+}) 
+
+
+function search2(a) {
+	
+	$("#main-keyword").val(a.innerHTML);
+	$("#main-search").attr({"target":"_self", "action":"search.do"}).submit();
+	
+}
+ function rc_clear() {
+	 alert("삭제");
+	 location.href="rc_clear.do"; 
+}
+</script>
+
 </body>
 </html>
