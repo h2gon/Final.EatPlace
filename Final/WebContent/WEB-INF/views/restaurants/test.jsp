@@ -1159,14 +1159,9 @@ List<String> imagelist = (List<String>) request.getAttribute("imagelist");
 <div class="modal fade" id="carouselModal" tabindex="-1" role="dialog" aria-labelledby="carouselModalLabel">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header" style="float:left">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <div class="row">
-        	<div class="col-md-1">
-
-        <h4 class="modal-title" id="carouselModalLabel">${rs.rs_name }</h4>
-        	</div>
-        </div>
+        
       </div>
       <div class="modal-body">
 <div class="customNavigation">
@@ -1270,7 +1265,7 @@ for(int i=0;i<imagelist.size();i++){
 %>
 	<div class="item" id="owlImages" style="margin-right: 5px;">
 	<a href="#" data-toggle="modal" data-target="#carouselModal">
-	<img src="<%=imagelist.get(i)+mstr%>" style="height: 300px; margin-right: 3px" onclick="onefunc()" >
+	<img src="<%=imagelist.get(i)+mstr%>" style="height: 300px; margin-right: 3px" onclick="createImages(<%=imagelist %>)" >
 	</a>
 	</div>
 <%
@@ -1278,7 +1273,7 @@ for(int i=0;i<imagelist.size();i++){
 		%>
 	 <div class="item" id="owlImages" style="margin-right: 5px">
 	 <a href="#" data-toggle="modal" data-target="#carouselModal">
-	 <img src="\image\<%=imagelist.get(i)%>" style="height: 300px; margin-right: 3px" onclick="onefunc()">
+	 <img src="\image\<%=imagelist.get(i)%>" style="height: 300px; margin-right: 3px" onclick="createImages(<%=imagelist %>)">
 	 </a>
 	 </div>
 		<%
@@ -1330,7 +1325,7 @@ function onefunc() {
 			$("#sync2 .owl-wrapper").append(
 					$('<div>').attr('class','owl-item').attr("style","width: 119px;").append(
 					    $('<div>').attr('class','item').append(
-					            $('<img>').attr('src','/image/<%=imagelist.get(i) %>').attr('class','img-responsive').append(
+					            $('<img>').attr('src','localhost:8090/image/<%=imagelist.get(i) %>').attr('class','img-responsive').append(
 					            	
 				              ))));
 	          <%
@@ -1732,7 +1727,7 @@ function onefunc() {
         	 if(img.indexOf("https://") !=-1){
 					var	filename=img;
 				}else if(img.indexOf("https://")==-1){
-					var filename=img.substring(7);
+					var filename=img.substring(img.lastIndexOf("/")+1);
 				} 
         	 
         	 $('#mainImage').attr('src',img);
@@ -1823,6 +1818,7 @@ function onefunc() {
 		}
          
 		function createImages(objImageInfo) { 
+			
 			var images = objImageInfo; 
 			var strDOM = ''; 
 			/* alert('createImages');
@@ -1830,16 +1826,34 @@ function onefunc() {
 			alert(images[0]); */
 			customNavTest(images);
 			var str = "?fit=around|148:152&crop=148:152;*,*&output-format=jpg&output-quality=80";
-				for (var i = 0; i < images.length; i++) {
+			<%
+			for (int i=0;i<imagelist.size();i++){
+				if(imagelist.get(i).contains("https://")){
+					%>
+					
 					$("#sync2 .owl-wrapper").append(
 							$('<div>').attr('class','owl-item').attr("style","width: 119px;").append(
-						    $('<div>').attr('class','item').append(
-						    		
-						            $('<img>').attr('onclick','test("'+images[i]+'")').attr('src',images[i]).attr('class','img-responsive').append(
-						            		
-						              ))));  
+							    $('<div>').attr('class','item synced').append(
+							            $('<img>').attr('onclick','test("'+images[i]+'")').attr('src','<%=imagelist.get(i) + str%>').attr('class','img-responsive').append(
+							            		
+						              ))));
+					<%
+				}else{
+					%>
+					$("#sync2 .owl-wrapper").append(
+							$('<div>').attr('class','owl-item').attr("style","width: 119px;").append(
+							    $('<div>').attr('class','item').append(
+							            $('<img>').attr('onclick','test("'+images[i]+'")').attr('src','localhost:8090/image/<%=imagelist.get(i)%>').attr('class','img-responsive').append(
+							            		
+						              ))));
+			          <%
 				}
-				//alert(images.length);
+			
+			}
+				
+
+		 	%>  
+	
 				
 
 
@@ -1927,71 +1941,74 @@ $(document).ready(function(){
 	 }); 
 	 
 	 $("#owlImages a img").click(function(){
-		 	$("#sync2 .owl-wrapper *").remove();
-			var img=$(this).attr('src');
-			//alert(img);
-			//var	filename=img.substring(7);
-			
-			if(img.indexOf("https://") !=-1){
-				var filename=jQuery.trim(img.split( '?', 1 ));
+			// 	$("#sync2 .owl-wrapper *").remove();
+				var img=$(this).attr('src');
+				//alert(img);
+				//var	filename=img.substring(7);
 				
-			}else if(img.indexOf("https://")==-1){
-				var filename=img.substring(7);
-			} 
-			
-			$('#mainImage').attr("src",img.split( '?', 1 ));
-			
-			var revData = {
-					'filename':filename,
-					'rseq':$("#rs_seq").attr("value")
-			};
-			
-			//var test=$("#rs_seq").attr("value");
-			//alert("success1");
- 			 $.ajax({
-				url:"getRPdetail.do",
-				datatype:'json',
-				data:revData,
-				type:'post',
-				async:true,
-				success:function(data){
-			//		alert("success");
-
-			//		alert(data.review.rs_content);
-					$("#pause").html(data.review.rs_content);
-					$("#p_id").html(data.review.id);
-					var rating =data.review.rs_rating;
-					if(rating===1){
-						$("#p_ratingP").attr('src','./img/like/1-2.png');	
-					}else if(rating===3){
-						$("#p_ratingP").attr('src','./img/like/3-2.png');
-					} else if(rating===5){
-						$("#p_ratingP").attr('src','./img/like/5-2.png');
+				if(img.indexOf("https://") !=-1){
+					var filename=jQuery.trim(img.split( '?', 1 ));
+					
+				}else if(img.indexOf("https://")==-1){
+					var filename=img.substring(7);
+				} 
+				
+				$('#mainImage').attr("src",img.split( '?', 1 ));
+				
+				var revData = {
+						'filename':filename,
+						'rseq':$("#rs_seq").attr("value")
+				};
+				
+				//var test=$("#rs_seq").attr("value");
+				//alert("success1");
+				
+	 			 $.ajax({
+					url:"getRPdetail.do",
+					datatype:'json',
+					data:revData,
+					type:'post',
+					async:true,
+					success:function(data){
+				//		alert("success");
+				//		onefunc();
+				//		alert(data.review.rs_content);
+						$("#pause").html(data.review.rs_content);
+						$("#p_id").html(data.review.id);
+						var rating =data.review.rs_rating;
+						if(rating===1){
+							$("#p_ratingP").attr('src','./img/like/1-2.png');	
+						}else if(rating===3){
+							$("#p_ratingP").attr('src','./img/like/3-2.png');
+						} else if(rating===5){
+							$("#p_ratingP").attr('src','./img/like/5-2.png');
+						}
+						
+						<%-- createImages(<%=imagelist%>); --%>
+					},
+					error:function(req, stu, err){
+						alert("error");
+						alert(stu + " " + err);
 					}
-					<%-- createImages(<%=imagelist%>); --%>
-				},
-				error:function(req, stu, err){
-					alert("error");
-					alert(stu + " " + err);
-				}
-			});
-			  
- 			 $.ajax({
- 				url:"getRPdetail2.do",
- 				datatype:'json',
- 				data:'rseq='+$("#rs_seq").attr("value"),
- 				type:'post',
- 				async:true,
- 				success:function(data){ 		
- 					 createImages(data.imagelist);
- 				},
- 				error:function(req, stu, err){
- 					alert("error");
- 					alert(stu + " " + err);
- 				}
- 			});
-			 
-	 });
+				});
+	 			  
+	 			 $.ajax({
+	 				url:"getRPdetail2.do",
+	 				datatype:'json',
+	 				data:'rseq='+$("#rs_seq").attr("value"),
+	 				type:'post',
+	 				async:true,
+	 				success:function(data){
+	 		
+	 					 createImages(data.imagelist);
+	 				},
+	 				error:function(req, stu, err){
+	 					alert("error");
+	 					alert(stu + " " + err);
+	 				}
+	 			});
+				  
+		 });
 
 });
 
@@ -2062,12 +2079,21 @@ $(document).ready(function() {
 						return;
 					}else{
 						 //alert("prev 클릭");
-						 
+						
+						
 						 $('#mainImage').attr("src",imglist[check]);
 						 
-						 var filename=imglist[check];
+						 var filename="";
+							
+						 if(imglist[check].indexOf("https://") !=-1){
+								//filename=jQuery.trim(img.split( '?', 1 ));
+								filename=imglist[check];
+							}else if(imglist[check].indexOf("https://")==-1){
+								filename = imglist[check].substring(imglist[check].lastIndexOf("/")+1);
+							} 
+						 
 						 var rseq=$("#rs_seq").attr("value");
-			        	 
+			        	// alert(filename);
 						 var revData = {
 									'filename':filename,
 									'rseq': rseq
@@ -2111,7 +2137,18 @@ $(document).ready(function() {
 					}else{
 						//alert("next클릭");
 						 $('#mainImage').attr("src",imglist[check]);
-						 var filename=imglist[check];
+						
+						 var filename="";
+							
+						 if(imglist[check].indexOf("https://") !=-1){
+								//filename=jQuery.trim(img.split( '?', 1 ));
+								filename=imglist[check];
+							}else if(imglist[check].indexOf("https://")==-1){
+								filename = imglist[check].substring(imglist[check].lastIndexOf("/")+1);
+								//filename=imglist[check].substring(7);
+							}
+						 
+					//	 alert(filename);
 						 var rseq=$("#rs_seq").attr("value");
 			        	 
 						 var revData = {
