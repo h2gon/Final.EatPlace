@@ -275,8 +275,9 @@ footer a:hover {
   z-index: 1;
 }
 .customNavigation a.next {
-  left: auto;
-  right: 0;
+ left: 485px;
+ /* right: 0; */
+ padding-right: 0px;
 }
 @media (min-width: 320px) {
   .customNavigation a {
@@ -295,7 +296,7 @@ footer a:hover {
 }
 @media (min-width: 992px) {
   .customNavigation a {
-    top: 35%;
+   /*  top: 35%; */
   }
 }
 
@@ -1165,7 +1166,7 @@ List<String> imagelist = (List<String>) request.getAttribute("imagelist");
       <div class="modal-body">
 <div class="customNavigation">
   <input type="hidden" name="trigger" id="trigger">
-  <a class="prev" id="_prev" style="z-index: 110;"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+  <a class="prev" id="_prev" style="z-index: 110; padding-left: 2px;"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
   <a class="next" id="_next" ><i class="fa fa-angle-right" aria-hidden="true"></i></a>
 </div>
 	<div class="row">
