@@ -1182,16 +1182,16 @@ List<String> imagelist = (List<String>) request.getAttribute("imagelist");
    				<p id="p_id">${review.id }</p>	
    		 		<div class="row">
    					<div class="col-md-1">
-   						<img src="img/button/review.png">
+   						
    					</div>
    					<div class="col-md-1">
-   						<p id="p_rc">0</p>
+   						
    					</div> 
    					<div class="col-md-1">
-   						<img alt="" src="img/button/fav.png">
+   						
    					</div>
     				<div class="col-md-1">
-   						<p id="p_lk">0</p>
+   						
    					</div> 
 
    				</div>
