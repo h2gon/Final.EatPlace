@@ -876,9 +876,9 @@ for(int i=0; i<wannagolist.size(); i++){
 		<!-- <a class=" openMask" href="#">로그인</a> -->
 		<button onclick="document.getElementById('id02').style.display='block'"  class="w3-btn w3-round-large w3-white ">Login</button>
   <%} else{%>
-		<a class="" href="#" ><%=user.getId()%>님</a>
+		<a class="" href="#" ><font style="color: black;"><%=user.getId()%>님</a>
 		<button onclick="document.getElementById('id01').style.display='none'"  class="w3-btn w3-round-large w3-white ">
-			<a id="_btnLogout" class="" href="logout.do" > 로그아웃 </a>
+			<a id="_btnLogout" class="" href="logout.do" ><font style="color: black;"> 로그아웃 </a>
 		</button>
 		<!-- <a id="_btnLogout" class="" href="logout.do" > 로그아웃 </a> -->
   <%} %>
