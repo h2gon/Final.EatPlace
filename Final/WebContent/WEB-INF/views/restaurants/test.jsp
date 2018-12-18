@@ -1532,8 +1532,8 @@ function onefunc() {
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>  -->
 <!-- </div> -->
-<div class="row">
-<div id="contents" class="col-md-8">
+<div class="row" style="padding-right: 700px;">
+<div id="contents" class="col-md-8" style="max-width: 1100px;">
   <div id="js-load" class="main">
     <ul class="lists">
     <%
@@ -1600,6 +1600,11 @@ function onefunc() {
 					List<fileDto> f_list = eatReviewDao.getRv_Image(list.get(i).getSeq());
 					%>					
 				</tr>
+				<!-- 그림과 글 사이 빈공간 창출 ㅋㅋㅋ -->
+				<tr>
+				<td><h1></h1></td>
+				</tr>
+				
 				<tr>
 				<td style="width: 15%; padding-top: 1px; vertical-align: top;"></td>
 				<!-- img td -->
