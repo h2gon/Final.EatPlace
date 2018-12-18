@@ -1180,7 +1180,12 @@ List<String> imagelist = (List<String>) request.getAttribute("imagelist");
         	<div class="item"><img id="mainImage" src="" class="img-responsive"></div>
         </div>
      </div>   
-   		<div class="col-md-4">
+   		   		<div class="col-md-4">
+   		<div class="row">
+   		 <div class="col-md-4">
+        	 <h4>${rs.rs_name }</h4>
+        	</div>
+        </div>
    		<div class="row">
    			 <div class="col-md-8"> 
    				<p id="p_id">${review.id }</p>	
