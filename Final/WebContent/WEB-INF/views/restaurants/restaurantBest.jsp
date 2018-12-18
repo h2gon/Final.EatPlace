@@ -400,7 +400,7 @@ public String ss(String msg){
 <!-- 가고싶어 제발 -->
 <div class="w3-container ">
 <div id="id01" class="w3-modal" style="z-index: 111;">
- <div class="w3-modal-content w3-card-4 w3-animate-zoom">
+ <div id="area" class="w3-modal-content w3-card-4 w3-animate-zoom">
  	<div>
   		<ul class="pagination w3-white w3-border-bottom" style="height:50px; width:100%; position:relative; list-style:none;">
   		<li style="position:relative; height:100%; width:50%; float:left; text-align: center;"><a href="#" class="tablink" onclick="openCity(event, 'London')" style="width: 100%; height: 100%; border-top: 7px;">최근 본 맛집</a></li>
@@ -1039,6 +1039,14 @@ geocoder[<%=j %>].addressSearch('<%=bestlist.get(j).getRs_address1() %>', functi
 	    	    	$("#search").css("z-index","110")
 	    	    } 
 	      }
+	      
+	      $("#id01").click(function(e) {
+				
+	    	    if(!$(e.target).is("#area *")) {
+		    		  $("#id01").toggle();
+		    	  }
+	    	  
+	    	}); 
 	     
 	      </script>
 

@@ -698,7 +698,7 @@ public String ss(String msg){
 <!-- 가고싶어 제발 -->
 <div class="w3-container ">
 <div id="id01" class="w3-modal">
- <div class="w3-modal-content w3-card-4 w3-animate-zoom">
+ <div id="area" class="w3-modal-content w3-card-4 w3-animate-zoom">
  	<div style="margin-top: 16px">
   		<ul class="pagination w3-white w3-border-bottom" style="margin-top:0px; padding-top:0px; border-top:0px; height:60px; width:100%; position:relative; list-style:none;">
   		<li style="position:relative; height:100%; width:50%; float:left; text-align: center;"><a href="#" class="tablink" onclick="openCity(event, 'London')" style="width: 100%; height: 100%; padding-top:15px; color: black;">최근 본 맛집</a></li>
@@ -1375,11 +1375,11 @@ function onefunc() {
 							<font size="26" color="#000000" id="rs_seq" value="${rs.seq }">${rs.rs_name }</font>
 					</div>		
 							<div class="col-md-4">  
-								<img id="review_btn" class="review_writing_button" onclick="WriteReview('${rs.seq}','${login.id }');" src="img/button/reviewIcon.png">
+								<img id="review_btn" style="cursor: pointer;" class="review_writing_button" onclick="WriteReview('${rs.seq}','${login.id }');" src="img/button/reviewIcon.png">
 								<%if(wannago){%>
 									<a href="wannago.do?rs_seq=${rs.seq}&rs_name=${rs.rs_name}"><img id="like_btn_delete" src="img/button/likeIconR.png" ></a>
 								<%}else{%>
-									<img id="like_btn" onclick="like()" src="img/button/likeIcon.png" >
+									<img id="like_btn" style="cursor: pointer;" onclick="like()" src="img/button/likeIcon.png" >
 								<%}
 								
 								%>
@@ -2457,6 +2457,15 @@ $("#_btnGetNickName").click(function () {
 	    	    } 
 	      }
 	     
+	      $("#id01").click(function(e) {
+				
+	    	    if(!$(e.target).is("#area *")) {
+		    		  $("#id01").toggle();
+		    	  }
+	    	  
+	    	}); 
+
+	      
 	      </script>
 
 <script type="text/javascript">
