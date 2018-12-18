@@ -28,7 +28,7 @@
       height:42px; 
     }
    
-    input[type="text"]{
+    .seaechAll/* input[type="text"] */{
       width:70%;
       height:100%;
       border:none;

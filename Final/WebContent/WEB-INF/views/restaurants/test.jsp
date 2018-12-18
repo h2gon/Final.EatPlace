@@ -400,7 +400,7 @@ footer a:hover {
       height:42px; 
     }
    
-    input[type="text"]{
+    .seaechAll/* input[type="text"] */{
       width:70%;
       height:100%;
       border:none;
@@ -890,7 +890,7 @@ for(int i=0; i<wannagolist.size(); i++){
 <!-- 로그인 모달 -->
 <div id="id02" class="w3-modal" style="z-index: 120;">
   <span onclick="document.getElementById('id02').style.display='none'" class="w3-closebtn w3-hover-red w3-container w3-padding-hor-8 w3-display-topright">&times;</span>
-  <div class="w3-modal-content w3-card-9 w3-animate-zoom" style="right:-10px; width:400px; height: 400px;">
+  <div class="w3-modal-content w3-card-9 w3-animate-zoom" style="right:-10px; max-width:600px; height: 400px;">
     <div class="w3-center"><br>
     	<h1>Login</h1>
     </div>
@@ -898,9 +898,9 @@ for(int i=0; i<wannagolist.size(); i++){
       <div class="w3-section">
       	<form action="loginAf.do" name="frmForm" id="_frmForm"  method="post">
 	        <label><b>Id</b></label><br>
-	        <input class="w3-input w3-border w3-margin-bottom" id="_userid" name="_userid" required="required" type="text" placeholder="Id"><br>
+	        <input class="w3-input w3-border w3-margin-bottom" id="_userid" name="_userid" required="required" type="text" placeholder="Id" style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;border-top-left-radius: 10px;border-top-right-radius: 10px;"><br>
 	        <label><b>Password</b></label><br>
-	        <input class="w3-input w3-border w3-margin-bottom" type="password" id="_pwd" name="_pwd" required="required" placeholder="Password">
+	        <input class="w3-input w3-border w3-margin-bottom" type="password" id="_pwd" name="_pwd" required="required" placeholder="Password" style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;border-top-left-radius: 10px;border-top-right-radius: 10px;">
 	        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="w3-btn w3-btn-round w3-white" id="_btnLogin" style="width:70%; text-align: center;">로그인</button><br>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="document.getElementById('id03').style.display='block'" class="w3-btn w3-btn-round w3-white" style="width:70%; text-align: center;">회원가입</button>
        	</form>
