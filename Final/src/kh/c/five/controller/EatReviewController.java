@@ -258,8 +258,8 @@ public class EatReviewController {
 		//model.addAttribute("wildCard", wildCard);
 		for(int i =0;i<flist.size();i++) {
 		System.out.println("wildCard: list: "+wildCard.getFlist().get(i)+" //rdto content: "+wildCard.getRdto().getRs_content());	
-		}		
-		return wildCard;		
+		}
+		return wildCard;
 	}
 	
 /*	@ResponseBody	

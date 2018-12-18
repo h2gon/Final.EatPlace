@@ -1536,6 +1536,7 @@ function onefunc() {
     <%
     EatReviewDao eatReviewDao = EatReviewDaoImpl.getInstance();
     List<ReviewDto> list = (List<ReviewDto>)request.getAttribute("reviewlist");
+    
     int Good=0;
     int soso=0;
     int notGood=0;
@@ -1648,10 +1649,10 @@ function onefunc() {
 					<!-- <div style="position: relative;"> -->
 					<a href="#" data-toggle="modal" data-target="#carouselModal">
 					<img alt="" src="<%=fileName[a] %>" style="float:left; width: 120px; height:120px; margin-left: 10px;">
-					</a>
+					</a><%if(remain_picture_count != 0){ %>
 					<span style="position: static; top: auto; left: auto; color: orange;"><h1>+<%=remain_picture_count %></h1></span>
 					<!-- </div> -->
-					<%
+					<%}
 					}else{//마지막 이전의 그림들이 출력되는 곳..
 					%>
 					<a href="#" data-toggle="modal" data-target="#carouselModal">
@@ -1664,11 +1665,12 @@ function onefunc() {
 							<!-- <div style="position: relative;"> -->
 							<a href="#" data-toggle="modal" data-target="#carouselModal">
 							<img alt="" src="/image/<%=fileName[a] %>" style="float:left; width: 120px; height:120px; margin-left: 10px;">
-							</a>
+							</a><%if(remain_picture_count != 0){ %>
 							<span style="position: static; top: auto; left: auto; color: orange;"><h1>+<%=remain_picture_count %></h1></span>
 							<!-- </div> -->
 							
-						<%}else{%>
+						<%}
+						}else{%>
 						<a href="#" data-toggle="modal" data-target="#carouselModal">
 						<img alt="" src="/image/<%=fileName[a] %>" style="float:left; width: 120px; height:120px; margin-left: 10px;">
 						</a>
