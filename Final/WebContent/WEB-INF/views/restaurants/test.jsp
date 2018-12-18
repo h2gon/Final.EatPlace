@@ -1936,8 +1936,7 @@ $(document).ready(function(){
  				data:'rseq='+$("#rs_seq").attr("value"),
  				type:'post',
  				async:true,
- 				success:function(data){
- 		
+ 				success:function(data){ 		
  					 createImages(data.imagelist);
  				},
  				error:function(req, stu, err){

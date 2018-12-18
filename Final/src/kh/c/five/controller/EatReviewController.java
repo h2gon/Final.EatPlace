@@ -181,9 +181,21 @@ public class EatReviewController {
 	@RequestMapping(value="getRPdetail2.do", method={RequestMethod.GET, RequestMethod.POST})
 	public Map<String, Object> getRPdetail2(int rseq, Model model) {
 		logger.info("EatReviewController getReviewDetail222"+new Date());
-		
+		String fileName = "";
 		List<String> imagelists = eatReviewService.getImageDT(rseq);
-		
+		for(int i = 0; i<imagelists.size();i++) {
+			if(!imagelists.get(i).contains("http")) {
+				fileName = "http://localhost:8090/image/"+imagelists.get(i);
+				
+				imagelists.remove(i);
+				
+				imagelists.add(i, fileName);
+				
+			}
+		}
+		for(int i = 0; i<imagelists.size();i++) {
+			System.out.println(imagelists.get(i));
+		}
 		Map<String, Object> rmap = new HashMap<String, Object>();
 		rmap.put("imagelist", imagelists);
 	//	model.addAttribute("resImgLists", resImgLists);
