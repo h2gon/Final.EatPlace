@@ -543,7 +543,7 @@ public class EatRestaurantsController {
 		
 		System.out.println("가고싶다 추가/삭제 완료!");
 		
-		return "redirect:/home.do";
+		return "redirect:/rsdetail.do?seq="+dto.getRs_seq()+"#";
 		
 	}
 
