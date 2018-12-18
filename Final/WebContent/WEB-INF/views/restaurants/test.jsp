@@ -1343,7 +1343,7 @@ function onefunc() {
  <%
  /* wannagolist 확인 작업 */
  boolean wannago = false;
-
+ if(rvlist.size() != 0){
  int rsseq = rvlist.get(0).getRs_seq();
 
  for(int i =0; i<wannagolist.size();i++){
@@ -1352,6 +1352,7 @@ function onefunc() {
 		 wannago = true;
 		 break;
 	 }
+ }
  }
  
  %>
