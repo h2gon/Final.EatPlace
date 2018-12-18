@@ -489,11 +489,16 @@ for (int i=1;i<cookies.length;i++){
 		</div>
 		<!-- 즐찾 -->
 		<div style="display:inline-block;  position:relative; width: 15%; height: 10%; top:-60px; right: -40px;">
+		<%if(user == null){ %>
+			<img id="like_btn" src="img/button/likeIcon.png" style="width: 45px; height: 45px;" >
+		<%}else{ %>
 			<a href="wannago.do?rs_seq=<%=cookieLike %>&rs_name=<%=cookiename%>"><img id="like_btn" src="img/button/likeIcon.png" style="width: 45px; height: 45px;" ></a>
+		<%} %>
 		</div>
 
  	</div>
 </div>
+
 <%-- 
 <table border="1" width="250">
 
