@@ -1247,7 +1247,7 @@ List<String> imagelist = (List<String>) request.getAttribute("imagelist");
 String mstr = "?fit=around|254:300&crop=254:300;*,*&output-format=jpg&output-quality=80";
 if(imagelist==null||imagelist.size()<3){
 	%>
-	이미지가 등록된 리뷰가 없다..고 띄워야 함.
+	<h1 style="text-align: center; padding-top: 50px;">이미지가 등록된 리뷰가 없습니다</h1>
 	<%
 }else{
 	%>

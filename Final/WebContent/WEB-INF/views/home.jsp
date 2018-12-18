@@ -413,7 +413,7 @@ public String dot3(String msg){
     left: 0;
     z-index: 1000;
     background: rgba(0,0,0,0.8);
-    display: none;">></div>
+    display: none;"></div>
 
 <!-- 가고싶어 제발 -->
 <div class="w3-container ">

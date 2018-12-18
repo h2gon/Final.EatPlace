@@ -114,11 +114,11 @@ int reviewcount = (int)request.getAttribute("reviewcount");
 		<table>
 			<tr>
 				<td>아이디</td>
-				<td><%=login.getId() %></td>
+				<td valign="center"><%=login.getId() %></td>
 			</tr>
 			<tr>
 				<td><p style="color: grey">리뷰수</p></td>
-				<td><%=reviewcount %></td>
+				<td valign="top"><%=reviewcount %></td>
 			</tr>
 			
 			
