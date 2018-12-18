@@ -510,7 +510,7 @@ System.out.println(i + "번째 쿠키에 설정된 값 : " + cookies[i].getValue
 
 
     position: relative;
-    font-size: 0.875rem;
+    font-size: 15px;
     color: #7f7f7f;
     width: 32.5%;
     height: 50px;
@@ -527,6 +527,7 @@ System.out.println(i + "번째 쿠키에 설정된 값 : " + cookies[i].getValue
     
     .search-keywords-container .tab-keywords button.selected {
     color: #ff7100;
+    font-size: 15px;
 }
 .search-keywords-container .tab-keywords button.selected:before {
     content: '';
@@ -577,7 +578,7 @@ System.out.println(i + "번째 쿠키에 설정된 값 : " + cookies[i].getValue
 .search-keywords-container .keywords .list-keywords-wrap .list-keywords>li a {
     display: block;
     padding: 0 45px 0 36px;
-    font-size: 0.875rem;
+    font-size: 13px;
     color: #7f7f7f;
     text-decoration: none;
     margin: 20px 0;
@@ -660,6 +661,28 @@ p.test {
 </head>
 <body style="padding-top: 0px;">
 
+<%!
+public String dot3(String msg){
+	String s = "";
+	if(msg.length() >= 6){
+		s = msg.substring(0, 6);
+		s += "...";
+	}else{
+		s = msg.trim();
+	}
+	return s;
+}
+
+
+public String ss(String msg){
+	
+	String s[] = msg.split(" ");
+	String re = s[0] + " " + s[1];
+
+	return re;
+}
+
+%>
 <!-- 블랙스크린 -->
 <div id="black_screen" onclick="displayVsearch()" class="black_screen" style="
     width: 100%;
@@ -733,7 +756,7 @@ for (int i=1;i<cookies.length;i++){
 	
 		<!-- 이름 -->
 		<div style="display:inline-block; position:relative; width: 30%; height: 45%; top:-20px; left:20px;">
-			<a href="rsdetail.do?seq=<%=cookies[i].getValue()%>" style="text-align: center; color: black;"><b><font style="font-size: medium;text-align:center;"><%=cn%></font></b></a>
+			<a href="rsdetail.do?seq=<%=cookies[i].getValue()%>" style="text-align: center; color: black;"><b><font style="font-size: medium;text-align:center;"><%=dot3(cn) %></font></b></a>
 		</div>
 		<!-- 주소 -->
 		<div style="display:inline-block; position:relative; width: 55%; height: 30%; top:-55px; left:120px;">
@@ -970,28 +993,7 @@ function alarm() {
 }
 
 </script>
-<%!
-public String dot3(String msg){
-	String s = "";
-	if(msg.length() >= 3){
-		s = msg.substring(0, 3);
-		s += "...";
-	}else{
-		s = msg.trim();
-	}
-	return s;
-}
 
-
-public String ss(String msg){
-	
-	String s[] = msg.split(" ");
-	String re = s[0] + " " + s[1];
-
-	return re;
-}
-
-%>
 
 <%
 String category = (String)request.getAttribute("s_category");
@@ -2480,6 +2482,20 @@ $("#_btnGetNickName").click(function () {
 
 }) 
 
+
+function search() {
+	
+	  var keyword = $("#main-keyword").val();
+	  if (keyword == "" || keyword == null) {
+		alert("검색어를 입력해주세요")
+		
+	}else{
+		alert("main-keyword = " + keyword);
+		
+		$("#main-search").attr({"target":"_self", "action":"search.do"}).submit();
+	}
+	
+}
 
 function search2(a) {
 	
