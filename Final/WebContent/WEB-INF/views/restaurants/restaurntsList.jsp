@@ -62,7 +62,7 @@
       height:42px; 
     }
    
-    input[type="text"]{
+    .seaechAll/* input[type="text"] */{
       width:70%;
       height:100%;
       border:none;
@@ -439,14 +439,13 @@ for (int i=1;i<cookies.length;i++){
 			<a><font style="color:#c53211 "><%=cookieRating %></font></a>
 		</div>
 		<!-- 즐찾 -->
-		<%if(user == null){%>
-		
-	 <%} else{%>
 		<div style="display:inline-block;  position:relative; width: 15%; height: 10%; top:-60px; right: -40px;">
+		<%if(user == null){ %>
+			<img id="like_btn" src="img/button/likeIcon.png" style="width: 45px; height: 45px;" >
+		<%}else{ %>
 			<a href="wannago.do?rs_seq=<%=cookieLike %>&rs_name=<%=cookiename%>"><img id="like_btn" src="img/button/likeIcon.png" style="width: 45px; height: 45px;" ></a>
+		<%} %>
 		</div>
-	<%} %>
-
 
  	</div>
 </div>
