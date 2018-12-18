@@ -942,7 +942,7 @@ function search() {
 		alert("검색어를 입력해주세요")
 		
 	}else{
-		alert("main-keyword = " + keyword);
+		//alert("main-keyword = " + keyword);
 		
 		$("#main-search").attr({"target":"_self", "action":"search.do"}).submit();
 	}
