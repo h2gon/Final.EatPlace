@@ -2052,7 +2052,17 @@ $(document).ready(function() {
 	  
 	  function customNav(go) {
 			  
-		var mainnum = $('#mainImage').attr("src");
+		var mainnum2 = $('#mainImage').attr("src");
+		var mainnum = null;
+		
+		 if(mainnum2.indexOf("http")==-1){
+			mainnum='http://localhost:8090'+mainnum2;
+			mainnum= mainnum.replace("\\","/");
+			mainnum= mainnum.replace("\\","/");
+		}else{
+			mainnum = mainnum2;
+		} 
+		//alert(mainnum);
 		var imglist = new Array();
 		var check = 0;
 		
@@ -2092,7 +2102,7 @@ $(document).ready(function() {
 							} 
 						 
 						 var rseq=$("#rs_seq").attr("value");
-			        	// alert(filename);
+			        	 //alert(filename);
 						 var revData = {
 									'filename':filename,
 									'rseq': rseq
