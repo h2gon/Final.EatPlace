@@ -245,7 +245,7 @@ public class EatRestaurantsController {
 		//잠시 디테일 테스트용으로 test로 바꿔뒀어요
 		//return "restaurants/restaurantDetail";
 		
-				return "restaurants/test";
+				return "restaurants/restaurantDetail";
 	}
 	
 	@RequestMapping(value="clear.do", method={RequestMethod.GET, RequestMethod.POST})
