@@ -1620,7 +1620,7 @@ function onefunc() {
 					for(int a=0 ; a<f_list.size();a++){
 					fileName[a] = f_list.get(a).getFile_name();
 					//fileName[0] = f_list.get(a);
-					System.out.println("less than 4 f_list.size(): "+f_list.size());
+					//System.out.println("less than 4 f_list.size(): "+f_list.size());
 					//System.out.println("fileName has just 1:"+fileName[0]);
 					if(fileName[a].contains("https://")){
 						%>
@@ -1642,7 +1642,7 @@ function onefunc() {
 					int remain_picture_count = f_list.size() - 4; 
 					for(int a = 0 ; a<4 ; a++){
 					fileName[a] = f_list.get(a).getFile_name();					
-					System.out.println("more than 4 f_list.size(): "+f_list.size());
+					//System.out.println("more than 4 f_list.size(): "+f_list.size());
 					
 					if(fileName[a].contains("https://")){
 						if(a==3){//마지막 부분에 이미지 위 글자 새김.
@@ -2066,7 +2066,7 @@ $(document).ready(function() {
 		//$('#trigger').data('target',imglistTest);
 		imagelist = $("#trigger").data('target');
 		for(var i =0; i<imagelist.length;i++){
-		console.log("imagelist data target[] "+imagelist[i]);
+		//console.log("imagelist data target[] "+imagelist[i]);
 			imglist.push(imagelist[i]);
 		}
 		//console.log('data(target): '+$("#trigger").data('target'));
@@ -2293,7 +2293,7 @@ $(function(){
  });
  
 function WriteReview(seq,id) {
-	console.log(seq,id);
+	//console.log(seq,id);
 	if(id != null && id!=''){
 	location.href='WriteReview.do?seq='+seq;
 	}else{
