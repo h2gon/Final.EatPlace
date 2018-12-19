@@ -2547,15 +2547,23 @@ $("#_btnGetNickName").click(function () {
 
 function search() {
 	
-	  var keyword = $("#main-keyword").val();
-	  if (keyword == "" || keyword == null) {
-		alert("검색어를 입력해주세요")
+	 
+		var	keyword = $("#main-keyword").val();
+	  
+	   if (keyword == "" || keyword == null) {
+		//alert("검색어를 입력해주세요");
+		 $("#main-keyword").val(' ');
+		 $("#main-search").attr({"target":"_self", "action":"search.do"}).submit();
+		//location.href = "rsdetail.do?seq="+${rs.seq};
+		//window.location = this;
+		//keyword = " ";
 		
 	}else{
 		//alert("main-keyword = " + keyword);
 		
 		$("#main-search").attr({"target":"_self", "action":"search.do"}).submit();
-	}
+	} 
+ 
 	
 }
 

@@ -939,7 +939,9 @@ function search() {
 	
 	  var keyword = $("#main-keyword").val();
 	  if (keyword == "" || keyword == null) {
-		alert("검색어를 입력해주세요")
+		//alert("검색어를 입력해주세요")
+		  $("#main-keyword").val(' ');
+		  $("#main-search").attr({"target":"_self", "action":"search.do"}).submit();
 		
 	}else{
 		//alert("main-keyword = " + keyword);
